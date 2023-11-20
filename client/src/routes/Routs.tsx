@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Deshbord from "../pages/Deshbord";
 import HomePage from "../pages/HomePage";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
+import LoginPage from "../pages/LoginPage";
+import RegisterPage from "../pages/RegisterPage";
 import CategoryByName from "../pages/CategoryByName";
 import BannerCreateOrEdit from "../pages/BannerCreateOrEdit";
 import AllBanners from "../pages/AllBanners";
@@ -30,12 +30,12 @@ export default function Routs() {
                         },
                         {
                             path: "login",
-                            element: <Login />,
+                            element: <LoginPage />,
                             errorElement: <ErrorPage />,
                         },
                         {
                             path: "register",
-                            element: <Register />,
+                            element: <RegisterPage />,
                             errorElement: <ErrorPage />,
                         },
                         {

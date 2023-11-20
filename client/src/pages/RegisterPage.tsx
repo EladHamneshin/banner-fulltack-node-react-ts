@@ -3,10 +3,10 @@ import React from 'react'
 
 type Props = {}
 
-const Register = (props: Props) => {
+const RegisterPage = (props: Props) => {
     return (
         <Box>Register</Box>
     )
 }
 
-export default Register
+export default RegisterPage

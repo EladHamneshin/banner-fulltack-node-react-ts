@@ -6,57 +6,48 @@ import { Outlet } from 'react-router-dom';
 
 
 const styleContainer = {
-    height: '100%',
-    width: '100%',
-    display: 'grid',
-    gridTemplateAreas:
-      "'header header header' \
-      'sideBar main main' \
-      'footer footer footer'",
-    gridTemplateRows: '90px 1fr 70px',
-    gridTemplateColumns: '15% 1fr 15%',
-    gridGap: '4px'
-  };
+  height: '100%',
+  width: '100%',
+  display: 'grid',
+  gridTemplateAreas:
+    "'header header header' \
+    'sideBar main main' \
+    'footer footer footer'",
+    gridTemplateRows: '8vh 80vh 6vh', // שינוי כאן - שורת הכותרת העליונה והתחתונה יהיו בגובה אוטומטי
+  gridTemplateColumns: '15% 1fr 15%',
+  gridGap: '4px',
+};
 
-  const styleHeaderBox = {
-    display: 'block',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'fixed',
-    width: 'inherit',
-    marginTop: '0px',
-    // background: '#7a9cc6',
-    // maxWidth: '1280px',
-    zIndex: 1000
-  }
+const styleHeaderBox = {
+  position: 'sticky',
+  top: 0,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: 'inherit',
+  zIndex: 1000,
+};
 
-  const styleMainBox = {
-    // background: '#9fbbcc',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    paddingBottom: '90px',
-    width: '100%',
-    // height: 'inherit',
-    // overflowY: 'auto' // זה מאפשר גלילה אנכית
-  };
+const styleMainBox = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  
+  flexWrap: 'wrap',
+  paddingBottom: '60px', // שינוי כאן - כדי להשאיר מקום לכותרת התחתונה
+  width: '100%',
+};
 
-
-  const styleFooterBox = {
-
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'fixed',
-    width: 'inherit',
-    bottom: '0',
-    // background: '#7a9cc6',
-    color: 'gold',
-    // maxWidth: '1280px',
-    height: '60px'
-
-  }
+const styleFooterBox = {
+  position: 'sticky',
+  bottom: 0,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: 'inherit',
+  // maxWidth: '1280px', // כנראה שזה לא נחוץ
+  height: '30px',
+};
 
 type Props = {
 
@@ -70,7 +61,7 @@ const Deshbord = (props: Props) => {
         <Header />
       </Box>
 
-      <Box sx={{ ...styleMainBox, border:'1px solid black', gridArea: 'main' }}>
+      <Box sx={{ ...styleMainBox, border:'1px solid black', gridArea: 'main', flex: 1, }}>
      
         <Outlet/>
       </Box>

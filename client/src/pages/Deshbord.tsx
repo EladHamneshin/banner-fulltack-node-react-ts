@@ -1,52 +1,42 @@
-import { Box } from '@mui/material'
-import React from 'react'
+import { Box, IconButton } from '@mui/material'
+import React, { useState } from 'react'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Outlet } from 'react-router-dom';
+import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
+
 
 
 const styleContainer = {
-  height: '100%',
-  width: '100%',
-  display: 'grid',
-  gridTemplateAreas:
-    "'header header header' \
-    'sideBar main main' \
-    'footer footer footer'",
-    gridTemplateRows: '8vh 80vh 6vh', // שינוי כאן - שורת הכותרת העליונה והתחתונה יהיו בגובה אוטומטי
-  gridTemplateColumns: '15% 1fr 15%',
-  gridGap: '4px',
+  height: '99%',
+  width: '99%',
+  display: 'flex',
+  flexDirection: 'column'
 };
 
 const styleHeaderBox = {
-  position: 'sticky',
+  order: 1,
+  position: 'fixed',
   top: 0,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: 'inherit',
-  zIndex: 1000,
+  width: '100%',
+  height: '60px'
 };
 
 const styleMainBox = {
+  order: 2,
+  flexGrow: 1,
+  padding: '10px',
   display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  
-  flexWrap: 'wrap',
-  paddingBottom: '60px', // שינוי כאן - כדי להשאיר מקום לכותרת התחתונה
-  width: '100%',
+  marginTop: '60px',
+  width: '100vw',
 };
 
 const styleFooterBox = {
-  position: 'sticky',
-  bottom: 0,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: 'inherit',
-  // maxWidth: '1280px', // כנראה שזה לא נחוץ
-  height: '30px',
+  order: 3,
+  position: 'fixed',
+  bottom: 2,
+  width: '100%',
+  height: '60px'
 };
 
 type Props = {
@@ -54,26 +44,35 @@ type Props = {
 }
 
 const Deshbord = (props: Props) => {
+  const [openSidebar, setOpenSidebar] = useState(true);
+
+
+
   return (
     <Box sx={styleContainer}>
 
-      <Box sx={{ ...styleHeaderBox,border:'1px solid black', gridArea: 'header' }}>
+      <Box sx={{ ...styleHeaderBox, border: '1px solid black' }}>
         <Header />
       </Box>
+      <Box sx={{ ...styleMainBox,flexDirection:'row', border: '1px solid black' }}>
 
-      <Box sx={{ ...styleMainBox, border:'1px solid black', gridArea: 'main', flex: 1, }}>
-     
-        <Outlet/>
+        <Box sx={{ border: '1px solid black' }}>
+          <IconButton onClick={() => setOpenSidebar(!openSidebar)}>
+            {openSidebar ? <MenuOpenOutlinedIcon/> : <MenuOpenOutlinedIcon sx={{transform: 'rotateY(180deg)'}}/>}
+          </IconButton>
+          {openSidebar && <p>sid bar </p>}
+        </Box>
+
+
+        <Box sx={{ flexGrow:1, border: '1px solid black' }}>
+          <Outlet />
+          Box</Box>
       </Box>
-      <Box sx={{ border:'1px solid black', gridArea: 'sideBar' }}>
+      <Box sx={{ ...styleFooterBox, border: '1px solid black' }}>
         <Footer />
       </Box>
 
-      <Box sx={{ ...styleFooterBox, border:'1px solid black', gridArea: 'footer' }}>
-        <Footer />
-      </Box>
-
-  </Box>
+    </Box>
   )
 }
 

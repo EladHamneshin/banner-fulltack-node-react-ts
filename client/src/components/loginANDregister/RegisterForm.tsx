@@ -3,6 +3,8 @@ import React, { Dispatch, SetStateAction, useState } from 'react'
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
+import { useNavigate } from 'react-router-dom';
+import UserFetch from '../../api/usersFunc'
 // import { signupUser } from '../../api/usersFuncApi';
 
 const schema = yup.object({
@@ -16,14 +18,19 @@ const schema = yup.object({
 
 
 type Props = {
-  handelSignup : Dispatch<SetStateAction<string>>
-  close: () => void
+  // handelSignup : Dispatch<SetStateAction<string>>
+  // close: () => void
 }
 
 const LoginForm = (props: Props) => {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
   const textFieldStyle = { padding: '2px', margin: '4px auto ' }
+
+  const navigate = useNavigate();
+  const moveToLogin = ( ) => {
+      navigate(`/deshbord/login`)
+  }
 
   const { register, formState: { errors }, handleSubmit } = useForm({
     resolver: yupResolver(schema),
@@ -34,26 +41,27 @@ const LoginForm = (props: Props) => {
     const email = data.email
     const password = data.password
 
-  //   const user = JSON.stringify({
-  //     name: name,
-  //     email: email,
-  //     password: password
-  //   });
-  //   setLoading(true)
-  //   try {
-  //     const response = await signupUser(user)
-  //     setMessage(response.data.message)
-  //     setTimeout(() => {
-  //       props.handelSignup('login')
-  //       setLoading(false)
-  //     }, 1000);
+    const user = {
+      name: name,
+      email: email,
+      password: password,
+      isAdmin: false
+    };
+    setLoading(true)
+    try {
+      const respon = await UserFetch.regiterFetch(user)
+      // setMessage(response.message)
+      const response = await UserFetch.getUsersFetch()
+      setTimeout(() => {
+        setLoading(false)
+      }, 1000);
 
-  //   } catch (err) {
-  //     setMessage('sign up faild - try again');
-  //     setTimeout(() => {
-  //       setLoading(false);
-  //     }, 2000);
-  //   }
+    } catch (err) {
+      setMessage('sign up faild - try again');
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
+    }
   }
 
   return (

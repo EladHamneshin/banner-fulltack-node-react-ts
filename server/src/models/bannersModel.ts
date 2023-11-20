@@ -10,8 +10,8 @@ const bannerSchema = new mongoose.Schema<bannerInterface>({
       url: { type: String, required: true },
       alt: { type: String, required: true }
     },
-    size: { type: 'side'|'top'| 'all', required: true },
-    kind: [{ type: String, enum: ['price', 'sale'] }],
+    size: { type: String, enum: ['side', 'top', 'all'], required: true },
+    kind: [{ type: String, enum: ['price', 'sale'], required: true }],
     text: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
     author: { type: String, required: true }

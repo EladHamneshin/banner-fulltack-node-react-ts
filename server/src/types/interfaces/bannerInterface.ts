@@ -7,8 +7,8 @@ export interface bannerInterface {
         url: string;
         alt: string;
     };
-    size: "side" | "top" | "all";
-    kind:  ("price" | "sale" )[];
+    size: 'side' | 'top' | 'all';
+    kind:  ('price' | 'sale' )[];
     text: string;
     createdAt: Date;
     author: string;

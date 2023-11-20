@@ -1,8 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Deshbord from "../pages/Deshbord";
 import HomePage from "../pages/HomePage";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
 import CategoryByName from "../pages/CategoryByName";
 import BannerCreateOrEdit from "../pages/BannerCreateOrEdit";
 import AllBanners from "../pages/AllBanners";
@@ -10,6 +8,8 @@ import BannerByCategoryByName from "../pages/CategoryByName";
 import BannerByProducdID from "../pages/BannerByProducdID";
 import ErrorPage from "./ErrorPage";
 import App from "../App";
+import Register from "../pages/Register";
+import Login from "../pages/Login";
 
 export default function Routs() {
     const router = createBrowserRouter([

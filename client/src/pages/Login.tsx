@@ -1,8 +1,6 @@
-import React, { Dispatch, SetStateAction } from 'react';
-import { Typography, Avatar, Button, Checkbox, Grid, Paper, TextField, Link } from '@mui/material';
+import { Typography, Avatar, Button, Checkbox, Grid, Paper, TextField, Link, Box } from '@mui/material';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { useEffect } from 'react';
 import LoginForm from '../components/loginANDregister/LoginForm';
 import { useNavigate } from 'react-router-dom';
 import { getAllBannersImage } from '../api/bannersImageFunc';
@@ -17,41 +15,74 @@ type Props = {
 const Login = (props: Props) => {
 
     const navigate = useNavigate();
-    const handelClickSignUp = ( ) => {
+    const handelClickSignUp = () => {
         navigate(`/deshbord/register`)
     }
 
     getAllBannersImage()
 
-    const paperStyle = { padding: 20, margin: '0 auto ' };
+    const paperStyle = {
+        padding: 20,
+        margin: '0 auto ',
+        boxShadow: '0',
+        display: 'flex',
+        alignItems: 'center'
+    };
     const avatarStyle = { backgroundColor: 'green' };
 
 
     return (
-        <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '70vh' }}>
-            <Paper elevation={10} style={paperStyle}>
-                <Grid container direction="column" justifyContent="center" alignItems="center" >
-                    <Grid item>
-                        <Avatar style={avatarStyle}>
-                            <LockOpenOutlinedIcon />
-                        </Avatar>
+        <Grid
+            container
+            justifyContent="center"
+            alignItems="center"
+            style={{
+                minHeight: '70vh',
+                display: 'flex'
+            }}
+        >
+            <Paper
+                // elevation={10}
+                style={paperStyle}>
+                <Box sx={{
+                    padding: '20px'
+                }}>
+                    <Grid
+                        container
+                        direction="column"
+                        justifyContent="center"
+                        alignItems="center"
+                    >
+                        <Grid item>
+                            <Avatar style={avatarStyle}>
+                                <LockOpenOutlinedIcon />
+                            </Avatar>
+                        </Grid>
+                        <Grid item>
+                            <Typography variant="h4" gutterBottom>
+                                login
+                            </Typography>
+                        </Grid>
                     </Grid>
-                    <Grid item>
-                        <h2>login</h2>
-                    </Grid>
-                </Grid>
-                <LoginForm  />
-                <Typography>
-                    <Link href='#'>
-                        Forgot password?
-                    </Link>
-                </Typography>
-                <Typography>
-                    <Button onClick={handelClickSignUp} >
-                        sign Up
-                    </Button>
-                </Typography>
+                </Box>
+                <Box sx={{
+                    display: 'flex',
+                    alignItems: "center",
+                    flexDirection: 'column'
 
+                }}>
+                    <LoginForm />
+                    <Typography>
+                        <Link href='#'>
+                            Forgot password?
+                        </Link>
+                    </Typography>
+                    <Typography>
+                        <Button onClick={handelClickSignUp} >
+                            sign Up
+                        </Button>
+                    </Typography>
+                </Box>
             </Paper>
         </Grid>
     );

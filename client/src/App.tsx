@@ -1,10 +1,11 @@
 import './App.css'
 
-function App() {
 
+function App() {
+  
   return (
     <>
-      app
+      <div>App</div>
     </>
   )
 }

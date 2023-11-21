@@ -28,6 +28,7 @@ const styleMainBox = {
   padding: '10px',
   display: 'flex',
   marginTop: '60px',
+  marginBottom: '60px',
   width: '100vw',
 };
 
@@ -36,7 +37,7 @@ const styleFooterBox = {
   position: 'fixed',
   bottom: 2,
   width: '100%',
-  height: '60px'
+  height: '30px'
 };
 
 type Props = {
@@ -54,17 +55,17 @@ const Deshbord = (props: Props) => {
       <Box sx={{ ...styleHeaderBox, border: '1px solid black' }}>
         <Header />
       </Box>
-      <Box sx={{ ...styleMainBox,flexDirection:'row', border: '1px solid black' }}>
+      <Box sx={{ ...styleMainBox, flexDirection: 'row', border: '1px solid black' }}>
 
         <Box sx={{ border: '1px solid black' }}>
           <IconButton onClick={() => setOpenSidebar(!openSidebar)}>
-            {openSidebar ? <MenuOpenOutlinedIcon/> : <MenuOpenOutlinedIcon sx={{transform: 'rotateY(180deg)'}}/>}
+            {openSidebar ? <MenuOpenOutlinedIcon /> : <MenuOpenOutlinedIcon sx={{ transform: 'rotateY(180deg)' }} />}
           </IconButton>
           {openSidebar && <p>sid bar </p>}
         </Box>
 
 
-        <Box sx={{ flexGrow:1, border: '1px solid black' }}>
+        <Box sx={{ flexGrow: 1, border: '1px solid black' }}>
           <Outlet />
           Box</Box>
       </Box>

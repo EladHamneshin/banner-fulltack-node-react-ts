@@ -62,8 +62,8 @@ app.use(helmet());
 // Setup routing
 
 app.use("/api/users", user);
+app.use("/api/bannersImage", routerBannersImage);
 
-app.use("/bannersImage", routerBannersImage);
 
 
 

@@ -29,7 +29,7 @@ const RATE_REQUEST_LIMIT = Number(process.env.RATE_REQUEST_LIMIT) || 100;
 
 // Init express app
 const app = express();
-
+app.use(express.static('public'))
 // Body parser
 app.use(express.json());
 

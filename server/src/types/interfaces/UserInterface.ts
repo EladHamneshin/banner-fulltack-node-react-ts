@@ -1,7 +1,7 @@
-export interface UserInterface {
-    _id: string;
+export type UserInterface = {
+    _id?: string;
     name: string;
     email: string;
     password: string;
-    isAdmin: boolean
+    isAdmin: boolean;
 } 

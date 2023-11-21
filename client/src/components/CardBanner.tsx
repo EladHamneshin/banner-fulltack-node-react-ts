@@ -1,36 +1,24 @@
-import { Avatar, CardActions, CardHeader, Collapse, IconButton, IconButtonProps } from '@mui/material';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
+import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, IconButton, IconButtonProps, Typography, styled } from '@mui/material';
 import { blue } from '@mui/material/colors';
-import { useState } from 'react';
+import { useState } from 'react'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { styled } from '@mui/material/styles';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 type Props = {
-  id: string ,
-  name: string,
-  salePrice: number,
-  quantity : number,
-  description : string,
-  category: string,
-  discountPercentage : number,
-  rating : number,
-  click: number
-  coordinate:{
-longitude1:number
-longitude2:number
-longitude3:number
-latitude1:number
-latitude2:number
-latitude3:number
-// (if you have an idea who to make it dynamic for each product go for it)
-}
-  image:
-      {  url: string
-      alt: string }
+  _id: string;
+  productID: string;
+  catogryID: string;
+  clickCount: number;
+  image: {
+      url: string;
+      alt: string;
+  };
+  size: 'side' | 'top' | 'all';
+  kind:  ('price' | 'sale' )[];
+  text: string;
+  createdAt: Date;
+  author: string;
 }
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -48,13 +36,13 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }));
 
-const CardProduct = (product: Props) => {
+
+const CardBanner = (prop: Props) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
   return (
     <Card 
     sx={{ 
@@ -73,25 +61,22 @@ const CardProduct = (product: Props) => {
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor:blue[400]}}>
-            {product.name.charAt(0)}
+            {prop.author.charAt(0)}
           </Avatar>}
-        title={product.name} subheader={product.category}/>
+        title={prop.productID} subheader={prop.createdAt.toDateString()}/>
       <CardMedia
         component="img"
         height="105"
         width='100'
-        image= {product.image.url}
-        alt={product.image.alt}
+        image= {prop.image.url}
+        alt={prop.image.alt}
       />
       <CardContent>
           <Typography gutterBottom variant="h4" component="div">
-            {product.name}
+            {prop.name}
           </Typography>
           <Typography variant='h6' component='div'>
-            rating: {product.rating}
-          </Typography>
-          <Typography variant='h6' component='div'>
-            clicks: {product.click}
+            clicks: {prop.clickCount}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
@@ -106,29 +91,30 @@ const CardProduct = (product: Props) => {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography variant='body1' color='text.secondary'>
-            quantity:{product.quantity}
+          <Typography variant="body1" color="text.secondary">
+            size: {prop.size}
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            regular price: {product.salePrice}$
+            kind: {prop.kind}
           </Typography>
-          <Typography variant='body1' color='text.secondary'>
-          discount: {product.discountPercentage}%
+          <Typography variant="body1" color="text.secondary">
+            text: {prop.text}
           </Typography>
-          <Typography variant='body1' color='text.secondary'>
-          special price: {product.salePrice-product.salePrice*product.discountPercentage*0.01}$
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            description: {product.description}
+          <Typography variant="body1" color="text.secondary">
+            author: {prop.author}
           </Typography>
         </CardContent>
       </Collapse>
       <CardActions>
         <IconButton>
-          <AddCircleIcon/>
+          <DeleteIcon/>
+        </IconButton>
+        <IconButton>
+          <EditIcon/>
         </IconButton>
       </CardActions>
     </Card>
-)}
+  )
+}
 
-export default CardProduct
+export default CardBanner

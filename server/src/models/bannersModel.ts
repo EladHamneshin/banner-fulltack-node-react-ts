@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { BannerInterface } from "../types/interfaces/BannerInterface";
+import {BannerInterface}  from "../types/interfaces/bannerInterface";
 
 
 const bannerSchema = new mongoose.Schema<BannerInterface>({
@@ -22,14 +22,15 @@ const bannerModel = mongoose.model('Banner', bannerSchema);
 
 export {
   bannerModel,
-  insertBanners,
 }
 
 
 
 
 
-async function insertBanners() {
+export async function insertBanners() {
+  console.log('in');
+  
   const banners: BannerInterface[] = [
     {
       _id: "1",

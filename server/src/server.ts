@@ -73,7 +73,7 @@ app.use(catchErrors);
 connectToDB().then((res) => {
   console.log('Connecting to mongodb');
   // איתוחל דאטה ראשוני
-  // insertBanners()
+  insertBanners()
   app.listen(PORT, () => {
     console.log(`Server is listening on: ${PORT}`);
   });

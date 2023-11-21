@@ -21,9 +21,9 @@ const routerBannersImage = express.Router();
 routerBannersImage.get("/", getBannersImage);
 
 // @desc   Get bannersImage by productID
-// @route  GET /bannersImage/:productID
+// @route  GET /bannersImage/prudact/:productID
 // @access Public
-routerBannersImage.get("/:productID", getBannersImageByProductID);
+routerBannersImage.get("/procuct/:productID", getBannersImageByProductID);
 
 // @desc   Get bannersImage by category
 // @route  GET /bannersImage/category/:categoryName
@@ -33,7 +33,7 @@ routerBannersImage.get("/category/:categoryName", getBannersImageByCategory);
 // @desc   Get bannersImage by user
 // @route  GET /bannersImage/user
 // @access Internal
-routerBannersImage.get("/user", getBannersImageByUser);
+routerBannersImage.get("/user/:userID", getBannersImageByUser);
 
 // @desc   Update bannerImage by bannerID
 // @route  PUT /bannersImage/:bannerID

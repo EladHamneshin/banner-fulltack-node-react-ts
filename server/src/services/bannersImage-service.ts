@@ -15,13 +15,10 @@ import dal from "../dal/bannersImage-dal"
 
 // פונקציה לקבלת רשימת 
 const getBannersImage = async () => {
-    try {
+    
         const banners : BannerInterface[] = await dal.getBannersImage()
-        return banners
-    }
-    catch (error) {
-        throw new ApiError({}, STATUS_CODES.NOT_FOUND, "users not found");
-    }
+        if (! banners) {throw new ApiError({}, STATUS_CODES.NOT_FOUND, "users not found");}
+        return banners 
 
 }
 

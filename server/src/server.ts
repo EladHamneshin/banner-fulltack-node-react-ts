@@ -8,8 +8,6 @@ import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 
 
-
-
 import { verify } from "./middleware/auth-middleware";
 import { unless } from "./middleware/unless";
 
@@ -18,9 +16,11 @@ dotenv.config();
 
 // Import routes from the ./routes
 import user from "./routes/user-route";
-// import { connectDB } from "./dataBase/conectMongoose";
+import  connectToDB  from "./configs/mongoDBConnect";
 import { catchErrors, notFound } from "./middleware/errorNOTfound";
 import { ApiError } from "./utils/ApiError";
+import { insertBanners } from "./models/bannersModel";
+import routerBannersImage from "./routes/bannersImage-route";
 
 // Setup constant variables
 const PORT = process.env.PORT || 5000;
@@ -29,7 +29,7 @@ const RATE_REQUEST_LIMIT = Number(process.env.RATE_REQUEST_LIMIT) || 100;
 
 // Init express app
 const app = express();
-
+app.use(express.static('public'))
 // Body parser
 app.use(express.json());
 
@@ -60,7 +60,11 @@ app.use(helmet());
 // app.use(unless(["/users/login"], verify));
 
 // Setup routing
+
 app.use("/api/users", user);
+
+app.use("/bannersImage", routerBannersImage);
+
 
 
 app.use(notFound);
@@ -69,13 +73,15 @@ app.use(catchErrors);
 
 
 // Listen to specified port in .env or default 5000
-// connectDB().then((res) => {
-//   console.log('Connecting to mongodb');
-//   app.listen(PORT, () => {
-//     console.log(`Server is listening on: ${PORT}`);
-//   });
-// }).catch((err) => console.error(err))
-app.listen(PORT, () => {
+connectToDB().then((res) => {
+  console.log('Connecting to mongodb');
+  // איתוחל דאטה ראשוני
+  // insertBanners()
+  app.listen(PORT, () => {
     console.log(`Server is listening on: ${PORT}`);
-})
+  });
+}).catch((err) => console.error(err))
+// app.listen(PORT, () => {
+//     console.log(`Server is listening on: ${PORT}`);
+// })
 

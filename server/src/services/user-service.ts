@@ -1,5 +1,8 @@
 import { ApiError } from "../utils/ApiError";
-import {UserInterface as User } from "../types/interfaces/UserInterface";
+
+import { UserInterface as User } from "../types/interfaces/UserInterface";
+import { Document, Types } from "mongoose";
+import bcrypt from "bcrypt";
 import STATUS_CODES from "../utils/StatusCodes";
 import userDal from "../dal/userDal";
 import { comparePassword, hashPassword } from "../utils/encryptionUtils";
@@ -13,6 +16,7 @@ const authUser = async (email: string, password: string) => {
         throw new Error('User not found');
 
     const isPasswordCorrect = await comparePassword(password, user.password);
+
 
     if (!isPasswordCorrect)
      throw new ApiError({},STATUS_CODES.FORBIDDEN,'Invalid password');
@@ -29,6 +33,7 @@ const registerUser = async (user : User) => {
     if (isUserRegisted)
         throw new ApiError({}, STATUS_CODES.BAD_REQUEST, "user already registed");
 
+
     const hashedPassword = await hashPassword(password);
     user.password = hashedPassword
     user._id = uuid();
@@ -44,3 +49,4 @@ export default {
     registerUser,
     authUser,
 };
+

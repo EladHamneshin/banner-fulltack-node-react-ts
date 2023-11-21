@@ -1,10 +1,15 @@
-import './App.css'
+import { Outlet, RouterProvider } from 'react-router-dom'
+
+
+
 
 function App() {
-
+  
   return (
     <>
-      app
+
+      <Outlet />
+
     </>
   )
 }

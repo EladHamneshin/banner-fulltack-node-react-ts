@@ -2,11 +2,14 @@ import { Outlet, RouterProvider } from 'react-router-dom'
 
 
 
-function App() {
 
+function App() {
+  
   return (
     <>
+
       <Outlet />
+
     </>
   )
 }

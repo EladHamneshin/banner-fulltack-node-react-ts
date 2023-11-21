@@ -1,0 +1,88 @@
+import { Request, Response, NextFunction } from "express";
+import { ApiSuccess } from "../utils/ApiSucess";
+import { asyncHandler } from "../middleware/async-middleware";
+import { UserInterface as User } from "../types/interfaces/UserInterface";
+import { ApiError } from "../utils/ApiError";
+import service from "../services/user-service";
+import { errorResponse } from "../middleware/error-middleware";
+import STATUS_CODES from "../utils/StatusCodes";
+import generateToken from "../utils/generateToken";
+
+
+
+
+export const getUsers = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const users = await service.getUsers();
+    
+    if (!users) { throw new ApiError({}, 500, "Something went wrong .... Please try again") }
+    res.status(STATUS_CODES.OK).json(new ApiSuccess<User[]>(users, "Success!"));
+  },
+);
+
+
+export const getUserByID = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => { 
+    const userID = req.params.id
+    const user = await service.getUserByID(userID);
+    if (!user) { throw new ApiError({}, 500, "Something went wrong .... Please try again") }
+    res.status(STATUS_CODES.OK).json(new ApiSuccess<User>(user, "Success!"));
+  },
+);
+
+export const loginUser = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const {email , password} = req.body;
+    const user = await service.loginUser(email , password);
+    if (!user) { throw new ApiError({}, 500, "Something went wrong .... Please try again") }
+    res.status(STATUS_CODES.OK).json(new ApiSuccess<User>(user, "Success!"));
+  },
+);
+
+export const createUser = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const addUser = await service.createUser(req.body);
+    if (!addUser) { throw new ApiError({}, 500, "Something went wrong .... Please try again") }
+    res.status(STATUS_CODES.CREATED).json(new ApiSuccess<User>(addUser, "Success!"));
+  },
+);
+
+export const updatedUser = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userID = req.params.id;
+    const updateUser = req.body
+    const updated : User = await service.updateUser(userID ,updateUser);
+    if (!updated) { throw new ApiError({}, 500, "Something went wrong .... Please try again") }
+    res.status(STATUS_CODES.CREATED).json(new ApiSuccess<User>(updated, `user ${updated.name} update Success!`));
+  },
+);
+
+export const deleteUserByID = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userID = req.params.id
+    const user : User = await service.deleteUser(userID);
+    if (!user) { throw new ApiError({}, 500, "Something went wrong .... Please try again") }
+    res.status(STATUS_CODES.OK).json(new ApiSuccess<User>(user, `Success! user ${user.name} deleted`));
+  },
+);
+
+export const logoutUser = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    res.cookie('jwt', '', {
+      httpOnly: true,
+      expires: new Date(0),
+    });
+    res.status(STATUS_CODES.OK).json({ message: 'Logged out successfully' });
+  },
+);
+
+
+
+
+// ? asyncHandler should be used for every request for easy async handling
+export const errorUser = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    // Return json with error message and empty data
+    throw new ApiError({}, STATUS_CODES.INTERNAL_SERVER_ERROR, "Handled by asyncHandler")
+  },
+);

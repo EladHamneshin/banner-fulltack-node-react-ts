@@ -1,8 +1,8 @@
-export interface bannerInterface {
+export interface BannerInterface {
     _id: string;
     productID: string;
     catogryID: string;
-    onClick: string;
+    clickCount: number;
     image: {
         url: string;
         alt: string;

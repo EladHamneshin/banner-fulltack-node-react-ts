@@ -3,6 +3,7 @@ import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import LoginForm from '../components/loginANDregister/LoginForm';
 import { useNavigate } from 'react-router-dom';
+import { getAllBannersImage } from '../api/bannersImageFunc';
 // import Signup from './Signup';
 
 
@@ -18,6 +19,7 @@ const Login = (props: Props) => {
         navigate(`/deshbord/register`)
     }
 
+    getAllBannersImage()
 
     const paperStyle = {
         padding: 20,

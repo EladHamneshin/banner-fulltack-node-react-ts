@@ -60,8 +60,11 @@ app.use(helmet());
 // app.use(unless(["/users/login"], verify));
 
 // Setup routing
+
 app.use("/api/users", user);
 app.use("/api/bannersImage", routerBannersImage);
+
+
 
 
 app.use(notFound);
@@ -73,7 +76,7 @@ app.use(catchErrors);
 connectToDB().then((res) => {
   console.log('Connecting to mongodb');
   // איתוחל דאטה ראשוני
-  // insertBanners()
+  insertBanners()
   app.listen(PORT, () => {
     console.log(`Server is listening on: ${PORT}`);
   });

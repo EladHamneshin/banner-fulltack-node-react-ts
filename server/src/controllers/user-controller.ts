@@ -3,86 +3,52 @@ import { ApiSuccess } from "../utils/ApiSucess";
 import { asyncHandler } from "../middleware/async-middleware";
 import { UserInterface as User } from "../types/interfaces/UserInterface";
 import { ApiError } from "../utils/ApiError";
-import service from "../services/user-service";
-import { errorResponse } from "../middleware/error-middleware";
+import userService from "../services/user-service";
 import STATUS_CODES from "../utils/StatusCodes";
-import generateToken from "../utils/generateToken";
+import {registerUserValidation, loginUserValidation} from "../utils/validations/userValidation";
+import generateToken from "../utils/jwtUtils";
 
 
+// @desc Auth user & login
+// @route POST /api/users/login
+// @acces public
+export const loginUser = asyncHandler(async (req: Request,res: Response) => {
+  const { error } = loginUserValidation(req.body);
+  if (error)
+      throw new ApiError({}, STATUS_CODES.BAD_REQUEST, error.message);
 
+  if (req.headers.authorization)
+      throw new ApiError({}, STATUS_CODES.BAD_REQUEST,'User already logged in');
 
-export const getUsers = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const users = await service.getUsers();
+  const {email, password } = req.body;
+  const user = await userService.authUser(email, password);
+
+  const token =  generateToken(user._id);
+
+  res.status(STATUS_CODES.OK).json(new ApiSuccess({token:token,user: user}, "Success!"));
+});
+
+// @desc  Register new user
+// @route POST /api/users/register
+// @acces public
+export const registerUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+  
+    const {error} = registerUserValidation(req.body);
+    if (error)
+        throw new ApiError({}, 400, error.message);
     
-    if (!users) { throw new ApiError({}, 500, "Something went wrong .... Please try again") }
-    res.status(STATUS_CODES.OK).json(new ApiSuccess<User[]>(users, "Success!"));
+    const user = await userService.registerUser(req.body);
+    
+    res.status(STATUS_CODES.CREATED).json(new ApiSuccess<User>(user, "Success!"));
   },
 );
 
 
-export const getUserByID = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => { 
-    const userID = req.params.id
-    const user = await service.getUserByID(userID);
-    if (!user) { throw new ApiError({}, 500, "Something went wrong .... Please try again") }
-    res.status(STATUS_CODES.OK).json(new ApiSuccess<User>(user, "Success!"));
-  },
-);
-
-export const loginUser = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const {email , password} = req.body;
-    const user = await service.loginUser(email , password);
-    if (!user) { throw new ApiError({}, 500, "Something went wrong .... Please try again") }
-    res.status(STATUS_CODES.OK).json(new ApiSuccess<User>(user, "Success!"));
-  },
-);
-
-export const createUser = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const addUser = await service.createUser(req.body);
-    if (!addUser) { throw new ApiError({}, 500, "Something went wrong .... Please try again") }
-    res.status(STATUS_CODES.CREATED).json(new ApiSuccess<User>(addUser, "Success!"));
-  },
-);
-
-export const updatedUser = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const userID = req.params.id;
-    const updateUser = req.body
-    const updated : User = await service.updateUser(userID ,updateUser);
-    if (!updated) { throw new ApiError({}, 500, "Something went wrong .... Please try again") }
-    res.status(STATUS_CODES.CREATED).json(new ApiSuccess<User>(updated, `user ${updated.name} update Success!`));
-  },
-);
-
-export const deleteUserByID = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const userID = req.params.id
-    const user : User = await service.deleteUser(userID);
-    if (!user) { throw new ApiError({}, 500, "Something went wrong .... Please try again") }
-    res.status(STATUS_CODES.OK).json(new ApiSuccess<User>(user, `Success! user ${user.name} deleted`));
-  },
-);
-
-export const logoutUser = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    res.cookie('jwt', '', {
-      httpOnly: true,
-      expires: new Date(0),
-    });
-    res.status(STATUS_CODES.OK).json({ message: 'Logged out successfully' });
-  },
-);
+export default {registerUser, loginUser}
 
 
 
 
-// ? asyncHandler should be used for every request for easy async handling
-export const errorUser = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    // Return json with error message and empty data
-    throw new ApiError({}, STATUS_CODES.INTERNAL_SERVER_ERROR, "Handled by asyncHandler")
-  },
-);
+
+
+

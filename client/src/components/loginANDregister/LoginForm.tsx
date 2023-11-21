@@ -109,45 +109,117 @@ const LoginForm = () => {
     }
 
     return (
-
         <form onSubmit={handleSubmit(onSubmit)}>
-            {loading ? <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', minWidth: '420px', minHeight: '360px' }}>
-                <Grid sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                    <Typography>Loding.....</Typography>
-                    {message && <Typography>{message}</Typography>}
-                </Grid>
-            </Box>
+            {loading ?
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-around',
+                        minWidth: '420px',
+                        minHeight: '360px'
+                    }}>
+                    <Grid
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}>
+                        <Typography>Loding.....</Typography>
+                        {message && <Typography>{message}</Typography>}
+                    </Grid>
+                </Box>
                 :
                 <Grid>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-
-                        <Grid sx={{ display: 'flex', flexDirection: 'column' }}>
-                            <TextField style={textFieldStyle} label="First Name" placeholder="Enter first name"
-                                {...register("firstName", { required: true, maxLength: 20 })}
-                                aria-invalid={errors.firstName ? "true" : "false"} />
-                            <Typography color='red' variant='caption'>{errors.firstName?.message}</Typography>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'space-between'
+                        }}>
+                        <Grid
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column'
+                            }}>
+                            <TextField
+                                style={textFieldStyle}
+                                label="First Name"
+                                placeholder="Enter first name"
+                                {...register("firstName",
+                                    { required: true, maxLength: 20 }
+                                )}
+                                aria-invalid={
+                                    errors.firstName ? "true" : "false"
+                                } />
+                            <Typography
+                                color='red'
+                                variant='caption'
+                            >
+                                {errors.firstName?.message}
+                            </Typography>
                         </Grid>
 
-                        <Grid sx={{ display: 'flex', flexDirection: 'column' }}>
-                            <TextField style={textFieldStyle} label="Last Name" placeholder="Enter last name"
-                                {...register("lastName", { required: true, maxLength: 20 })}
+                        <Grid
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column'
+                            }}>
+                            <TextField
+                                style={textFieldStyle}
+                                label="Last Name"
+                                placeholder="Enter last name"
+                                {...register("lastName", {
+                                    required: true, maxLength: 20
+                                })}
                                 aria-invalid={errors.lastName ? "true" : "false"} />
-                            <Typography color='red' variant='caption'>{errors.lastName?.message}</Typography>
+                            <Typography
+                                color='red'
+                                variant='caption'
+                            >
+                                {errors.lastName?.message}
+                            </Typography>
                         </Grid>
                     </Box>
 
-                    <Grid sx={{ display: 'flex', flexDirection: 'column' }}>
-                        <TextField style={textFieldStyle} label="Email" placeholder="Enter your email" fullWidth
+                    <Grid
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column'
+                        }}>
+                        <TextField
+                            style={textFieldStyle}
+                            label="Email"
+                            placeholder="Enter your email"
+                            fullWidth
                             {...register("email", { required: true, pattern: /^\S+@\S+\.\S+$/ })}
                             aria-invalid={errors.email ? "true" : "false"} />
-                        <Typography color='red' variant='caption'>{errors.email?.message}</Typography>
+                        <Typography
+                            color='red'
+                            variant='caption'
+                        >
+                            {errors.email?.message}
+                        </Typography>
                     </Grid>
 
-                    <Grid sx={{ display: 'flex', flexDirection: 'column' }}>
-                        <TextField style={textFieldStyle} label="Password" placeholder="Enter your password" fullWidth
+                    <Grid
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column'
+                        }}>
+                        <TextField
+                            style={textFieldStyle}
+                            label="Password"
+                            placeholder="Enter your password"
+                            fullWidth
                             {...register("password", { required: true, min: 4, max: 12 })}
                             aria-invalid={errors.password ? "true" : "false"} />
-                        <Typography color='red' variant='caption'>{errors.password?.message}</Typography>
+                        <Typography
+                            color='red'
+                            variant='caption'
+                        >
+                            {errors.password?.message}
+                        </Typography>
                     </Grid>
                 </Grid>}
             <Button
@@ -159,6 +231,7 @@ const LoginForm = () => {
                 sign in
             </Button>
         </form >
+
     )
 }
 

@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import { Avatar, Button, Grid, Paper, } from '@mui/material';
+import { Avatar, Box, Button, Grid, Paper, Typography, } from '@mui/material';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 
 import RegisterForm from '../components/loginANDregister/RegisterForm';
@@ -11,32 +11,67 @@ type Props = {
 
 const Register = (props: Props) => {
     const navigate = useNavigate();
-    const handelClickLogin = ( ) => {
+    const handelClickLogin = () => {
         navigate(`/deshbord/login`)
     }
 
-    const paperStyle = { padding: 20, margin: '0 auto ' };
+    const paperStyle = {
+        padding: 20,
+        margin: '0 auto ',
+        boxShadow: '0',
+        display: 'flex',
+        alignItems: 'center'
+    };
     const avatarStyle = { backgroundColor: 'green' };
 
 
     return (
-        <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '70vh' }}>
-            <Paper elevation={10} style={paperStyle}>
-                <Grid container direction="column" justifyContent="center" alignItems="center" >
-                    <Grid item>
-                        <Avatar style={avatarStyle}>
-                            <LockOpenOutlinedIcon />
-                        </Avatar>
+        <Grid
+            container
+            justifyContent="center"
+            alignItems="center"
+            style={{
+                minHeight: '70vh',
+                display: 'flex'
+            }}
+        >
+            <Paper
+                // elevation={10}
+                style={paperStyle}>
+                <Box sx={{
+                    padding: '20px'
+                }}>
+                    <Grid
+                        container
+                        direction="column"
+                        justifyContent="center"
+                        alignItems="center"
+                    >
+                        <Grid item>
+                            <Avatar style={avatarStyle}>
+                                <LockOpenOutlinedIcon />
+                            </Avatar>
+                        </Grid>
+                        <Grid item>
+                            <Typography variant="h4" gutterBottom>
+                                Signup
+                            </Typography>
+                        </Grid>
                     </Grid>
-                    <Grid item>
-                        <h2>Signup</h2>
-                    </Grid>
-                </Grid>
-                <RegisterForm />
+                </Box>
+                <Box sx={{
+                    display: 'flex',
+                    alignItems: "center",
+                    flexDirection: 'column'
 
-            <Button onClick={handelClickLogin} >
-                sign in
-            </Button>
+                }}>
+                    <RegisterForm />
+
+                    <Button onClick={handelClickLogin} >
+                        sign in
+                    </Button>
+                </Box>
+
             </Paper>
         </Grid>
     );

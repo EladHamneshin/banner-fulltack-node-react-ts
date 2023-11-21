@@ -5,6 +5,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { useEffect } from 'react';
 import LoginForm from '../components/loginANDregister/LoginForm';
 import { useNavigate } from 'react-router-dom';
+import { getAllBannersImage } from '../api/bannersImageFunc';
 // import Signup from './Signup';
 
 
@@ -20,6 +21,7 @@ const Login = (props: Props) => {
         navigate(`/deshbord/register`)
     }
 
+    getAllBannersImage()
 
     const paperStyle = { padding: 20, margin: '0 auto ' };
     const avatarStyle = { backgroundColor: 'green' };

@@ -60,8 +60,11 @@ app.use(helmet());
 // app.use(unless(["/users/login"], verify));
 
 // Setup routing
-app.use("/users", user);
+
+app.use("/api/users", user);
+
 app.use("/bannersImage", routerBannersImage);
+
 
 
 app.use(notFound);

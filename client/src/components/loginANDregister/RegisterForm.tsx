@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { useNavigate } from 'react-router-dom';
-import UserFetch from '../../api/usersFunc'
+import UserFetch from '../../api/regiterFetch'
 // import { signupUser } from '../../api/usersFuncApi';
 
 const schema = yup.object({

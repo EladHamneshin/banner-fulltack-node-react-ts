@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-import {BannerInterface}  from "../types/interfaces/bannerInterface";
+import { BannerInterface } from "../types/interfaces/bannerInterface";
 
 
 
@@ -31,89 +31,89 @@ export {
 
 
 
-async function insertBanners() {
-  const banners: BannerInterface[] =  [
+export async function insertBanners() {
+  const banners: BannerInterface[] = [
     {
-        _id: "1",
-        productID: "123",
-        catogryID: "456",
-        clickCount: 0,
-        name: "Banner 1", 
-        image: {
-            url: "https://example.com/image1.jpg",
-            alt: "Banner 1"
-        },
-        size: "side",
-        kind: ["price"],
-        text: "Special Sale!",
-        createdAt: new Date(),
-        author: "Admin"
+      _id: "1",
+      productID: "123",
+      catogryID: "456",
+      clickCount: 0,
+      name: "Banner 1",
+      image: {
+        url: "https://example.com/image1.jpg",
+        alt: "Banner 1"
+      },
+      size: "side",
+      kind: ["price"],
+      text: "Special Sale!",
+      createdAt: new Date(),
+      author: "Admin"
     },
     {
-        _id: "2",
-        productID: "456",
-        catogryID: "789",
-        clickCount: 0,
-        name: "Banner 2", 
-        image: {
-            url: "https://example.com/image2.jpg",
-            alt: "Banner 2"
-        },
-        size: "top",
-        kind: ["sale"],
-        text: "Limited Time Offer!",
-        createdAt: new Date(),
-        author: "Admin"
+      _id: "2",
+      productID: "456",
+      catogryID: "789",
+      clickCount: 0,
+      name: "Banner 2",
+      image: {
+        url: "https://example.com/image2.jpg",
+        alt: "Banner 2"
+      },
+      size: "top",
+      kind: ["sale"],
+      text: "Limited Time Offer!",
+      createdAt: new Date(),
+      author: "Admin"
     },
     {
-        _id: "3",
-        productID: "789",
-        catogryID: "012",
-        clickCount: 0,
-        name: "Banner 3", 
-        image: {
-            url: "https://example.com/image3.jpg",
-            alt: "Banner 3"
-        },
-        size: "all",
-        kind: ["price", "sale"],
-        text: "New Arrivals!",
-        createdAt: new Date(),
-        author: "Admin"
+      _id: "3",
+      productID: "789",
+      catogryID: "012",
+      clickCount: 0,
+      name: "Banner 3",
+      image: {
+        url: "https://example.com/image3.jpg",
+        alt: "Banner 3"
+      },
+      size: "all",
+      kind: ["price", "sale"],
+      text: "New Arrivals!",
+      createdAt: new Date(),
+      author: "Admin"
     },
     {
-        _id: "4",
-        productID: "012",
-        catogryID: "345",
-        clickCount: 0,
-        name: "Banner 4", // שם המוצר כאן
-        image: {
-            url: "https://example.com/image4.jpg",
-            alt: "Banner 4"
-        },
-        size: "side",
-        kind: ["price"],
-        text: "Clearance Sale!",
-        createdAt: new Date(),
-        author: "Admin"
+      _id: "4",
+      productID: "012",
+      catogryID: "345",
+      clickCount: 0,
+      name: "Banner 4", // שם המוצר כאן
+      image: {
+        url: "https://example.com/image4.jpg",
+        alt: "Banner 4"
+      },
+      size: "side",
+      kind: ["price"],
+      text: "Clearance Sale!",
+      createdAt: new Date(),
+      author: "Admin"
     },
     {
-        _id: "5",
-        productID: "345",
-        catogryID: "678",
-        clickCount: 0,
-        name: "Banner 5", // שם המוצר כאן
-        image: {
-            url: "https://example.com/image5.jpg",
-            alt: "Banner 5"
-        },
-        size: "top",
-        kind: ["sale"],
-        text: "Flash Sale!",
-        createdAt: new Date(),
-        author: "Admin"
+      _id: "5",
+      productID: "345",
+      catogryID: "678",
+      clickCount: 0,
+      name: "Banner 5", // שם המוצר כאן
+      image: {
+        url: "https://example.com/image5.jpg",
+        alt: "Banner 5"
+      },
+      size: "top",
+      kind: ["sale"],
+      text: "Flash Sale!",
+      createdAt: new Date(),
+      author: "Admin"
     }
-];
+  ];
 
   try {
     const result = await bannerModel.insertMany(banners);

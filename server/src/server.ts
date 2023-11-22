@@ -16,10 +16,10 @@ dotenv.config();
 
 // Import routes from the ./routes
 import user from "./routes/user-route";
-import  connectToDB  from "./configs/mongoDBConnect";
+import connectToDB from "./configs/mongoDBConnect";
 import { catchErrors, notFound } from "./middleware/errorNOTfound";
 import { ApiError } from "./utils/ApiError";
-// import { insertBanners } from "./models/bannersModel";
+import { insertBanners } from "./models/bannersModel";
 import routerBannersImage from "./routes/bannersImage-route";
 
 // Setup constant variables

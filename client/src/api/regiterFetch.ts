@@ -1,17 +1,6 @@
-export type Response = {
-    success: boolean;
-    data: {};
-    message: string;
-}
+import { LoginInterface } from "../types/UserInterface";
 
-type User = {
-    name: string;
-    email: string;
-    password: string;
-    isAdmin: boolean;
-}
-
-const regiterFetch = (user: User) => {
+export const regiterFetch = (user: LoginInterface) => {
 
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -39,12 +28,13 @@ const regiterFetch = (user: User) => {
         });
 }
 
-const getUsersFetch = () => {
-    var raw = "";
 
-    var requestOptions : RequestInit = {
+export const getUsersFetch = () => {
+    let raw = "";
+
+    let requestOptions: RequestInit = {
         method: 'GET',
-        
+
         redirect: 'follow'
     };
 
@@ -53,7 +43,5 @@ const getUsersFetch = () => {
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
 }
-export default {
-    regiterFetch,
-    getUsersFetch,
-}
+export default regiterFetch
+

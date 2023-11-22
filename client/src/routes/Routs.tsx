@@ -30,16 +30,16 @@ export default function Routs() {
                             element: <HomePage />,
                             errorElement: <ErrorPage />,
                         },
-                        // {
-                        //     path: "login",
-                        //     element: <Login />,
-                        //     errorElement: <ErrorPage />,
-                        // },
                         {
                             path: "login",
-                            element: <CreateBanner />,
+                            element: <Login />,
                             errorElement: <ErrorPage />,
                         },
+                        // {
+                        //     path: "login",
+                        //     element: <CreateBanner />,
+                        //     errorElement: <ErrorPage />,
+                        // },
                         {
                             path: "register",
                             element: <Register />,

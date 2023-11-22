@@ -19,7 +19,7 @@ import user from "./routes/user-route";
 import  connectToDB  from "./configs/mongoDBConnect";
 import { catchErrors, notFound } from "./middleware/errorNOTfound";
 import { ApiError } from "./utils/ApiError";
-import { insertBanners } from "./models/bannersModel";
+// import { insertBanners } from "./models/bannersModel";
 import routerBannersImage from "./routes/bannersImage-route";
 
 // Setup constant variables
@@ -76,7 +76,7 @@ app.use(catchErrors);
 connectToDB().then((res) => {
   console.log('Connecting to mongodb');
   // איתוחל דאטה ראשוני
-  insertBanners()
+  // insertBanners()
   app.listen(PORT, () => {
     console.log(`Server is listening on: ${PORT}`);
   });

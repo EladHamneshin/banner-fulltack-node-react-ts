@@ -1,5 +1,4 @@
-
-import { Outlet, RouterProvider } from 'react-router-dom'   
+import { Outlet, RouterProvider } from 'react-router-dom'
 
 function App() {
 

@@ -48,6 +48,7 @@ const LoginForm = () => {
         setLoading(true)
         const handelClickHomePage = () => {
             navigate(`/deshbord `)
+            window.location.reload();
         }
         try {
             const data: Response = await loginFetch(user)

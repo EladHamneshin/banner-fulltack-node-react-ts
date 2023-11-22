@@ -19,7 +19,7 @@ const Login = (props: Props) => {
         navigate(`/deshbord/register`)
     }
 
-    getAllBannersImage()
+    // getAllBannersImage()
 
     const paperStyle = {
         padding: 20,

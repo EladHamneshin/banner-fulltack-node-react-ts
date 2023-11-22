@@ -32,7 +32,9 @@ export {
 
 
 export async function insertBanners() {
+
   const banners: BannerInterface[] = [
+
     {
       _id: "1",
       productID: "123",

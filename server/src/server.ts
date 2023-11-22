@@ -19,7 +19,7 @@ import user from "./routes/user-route";
 import  connectToDB  from "./configs/mongoDBConnect";
 import { catchErrors, notFound } from "./middleware/errorNOTfound";
 import { ApiError } from "./utils/ApiError";
-// import { insertBanners } from "./models/bannersModel";
+import { insertBanners } from "./models/bannersModel";
 import routerBannersImage from "./routes/bannersImage-route";
 
 // Setup constant variables
@@ -28,7 +28,8 @@ const RATE_TIME_LIMIT = Number(process.env.RATE_TIME_LIMIT) || 15;
 const RATE_REQUEST_LIMIT = Number(process.env.RATE_REQUEST_LIMIT) || 100;
 
 // Init express app
-const app = express();
+export const app = express();
+
 app.use(express.static('public'))
 // Body parser
 app.use(express.json());

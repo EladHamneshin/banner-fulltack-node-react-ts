@@ -31,7 +31,7 @@ export {
 
 
 
-async function insertBanners() {
+export async function insertBanners() {
   const banners: BannerInterface[] =  [
     {
         _id: "1",

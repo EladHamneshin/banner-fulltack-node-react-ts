@@ -21,12 +21,13 @@ export const loginUser = asyncHandler(async (req: Request,res: Response) => {
       throw new ApiError({}, STATUS_CODES.BAD_REQUEST,'User already logged in');
 
   const {email, password } = req.body;
-  const user = await userService.authUser(email, password);
 
-  const token =  generateToken(user._id);
+  const user = await userService.authUser(email, password);
+  const token =  generateToken(user._id,user.isAdmin);
 
   res.status(STATUS_CODES.OK).json(new ApiSuccess({token:token,user: user}, "Success!"));
 });
+
 
 // @desc  Register new user
 // @route POST /api/users/register
@@ -44,7 +45,15 @@ export const registerUser = asyncHandler(async (req: Request, res: Response, nex
 );
 
 
-export default {registerUser, loginUser}
+// @desc Delete a user
+// @route DELETE /api/users/
+// @access private
+export const deleteUser = asyncHandler(async (req:Request, res:Response, next: NextFunction) => {
+ // const deletedUser = await userService.deleteUser(req.body.userID);
+
+  res.status(STATUS_CODES.OK).json(new ApiSuccess('', "Success!"));
+})
+export default {registerUser, loginUser, deleteUser}
 
 
 

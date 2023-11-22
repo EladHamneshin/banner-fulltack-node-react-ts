@@ -1,47 +1,28 @@
-import { LoginInterface } from "../types/UserInterface";
+import { LoginInterface, UserInterface } from "../types/UserInterface";
+import axios from 'axios';
 
-export const regiterFetch = (user: LoginInterface) => {
 
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+export const regiterFetch = async (user: UserInterface) => {
 
-    const raw = JSON.stringify(user);
+    let data = user
 
-    const requestOptions: RequestInit = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
+    let config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: 'http://localhost:5000/api/users/register',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: data
     };
 
-    fetch("http://localhost:5000/users/register", requestOptions)
-        .then(response => {
-            console.log(response.json());
-            console.log(response);
-
-            return response
-        })
-        .then(result => console.log(result))
-        .catch(error => {
-            console.log(error.message);
-            return error
-        });
+    try {
+        const res = await axios.request(config)
+        return res.data
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 
-export const getUsersFetch = () => {
-    let raw = "";
-
-    let requestOptions: RequestInit = {
-        method: 'GET',
-
-        redirect: 'follow'
-    };
-
-    fetch("http://localhost:5000/users/", requestOptions)
-        .then(response => response.json())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-}
-export default regiterFetch
 

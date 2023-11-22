@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { useNavigate } from 'react-router-dom';
-import UserFetch from '../../api/regiterFetch'
+import { regiterFetch } from '../../api/regiterFetch';
 // import { signupUser } from '../../api/usersFuncApi';
 
 const schema = yup.object({
@@ -23,19 +23,21 @@ type Props = {
 }
 
 const LoginForm = (props: Props) => {
+  const navigate = useNavigate();
+
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
   const textFieldStyle = { padding: '2px', margin: '4px auto ' }
 
-  const navigate = useNavigate();
-  const moveToLogin = () => {
-    navigate(`/deshbord/login`)
-  }
 
   const { register, formState: { errors }, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
   const onSubmit: SubmitHandler<any> = async (data) => {
+
+    const moveToLogin = () => {
+      navigate(`/deshbord/login`)
+    }
 
     const name = data.firstName + ' ' + data.lastName;
     const email = data.email
@@ -45,13 +47,18 @@ const LoginForm = (props: Props) => {
       name: name,
       email: email,
       password: password,
-      isAdmin: false
+      isAdmin: true
     };
     setLoading(true)
     try {
-      const respon = await UserFetch.regiterFetch(user)
+      const data = await regiterFetch(user)
+
+      console.log(data);
+      console.log('data.success', data.success);
+      if (data.success === true) { moveToLogin() };
       // setMessage(response.message)
-      const response = await UserFetch.getUsersFetch()
+      // const response = await UserFetch.getUsersFetch()
+
       setTimeout(() => {
         setLoading(false)
       }, 1000);

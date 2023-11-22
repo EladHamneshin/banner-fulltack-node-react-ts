@@ -22,7 +22,7 @@ type Props = {
   // close: () => void
 }
 
-const LoginForm = (props: Props) => {
+const RegisterForm = (props: Props) => {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false)
@@ -131,4 +131,4 @@ const LoginForm = (props: Props) => {
   )
 }
 
-export default LoginForm
+export default RegisterForm

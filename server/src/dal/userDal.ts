@@ -24,4 +24,10 @@ const registerUser = async (user: User) => {
     return rows[0];
 };
 
-export default {getUserByEmail, registerUser, getAllUsers} ;
+
+const deleteUser = async (userID: string) => {
+    const client = await postgresPool.connect();
+    
+}
+export default {getUserByEmail, registerUser,  getAllUsers, deleteUser} ;
+

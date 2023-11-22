@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Outlet } from 'react-router-dom';
 import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
+import SidBar from '../components/SidBar';
 
 
 
@@ -59,9 +60,9 @@ const Deshbord = (props: Props) => {
 
         <Box sx={{ border: '1px solid black' }}>
           <IconButton onClick={() => setOpenSidebar(!openSidebar)}>
-            {openSidebar ? <MenuOpenOutlinedIcon /> : <MenuOpenOutlinedIcon sx={{ transform: 'rotateY(180deg)' }} />}
+            {/* {openSidebar ? <SidBar /> : <SidBar />} */}
           </IconButton>
-          {openSidebar && <p>sid bar </p>}
+          {openSidebar && <SidBar />}
         </Box>
 
 

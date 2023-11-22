@@ -10,19 +10,24 @@ const authUser = async (email: string, password: string) => {
     const user = await userDal.getUserByEmail( email );
 
     if (!user) 
+
         throw new Error('User not found');
 
     const isPasswordCorrect = await comparePassword(password, user.password);
+    console.log('iscorrect', isPasswordCorrect);
+
 
     if (!isPasswordCorrect)
-     throw new ApiError({},STATUS_CODES.FORBIDDEN,'Invalid password');
+        throw new ApiError({}, STATUS_CODES.FORBIDDEN, 'Invalid password');
 
     return user;
 };
 
 
+
 const registerUser = async (user : User) => {    
     const {email, password} = user;
+
 
     const isUserRegisted = await userDal.getUserByEmail(email);
 
@@ -37,7 +42,7 @@ const registerUser = async (user : User) => {
     const newUser = await userDal.registerUser(user);
     if (!newUser)
         throw new ApiError({}, STATUS_CODES.INTERNAL_SERVER_ERROR, "something went wrong");
-    
+
     return newUser;
 };
 

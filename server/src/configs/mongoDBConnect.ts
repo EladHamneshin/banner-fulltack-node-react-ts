@@ -5,8 +5,9 @@ import { MongoMemoryServer } from "mongodb-memory-server";
 const connectToDB = async () => {
     let dbUri = process.env.MONGO_URI!
 
-    if (!process.env.MONGO_URI) {
-        console.error('MONGODB_URI is not defined');
+    if(!process.env.MONGO_URI){
+        console.error('MONGO_URI is not defined');
+
         process.exit(1);
     }
     if (process.env.NODE_ENV === "test") {

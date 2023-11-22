@@ -8,7 +8,6 @@ import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 
 
-import { verify } from "./middleware/auth-middleware";
 import { unless } from "./middleware/unless";
 
 // Setup .env variables for app usage

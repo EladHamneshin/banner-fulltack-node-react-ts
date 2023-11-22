@@ -9,6 +9,14 @@ const getUserByEmail = async (email: string) => {
     return rows[0];
 };
 
+const getAllUsers = async () => {
+    const client = await postgresPool.connect();
+    const { rows } = await client.query(`SELECT * FROM users`);
+    
+    client.release();
+    return rows;
+};
+
 const registerUser = async (user: User) => {
     const client = await postgresPool.connect();
     const { rows } = await client.query(`INSERT INTO users (id, name, email, password, isadmin) VALUES ($1, $2, $3, $4, $5) RETURNING *`, [user._id ,user.name, user.email, user.password, user.isAdmin]);
@@ -16,4 +24,4 @@ const registerUser = async (user: User) => {
     return rows[0];
 };
 
-export default {getUserByEmail, registerUser} ;
+export default {getUserByEmail, registerUser, getAllUsers} ;

@@ -43,8 +43,18 @@ export const registerUser = asyncHandler(async (req: Request, res: Response, nex
   },
 );
 
+export const getAllUsers = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+  
+  const users = await userService.getAllUsers();
+  
+  res.status(STATUS_CODES.OK).json(new ApiSuccess<User[]>(users, "Success!"));
+},
+);
 
-export default {registerUser, loginUser}
+
+
+
+export default {registerUser, loginUser, getAllUsers}
 
 
 

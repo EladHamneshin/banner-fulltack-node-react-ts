@@ -25,29 +25,42 @@ const authUser = async (email: string, password: string) => {
 
 
 
+
 const registerUser = async (user : User) => {    
     const {email, password} = user;
-
 
     const isUserRegisted = await userDal.getUserByEmail(email);
 
     if (isUserRegisted)
-        throw new ApiError({}, STATUS_CODES.BAD_REQUEST, "user already registed");
+    throw new ApiError({}, STATUS_CODES.BAD_REQUEST, "user already registed");
 
-    const hashedPassword = await hashPassword(password);
 
-    user.password = hashedPassword;
-    user._id = uuid();
 
-    const newUser = await userDal.registerUser(user);
-    if (!newUser)
-        throw new ApiError({}, STATUS_CODES.INTERNAL_SERVER_ERROR, "something went wrong");
+const hashedPassword = await hashPassword(password);
+user.password = hashedPassword
+user._id = uuid();
 
-    return newUser;
+const newUser = await userDal.registerUser(user);
+if (!newUser)
+throw new ApiError({}, STATUS_CODES.INTERNAL_SERVER_ERROR, "something went wrong");
+
+return newUser;
+};
+
+
+const getAllUsers = async () => {
+    const users = await userDal.getAllUsers();
+    if (!users)
+        throw new Error('Users not found');
+
+    return users;
 };
 
 
 export default {
     registerUser,
     authUser,
+    getAllUsers
 };
+
+

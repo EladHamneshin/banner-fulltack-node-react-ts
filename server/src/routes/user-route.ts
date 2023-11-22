@@ -6,6 +6,10 @@ import { authHandler } from "../middleware/auth-middleware";
 const router = express.Router();
 
 
+// add a token 
+router.get("/", userController.getAllUsers);
+
+
 router.post("/register", userController.registerUser);
 
 router.post("/login", userController.loginUser);

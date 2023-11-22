@@ -44,6 +44,17 @@ export const registerUser = asyncHandler(async (req: Request, res: Response, nex
   },
 );
 
+export const getAllUsers = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+  
+  const users = await userService.getAllUsers();
+  
+  res.status(STATUS_CODES.OK).json(new ApiSuccess<User[]>(users, "Success!"));
+},
+);
+
+
+
+
 
 // @desc Delete a user
 // @route DELETE /api/users/
@@ -53,7 +64,8 @@ export const deleteUser = asyncHandler(async (req:Request, res:Response, next: N
 
   res.status(STATUS_CODES.OK).json(new ApiSuccess('', "Success!"));
 })
-export default {registerUser, loginUser, deleteUser}
+export default {registerUser, loginUser, deleteUser,  getAllUsers}
+
 
 
 

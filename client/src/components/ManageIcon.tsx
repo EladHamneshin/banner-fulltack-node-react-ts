@@ -43,6 +43,7 @@ const ManageIcon = (props: Props) => {
         setAnchorEl(null);
         localStorage.removeItem('name')
         localStorage.removeItem('token')
+        localStorage.removeItem('userID')
         handelClickLogin()
         // window.location.reload();
 

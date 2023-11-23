@@ -7,6 +7,10 @@ import * as yup from "yup";
 import { Product } from '../../types/ProductInterface';
 import { v4 as uuid } from 'uuid'
 
+import UpImageBanner from './UpImageBanner';
+import { useNavigate } from 'react-router-dom';
+
+
 const schema = yup.object({
     name: yup.string().max(20).required(),
     size: yup.string().oneOf(['side', 'top', 'all']).required(),
@@ -24,6 +28,11 @@ type Props = {
 }
 
 const NewBannerForm = (props: Props) => {
+
+    const navigate = useNavigate();
+    const handelClickLogin = () => { navigate(`/login`) }
+    if (localStorage.getItem('token') === null) { handelClickLogin() }
+
     const product = props.product
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
@@ -86,6 +95,7 @@ const NewBannerForm = (props: Props) => {
 
                             <Grid key={uuid()} sx={{ display: 'flex', flexDirection: 'column', }}>
 
+
                                 <TextField style={textFieldStyle} label="Name" defaultValue={product.name}
                                     {...register("name", { required: true, maxLength: 20 })} />
                                 <Typography color='red' variant='caption'> {errors.name?.message} </Typography>
@@ -93,6 +103,7 @@ const NewBannerForm = (props: Props) => {
                                 <TextField style={textFieldStyle} label="Discription" placeholder="Discription"
                                     {...register("text", { required: true, maxLength: 20 })} />
                                 <Typography color='red' variant='caption'> {errors.text?.message} </Typography>
+
 
                                 <InputLabel  htmlFor="size">Select size</InputLabel>
                                 <Select 
@@ -105,6 +116,7 @@ const NewBannerForm = (props: Props) => {
                                     <MenuItem value="top">TOP</MenuItem>
                                 </Select>
                                 <Typography color='red' variant='caption'>{errors.size?.message}</Typography>
+
 
 
                                 <TextField
@@ -132,12 +144,14 @@ const NewBannerForm = (props: Props) => {
                                 <Typography color='red' variant='caption'>{errors.kind?.message}</Typography>
 
 
+
                             </Grid>
 
 
 
 
                         </Box>
+
 
                     </Grid>
                 }
@@ -149,6 +163,7 @@ const NewBannerForm = (props: Props) => {
             <Box>
 
                 {/* <UpImageBanner /> */}
+
             </Box>
         </Box>
     );

@@ -9,7 +9,10 @@ import SidBar from './SidBar';
 type Props = {}
 
 const Header = (props: Props) => {
+
   const navigate = useNavigate();
+  const handelClickLogin = () => { navigate(`/login`) }
+  if (localStorage.getItem('token') === null) { handelClickLogin() }
 
   const handelClickHomePage = () => {
     navigate(`/deshbord `)

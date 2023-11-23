@@ -1,31 +1,33 @@
-import { Box, Stack } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import { getAllBannersImage } from '../api/bannersImageFunc'
-import { ResponseBanner } from '../types/BannerInterface'
+import { bannerByUserID } from '../api/bannerByUserID'
+import { Box, Stack } from '@mui/system'
+import { useParams } from 'react-router-dom'
 import CardBanner from '../components/CardBanner'
+import { ResponseBanner } from '../types/BannerInterface'
 import { exmpleBanner } from '../exmpleBanners'
 
 
-type Props = {}
-
-const AllBanners = (props: Props) => {
+const BannerByUserID = () => {
     const [message, setMessage] = useState('')
     const [banners, setBanners] = useState<ResponseBanner[]>([]);
+    const { userID } = useParams()
+    // console.log('uuuuuuuu', useParams());
 
-
+    // console.log('lllllllllllllllll', userID);
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const result = await getAllBannersImage();
+                const result = await bannerByUserID(userID!);
+
+                // console.log('rrrrrrrrrrrrrrr', result);
                 if (result.success === false) { return setMessage(result.message) }
-                console.log('rrrrrrrrrrrrrrr', result);
                 if (result.success === true) {
                     const data: ResponseBanner[] = result.data
-                    console.log('ddddddddddd', data);
+                    // console.log('ddddddddddd', data);
                     data.length === 0 ? setBanners(exmpleBanner) : setBanners(data)
                 }
             } catch (error) {
-                console.log(error);
+                // console.log(error);
             }
         };
 
@@ -52,4 +54,4 @@ const AllBanners = (props: Props) => {
     )
 }
 
-export default AllBanners
+export default BannerByUserID

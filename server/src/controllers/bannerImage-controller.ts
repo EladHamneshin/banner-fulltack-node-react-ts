@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { ApiSuccess } from "../utils/ApiSucess";
 import { asyncHandler } from "../middleware/async-middleware";
-import {BannerInterface} from "../types/interfaces/bannerInterface";
+import { BannerInterface } from "../types/interfaces/bannerInterface";
 import { ApiError } from "../utils/ApiError";
 // import service from "../services/bannersImage-service";
 import { errorResponse } from "../middleware/error-middleware";
@@ -51,7 +51,7 @@ export const getBannersImageByProductID = asyncHandler(
       const banners: BannerInterface[] = await serviceGetBannersImageByProductID(productID);
 
       if (!banners) {
-        throw new ApiError({}, STATUS_CODES.NOT_FOUND, "Banners not found for the given productID");
+        throw new ApiError({}, STATUS_CODES.NO_CONTENT, "Banners not found for the given productID");
       }
 
       res.status(STATUS_CODES.OK).json({ success: true, data: banners, message: "Success!" });

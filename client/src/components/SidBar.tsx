@@ -3,12 +3,21 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import React, { useState } from 'react';
 import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
+import CardTravelIcon from '@mui/icons-material/CardTravel';
+import { useNavigate } from 'react-router-dom';
 
 
 type Props = {};
 
 const SidBar = (props: Props) => {
+    const navigate = useNavigate();
+
     const [state, setState] = useState({ left: false });
+
+    const handelClickAllBanners = () => {
+        navigate(`/deshbord/banners`)
+        // window.location.reload();
+    }
 
     const toggleDrawer =
         (anchor: 'left', open: boolean) =>
@@ -32,11 +41,12 @@ const SidBar = (props: Props) => {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                {['All banners', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                     <ListItem key={text} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={text === 'All banners' ? handelClickAllBanners : undefined}>
                             <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                {text === 'All banners' && <CardTravelIcon />}
+                                {/* {index > 0 && index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
                             </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>
@@ -56,7 +66,7 @@ const SidBar = (props: Props) => {
                     </ListItem>
                 ))}
             </List>
-        </Box>
+        </Box >
     );
 
     return (

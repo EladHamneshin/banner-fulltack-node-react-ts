@@ -1,3 +1,4 @@
+
 import { Box, Stack, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { bannerByProducdID } from '../api/bannerByProducdID'
@@ -5,9 +6,11 @@ import { ResponseBanner } from '../types/BannerInterface'
 import { useNavigate, useParams } from 'react-router-dom'
 import CardBanner from '../components/CardBanner'
 
+
 type Props = {}
 
 const BannersByProductID = (props: Props) => {
+
 
     const navigate = useNavigate();
     const handelClickLogin = () => { navigate(`/login`) }
@@ -17,10 +20,12 @@ const BannersByProductID = (props: Props) => {
     const [banners, setBanners] = useState<ResponseBanner[] | string>([]);
     const { productID } = useParams()
 
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const result = await bannerByProducdID(productID!);
+
                 if (result.success === false) { return setMessage(result.message) }
                 if (result.success === true) {
                     const data: ResponseBanner[] = result.data
@@ -28,10 +33,12 @@ const BannersByProductID = (props: Props) => {
                 }
             } catch (error) {
                 console.log(error);
+
             }
         };
 
         fetchData();
+
     }, []);
 
 
@@ -41,6 +48,7 @@ const BannersByProductID = (props: Props) => {
                 <Stack>{message}</Stack>
             ) : (
                 <>
+
                     {typeof banners === 'string' ? (
                         <Typography variant='h3'>{banners}</Typography>
                     ) : (
@@ -48,6 +56,7 @@ const BannersByProductID = (props: Props) => {
                             <Stack key={index}><CardBanner banner={banner} /></Stack>
                         ))
                     )}
+
                 </>
             )}
         </Box>

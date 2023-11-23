@@ -1,9 +1,15 @@
 import React, { useState } from 'react'
 import { useDropzone } from 'react-dropzone';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {}
 
 const UpImageBanner = () => {
+
+    const navigate = useNavigate();
+    const handelClickLogin = () => { navigate(`/login`) }
+    if (localStorage.getItem('token') === null) { handelClickLogin() }
+
     // const [imageData, setImageData] = useState(null);
     // const [width, setWidth] = useState(300); // רוחב רצוי כברירת מחדל
     // const [height, setHeight] = useState(200); // גובה רצוי כברירת מחדל
@@ -37,7 +43,7 @@ const UpImageBanner = () => {
 
     return (
         <>
-        {/* <div {...getRootProps()}>
+            {/* <div {...getRootProps()}>
             <input {...getInputProps()} />
             <p>Drag 'n' drop some files here, or click to select files</p>
 
@@ -55,7 +61,7 @@ const UpImageBanner = () => {
                         <input type="number" value={height} onChange={handleHeightChange} />
                     </div>
                     <button onClick={handleCrop}>Crop Image</button> */}
-                {/* </div>
+            {/* </div>
             )} */}
         </>
     );

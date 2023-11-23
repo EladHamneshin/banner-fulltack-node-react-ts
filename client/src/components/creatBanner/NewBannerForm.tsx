@@ -7,6 +7,7 @@ import { NewBannerInterface } from '../../types/BannerInterface';
 import { Product } from '../../types/ProductInterface';
 import { v4 as uuid } from 'uuid'
 import UpImageBanner from './UpImageBanner';
+import { useNavigate } from 'react-router-dom';
 
 const schema = yup.object({
     name: yup.string().max(20).required(),
@@ -25,6 +26,11 @@ type Props = {
 }
 
 const NewBannerForm = (props: Props) => {
+
+    const navigate = useNavigate();
+    const handelClickLogin = () => { navigate(`/login`) }
+    if (localStorage.getItem('token') === null) { handelClickLogin() }
+
     const product = props.product
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
@@ -54,67 +60,67 @@ const NewBannerForm = (props: Props) => {
 
     return (
         <Box>
-        <form onSubmit={handleSubmit(onSubmit)}>
-            {loading ?
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-around',
-                        minWidth: '420px',
-                        minHeight: '360px',
-                    }}
-                >
-                    <Grid
+            <form onSubmit={handleSubmit(onSubmit)}>
+                {loading ?
+                    <Box
                         sx={{
                             display: 'flex',
                             flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center',
+                            justifyContent: 'space-around',
+                            minWidth: '420px',
+                            minHeight: '360px',
                         }}
                     >
-                        <Typography>Loding.....</Typography>
-                        {message && <Typography>{message}</Typography>}
-                    </Grid>
-                </Box>
-                :
-                <Grid>
-                    <Box sx={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                    }}>
-
-
-                        <Grid key={uuid()} sx={{ display: 'flex', flexDirection: 'column', }}>
-
-                            {/* const allValuesArray = ['productID', 'catogryID', 'click', 'image url', 'image alt', 'size', 'kind', 'text', 'createdAt', 'author']; */}
-                            <TextField style={textFieldStyle} label="Name" defaultValue={product.name}
-                                {...register("name", { required: true, maxLength: 20 })} />
-                            <Typography color='red' variant='caption'> {errors.name?.message} </Typography>
-
-                            <TextField style={textFieldStyle} label="Discription" placeholder="Discription"
-                                {...register("text", { required: true, maxLength: 20 })} />
-                            <Typography color='red' variant='caption'> {errors.text?.message} </Typography>
-
+                        <Grid
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <Typography>Loding.....</Typography>
+                            {message && <Typography>{message}</Typography>}
                         </Grid>
-
-
-
-
                     </Box>
+                    :
+                    <Grid>
+                        <Box sx={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                        }}>
 
-                </Grid>
-            }
 
-            <Button type="submit" variant="contained" color="primary">
-                Submit
-            </Button>
-        </form>
-                                <Box>
+                            <Grid key={uuid()} sx={{ display: 'flex', flexDirection: 'column', }}>
 
-                                <UpImageBanner />
-                            </Box>
-                            </Box>
+                                {/* const allValuesArray = ['productID', 'catogryID', 'click', 'image url', 'image alt', 'size', 'kind', 'text', 'createdAt', 'author']; */}
+                                <TextField style={textFieldStyle} label="Name" defaultValue={product.name}
+                                    {...register("name", { required: true, maxLength: 20 })} />
+                                <Typography color='red' variant='caption'> {errors.name?.message} </Typography>
+
+                                <TextField style={textFieldStyle} label="Discription" placeholder="Discription"
+                                    {...register("text", { required: true, maxLength: 20 })} />
+                                <Typography color='red' variant='caption'> {errors.text?.message} </Typography>
+
+                            </Grid>
+
+
+
+
+                        </Box>
+
+                    </Grid>
+                }
+
+                <Button type="submit" variant="contained" color="primary">
+                    Submit
+                </Button>
+            </form>
+            <Box>
+
+                <UpImageBanner />
+            </Box>
+        </Box>
     );
 };
 

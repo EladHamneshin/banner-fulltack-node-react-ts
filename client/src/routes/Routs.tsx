@@ -73,7 +73,7 @@ export default function Routs() {
                             errorElement: <ErrorPage />,
                         },
                         {
-                            path: "banners/user/:userID",
+                            path: `banners/user/:userID`,
                             element: <BannerByUserID />,
                             errorElement: <ErrorPage />,
                         },

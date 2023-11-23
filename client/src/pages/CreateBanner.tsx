@@ -3,8 +3,10 @@ import NewBannerForm from '../components/creatBanner/NewBannerForm';
 import { Grid, Paper, Avatar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
+
 import UpImageBanner from '../components/creatBanner/UpImageBanner';
 import { useNavigate } from 'react-router-dom';
+
 
 type Props = {};
 

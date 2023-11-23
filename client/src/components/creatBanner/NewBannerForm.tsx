@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
-import { Button, TextField, Box, Grid, Typography } from '@mui/material';
+import { Button, TextField, Box, Grid, Typography, InputLabel, Select, MenuItem } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { NewBannerInterface } from '../../types/BannerInterface';
+// import { NewBannerInterface } from '../../types/BannerInterface';
 import { Product } from '../../types/ProductInterface';
 import { v4 as uuid } from 'uuid'
+
 import UpImageBanner from './UpImageBanner';
 import { useNavigate } from 'react-router-dom';
 
+
 const schema = yup.object({
     name: yup.string().max(20).required(),
-    // size: yup.string().required(),
+    size: yup.string().oneOf(['side', 'top', 'all']).required(),
     // click: yup.number().default(0).required(),
-    // image_url: yup.string().required(),
+    image: yup.mixed().required("Please upload an image"),
     // image_alt: yup.string().required(),
-    // kind: yup.string().oneOf(['price', 'sale']).required(),
+    kind: yup.string().oneOf(['price', 'sale']).required(),
     text: yup.string().max(20).required(),
     // createdAt: yup.date().required(),
     // author: yup.string().required(),
@@ -93,7 +95,7 @@ const NewBannerForm = (props: Props) => {
 
                             <Grid key={uuid()} sx={{ display: 'flex', flexDirection: 'column', }}>
 
-                                {/* const allValuesArray = ['productID', 'catogryID', 'click', 'image url', 'image alt', 'size', 'kind', 'text', 'createdAt', 'author']; */}
+
                                 <TextField style={textFieldStyle} label="Name" defaultValue={product.name}
                                     {...register("name", { required: true, maxLength: 20 })} />
                                 <Typography color='red' variant='caption'> {errors.name?.message} </Typography>
@@ -102,12 +104,54 @@ const NewBannerForm = (props: Props) => {
                                     {...register("text", { required: true, maxLength: 20 })} />
                                 <Typography color='red' variant='caption'> {errors.text?.message} </Typography>
 
+
+                                <InputLabel  htmlFor="size">Select size</InputLabel>
+                                <Select 
+                                    label="size"
+                                    defaultValue="side"
+                                    {...register("size", { required: true })}
+                                >
+                                    <MenuItem value="all">ALL</MenuItem>
+                                    <MenuItem value="side">SIDE</MenuItem>
+                                    <MenuItem value="top">TOP</MenuItem>
+                                </Select>
+                                <Typography color='red' variant='caption'>{errors.size?.message}</Typography>
+
+
+
+                                <TextField
+                                style={textFieldStyle}
+                                    type="file"
+                                    label="Image"
+                                    {...register("image")}
+                                    inputProps={{
+                                        accept: "image/*",
+                                    }}
+                                />
+                                <Typography color="red" variant="caption">
+                                    {errors.image?.message}
+                                </Typography>
+
+                                <InputLabel  htmlFor="kind">Select kind</InputLabel>
+                                <Select 
+                                    label="kind"
+                                    defaultValue="price"
+                                    {...register("kind", { required: true })}
+                                >
+                                    <MenuItem value="price">price</MenuItem>
+                                    <MenuItem value="saile">saile</MenuItem>
+                                </Select>
+                                <Typography color='red' variant='caption'>{errors.kind?.message}</Typography>
+
+
+
                             </Grid>
 
 
 
 
                         </Box>
+
 
                     </Grid>
                 }
@@ -118,7 +162,8 @@ const NewBannerForm = (props: Props) => {
             </form>
             <Box>
 
-                <UpImageBanner />
+                {/* <UpImageBanner /> */}
+
             </Box>
         </Box>
     );

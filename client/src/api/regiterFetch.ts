@@ -1,6 +1,7 @@
 import { LoginInterface, UserInterface } from "../types/UserInterface";
 import axios from 'axios';
 
+const base_url = import.meta.env.VITE_BASE_URL
 
 export const regiterFetch = async (user: UserInterface) => {
 
@@ -9,7 +10,7 @@ export const regiterFetch = async (user: UserInterface) => {
     let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'http://localhost:5000/api/users/register',
+        url: `${base_url}/api/users/register`,
         headers: {
             'Content-Type': 'application/json'
         },

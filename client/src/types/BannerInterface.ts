@@ -11,6 +11,7 @@ export interface BannerInterface {
 
 export interface NewBannerInterface {
     _id?: string;
+    name: string;
     productID: string;
     catogryID: string;
     click: number;

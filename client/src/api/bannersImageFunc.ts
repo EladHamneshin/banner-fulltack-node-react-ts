@@ -18,5 +18,6 @@ export const getAllBannersImage = async () => {
   } catch (error) {
     console.log(error);
   }
+
 }
 

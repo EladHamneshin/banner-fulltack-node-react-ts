@@ -4,13 +4,17 @@ import { getAllBannersImage } from '../api/bannersImageFunc'
 import { ResponseBanner } from '../types/BannerInterface'
 import CardBanner from '../components/CardBanner'
 import { exmpleBanner } from '../exmpleBanners'
+import { useNavigate } from 'react-router-dom'
 
 
-type Props = {}
 
-const AllBanners = (props: Props) => {
+const AllBanners = () => {
     const [message, setMessage] = useState('')
     const [banners, setBanners] = useState<ResponseBanner[]>([]);
+
+    const navigate = useNavigate();
+    const handelClickLogin = () => { navigate(`/login`) }
+    if (localStorage.getItem('token') === null) { handelClickLogin() }
 
 
     useEffect(() => {
@@ -28,12 +32,7 @@ const AllBanners = (props: Props) => {
                 console.log(error);
             }
         };
-
         fetchData();
-
-        //   return () => {
-
-        //   }
     }, []);
 
 

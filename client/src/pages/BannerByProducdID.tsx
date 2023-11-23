@@ -1,40 +1,37 @@
-import { Box, Stack } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import { Box, Stack, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
 import { bannerByProducdID } from '../api/bannerByProducdID'
 import { ResponseBanner } from '../types/BannerInterface'
-import { useParams } from 'react-router-dom'
-import { exmpleBanner } from '../exmpleBanners'
+import { useNavigate, useParams } from 'react-router-dom'
+import CardBanner from '../components/CardBanner'
 
 type Props = {}
 
 const BannersByProductID = (props: Props) => {
+
+    const navigate = useNavigate();
+    const handelClickLogin = () => { navigate(`/login`) }
+    if (localStorage.getItem('token') === null) { handelClickLogin() }
+
     const [message, setMessage] = useState('')
-    const [banners, setBanners] = useState<ResponseBanner[]>([]);
+    const [banners, setBanners] = useState<ResponseBanner[] | string>([]);
     const { productID } = useParams()
 
-    // console.log('lllllllllllllllll', productID);
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const result = await bannerByProducdID(productID!);
-
-                // console.log('rrrrrrrrrrrrrrr', result);
                 if (result.success === false) { return setMessage(result.message) }
                 if (result.success === true) {
                     const data: ResponseBanner[] = result.data
-                    // console.log('ddddddddddd', data);
-                    data.length === 0 ? setBanners(exmpleBanner) : setBanners(data)
+                    data.length === 0 ? setBanners('There is no such producrID') : setBanners(data)
                 }
             } catch (error) {
-                // console.log(error);
+                console.log(error);
             }
         };
 
         fetchData();
-
-        //   return () => {
-
-        //   }
     }, []);
 
 
@@ -44,9 +41,13 @@ const BannersByProductID = (props: Props) => {
                 <Stack>{message}</Stack>
             ) : (
                 <>
-                    {banners.map((banner, index) => (
-                        <Stack key={index}>{banner.name}</Stack>
-                    ))}
+                    {typeof banners === 'string' ? (
+                        <Typography variant='h3'>{banners}</Typography>
+                    ) : (
+                        banners.map((banner, index) => (
+                            <Stack key={index}><CardBanner banner={banner} /></Stack>
+                        ))
+                    )}
                 </>
             )}
         </Box>

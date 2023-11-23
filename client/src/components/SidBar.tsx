@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
 import CardTravelIcon from '@mui/icons-material/CardTravel';
 import { useNavigate } from 'react-router-dom';
+import ViewDaySharpIcon from '@mui/icons-material/ViewDaySharp';
 
 
 type Props = {};
@@ -16,6 +17,10 @@ const SidBar = (props: Props) => {
 
     const handelClickAllBanners = () => {
         navigate(`/deshbord/banners`)
+        // window.location.reload();
+    }
+    const handelClickMyBanners = () => {
+        navigate(`banners/user/${localStorage.getItem('name')}`)
         // window.location.reload();
     }
 
@@ -41,15 +46,24 @@ const SidBar = (props: Props) => {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['All banners', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                {['All banners', 'My bannars', 'Send email', 'Drafts'].map((text, index) => (
                     <ListItem key={text} disablePadding>
-                        <ListItemButton onClick={text === 'All banners' ? handelClickAllBanners : undefined}>
+                        <ListItemButton
+                            onClick={() => {
+                                if (text === 'All banners') {
+                                    handelClickAllBanners();
+                                } else if (text === 'My bannars') {
+                                    handelClickMyBanners();
+                                }
+                            }}
+                        >
                             <ListItemIcon>
                                 {text === 'All banners' && <CardTravelIcon />}
-                                {/* {index > 0 && index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+                                {text === 'My bannars' && <ViewDaySharpIcon />}
                             </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>
+
                     </ListItem>
                 ))}
             </List>

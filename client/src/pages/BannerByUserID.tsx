@@ -1,41 +1,38 @@
 import React, { useEffect, useState } from 'react'
 import { bannerByUserID } from '../api/bannerByUserID'
 import { Box, Stack } from '@mui/system'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import CardBanner from '../components/CardBanner'
 import { ResponseBanner } from '../types/BannerInterface'
 import { exmpleBanner } from '../exmpleBanners'
+import { Typography } from '@mui/material'
 
 
 const BannerByUserID = () => {
-    const [message, setMessage] = useState('')
-    const [banners, setBanners] = useState<ResponseBanner[]>([]);
-    const { userID } = useParams()
-    // console.log('uuuuuuuu', useParams());
 
-    // console.log('lllllllllllllllll', userID);
+    const navigate = useNavigate();
+    const handelClickLogin = () => { navigate(`/login`) }
+    if (localStorage.getItem('token') === null) { handelClickLogin() }
+
+    const [message, setMessage] = useState('')
+    const [banners, setBanners] = useState<ResponseBanner[] | string>([]);
+    const userID = localStorage.getItem('userID')
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const result = await bannerByUserID(userID!);
-
-                // console.log('rrrrrrrrrrrrrrr', result);
                 if (result.success === false) { return setMessage(result.message) }
                 if (result.success === true) {
                     const data: ResponseBanner[] = result.data
-                    // console.log('ddddddddddd', data);
-                    data.length === 0 ? setBanners(exmpleBanner) : setBanners(data)
+                    data.length === 0 ? setBanners('There are no banners on your name') : setBanners(data)
                 }
             } catch (error) {
-                // console.log(error);
+                console.log(error);
             }
         };
 
         fetchData();
-
-        //   return () => {
-
-        //   }
     }, []);
 
 
@@ -44,10 +41,13 @@ const BannerByUserID = () => {
             {message ? (
                 <Stack>{message}</Stack>
             ) : (
-                <>
-                    {banners.map((banner, index) => (
+                <> {typeof banners === 'string' ? (
+                    <Typography variant='h3'>{banners}</Typography>
+                ) : (
+                    banners.map((banner, index) => (
                         <Stack key={index}><CardBanner banner={banner} /></Stack>
-                    ))}
+                    ))
+                )}
                 </>
             )}
         </Box>
@@ -55,3 +55,7 @@ const BannerByUserID = () => {
 }
 
 export default BannerByUserID
+
+function ifUserIn() {
+    throw new Error('Function not implemented.')
+}

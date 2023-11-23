@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { ResponseBanner } from '../types/BannerInterface';
 import { deleteByBannerID } from '../api/deleteByBannerID';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   banner: ResponseBanner
@@ -28,6 +29,11 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 
 const CardBanner = (props: Props) => {
+
+  const navigate = useNavigate();
+  const handelClickLogin = () => { navigate(`/login`) }
+  if (localStorage.getItem('token') === null) { handelClickLogin() }
+
   const banner = props.banner;
   const [loading, setLoading] = useState(false)
 

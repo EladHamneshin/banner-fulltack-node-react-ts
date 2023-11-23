@@ -58,12 +58,12 @@ const Deshbord = (props: Props) => {
       </Box>
       <Box sx={{ ...styleMainBox, flexDirection: 'row', border: '1px solid black' }}>
 
-        <Box sx={{ border: '1px solid black' }}>
-          <IconButton onClick={() => setOpenSidebar(!openSidebar)}>
-            {/* {openSidebar ? <SidBar /> : <SidBar />} */}
-          </IconButton>
-          {openSidebar && <SidBar />}
-        </Box>
+        {/* <Box sx={{ border: '1px solid black' }}> */}
+        {/* <IconButton onClick={() => setOpenSidebar(!openSidebar)}> */}
+        {/* {openSidebar ? <SidBar /> : <SidBar />} */}
+        {/* </IconButton> */}
+        {/* {openSidebar && <SidBar />} */}
+        {/* </Box> */}
 
 
         <Box sx={{ flexGrow: 1, border: '1px solid black' }}>

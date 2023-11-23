@@ -1,30 +1,22 @@
-
-import axios, { AxiosResponse } from 'axios';
-import { BannerInterface } from '../types/BannerInterface';
-// import dotenv from 'dotenv'
-// dotenv.config()
-const base_url = import.meta.env.VITE_BASE_URL
-// const base_url = "http://127.0.0.1:5000"
+import axios from 'axios';
 
 
+export const getAllBannersImage = async () => {
 
-export const getAllBannersImage = () => {
-    
-let data = '';
+  let data = '';
 
-let config = {
-  method: 'get',
-  maxBodyLength: Infinity,
-  url: 'http://localhost:5000/bannersImage',
-  headers: { },
-  data : data
-};
-
-axios.request(config)
-.then((response) => {
-  console.log(JSON.stringify(response.data));
-})
-.catch((error) => {
-  console.log(error);
-});
+  let config = {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url: 'http://localhost:5000/api/bannersImage',
+    headers: {},
+    data: data
+  };
+  try {
+    const res = await axios.request(config)
+    return res.data
+  } catch (error) {
+    console.log(error);
+  }
 }
+

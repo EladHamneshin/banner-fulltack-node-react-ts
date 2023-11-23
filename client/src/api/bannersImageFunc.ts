@@ -15,7 +15,7 @@ let data = '';
 let config = {
   method: 'get',
   maxBodyLength: Infinity,
-  url: 'http://localhost:5000/bannersImage',
+  url: `${base_url}/bannersImage`,
   headers: { },
   data : data
 };

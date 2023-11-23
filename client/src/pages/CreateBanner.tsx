@@ -1,10 +1,35 @@
 import React from 'react';
-import NewBannerForm from '../components/NewBannerForm';
+import NewBannerForm from '../components/creatBanner/NewBannerForm';
 import { Grid, Paper, Avatar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
+import UpImageBanner from '../components/creatBanner/UpImageBanner';
 
 type Props = {};
+
+const product =  {
+    id: "1",
+    name: "Product 1",
+    salePrice: 20,
+    quantity: 50,
+    description: "Description for Product 1",
+    category: "Category 1",
+    discountPercentage: 10,
+    rating: 4.5,
+    click: 100,
+    coordinate: {
+      longitude1: 34.7789,
+      longitude2: 34.7890,
+      longitude3: 34.7991,
+      latitude1: 32.0678,
+      latitude2: 32.0789,
+      latitude3: 32.0900
+    },
+    image: {
+      url: "http://localhost:5000/ford.png",
+      alt: "Product 1 Image"
+    }
+  }
 
 const CreateBanner = (props: Props) => {
     const paperStyle = {
@@ -32,6 +57,7 @@ const CreateBanner = (props: Props) => {
                 },
             }}
         >
+
             <Paper elevation={10}>
                 <Box sx={{ padding: '20px' }}>
                     <Grid
@@ -47,7 +73,7 @@ const CreateBanner = (props: Props) => {
                         </Grid>
                         <Grid item>
                             <Typography variant="h4" gutterBottom>
-                                new banner
+                               creat new banner
                             </Typography>
                         </Grid>
                     </Grid>
@@ -59,9 +85,10 @@ const CreateBanner = (props: Props) => {
                         flexDirection: 'column',
                     }}
                 >
-                    <NewBannerForm />
+                    <NewBannerForm product={product} />
                 </Box>
             </Paper>
+                   
         </Grid>
     );
 };

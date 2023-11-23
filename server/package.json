@@ -8,7 +8,7 @@
     "build": "tsc",
     "start": "node .",
     "bs": "tsc && node .",
-    "test": " vitest --silent --testTimeout=5000 --run ./__tests__"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -29,7 +29,6 @@
     "supertest": "^6.3.3",
     "uuid": "^9.0.1",
     "vitest": "^0.34.6"
-
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
@@ -42,6 +41,7 @@
     "@types/pg": "^8.10.9",
     "@types/supertest": "^2.0.16",
     "@types/uuid": "^9.0.7",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "ts-jest": "^29.1.1"
   }
 }

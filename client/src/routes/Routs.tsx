@@ -10,12 +10,14 @@ import ErrorPage from "./ErrorPage";
 import App from "../App";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
+import NewBannerForm from "../components/creatBanner/NewBannerForm";
+import CreateBanner from "../pages/CreateBanner";
 
 export default function Routs() {
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <App/>,
+            element: <App />,
             errorElement: <ErrorPage />,
             children: [
                 {
@@ -31,6 +33,11 @@ export default function Routs() {
                         {
                             path: "login",
                             element: <Login />,
+                            errorElement: <ErrorPage />,
+                        },
+                        {
+                            path: "createBanner",
+                            element: <CreateBanner />,
                             errorElement: <ErrorPage />,
                         },
                         {

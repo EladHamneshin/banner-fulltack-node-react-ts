@@ -15,8 +15,10 @@ dotenv.config();
 
 // Import routes from the ./routes
 import user from "./routes/user-route";
+
 import  connectToDB  from "./configs/mongoDBConnect";
 import productRouter from "./routes/productRoutes";
+
 import { catchErrors, notFound } from "./middleware/errorNOTfound";
 import { ApiError } from "./utils/ApiError";
 import { insertBanners } from "./models/bannersModel";
@@ -29,7 +31,8 @@ const RATE_TIME_LIMIT = Number(process.env.RATE_TIME_LIMIT) || 15;
 const RATE_REQUEST_LIMIT = Number(process.env.RATE_REQUEST_LIMIT) || 100;
 
 // Init express app
-const app = express();
+export const app = express();
+
 app.use(express.static('public'))
 // Body parser
 app.use(express.json());
@@ -63,8 +66,8 @@ app.use(helmet());
 // Setup routing
 
 app.use("/api/users", user);
+app.use("/api/bannersImage", routerBannersImage);
 
-app.use("/bannersImage", routerBannersImage);
 
 app.use("/api/ext/bannersProduct",productRouter)
 

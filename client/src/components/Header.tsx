@@ -4,6 +4,7 @@ import HomeIcon from '@mui/icons-material/Home'; // Import HomeIcon
 import { blue } from '@mui/material/colors';
 import ManageIcon from './ManageIcon';
 import { useNavigate } from 'react-router-dom';
+import SidBar from './SidBar';
 
 type Props = {}
 
@@ -54,15 +55,20 @@ const Header = (props: Props) => {
         <ManageIcon />
       </Box>
       <ThemeProvider theme={theme}>
-        <IconButton onClick={handelClickHomePage}>
-          <HomeIcon
+        <Box>
+          <IconButton>
+            <SidBar />
+          </IconButton>
+          <IconButton onClick={handelClickHomePage}>
+            <HomeIcon
 
-            sx={{
-              bgcolor: `primary.light`,
-              borderRadius: '50% '
-            }} fontSize="large"
-            color="primary" />
-        </IconButton>
+              sx={{
+                bgcolor: `primary.light`,
+                borderRadius: '50% '
+              }} fontSize="large"
+              color="primary" />
+          </IconButton>
+        </Box>
       </ThemeProvider>
     </Box>
   );

@@ -25,3 +25,20 @@ export interface NewBannerInterface {
     createdAt: Date;
     author: string;
 }
+export interface ResponseBanner {
+    author: string;
+    catogryID: string;
+    clickCount: number;
+    createdAt: string; // Assuming it's a date string
+    image: {
+        alt: string;
+        url: string;
+    };
+    kind: string[]; // Assuming it's an array of strings
+    name: string;
+    productID: string;
+    size: string;
+    text: string;
+    __v: number;
+    _id: string;
+};

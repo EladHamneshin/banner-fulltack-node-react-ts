@@ -6,7 +6,6 @@ import { ApiError } from "../utils/ApiError";
 // import service from "../services/bannersImage-service";
 import { errorResponse } from "../middleware/error-middleware";
 import STATUS_CODES from "../utils/StatusCodes";
-import generateToken from "../utils/generateToken";
 
 
 

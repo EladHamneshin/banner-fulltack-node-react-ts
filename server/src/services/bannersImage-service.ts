@@ -6,6 +6,7 @@ import STATUS_CODES from "../utils/StatusCodes";
 
 import { BannerInterface } from "../types/interfaces/bannerInterface";
 
+
 import {
     getBannersImage as dalGetBannersImage,
     getBannersImageByProductID as dalGetBannersImageByProductID,
@@ -18,6 +19,7 @@ import {
   
   // Function to get all bannersImage
   export const getBannersImage = async (): Promise<BannerInterface[]> => {
+
     try {
       const banners: BannerInterface[] = await dalGetBannersImage();
       return banners;
@@ -85,3 +87,4 @@ import {
     }
   };
   
+

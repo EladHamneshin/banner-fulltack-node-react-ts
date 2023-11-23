@@ -6,7 +6,7 @@ const generateToken = (userID: string,isAdmin:boolean) => {
         process.exit(1);
     };
 
-    const token = jwt.sign({userID:userID,isAdmin:isAdmin}, process.env.JWT_SECRET, {
+    const token = jwt.sign({userID,isAdmin}, process.env.JWT_SECRET, {
         expiresIn: '2d'
     });
 

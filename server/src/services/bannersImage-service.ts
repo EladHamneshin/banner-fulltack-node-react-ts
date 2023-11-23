@@ -4,7 +4,7 @@ import { ApiError } from "../utils/ApiError";
 import STATUS_CODES from "../utils/StatusCodes";
 
 
-import { BannerInterface } from "../types/interfaces/BannerInterface";
+import { BannerInterface } from "../types/interfaces/bannerInterface";
 
 import dal from "../dal/bannersImage-dal"
 
@@ -22,7 +22,6 @@ const getBannersImage = async () => {
     catch (error) {
         throw new ApiError({}, STATUS_CODES.NOT_FOUND, "users not found");
     }
-
 }
 
 

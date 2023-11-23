@@ -1,5 +1,5 @@
 import { bannerModel } from "../models/bannersModel"; 
-import { BannerInterface } from "../types/interfaces/BannerInterface";
+import { BannerInterface } from "../types/interfaces/bannerInterface";
 import { ApiError } from "../utils/ApiError";
 import STATUS_CODES from "../utils/StatusCodes";
 

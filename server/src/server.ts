@@ -16,10 +16,12 @@ dotenv.config();
 // Import routes from the ./routes
 import user from "./routes/user-route";
 import  connectToDB  from "./configs/mongoDBConnect";
+import productRouter from "./routes/productRoutes";
 import { catchErrors, notFound } from "./middleware/errorNOTfound";
 import { ApiError } from "./utils/ApiError";
 import { insertBanners } from "./models/bannersModel";
 import routerBannersImage from "./routes/bannersImage-route";
+import productControllers from "./controllers/productControllers";
 
 // Setup constant variables
 const PORT = process.env.PORT || 5000;
@@ -63,6 +65,8 @@ app.use(helmet());
 app.use("/api/users", user);
 
 app.use("/bannersImage", routerBannersImage);
+
+app.use("/api/ext/bannersProduct",productRouter)
 
 
 

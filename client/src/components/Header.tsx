@@ -1,14 +1,14 @@
-import { Box, Button, IconButton, Popover, ThemeProvider, Typography, createTheme } from '@mui/material'
-import React, { useState } from 'react'
+import { Box,  IconButton,  ThemeProvider, createTheme } from '@mui/material'
+import  { useState } from 'react'
 import HomeIcon from '@mui/icons-material/Home'; // Import HomeIcon
 import { blue } from '@mui/material/colors';
 import ManageIcon from './ManageIcon';
 import { useNavigate } from 'react-router-dom';
 import SidBar from './SidBar';
 
-type Props = {}
 
-const Header = (props: Props) => {
+
+const Header = () => {
   const navigate = useNavigate();
 
   const handelClickHomePage = () => {
@@ -23,7 +23,7 @@ const Header = (props: Props) => {
   // Set the initial state based on the stored value or use 'User' as a fallback
   const initialUserName: UserNameType = storedUserName ? storedUserName : 'User';
 
-  const [UserName, setUserName] = useState<UserNameType>(initialUserName);
+  const [UserName, _setUserName] = useState<UserNameType>(initialUserName);
 
 
 
@@ -83,10 +83,10 @@ const containerStyle = {
   background: "#09056A",
 };
 
-const iconButtonStyle = {
-  color: 'white',
-  cursor: 'pointer'
-};
+// const iconButtonStyle = {
+//   color: 'white',
+//   cursor: 'pointer'
+// };
 const textBoxStyle = {
   fontFamily: "Arial, sans-serif",
   fontSize: "16px",

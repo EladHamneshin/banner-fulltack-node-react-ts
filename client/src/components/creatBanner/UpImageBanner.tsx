@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { useDropzone } from 'react-dropzone';
+// import React, { useState } from 'react'
+// import { useDropzone } from 'react-dropzone';
 
-type Props = {}
+// type Props = {}
 
 const UpImageBanner = () => {
     // const [imageData, setImageData] = useState(null);

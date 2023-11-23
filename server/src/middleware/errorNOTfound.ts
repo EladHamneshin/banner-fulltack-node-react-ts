@@ -4,14 +4,14 @@ import STATUS_CODES from "../utils/StatusCodes";
 import { ApiError } from "../utils/ApiError";
 
 
-export const notFound = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+export const notFound = asyncHandler(async (req: Request, _res: Response, next: NextFunction) => {
     console.log('not found');
     const error = new ApiError({},STATUS_CODES.NOT_FOUND,`Not Found - ${req.originalUrl}`);
     next(error);
   },
   );
 
-  export const catchErrors = (err : Error | ApiError, req : Request, res : Response) => {
+  export const catchErrors = (err : Error | ApiError, _req : Request, res : Response) => {
     // התנאים הבאים יתאימו לסוגי השגיאות שאתה רוצה לתפוס
     if (err instanceof ApiError) {
       res.status(err.statusCode).json({

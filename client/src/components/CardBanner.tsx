@@ -72,9 +72,6 @@ const CardBanner = (prop: Props) => {
         alt={prop.image.alt}
       />
       <CardContent>
-          <Typography gutterBottom variant="h4" component="div">
-            {prop.name}
-          </Typography>
           <Typography variant='h6' component='div'>
             clicks: {prop.clickCount}
           </Typography>

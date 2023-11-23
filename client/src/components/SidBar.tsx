@@ -7,9 +7,9 @@ import CardTravelIcon from '@mui/icons-material/CardTravel';
 import { useNavigate } from 'react-router-dom';
 
 
-type Props = {};
 
-const SidBar = (props: Props) => {
+
+const SidBar = () => {
     const navigate = useNavigate();
 
     const [state, setState] = useState({ left: false });
@@ -20,7 +20,7 @@ const SidBar = (props: Props) => {
     }
 
     const toggleDrawer =
-        (anchor: 'left', open: boolean) =>
+        (_anchor: 'left', open: boolean) =>
             (event: React.KeyboardEvent | React.MouseEvent) => {
                 if (
                     event.type === 'keydown' &&

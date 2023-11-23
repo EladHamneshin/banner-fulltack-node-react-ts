@@ -1,11 +1,11 @@
-import React from 'react';
+
 import NewBannerForm from '../components/creatBanner/NewBannerForm';
 import { Grid, Paper, Avatar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
-import UpImageBanner from '../components/creatBanner/UpImageBanner';
+// import UpImageBanner from '../components/creatBanner/UpImageBanner';
 
-type Props = {};
+
 
 const product =  {
     id: "1",
@@ -31,7 +31,7 @@ const product =  {
     }
   }
 
-const CreateBanner = (props: Props) => {
+const CreateBanner = () => {
     const paperStyle = {
         padding: 20,
         margin: '0 auto',

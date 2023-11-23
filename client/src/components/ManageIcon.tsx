@@ -1,5 +1,5 @@
-import { Box, Typography, Popover } from '@mui/material';
-import React, { useState } from 'react'
+import { Box} from '@mui/material';
+import React from 'react'
 import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -22,13 +22,13 @@ const ManageIcon = (props: Props) => {
     }
     // const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
-    const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
+    // const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
+    //     setAnchorEl(event.currentTarget);
+    // };
 
-    const handlePopoverClose = () => {
-        setAnchorEl(null);
-    };
+    // const handlePopoverClose = () => {
+    //     setAnchorEl(null);
+    // };
     // const open = Boolean(anchorEl);
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

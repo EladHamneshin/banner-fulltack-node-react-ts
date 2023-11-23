@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, TextField, Box, Grid, Typography } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { NewBannerInterface } from '../../types/BannerInterface';
+// import { NewBannerInterface } from '../../types/BannerInterface';
 import { Product } from '../../types/ProductInterface';
 import { v4 as uuid } from 'uuid'
 import UpImageBanner from './UpImageBanner';

@@ -1,9 +1,9 @@
 import { Box } from '@mui/material'
-import React from 'react'
 
-type Props = {}
 
-const Futer = (props: Props) => {
+
+
+const Futer = () => {
   return (
     <Box>Futer</Box>
   )

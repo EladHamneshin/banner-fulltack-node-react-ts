@@ -1,12 +1,11 @@
 import { Box, Stack } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getAllBannersImage } from '../api/bannersImageFunc'
 import { ResponseBanner } from '../types/BannerInterface'
 
 
-type Props = {}
 
-const AllBanners = (props: Props) => {
+const AllBanners = () => {
     const [message, setMessage] = useState('')
     const [banners, setBanners] = useState<ResponseBanner[]>([]);
 

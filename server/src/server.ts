@@ -1,5 +1,5 @@
 
-import express, { NextFunction, Request, Response } from "express";
+import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import helmet from "helmet";
@@ -8,7 +8,7 @@ import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 
 
-import { unless } from "./middleware/unless";
+
 
 // Setup .env variables for app usage
 dotenv.config();
@@ -20,10 +20,9 @@ import  connectToDB  from "./configs/mongoDBConnect";
 import productRouter from "./routes/productRoutes";
 
 import { catchErrors, notFound } from "./middleware/errorNOTfound";
-import { ApiError } from "./utils/ApiError";
-import { insertBanners } from "./models/bannersModel";
+
 import routerBannersImage from "./routes/bannersImage-route";
-import productControllers from "./controllers/productControllers";
+
 
 // Setup constant variables
 const PORT = process.env.PORT || 5000;
@@ -79,7 +78,7 @@ app.use(catchErrors);
 
 
 // Listen to specified port in .env or default 5000
-connectToDB().then((res) => {
+connectToDB().then(() => {
   console.log('Connecting to mongodb');
   // איתוחל דאטה ראשוני
   // insertBanners()

@@ -1,15 +1,13 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+// import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Avatar, Box, Button, Grid, Paper, Typography, } from '@mui/material';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 
 import RegisterForm from '../components/loginANDregister/RegisterForm';
 import { useNavigate } from 'react-router-dom';
 
-type Props = {
 
-};
 
-const Register = (props: Props) => {
+const Register = () => {
     const navigate = useNavigate();
     const handelClickLogin = () => {
         navigate(`/deshbord/login`)

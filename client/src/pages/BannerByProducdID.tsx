@@ -1,9 +1,9 @@
 import { Box } from '@mui/material'
-import React from 'react'
 
-type Props = {}
 
-const BannerByProducdID = (props: Props) => {
+
+
+const BannerByProducdID = () => {
     return (
         <Box>BannerByProducdID</Box>
     )

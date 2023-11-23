@@ -1,9 +1,6 @@
 import { Box } from '@mui/material'
-import React from 'react'
 
-type Props = {}
-
-const CategoryForm = (props: Props) => {
+const CategoryForm = () => {
   return (
     <Box>CategoryForm</Box>
   )

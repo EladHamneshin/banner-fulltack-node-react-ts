@@ -1,9 +1,9 @@
 import { Box } from '@mui/material'
-import React from 'react'
+
 
 type Props = {}
 
-const AllBannersForm = (props: Props) => {
+const AllBannersForm = () => {
   return (
     <Box>AllBannersForm</Box>
   )

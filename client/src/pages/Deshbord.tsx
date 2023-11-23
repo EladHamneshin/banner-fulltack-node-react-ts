@@ -1,10 +1,10 @@
-import { Box, IconButton } from '@mui/material'
-import React, { useState } from 'react'
+import { Box } from '@mui/material'
+import  { useState } from 'react'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Outlet } from 'react-router-dom';
-import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
-import SidBar from '../components/SidBar';
+// import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
+// import SidBar from '../components/SidBar';
 
 
 
@@ -41,12 +41,10 @@ const styleFooterBox = {
   height: '30px'
 };
 
-type Props = {
 
-}
 
-const Deshbord = (props: Props) => {
-  const [openSidebar, setOpenSidebar] = useState(true);
+const Deshbord = () => {
+  // const [openSidebar, setOpenSidebar] = useState(true);
 
 
 

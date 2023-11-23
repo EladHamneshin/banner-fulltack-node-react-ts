@@ -1,18 +1,15 @@
-import { Typography, Avatar, Button, Checkbox, Grid, Paper, TextField, Link, Box } from '@mui/material';
+import { Typography, Avatar, Button, Grid, Paper, Link, Box } from '@mui/material';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
-import FormControlLabel from '@mui/material/FormControlLabel';
+// import FormControlLabel from '@mui/material/FormControlLabel';
 import LoginForm from '../components/loginANDregister/LoginForm';
 import { useNavigate } from 'react-router-dom';
-import { getAllBannersImage } from '../api/bannersImageFunc';
+// import { getAllBannersImage } from '../api/bannersImageFunc';
 // import Signup from './Signup';
 
 
-type Props = {
-    // handelSignup : Dispatch<SetStateAction<string>>
-    // close: () => void
-}
 
-const Login = (props: Props) => {
+
+const Login = () => {
 
     const navigate = useNavigate();
     const handelClickSignUp = () => {

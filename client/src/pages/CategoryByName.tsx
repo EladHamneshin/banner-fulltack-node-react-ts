@@ -1,9 +1,7 @@
 import { Box } from '@mui/material'
-import React from 'react'
 
-type Props = {}
 
-const BannerByCategoryByName = (props: Props) => {
+const BannerByCategoryByName = () => {
     return (
         <Box>BannerByCategoryByName</Box>
     )

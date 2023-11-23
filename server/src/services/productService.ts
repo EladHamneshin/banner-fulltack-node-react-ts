@@ -24,9 +24,9 @@ const getProductByProductName = async (product: string) => {
 };
 
 const getTop5Categories = async () => {
-    const categories:Category[] = await productsDal.getAllCategoryNames().sort((a: Category, b: Category) => b.clicked - a.clicked);
-    categories
-    return categories.slice(0, 5);
+    const categories:Category[] = await productsDal.getAllCategoryNames()
+    const sortcategories = categories.sort((a: Category, b: Category) => b.clicked - a.clicked);
+    return sortcategories.slice(0, 5);
 };
 
 const getTop5Products = async () => {

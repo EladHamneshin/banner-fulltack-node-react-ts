@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+const base_url = import.meta.env.VITE_BASE_URL
 
 export const loginFetch = async (user: string) => {
 
@@ -8,7 +9,7 @@ export const loginFetch = async (user: string) => {
     let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'http://localhost:5000/api/users/login',
+        url: `${base_url}/api/users/login`,
         headers: {
             'Content-Type': 'application/json'
         },

@@ -46,6 +46,7 @@ const getRandomProductByCategory = asyncHandler(async (req: Request, res: Respon
 });
 
 
+
 export default {
     getTop5Categories,
     getTop5Products,

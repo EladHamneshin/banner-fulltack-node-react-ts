@@ -26,7 +26,7 @@ type Props = {
 
 const NewBannerForm = (props: Props) => {
     const product = props.product
-    const [message, setMessage] = useState('');
+    const [message] = useState('');
     const [loading, setLoading] = useState(false);
 
     const textFieldStyle = { padding: '2px', margin: '4px auto ' };

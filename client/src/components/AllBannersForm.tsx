@@ -1,7 +1,6 @@
 import { Box } from '@mui/material'
 
 
-type Props = {}
 
 const AllBannersForm = () => {
   return (

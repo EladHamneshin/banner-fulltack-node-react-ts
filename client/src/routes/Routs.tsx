@@ -10,7 +10,7 @@ import ErrorPage from "./ErrorPage";
 import App from "../App";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
-import NewBannerForm from "../components/NewBannerForm";
+import NewBannerForm from "../components/creatBanner/NewBannerForm";
 import CreateBanner from "../pages/CreateBanner";
 
 export default function Routs() {
@@ -36,11 +36,16 @@ export default function Routs() {
                             errorElement: <ErrorPage />,
                         },
 
-                        // {
-                        //     path: "login",
-                        //     element: <CreateBanner />,
-                        //     errorElement: <ErrorPage />,
-                        // },
+                        {
+                            path: "login",
+                            element: <Login />,
+                            errorElement: <ErrorPage />,
+                        },
+                        {
+                            path: "createBanner",
+                            element: <CreateBanner />,
+                            errorElement: <ErrorPage />,
+                        },
                         {
                             path: "register",
                             element: <Register />,

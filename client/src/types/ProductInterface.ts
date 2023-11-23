@@ -15,7 +15,7 @@ export interface Product {
         latitude1: number
         latitude2: number
         latitude3: number
-        //(if you have an idea who to make it dynamic for each product go for it)
+       
     }
     image:
     {

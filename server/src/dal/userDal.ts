@@ -10,7 +10,10 @@ const getUserByEmail = async (email: string) => {
 };
 
 const getAllUsers = async () => {
+    console.log('a');
+    
     const client = await postgresPool.connect();
+    console.log('b');
     const { rows } = await client.query(`SELECT * FROM users`);
     
     client.release();

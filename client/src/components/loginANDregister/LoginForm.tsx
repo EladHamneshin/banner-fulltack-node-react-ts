@@ -56,6 +56,7 @@ const LoginForm = () => {
             if (data.success === true) {
                 localStorage.setItem('token', data.data.token)
                 localStorage.setItem('name', data.data.user.name)
+                localStorage.setItem('userID', data.data.user.id)
                 setLoading(false)
                 handelClickHomePage()
             }

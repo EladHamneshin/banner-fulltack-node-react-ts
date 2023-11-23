@@ -3,10 +3,10 @@ import React from 'react'
 
 type Props = {}
 
-const BannersByProductForm = (props: Props) => {
+const BannersByProductID = (props: Props) => {
   return (
     <Box>BannersByProductForm</Box>
   )
 }
 
-export default BannersByProductForm
+export default BannersByProductID

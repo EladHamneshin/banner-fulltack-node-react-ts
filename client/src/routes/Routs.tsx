@@ -1,10 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Deshbord from "../pages/Deshbord";
 import HomePage from "../pages/HomePage";
-import CategoryByName from "../pages/CategoryByName";
+import CategoryByName from "../pages/BannerByCategoryByName";
 import BannerCreateOrEdit from "../pages/BannerCreateOrEdit";
 import AllBanners from "../pages/AllBanners";
-import BannerByCategoryByName from "../pages/CategoryByName";
+import BannerByCategoryByName from "../pages/BannerByCategoryByName";
 import BannerByProducdID from "../pages/BannerByProducdID";
 import ErrorPage from "./ErrorPage";
 import App from "../App";
@@ -12,6 +12,7 @@ import Register from "../pages/Register";
 import Login from "../pages/Login";
 import NewBannerForm from "../components/creatBanner/NewBannerForm";
 import CreateBanner from "../pages/CreateBanner";
+import BannerByUserID from "../pages/BannerByUserID";
 
 export default function Routs() {
     const router = createBrowserRouter([
@@ -62,13 +63,18 @@ export default function Routs() {
                             errorElement: <ErrorPage />,
                         },
                         {
-                            path: "banners/:producdID",
+                            path: "banners/:productID",
                             element: <BannerByProducdID />,
                             errorElement: <ErrorPage />,
                         },
                         {
                             path: "banners/category/:name",
                             element: <BannerByCategoryByName />,
+                            errorElement: <ErrorPage />,
+                        },
+                        {
+                            path: "banners/user/:userID",
+                            element: <BannerByUserID />,
                             errorElement: <ErrorPage />,
                         },
                         {

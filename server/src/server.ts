@@ -74,14 +74,14 @@ app.use(catchErrors);
 
 // Listen to specified port in .env or default 5000
 connectToDB().then((res) => {
-  console.log('Connecting to mongodb');
-  // איתוחל דאטה ראשוני
-  // insertBanners()
+  console.log('1 - Connecting to mongodb');
+  // אתחול דאטה ראשוני
+  insertBanners()
   app.listen(PORT, () => {
     console.log(`Server is listening on: ${PORT}`);
   });
 }).catch((err) => console.error(err))
-// app.listen(PORT, () => {
-//     console.log(`Server is listening on: ${PORT}`);
-// })
+app.listen(PORT, () => {
+    console.log(`Server is listening on: ${PORT}`);
+})
 

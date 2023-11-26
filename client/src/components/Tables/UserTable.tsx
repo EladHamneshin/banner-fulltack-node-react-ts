@@ -1,14 +1,21 @@
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { UserInterface } from '../../types/UserInterface';
+
+type User = {
+  _id?: string;
+  name: string;
+  email: string;
+  isAdmin: boolean;
+}
+
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 70 },
   { field: 'name', headerName: 'Name', width: 130 },
   { field:'email', headerName:'E-Mail', width:200 },
   { field: 'isAdmin', headerName:'Admin Permission?', width:120}
 ];
-export default function UserTable({prod }: {prod: UserInterface[]}) {
+export default function UserTable({user }: {user: User[]}) {
     const rows:any = []
-    prod.forEach(element => {
+    user.forEach(element => {
         rows.push(
         { 
             id: element._id,

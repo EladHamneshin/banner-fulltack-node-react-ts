@@ -14,12 +14,6 @@ import BannerByUserID from "../pages/bannersPages/BannerByUserID";
 export default function Routs() {
     const router = createBrowserRouter([
         {
-            path: "/login",
-            element: <Login />,
-            errorElement: <ErrorPage />,
-        },
-
-        {
             path: "/",
             element: <Deshbord />,
             errorElement: <ErrorPage />,
@@ -29,7 +23,6 @@ export default function Routs() {
                 //     element: <HomePage />,
                 //     errorElement: <ErrorPage />,
                 // },
-
                 {
                     path: "login",
                     element: <Login />,

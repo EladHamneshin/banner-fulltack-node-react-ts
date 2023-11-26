@@ -1,5 +1,5 @@
 import { Box, Button, Grid, TextField, Typography } from '@mui/material';
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import { useState } from 'react'
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
@@ -17,12 +17,9 @@ const schema = yup.object({
   .required();
 
 
-type Props = {
-  // handelSignup : Dispatch<SetStateAction<string>>
-  // close: () => void
-}
 
-const RegisterForm = (props: Props) => {
+
+const RegisterForm = () => {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false)
@@ -56,8 +53,6 @@ const RegisterForm = (props: Props) => {
       console.log(data);
       console.log('data.success', data.success);
       if (data.success === true) { moveToLogin() };
-      // setMessage(response.message)
-      // const response = await UserFetch.getUsersFetch()
 
       setTimeout(() => {
         setLoading(false)

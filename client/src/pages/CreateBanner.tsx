@@ -3,11 +3,14 @@ import NewBannerForm from '../components/creatBanner/NewBannerForm';
 import { Grid, Paper, Avatar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
+
 import UpImageBanner from '../components/creatBanner/UpImageBanner';
+import { useNavigate } from 'react-router-dom';
+
 
 type Props = {};
 
-const product =  {
+const product = {
     id: "1",
     name: "Product 1",
     salePrice: 20,
@@ -18,20 +21,25 @@ const product =  {
     rating: 4.5,
     click: 100,
     coordinate: {
-      longitude1: 34.7789,
-      longitude2: 34.7890,
-      longitude3: 34.7991,
-      latitude1: 32.0678,
-      latitude2: 32.0789,
-      latitude3: 32.0900
+        longitude1: 34.7789,
+        longitude2: 34.7890,
+        longitude3: 34.7991,
+        latitude1: 32.0678,
+        latitude2: 32.0789,
+        latitude3: 32.0900
     },
     image: {
-      url: "http://localhost:5000/ford.png",
-      alt: "Product 1 Image"
+        url: "http://localhost:5000/ford.png",
+        alt: "Product 1 Image"
     }
-  }
+}
 
 const CreateBanner = (props: Props) => {
+
+    const navigate = useNavigate();
+    const handelClickLogin = () => { navigate(`/login`) }
+    if (localStorage.getItem('token') === null) { handelClickLogin() }
+
     const paperStyle = {
         padding: 20,
         margin: '0 auto',
@@ -73,7 +81,7 @@ const CreateBanner = (props: Props) => {
                         </Grid>
                         <Grid item>
                             <Typography variant="h4" gutterBottom>
-                               creat new banner
+                                creat new banner
                             </Typography>
                         </Grid>
                     </Grid>
@@ -88,7 +96,7 @@ const CreateBanner = (props: Props) => {
                     <NewBannerForm product={product} />
                 </Box>
             </Paper>
-                   
+
         </Grid>
     );
 };

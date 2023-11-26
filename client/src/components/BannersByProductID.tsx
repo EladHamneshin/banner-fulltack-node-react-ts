@@ -1,15 +1,22 @@
 import { Box } from '@mui/material'
+
 import { useNavigate } from 'react-router-dom';
 
-const AllBannersForm = () => {
+
+
+type Props = {}
+
+const BannersByProductID = (props: Props) => {
+
 
   const navigate = useNavigate();
   const handelClickLogin = () => { navigate(`/login`) }
   if (localStorage.getItem('token') === null) { handelClickLogin() }
 
+
   return (
-    <Box>AllBannersForm</Box>
+    <Box>BannersByProductForm</Box>
   )
 }
 
-export default AllBannersForm
+export default BannersByProductID

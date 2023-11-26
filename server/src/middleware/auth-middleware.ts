@@ -1,6 +1,6 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { asyncHandler } from "../middleware/async-middleware";
-import STATUS_CODES from '../utils/StatusCodes.js';
+import STATUS_CODES from '../utils/StatusCodes';
 import { ApiError } from '../utils/ApiError';
 
 

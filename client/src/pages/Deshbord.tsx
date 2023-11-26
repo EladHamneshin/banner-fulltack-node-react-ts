@@ -2,7 +2,7 @@ import { Box, IconButton } from '@mui/material'
 import React, { useState } from 'react'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
 import SidBar from '../components/SidBar';
 
@@ -46,6 +46,11 @@ type Props = {
 }
 
 const Deshbord = (props: Props) => {
+
+  const navigate = useNavigate();
+  const handelClickLogin = () => { navigate(`/login`) }
+  if (localStorage.getItem('token') === null) { handelClickLogin() }
+
   const [openSidebar, setOpenSidebar] = useState(true);
 
 
@@ -57,14 +62,6 @@ const Deshbord = (props: Props) => {
         <Header />
       </Box>
       <Box sx={{ ...styleMainBox, flexDirection: 'row', border: '1px solid black' }}>
-
-        <Box sx={{ border: '1px solid black' }}>
-          <IconButton onClick={() => setOpenSidebar(!openSidebar)}>
-            {/* {openSidebar ? <SidBar /> : <SidBar />} */}
-          </IconButton>
-          {openSidebar && <SidBar />}
-        </Box>
-
 
         <Box sx={{ flexGrow: 1, border: '1px solid black' }}>
           <Outlet />

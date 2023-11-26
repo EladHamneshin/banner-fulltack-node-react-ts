@@ -18,7 +18,7 @@ type Props = {}
 const ManageIcon = (props: Props) => {
     const navigate = useNavigate();
     const handelClickLogin = () => {
-        navigate(`/deshbord/login`)
+        navigate(`/login`)
     }
     // const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
@@ -43,8 +43,9 @@ const ManageIcon = (props: Props) => {
         setAnchorEl(null);
         localStorage.removeItem('name')
         localStorage.removeItem('token')
+        localStorage.removeItem('userID')
         handelClickLogin()
-        window.location.reload();
+        // window.location.reload();
 
     }
     return (

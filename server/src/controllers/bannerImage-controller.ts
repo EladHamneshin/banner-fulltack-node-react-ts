@@ -49,6 +49,7 @@ export const getBannersImageByProductID = asyncHandler(
 
     const banners: BannerInterface[] = await serviceGetBannersImageByProductID(productID);
 
+
     if (!banners) {
       throw new ApiError({}, STATUS_CODES.NOT_FOUND, "Banners not found for the given productID");
     }

@@ -1,14 +1,16 @@
 import axios from 'axios';
 
 
-export const getAllBannersImage = async () => {
+export const bannerByProducdID = async (productID: string) => {
+  console.log(productID);
+
 
   let data = '';
 
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: 'http://localhost:5000/api/bannersImage',
+    url: ` http://localhost:5000/api/bannersImage/procuct/${productID}`,
     headers: {},
     data: data
   };
@@ -18,6 +20,5 @@ export const getAllBannersImage = async () => {
   } catch (error) {
     console.log(error);
   }
-
 }
 

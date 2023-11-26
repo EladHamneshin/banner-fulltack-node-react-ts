@@ -3,7 +3,7 @@ import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import LoginForm from '../components/loginANDregister/LoginForm';
 import { useNavigate } from 'react-router-dom';
-import { getAllBannersImage } from '../api/bannersImageFunc';
+import { getAllBannersImage } from '../api/banners/bannersImageFunc';
 // import Signup from './Signup';
 
 

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-import { loginFetch } from '../../api/loginFetch';
+import { loginFetch } from '../../api/users/loginFetch';
 import { Response } from '../../types/UserInterface';
 import { useNavigate } from 'react-router-dom';
 

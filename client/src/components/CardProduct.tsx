@@ -9,31 +9,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useNavigate } from 'react-router-dom';
+import { Product } from '../types/ProductInterface';
 
 type Props = {
-  id: string,
-  name: string,
-  salePrice: number,
-  quantity: number,
-  description: string,
-  category: string,
-  discountPercentage: number,
-  rating: number,
-  click: number
-  coordinate: {
-    longitude1: number
-    longitude2: number
-    longitude3: number
-    latitude1: number
-    latitude2: number
-    latitude3: number
-    // (if you have an idea who to make it dynamic for each product go for it)
-  }
-  image:
-  {
-    url: string
-    alt: string
-  }
+  product : Product
 }
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -51,8 +30,8 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }));
 
-const CardProduct = (product: Props) => {
-
+const CardProduct = (props: Props) => {
+  const product = props.product
   const navigate = useNavigate();
   const handelClickLogin = () => { navigate(`/login`) }
   if (localStorage.getItem('token') === null) { handelClickLogin() }
@@ -66,6 +45,8 @@ const CardProduct = (product: Props) => {
   return (
     <Card
       sx={{
+        display: 'flex',
+        flexDirection: 'column',
         maxWidth: 250,
         maxHeight: 500,
         margin: '5px',
@@ -78,23 +59,12 @@ const CardProduct = (product: Props) => {
 
         },
       }}>
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: blue[400] }}>
-            {product.name.charAt(0)}
-          </Avatar>}
-        title={product.name} subheader={product.category} />
-      <CardMedia
-        component="img"
-        height="105"
-        width='100'
-        image={product.image.url}
-        alt={product.image.alt}
-      />
+
       <CardContent>
         <Typography gutterBottom variant="h4" component="div">
           {product.name}
         </Typography>
+        <img src={product.image.url} alt={product.image.alt} width='200px' />
         <Typography variant='h6' component='div'>
           rating: {product.rating}
         </Typography>

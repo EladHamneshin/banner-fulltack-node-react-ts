@@ -1,6 +1,6 @@
 import { Box, Stack } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import { getAllBannersImage } from '../api/bannersImageFunc'
+import { getAllBannersImage } from '../api/banners/bannersImageFunc'
 import { ResponseBanner } from '../types/BannerInterface'
 import CardBanner from '../components/CardBanner'
 import { exmpleBanner } from '../exmpleBanners'

@@ -2,7 +2,7 @@
 import { Box, Stack, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { bannerByCategoryByName } from '../api/bannerByCategoryByName'
+import { bannerByCategoryByName } from '../api/banners/bannerByCategoryByName'
 import { ResponseBanner } from '../types/BannerInterface'
 import CardBanner from '../components/CardBanner'
 

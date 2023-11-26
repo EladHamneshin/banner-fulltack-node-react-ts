@@ -5,7 +5,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { ResponseBanner } from '../types/BannerInterface';
-import { deleteByBannerID } from '../api/deleteByBannerID';
+import { deleteByBannerID } from '../api/banners/deleteByBannerID';
 
 import { useNavigate } from 'react-router-dom';
 

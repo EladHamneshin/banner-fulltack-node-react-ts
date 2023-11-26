@@ -10,7 +10,7 @@ import ErrorPage from "./ErrorPage";
 import App from "../App";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
-import NewBannerForm from "../components/creatBanner/NewBannerForm";
+import NewBannerForm from "../components/creatBanner/NewBannerHeder";
 import CreateBanner from "../pages/CreateBanner";
 import BannerByUserID from "../pages/BannerByUserID";
 

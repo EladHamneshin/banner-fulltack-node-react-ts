@@ -1,7 +1,7 @@
 import { Box, IconButton } from '@mui/material'
 import React, { useState } from 'react'
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from '../components/Hder-Footer/Header';
+import Footer from '../components/Hder-Footer/Footer';
 import { Outlet, useNavigate } from 'react-router-dom';
 import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
 import SidBar from '../components/SidBar';

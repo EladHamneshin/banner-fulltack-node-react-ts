@@ -13,7 +13,7 @@ export const uploadImageANDcreateBanner = async (newBanner: any) => {
     
     
     formData.append("myImage", imageFile);
-    let dataString = JSON.stringify(newBanner);
+    // let dataString = JSON.stringify(newBanner);
 
 
     let configUpImage = {

@@ -4,8 +4,8 @@ import { useState } from 'react'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { ResponseBanner } from '../types/BannerInterface';
-import { deleteByBannerID } from '../api/banners/deleteByBannerID';
+import { ResponseBanner } from '../../types/BannerInterface';
+import { deleteByBannerID } from '../../api/banners/deleteByBannerID';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -98,10 +98,10 @@ const CardBanner = (props: Props) => {
           boxShadow: '0 4px 8px rgba(0, 0, 0.9, 0.8)',
           marginBlock: '10px',
           transition: 'transform 0.3s',
-          '&:hover': {
-            transform: 'scale(1.05)',
+          // '&:hover': {
+          //   transform: 'scale(1.05)',
 
-          },
+          // },
         }}>
 
         <CardMedia

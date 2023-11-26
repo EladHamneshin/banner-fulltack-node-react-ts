@@ -1,31 +1,27 @@
-
 import { Box, Stack, Typography } from '@mui/material'
-import { useEffect, useState } from 'react'
-import { bannerByProducdID } from '../api/banners/bannerByProducdID'
-import { ResponseBanner } from '../types/BannerInterface'
-import { useNavigate, useParams } from 'react-router-dom'
-import CardBanner from '../components/CardBanner'
+import React, { useEffect, useState } from 'react'
+import { getAllBannersImage } from '../../api/banners/bannersImageFunc'
+import { ResponseBanner } from '../../types/BannerInterface'
+import CardBanner from '../../components/cards/CardBanner'
+import { useNavigate } from 'react-router-dom'
 
 
-type Props = {}
-
-const BannersByProductID = (props: Props) => {
 
 
-    const navigate = useNavigate();
-    const handelClickLogin = () => { navigate(`/login`) }
-    if (localStorage.getItem('token') === null) { handelClickLogin() }
-
+const AllBanners = () => {
     const [message, setMessage] = useState('')
     const [banners, setBanners] = useState<ResponseBanner[] | string>([]);
-    const { productID } = useParams()
 
+    const navigate = useNavigate();
+    const handelClickLogin = () => { navigate(`login`) }
+    useEffect(() => {
+        if (localStorage.getItem('token') === null) { handelClickLogin() }
+    }, [])
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const result = await bannerByProducdID(productID!);
-
+                const result = await getAllBannersImage();
                 if (result.success === false) { return setMessage(result.message) }
                 if (result.success === true) {
                     const data: ResponseBanner[] = result.data
@@ -33,12 +29,9 @@ const BannersByProductID = (props: Props) => {
                 }
             } catch (error) {
                 console.log(error);
-
             }
         };
-
         fetchData();
-
     }, []);
 
 
@@ -63,6 +56,4 @@ const BannersByProductID = (props: Props) => {
     )
 }
 
-
-
-export default BannersByProductID
+export default AllBanners

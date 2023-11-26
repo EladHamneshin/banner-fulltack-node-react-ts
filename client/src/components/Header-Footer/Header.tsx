@@ -8,11 +8,11 @@ import SidBar from '../SidBar';
 
 type Props = {}
 
-const Header = (props: Props) => {
+const Header = () => {
 
   const navigate = useNavigate();
-  const handelClickLogin = () => { navigate(`/login`) }
-  if (localStorage.getItem('token') === null) { handelClickLogin() }
+  // const handelClickLogin = () => { navigate(`/login`) }
+  // if (localStorage.getItem('token') === null) { handelClickLogin() }
 
   const handelClickHomePage = () => {
     navigate(`/deshbord `)
@@ -86,10 +86,6 @@ const containerStyle = {
   background: "#09056A",
 };
 
-const iconButtonStyle = {
-  color: 'white',
-  cursor: 'pointer'
-};
 const textBoxStyle = {
   fontFamily: "Arial, sans-serif",
   fontSize: "16px",

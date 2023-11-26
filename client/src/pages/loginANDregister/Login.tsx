@@ -1,9 +1,9 @@
 import { Typography, Avatar, Button, Checkbox, Grid, Paper, TextField, Link, Box } from '@mui/material';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import LoginForm from '../components/loginANDregister/LoginForm';
+import LoginForm from '../../components/loginANDregister/LoginForm';
 import { useNavigate } from 'react-router-dom';
-import { getAllBannersImage } from '../api/banners/bannersImageFunc';
+import { getAllBannersImage } from '../../api/banners/bannersImageFunc';
 // import Signup from './Signup';
 
 

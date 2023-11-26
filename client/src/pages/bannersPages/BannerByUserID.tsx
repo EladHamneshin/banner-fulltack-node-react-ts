@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { bannerByUserID } from '../api/banners/bannerByUserID'
+import { bannerByUserID } from '../../api/banners/bannerByUserID'
 import { Box, Stack } from '@mui/system'
 
 import { useNavigate, useParams } from 'react-router-dom'
-import CardBanner from '../components/CardBanner'
-import { ResponseBanner } from '../types/BannerInterface'
-import { exmpleBanner } from '../exmpleBanners'
+import CardBanner from '../../components/cards/CardBanner'
+import { ResponseBanner } from '../../types/BannerInterface'
+import { exmpleBanner } from '../../exmpleBanners'
 import { Typography } from '@mui/material'
 
 

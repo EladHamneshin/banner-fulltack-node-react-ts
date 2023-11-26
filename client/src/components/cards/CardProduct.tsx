@@ -9,10 +9,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useNavigate } from 'react-router-dom';
-import { Product } from '../types/ProductInterface';
+import { Product } from '../../types/ProductInterface';
 
 type Props = {
-  product : Product
+  product: Product
 }
 
 interface ExpandMoreProps extends IconButtonProps {

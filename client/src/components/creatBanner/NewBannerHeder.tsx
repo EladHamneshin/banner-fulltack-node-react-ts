@@ -7,7 +7,7 @@ import { Product } from '../../types/ProductInterface';
 import { v4 as uuid } from 'uuid'
 
 import { useNavigate } from 'react-router-dom';
-import CardProduct from '../CardProduct';
+import CardProduct from '../cards/CardProduct';
 import { uploadImageANDcreateBanner } from '../../api/banners/creatNewBanner';
 
 
@@ -49,24 +49,24 @@ const NewBannerForm = (props: Props) => {
     const onSubmit: SubmitHandler<any> = async (data) => {
         console.log(data);
         const newBanner = {
-            name: product.name ,
-            productID : product.id,
-            catogryID : product.category,
-            click : 0,
-            image : {
-                url : data.image[0],
+            name: product.name,
+            productID: product.id,
+            catogryID: product.category,
+            click: 0,
+            image: {
+                url: data.image[0],
                 alt: product.name
             },
-            size : data.size,
-            kind : data.kind,
-            text : data.text,
-            createdAt : Date.now(),
-            author : 'admin',
+            size: data.size,
+            kind: data.kind,
+            text: data.text,
+            createdAt: Date.now(),
+            author: 'admin',
         }
         setLoading(true);
         uploadImageANDcreateBanner(newBanner);
 
-        
+
         // setImage(data.image[0])
     };
 
@@ -173,7 +173,7 @@ const NewBannerForm = (props: Props) => {
                 </Button>
             </form>
             <Box>
-            <img src={image} width="100%" alt='fff'></img>
+                <img src={image} width="100%" alt='fff'></img>
                 {image ? <img src={image} width="100%" alt='fff'></img>
                     :
                     <p>image not selected</p>}

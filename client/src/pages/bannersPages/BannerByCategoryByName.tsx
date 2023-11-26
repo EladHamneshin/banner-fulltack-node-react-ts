@@ -7,13 +7,14 @@ import { ResponseBanner } from '../../types/BannerInterface'
 import CardBanner from '../../components/cards/CardBanner'
 
 
-type Props = {}
 
-const BannerByCategoryByName = (props: Props) => {
+const BannerByCategoryByName = () => {
 
     const navigate = useNavigate();
-    const handelClickLogin = () => { navigate(`/login`) }
-    if (localStorage.getItem('token') === null) { handelClickLogin() }
+    const handelClickLogin = () => { navigate(`login`) }
+    useEffect(() => {
+        if (localStorage.getItem('token') === null) { handelClickLogin() }
+    }, [])
 
     const [message, setMessage] = useState('')
     const [banners, setBanners] = useState<ResponseBanner[] | string>([]);

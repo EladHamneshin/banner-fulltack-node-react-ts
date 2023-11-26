@@ -1,25 +1,14 @@
-import { Typography, Avatar, Button, Checkbox, Grid, Paper, TextField, Link, Box } from '@mui/material';
+import { Typography, Avatar, Button, Grid, Paper, Link, Box } from '@mui/material';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import LoginForm from '../../components/loginANDregister/LoginForm';
 import { useNavigate } from 'react-router-dom';
-import { getAllBannersImage } from '../../api/banners/bannersImageFunc';
-// import Signup from './Signup';
 
-
-type Props = {
-    // handelSignup : Dispatch<SetStateAction<string>>
-    // close: () => void
-}
-
-const Login = (props: Props) => {
+const Login = () => {
 
     const navigate = useNavigate();
     const handelClickSignUp = () => {
         navigate(`/deshbord/register`)
     }
-
-    // getAllBannersImage()
 
     const paperStyle = {
         padding: 20,
@@ -42,7 +31,6 @@ const Login = (props: Props) => {
             }}
         >
             <Paper
-                // elevation={10}
                 style={paperStyle}>
                 <Box sx={{
                     padding: '20px'
@@ -69,7 +57,6 @@ const Login = (props: Props) => {
                     display: 'flex',
                     alignItems: "center",
                     flexDirection: 'column'
-
                 }}>
                     <LoginForm />
                     <Typography>

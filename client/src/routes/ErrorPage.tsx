@@ -1,5 +1,5 @@
-import { useRouteError, isRouteErrorResponse, ErrorResponse } from "react-router-dom";
- 
+import { useRouteError, isRouteErrorResponse } from "react-router-dom";
+
 export default function ErrorPage() {
     const error = useRouteError();
 
@@ -7,7 +7,7 @@ export default function ErrorPage() {
 
     if (isRouteErrorResponse(error)) {
         // error is type `ErrorResponse`
-        errorMessage =  error.statusText 
+        errorMessage = error.statusText
     } else if (error instanceof Error) {
         errorMessage = error.message;
     } else if (typeof error === 'string') {

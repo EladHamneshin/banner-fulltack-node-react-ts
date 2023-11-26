@@ -1,4 +1,3 @@
-// Import necessary icons
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, Drawer } from '@mui/material';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
@@ -8,9 +7,7 @@ import CardTravelIcon from '@mui/icons-material/CardTravel';
 import { useNavigate } from 'react-router-dom';
 import ViewDaySharpIcon from '@mui/icons-material/ViewDaySharp';
 
-type Props = {};
-
-const SidBar = (props: Props) => {
+const SidBar = () => {
     const navigate = useNavigate();
 
     const [state, setState] = useState({ left: false });

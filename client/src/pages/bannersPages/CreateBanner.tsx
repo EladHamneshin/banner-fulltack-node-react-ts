@@ -6,9 +6,6 @@ import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
 
 import { useNavigate } from 'react-router-dom';
 
-
-type Props = {};
-
 const product = {
     id: "1",
     name: "Product 1",
@@ -33,7 +30,7 @@ const product = {
     }
 }
 
-const CreateBanner = (props: Props) => {
+const CreateBanner = () => {
     const navigate = useNavigate();
     const handelClickLogin = () => { navigate(`login`) }
     useEffect(() => {
@@ -63,7 +60,6 @@ const CreateBanner = (props: Props) => {
                 },
             }}
         >
-
             {/* <Paper elevation={10}> */}
             <Grid
                 container
@@ -85,9 +81,7 @@ const CreateBanner = (props: Props) => {
             <Box sx={{ display: 'flex', padding: '33px', alignSelf: 'end' }}>
                 <NewBannerForm product={product} />
             </Box>
-
             {/* </Paper> */}
-
         </Grid>
     );
 };

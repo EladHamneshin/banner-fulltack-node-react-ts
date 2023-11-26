@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { bannerByUserID } from '../../api/banners/bannerByUserID'
 import { Box, Stack } from '@mui/system'
 
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import CardBanner from '../../components/cards/CardBanner'
 import { ResponseBanner } from '../../types/BannerInterface'
-import { exmpleBanner } from '../../exmpleBanners'
 import { Typography } from '@mui/material'
 
 
 const BannerByUserID = () => {
 
     const navigate = useNavigate();
-    const handelClickLogin = () => { navigate(`/login`) }
-    if (localStorage.getItem('token') === null) { handelClickLogin() }
+    const handelClickLogin = () => { navigate(`login`) }
+    useEffect(() => {
+        if (localStorage.getItem('token') === null) { handelClickLogin() }
+    }, [])
 
     const [message, setMessage] = useState('')
     const [banners, setBanners] = useState<ResponseBanner[] | string>([]);
@@ -46,7 +47,6 @@ const BannerByUserID = () => {
             {message ? (
                 <Stack>{message}</Stack>
             ) : (
-
                 <> {typeof banners === 'string' ? (
                     <Typography variant='h3'>{banners}</Typography>
                 ) : (
@@ -54,7 +54,6 @@ const BannerByUserID = () => {
                         <Stack key={index}><CardBanner banner={banner} /></Stack>
                     ))
                 )}
-
                 </>
             )}
         </Box>

@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getAllBannersImage } from '../../api/banners/bannersImageFunc'
 import { ResponseBanner } from '../../types/BannerInterface'
 import CardBanner from '../../components/cards/CardBanner'

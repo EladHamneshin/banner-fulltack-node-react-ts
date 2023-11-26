@@ -1,22 +1,18 @@
-import { Box, Button, IconButton, Popover, ThemeProvider, Typography, createTheme } from '@mui/material'
-import React, { useState } from 'react'
-import HomeIcon from '@mui/icons-material/Home'; // Import HomeIcon
+import { Box, IconButton, ThemeProvider, createTheme } from '@mui/material'
+import { useState } from 'react'
+import HomeIcon from '@mui/icons-material/Home';
 import { blue } from '@mui/material/colors';
 import ManageIcon from '../ManageIcon';
 import { useNavigate } from 'react-router-dom';
 import SidBar from '../SidBar';
 
-type Props = {}
 
 const Header = () => {
 
   const navigate = useNavigate();
-  // const handelClickLogin = () => { navigate(`/login`) }
-  // if (localStorage.getItem('token') === null) { handelClickLogin() }
 
   const handelClickHomePage = () => {
     navigate(`/deshbord `)
-    // window.location.reload();
   }
   const storedUserName = localStorage.getItem('name');
 
@@ -28,16 +24,6 @@ const Header = () => {
 
   const [UserName, setUserName] = useState<UserNameType>(initialUserName);
 
-
-
-  // const signOut = () => {
-  //   localStorage.removeItem('token');
-  //   localStorage.removeItem('name');
-  //   setUserName('User')
-  // }
-  // const ifUserIn = () => {
-  //   return localStorage.getItem('token') !== null
-  // }
   const theme = createTheme({
     palette: {
       primary: {

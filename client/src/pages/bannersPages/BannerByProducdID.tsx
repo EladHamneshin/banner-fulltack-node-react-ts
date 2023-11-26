@@ -6,15 +6,13 @@ import { ResponseBanner } from '../../types/BannerInterface'
 import { useNavigate, useParams } from 'react-router-dom'
 import CardBanner from '../../components/cards/CardBanner'
 
-
-type Props = {}
-
-const BannersByProductID = (props: Props) => {
-
+const BannersByProductID = () => {
 
     const navigate = useNavigate();
-    const handelClickLogin = () => { navigate(`/login`) }
-    if (localStorage.getItem('token') === null) { handelClickLogin() }
+    const handelClickLogin = () => { navigate(`login`) }
+    useEffect(() => {
+        if (localStorage.getItem('token') === null) { handelClickLogin() }
+    }, [])
 
     const [message, setMessage] = useState('')
     const [banners, setBanners] = useState<ResponseBanner[] | string>([]);
@@ -33,14 +31,10 @@ const BannersByProductID = (props: Props) => {
                 }
             } catch (error) {
                 console.log(error);
-
             }
         };
-
         fetchData();
-
     }, []);
-
 
     return (
         <Box>
@@ -48,7 +42,6 @@ const BannersByProductID = (props: Props) => {
                 <Stack>{message}</Stack>
             ) : (
                 <>
-
                     {typeof banners === 'string' ? (
                         <Typography variant='h3'>{banners}</Typography>
                     ) : (
@@ -56,7 +49,6 @@ const BannersByProductID = (props: Props) => {
                             <Stack key={index}><CardBanner banner={banner} /></Stack>
                         ))
                     )}
-
                 </>
             )}
         </Box>

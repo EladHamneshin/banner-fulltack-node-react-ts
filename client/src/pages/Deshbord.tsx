@@ -1,10 +1,8 @@
-import { Box, IconButton } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import { Box } from '@mui/material'
+import { useEffect } from 'react'
 import Header from '../components/Header-Footer/Header';
 import Footer from '../components/Header-Footer/Footer';
 import { Outlet, useNavigate } from 'react-router-dom';
-import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
-import SidBar from '../components/SidBar';
 
 
 
@@ -41,21 +39,14 @@ const styleFooterBox = {
   height: '30px'
 };
 
-type Props = {
 
-}
 
-const Deshbord = (props: Props) => {
+const Deshbord = () => {
   const navigate = useNavigate();
   const handelClickLogin = () => { navigate(`login`) }
   useEffect(() => {
     if (localStorage.getItem('token') === null) { handelClickLogin() }
   }, [])
-
-
-  const [openSidebar, setOpenSidebar] = useState(true);
-
-
 
   return (
     <Box sx={styleContainer}>
@@ -64,7 +55,6 @@ const Deshbord = (props: Props) => {
         <Header />
       </Box>
       <Box sx={{ ...styleMainBox, flexDirection: 'row', border: '1px solid black' }}>
-
         <Box sx={{ flexGrow: 1, border: '1px solid black' }}>
           <Outlet />
           Box</Box>
@@ -72,7 +62,6 @@ const Deshbord = (props: Props) => {
       <Box sx={{ ...styleFooterBox, border: '1px solid black' }}>
         <Footer />
       </Box>
-
     </Box>
   )
 }

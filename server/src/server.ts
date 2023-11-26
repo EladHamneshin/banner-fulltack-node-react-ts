@@ -16,7 +16,7 @@ dotenv.config();
 // Import routes from the ./routes
 import user from "./routes/user-route";
 
-import  connectToDB  from "./configs/mongoDBConnect";
+import connectToDB from "./configs/mongoDBConnect";
 import productRouter from "./routes/productRoutes";
 
 import { catchErrors, notFound } from "./middleware/errorNOTfound";
@@ -72,7 +72,7 @@ app.use("/api/bannersImage", routerBannersImage);
 app.use("/api/upload", uploadRouter);
 
 
-app.use("/api/ext/bannersProduct",productRouter)
+app.use("/api/ext/bannersProduct", productRouter)
 
 app.use(catchErrors);
 

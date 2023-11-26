@@ -1,15 +1,12 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Avatar, Box, Button, Grid, Paper, Typography, } from '@mui/material';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 
 import RegisterForm from '../../components/loginANDregister/RegisterForm';
 import { useNavigate } from 'react-router-dom';
 
-type Props = {
 
-};
 
-const Register = (props: Props) => {
+const Register = () => {
     const navigate = useNavigate();
     const handelClickLogin = () => {
         navigate(`/deshbord/login`)
@@ -36,7 +33,6 @@ const Register = (props: Props) => {
             }}
         >
             <Paper
-                // elevation={10}
                 style={paperStyle}>
                 <Box sx={{
                     padding: '20px'
@@ -63,15 +59,12 @@ const Register = (props: Props) => {
                     display: 'flex',
                     alignItems: "center",
                     flexDirection: 'column'
-
                 }}>
                     <RegisterForm />
-
                     <Button onClick={handelClickLogin} >
                         sign in
                     </Button>
                 </Box>
-
             </Paper>
         </Grid>
     );

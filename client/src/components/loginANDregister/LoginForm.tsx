@@ -47,7 +47,7 @@ const LoginForm = () => {
 
         setLoading(true)
         const handelClickHomePage = () => {
-            navigate(`/deshbord `)
+            navigate(`/`)
             window.location.reload();
         }
         try {

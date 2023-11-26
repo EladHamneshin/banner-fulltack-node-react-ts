@@ -25,10 +25,10 @@ const AllBanners = () => {
                 if (result.success === false) { return setMessage(result.message) }
                 if (result.success === true) {
                     const data: ResponseBanner[] = result.data
-                    data.length === 0 ? setBanners('There is no such producrID') : setBanners(data)
+                    data.length === 0 ? setBanners('There is no such Banners') : setBanners(data)
                 }
             } catch (error) {
-                console.log(error);
+                console.log('err:', error);
             }
         };
         fetchData();
@@ -37,6 +37,7 @@ const AllBanners = () => {
 
     return (
         <Box>
+            bb
             {message ? (
                 <Stack>{message}</Stack>
             ) : (

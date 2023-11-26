@@ -13,7 +13,7 @@ const SidBar = () => {
     const [state, setState] = useState({ left: false });
 
     const handelClickAllBanners = () => {
-        navigate(`/deshbord/banners`);
+        navigate(`/banners`);
     };
 
     const handelClickMyBanners = () => {

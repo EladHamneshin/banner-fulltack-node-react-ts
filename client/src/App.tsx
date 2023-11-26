@@ -1,9 +1,9 @@
-import { Outlet } from 'react-router-dom'
+import Routs from './routes/Routs'
 function App() {
 
   return (
     <>
-      <Outlet />
+      <Routs />
     </>
   )
 }

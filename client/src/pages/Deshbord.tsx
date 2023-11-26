@@ -43,7 +43,7 @@ const styleFooterBox = {
 
 const Deshbord = () => {
   const navigate = useNavigate();
-  const handelClickLogin = () => { navigate(`login`) }
+  const handelClickLogin = () => { navigate(`/login`) }
   useEffect(() => {
     if (localStorage.getItem('token') === null) { handelClickLogin() }
   }, [])
@@ -57,7 +57,7 @@ const Deshbord = () => {
       <Box sx={{ ...styleMainBox, flexDirection: 'row', border: '1px solid black' }}>
         <Box sx={{ flexGrow: 1, border: '1px solid black' }}>
           <Outlet />
-          Box</Box>
+        </Box>
       </Box>
       <Box sx={{ ...styleFooterBox, border: '1px solid black' }}>
         <Footer />

@@ -13,7 +13,7 @@ const AllBanners = () => {
     const [banners, setBanners] = useState<ResponseBanner[] | string>([]);
 
     const navigate = useNavigate();
-    const handelClickLogin = () => { navigate(`login`) }
+    const handelClickLogin = () => { navigate(`/login`) }
     useEffect(() => {
         if (localStorage.getItem('token') === null) { handelClickLogin() }
     }, [])
@@ -37,7 +37,6 @@ const AllBanners = () => {
 
     return (
         <Box>
-            bb
             {message ? (
                 <Stack>{message}</Stack>
             ) : (

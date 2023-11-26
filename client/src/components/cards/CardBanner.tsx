@@ -76,7 +76,8 @@ const CardBanner = (props: Props) => {
           flexDirection: 'column',
           justifyContent: 'space-around',
           minWidth: '420px',
-          minHeight: '360px'
+          minHeight: '360px',
+
         }}>
         <Grid
           sx={{
@@ -92,6 +93,7 @@ const CardBanner = (props: Props) => {
       :
       <Card
         sx={{
+          // pt: '100%',
           maxWidth: 250,
           maxHeight: 500,
           margin: '5px',

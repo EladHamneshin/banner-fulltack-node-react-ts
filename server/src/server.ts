@@ -24,6 +24,7 @@ import { ApiError } from "./utils/ApiError";
 import { insertBanners } from "./models/bannersModel";
 import routerBannersImage from "./routes/bannersImage-route";
 import productControllers from "./controllers/productControllers";
+import uploadRouter from "./routes/upLoad";
 
 // Setup constant variables
 const PORT = process.env.PORT || 5000;
@@ -68,6 +69,7 @@ app.use(helmet());
 
 app.use("/api/users", user);
 app.use("/api/bannersImage", routerBannersImage);
+app.use("/api/upload", uploadRouter);
 
 
 app.use("/api/ext/bannersProduct",productRouter)

@@ -1,11 +1,10 @@
-import { Avatar, Box, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, Grid, IconButton, IconButtonProps, Typography, styled } from '@mui/material';
-import { blue } from '@mui/material/colors';
-import { useState } from 'react'
+import { Box, Card, CardActions, CardContent, CardMedia, Collapse, Grid, IconButton, IconButtonProps, Typography, styled } from '@mui/material';
+import { useEffect, useState } from 'react'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { ResponseBanner } from '../types/BannerInterface';
-import { deleteByBannerID } from '../api/banners/deleteByBannerID';
+import { ResponseBanner } from '../../types/BannerInterface';
+import { deleteByBannerID } from '../../api/banners/deleteByBannerID';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -34,8 +33,10 @@ const CardBanner = (props: Props) => {
 
 
   const navigate = useNavigate();
-  const handelClickLogin = () => { navigate(`/login`) }
-  if (localStorage.getItem('token') === null) { handelClickLogin() }
+  const handelClickLogin = () => { navigate(`login`) }
+  useEffect(() => {
+    if (localStorage.getItem('token') === null) { handelClickLogin() }
+  }, [])
 
 
   const banner = props.banner;
@@ -98,10 +99,6 @@ const CardBanner = (props: Props) => {
           boxShadow: '0 4px 8px rgba(0, 0, 0.9, 0.8)',
           marginBlock: '10px',
           transition: 'transform 0.3s',
-          '&:hover': {
-            transform: 'scale(1.05)',
-
-          },
         }}>
 
         <CardMedia

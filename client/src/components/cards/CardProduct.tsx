@@ -1,18 +1,16 @@
-import { Avatar, CardActions, CardHeader, Collapse, IconButton, IconButtonProps } from '@mui/material';
+import { CardActions, Collapse, IconButton, IconButtonProps } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { blue } from '@mui/material/colors';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useNavigate } from 'react-router-dom';
-import { Product } from '../types/ProductInterface';
+import { Product } from '../../types/ProductInterface';
 
 type Props = {
-  product : Product
+  product: Product
 }
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -33,8 +31,10 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 const CardProduct = (props: Props) => {
   const product = props.product
   const navigate = useNavigate();
-  const handelClickLogin = () => { navigate(`/login`) }
-  if (localStorage.getItem('token') === null) { handelClickLogin() }
+  const handelClickLogin = () => { navigate(`login`) }
+  useEffect(() => {
+    if (localStorage.getItem('token') === null) { handelClickLogin() }
+  }, [])
 
   const [expanded, setExpanded] = useState(false);
 

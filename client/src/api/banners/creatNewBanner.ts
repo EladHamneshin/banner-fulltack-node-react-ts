@@ -2,12 +2,14 @@ import axios from 'axios';
 
 const API_URI = import.meta.env.VITE_API_URI
 
+
 export const uploadImageANDcreateBanner = async (newBanner: any) => {
     const imageFile = newBanner.image.url
     imageFile.name = newBanner.name
     console.log( imageFile);
     
     const formData = new FormData();  //create new form object
+
     
     
     formData.append("myImage", imageFile);

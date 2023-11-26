@@ -63,7 +63,3 @@ const BannerByUserID = () => {
 
 export default BannerByUserID
 
-function ifUserIn() {
-    throw new Error('Function not implemented.')
-}
-

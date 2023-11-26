@@ -20,7 +20,7 @@ const SidBar = () => {
         navigate(`banners/user/${localStorage.getItem('name')}`);
     };
 
-    const toggleDrawer = (anchor: 'left', open: boolean) => (
+    const toggleDrawer = (_anchor: 'left', open: boolean) => (
         event: React.KeyboardEvent | React.MouseEvent
     ) => {
         if (
@@ -42,7 +42,7 @@ const SidBar = () => {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['All banners', 'My bannars', 'Send email', 'Drafts'].map((text, index) => (
+                {['All banners', 'My bannars', 'Send email', 'Drafts'].map((text) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton
                             onClick={() => {

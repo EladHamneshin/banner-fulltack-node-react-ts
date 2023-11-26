@@ -34,10 +34,10 @@ const NewBannerForm = (props: Props) => {
     if (localStorage.getItem('token') === null) { handelClickLogin() }
 
     const product = props.product
-    const [message, setMessage] = useState('');
+    const [message] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const [image, setImage] = useState("");
+    const [image] = useState("");
 
 
     const textFieldStyle = { padding: '2px', margin: '4px auto ' };

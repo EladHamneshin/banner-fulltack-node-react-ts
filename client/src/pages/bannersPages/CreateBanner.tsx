@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import NewBannerForm from '../../components/creatBanner/NewBannerHeder';
-import { Grid, Paper, Avatar, Typography } from '@mui/material';
+import { Grid, Avatar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
 

@@ -22,7 +22,7 @@ const Header = () => {
   // Set the initial state based on the stored value or use 'User' as a fallback
   const initialUserName: UserNameType = storedUserName ? storedUserName : 'User';
 
-  const [UserName, setUserName] = useState<UserNameType>(initialUserName);
+  const [UserName] = useState<UserNameType>(initialUserName);
 
   const theme = createTheme({
     palette: {

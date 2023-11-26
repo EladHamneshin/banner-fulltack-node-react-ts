@@ -13,9 +13,7 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 
-type Props = {}
-
-const ManageIcon = (props: Props) => {
+const ManageIcon = () => {
     const navigate = useNavigate();
     const handelClickLogin = () => {
         navigate(`/login`)

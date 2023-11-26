@@ -1,10 +1,8 @@
 import { Box } from '@mui/material'
-import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
-type Props = {}
 
-const CategoryForm = (props: Props) => {
+const CategoryForm = () => {
 
   const navigate = useNavigate();
   const handelClickLogin = () => { navigate(`/login`) }

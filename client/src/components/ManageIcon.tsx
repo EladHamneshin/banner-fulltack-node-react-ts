@@ -1,5 +1,5 @@
-import { Box, Typography, Popover } from '@mui/material';
-import React, { useState } from 'react'
+import { Box } from '@mui/material';
+import React from 'react'
 import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -13,9 +13,8 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 
-type Props = {}
 
-const ManageIcon = (props: Props) => {
+const ManageIcon = () => {
     const navigate = useNavigate();
     const handelClickLogin = () => {
         navigate(`/login`)

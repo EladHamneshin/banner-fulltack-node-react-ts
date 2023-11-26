@@ -1,9 +1,7 @@
-import { Avatar, CardActions, CardHeader, Collapse, IconButton, IconButtonProps } from '@mui/material';
+import { CardActions, Collapse, IconButton, IconButtonProps } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { blue } from '@mui/material/colors';
 import { useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';

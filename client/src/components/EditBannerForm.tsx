@@ -1,10 +1,7 @@
 import { Box } from '@mui/material'
-import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
-type Props = {}
-
-const EditBannerForm = (props: Props) => {
+const EditBannerForm = () => {
 
   const navigate = useNavigate();
   const handelClickLogin = () => { navigate(`/login`) }

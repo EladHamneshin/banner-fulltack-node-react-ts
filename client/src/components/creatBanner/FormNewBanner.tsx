@@ -1,8 +1,4 @@
-import React from 'react'
-
-type Props = {}
-
-const FormNewBanner = (props: Props) => {
+const FormNewBanner = () => {
   return (
     <div>FormNewBanner</div>
   )

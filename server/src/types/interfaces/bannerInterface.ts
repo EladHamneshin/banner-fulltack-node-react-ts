@@ -2,7 +2,7 @@ export interface BannerInterface {
     _id: string;
     name: string;
     productID: string;
-    catogryID: string;
+    catogryName: string;
     clickCount: number;
     image: {
         url: string;

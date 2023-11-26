@@ -1,6 +1,6 @@
 export interface queryInterface {
     limit?: string,
     category?: string,
-    size?: 'side' | 'top' | 'allscreen' | 'homepage',
+    size?: 'side' | 'top' | 'all' | 'homepage',
     userID?: string
 };

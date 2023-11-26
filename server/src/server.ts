@@ -1,5 +1,5 @@
 import cookieParser from 'cookie-parser';
-import express, { NextFunction, Request, Response } from "express";
+import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import helmet from "helmet";
@@ -20,10 +20,7 @@ import  connectToDB  from "./configs/mongoDBConnect";
 import productRouter from "./routes/productRoutes";
 
 import { catchErrors, notFound } from "./middleware/errorNOTfound";
-import { ApiError } from "./utils/ApiError";
-import { insertBanners } from "./models/bannersModel";
 import routerBannersImage from "./routes/bannersImage-route";
-import productControllers from "./controllers/productControllers";
 import uploadRouter from "./routes/upLoad";
 
 // Setup constant variables
@@ -83,14 +80,10 @@ app.use(notFound);
 
 // Listen to specified port in .env or default 5000
 connectToDB().then((res) => {
-  console.log('Connecting to mongodb');
-  // איתוחל דאטה ראשוני
   // insertBanners()
   app.listen(PORT, () => {
     console.log(`Server is listening on: ${PORT}`);
   });
 }).catch((err) => console.error(err))
-// app.listen(PORT, () => {
-//     console.log(`Server is listening on: ${PORT}`);
-// })
+
 

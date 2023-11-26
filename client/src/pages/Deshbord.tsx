@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Outlet, useNavigate } from 'react-router-dom';
 import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
-import SidBar from '../components/SidBar';
+import SidBar from '../components/sidebar/SidBar';
 
 
 
@@ -48,7 +48,7 @@ type Props = {
 const Deshbord = (props: Props) => {
 
   const navigate = useNavigate();
-  const handelClickLogin = () => { navigate(`/login`) }
+  const handelClickLogin = () => { navigate(`login`) }
   if (localStorage.getItem('token') === null) { handelClickLogin() }
 
   const [openSidebar, setOpenSidebar] = useState(true);

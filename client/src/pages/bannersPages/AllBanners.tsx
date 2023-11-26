@@ -1,9 +1,9 @@
 import { Box, Stack } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import { getAllBannersImage } from '../api/bannersImageFunc'
-import { ResponseBanner } from '../types/BannerInterface'
-import CardBanner from '../components/CardBanner'
-import { exmpleBanner } from '../exmpleBanners'
+import { getAllBannersImage } from '../../api/bannersImageFunc'
+import { ResponseBanner } from '../../types/BannerInterface'
+import CardBanner from '../../components/banners/CardBanner'
+import { exmpleBanner } from '../../exmpleBanners'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -15,7 +15,7 @@ const AllBanners = () => {
     const [banners, setBanners] = useState<ResponseBanner[]>([]);
 
     const navigate = useNavigate();
-    const handelClickLogin = () => { navigate(`/login`) }
+    const handelClickLogin = () => { navigate(`login`) }
     if (localStorage.getItem('token') === null) { handelClickLogin() }
 
 
@@ -24,10 +24,8 @@ const AllBanners = () => {
             try {
                 const result = await getAllBannersImage();
                 if (result.success === false) { return setMessage(result.message) }
-                console.log('rrrrrrrrrrrrrrr', result);
                 if (result.success === true) {
                     const data: ResponseBanner[] = result.data
-                    console.log('ddddddddddd', data);
                     data.length === 0 ? setBanners(exmpleBanner) : setBanners(data)
                 }
             } catch (error) {

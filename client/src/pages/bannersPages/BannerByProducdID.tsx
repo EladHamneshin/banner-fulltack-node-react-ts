@@ -1,15 +1,16 @@
 
 import { Box, Stack, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
+import { bannerByProducdID } from '../../api/bannerByProducdID'
+import { ResponseBanner } from '../../types/BannerInterface'
 import { useNavigate, useParams } from 'react-router-dom'
-import { bannerByCategoryByName } from '../api/bannerByCategoryByName'
-import { ResponseBanner } from '../types/BannerInterface'
-import CardBanner from '../components/CardBanner'
+import CardBanner from '../../components/banners/CardBanner'
 
 
 type Props = {}
 
-const BannerByCategoryByName = (props: Props) => {
+const BannersByProductID = (props: Props) => {
+
 
     const navigate = useNavigate();
     const handelClickLogin = () => { navigate(`/login`) }
@@ -17,25 +18,25 @@ const BannerByCategoryByName = (props: Props) => {
 
     const [message, setMessage] = useState('')
     const [banners, setBanners] = useState<ResponseBanner[] | string>([]);
-    const { name } = useParams()
+    const { productID } = useParams()
 
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const result = await bannerByCategoryByName(name!);
-
+                const result = await bannerByProducdID(productID!);
 
                 if (result.success === false) { return setMessage(result.message) }
                 if (result.success === true) {
                     const data: ResponseBanner[] = result.data
-                    data.length === 0 ? setBanners('There is no such category name') : setBanners(data)
-
+                    data.length === 0 ? setBanners('There is no such producrID') : setBanners(data)
                 }
             } catch (error) {
                 console.log(error);
+
             }
         };
+
         fetchData();
 
     }, []);
@@ -49,13 +50,12 @@ const BannerByCategoryByName = (props: Props) => {
                 <>
 
                     {typeof banners === 'string' ? (
-                        <Typography variant='h2'>{banners}</Typography>
+                        <Typography variant='h3'>{banners}</Typography>
                     ) : (
                         banners.map((banner, index) => (
                             <Stack key={index}><CardBanner banner={banner} /></Stack>
                         ))
                     )}
-
 
                 </>
             )}
@@ -63,4 +63,6 @@ const BannerByCategoryByName = (props: Props) => {
     )
 }
 
-export default BannerByCategoryByName
+
+
+export default BannersByProductID

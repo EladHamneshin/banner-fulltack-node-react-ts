@@ -3,10 +3,10 @@ import React from 'react'
 
 type Props = {}
 
-const Futer = (props: Props) => {
+const Footer = (props: Props) => {
   return (
-    <Box>Futer</Box>
+    <Box>Footer</Box>
   )
 }
 
-export default Futer
+export default Footer

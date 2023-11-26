@@ -4,8 +4,8 @@ import { useState } from 'react'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { ResponseBanner } from '../types/BannerInterface';
-import { deleteByBannerID } from '../api/deleteByBannerID';
+import { ResponseBanner } from '../../types/BannerInterface';
+import { deleteByBannerID } from '../../api/deleteByBannerID';
 
 import { useNavigate } from 'react-router-dom';
 

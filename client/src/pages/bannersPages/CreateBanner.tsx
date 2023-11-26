@@ -1,10 +1,10 @@
 import React from 'react';
-import NewBannerForm from '../components/creatBanner/NewBannerForm';
+import NewBannerForm from '../../components/creatBanner/NewBannerForm';
 import { Grid, Paper, Avatar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
 
-import UpImageBanner from '../components/creatBanner/UpImageBanner';
+// import UpImageBanner from '../../components/creatBanner/UpImageBanner';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -37,7 +37,7 @@ const product = {
 const CreateBanner = (props: Props) => {
 
     const navigate = useNavigate();
-    const handelClickLogin = () => { navigate(`/login`) }
+    const handelClickLogin = () => { navigate(`login`) }
     if (localStorage.getItem('token') === null) { handelClickLogin() }
 
     const paperStyle = {

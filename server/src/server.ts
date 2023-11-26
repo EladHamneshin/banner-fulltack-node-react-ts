@@ -1,4 +1,4 @@
-
+import cookieParser from 'cookie-parser';
 import express, { NextFunction, Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -36,6 +36,7 @@ export const app = express();
 app.use(express.static('public'))
 // Body parser
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -71,11 +72,11 @@ app.use("/api/bannersImage", routerBannersImage);
 
 app.use("/api/ext/bannersProduct",productRouter)
 
+app.use(catchErrors);
 
 
 app.use(notFound);
 
-app.use(catchErrors);
 
 
 // Listen to specified port in .env or default 5000

@@ -1,5 +1,6 @@
 import { bannerModel } from "../models/bannersModel";
 import { BannerInterface } from "../types/interfaces/bannerInterface";
+import { queryInterface } from "../types/interfaces/imageQueryInterface";
 import { ApiError } from "../utils/ApiError";
 import STATUS_CODES from "../utils/StatusCodes";
 
@@ -9,13 +10,17 @@ export const getBannersImage = async (): Promise<BannerInterface[]> => {
     const data: BannerInterface[] = await bannerModel.find({});
     return data;
   } catch (error) {
-    throw new ApiError({ error }, STATUS_CODES.NOT_FOUND, "Banners not found faild in .dal");
+
+    throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, "Banners not found faild in .dal");
+
   }
 };
 
 // Function to get bannersImage by productID
 export const getBannersImageByProductID = async (productID: string) => {
-  const data: BannerInterface[] | null = await bannerModel.findOne({ productID });
+
+  const data: BannerInterface[] | null = await bannerModel.find({ productID });
+
   if (!data) { throw new ApiError({}, STATUS_CODES.NO_CONTENT, "Banner by ID not found faild in .dal"); }
   return data;
 
@@ -70,3 +75,18 @@ export const deleteBannerImage = async (bannerID: string): Promise<BannerInterfa
     throw new ApiError({ error }, STATUS_CODES.NOT_FOUND, "Banners not found faild in .dal");
   }
 };
+
+
+export const getBannerImageByQuery = async (queryObject: queryInterface): Promise<BannerInterface[]> => {
+  const query: any = {}
+  if (queryObject.category) {
+    query.categoryName = queryObject.category
+  }
+  if (queryObject.size) {
+    query.size = queryObject.size
+  }
+  const data = await bannerModel.find(query).limit(Number(queryObject.limit))
+  return data;
+};
+
+

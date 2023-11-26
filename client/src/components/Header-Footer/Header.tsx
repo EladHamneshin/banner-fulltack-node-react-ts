@@ -12,7 +12,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handelClickHomePage = () => {
-    navigate(`/deshbord `)
+    navigate(`/`)
   }
   const storedUserName = localStorage.getItem('name');
 

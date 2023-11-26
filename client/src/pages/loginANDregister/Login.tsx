@@ -7,7 +7,7 @@ const Login = () => {
 
     const navigate = useNavigate();
     const handelClickSignUp = () => {
-        navigate(`/deshbord/register`)
+        navigate(`/register`)
     }
 
     const paperStyle = {

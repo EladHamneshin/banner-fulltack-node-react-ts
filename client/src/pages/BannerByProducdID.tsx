@@ -1,7 +1,7 @@
 
 import { Box, Stack, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { bannerByProducdID } from '../api/bannerByProducdID'
+import { bannerByProducdID } from '../api/banners/bannerByProducdID'
 import { ResponseBanner } from '../types/BannerInterface'
 import { useNavigate, useParams } from 'react-router-dom'
 import CardBanner from '../components/CardBanner'

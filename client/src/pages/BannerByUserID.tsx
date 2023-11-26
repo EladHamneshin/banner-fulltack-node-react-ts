@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { bannerByUserID } from '../api/bannerByUserID'
+import { bannerByUserID } from '../api/banners/bannerByUserID'
 import { Box, Stack } from '@mui/system'
 
 import { useNavigate, useParams } from 'react-router-dom'

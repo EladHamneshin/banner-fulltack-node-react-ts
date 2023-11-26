@@ -17,7 +17,11 @@ const upload = multer({
   storage: storage,
   limits: { fileSize: 3000000 },
 }).single("myImage");
+
+
 uploadRouter.post("/image", (req, res) => {
+    console.log(req.body);
+    
   upload(req, res, (err) => {
     if (err) {
       console.log(err);

@@ -2,9 +2,9 @@ import { Box, Button, IconButton, Popover, ThemeProvider, Typography, createThem
 import React, { useState } from 'react'
 import HomeIcon from '@mui/icons-material/Home'; // Import HomeIcon
 import { blue } from '@mui/material/colors';
-import ManageIcon from './ManageIcon';
+import ManageIcon from '../ManageIcon';
 import { useNavigate } from 'react-router-dom';
-import SidBar from './SidBar';
+import SidBar from '../SidBar';
 
 type Props = {}
 

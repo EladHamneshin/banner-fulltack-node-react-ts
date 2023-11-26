@@ -1,17 +1,25 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URI
+const API_URI = import.meta.env.VITE_API_URI
+
 
 export const uploadImageANDcreateBanner = async (newBanner: any) => {
     const imageFile = newBanner.image.url
+    imageFile.name = newBanner.name
+    console.log( imageFile);
+    
     const formData = new FormData();  //create new form object
+
+    
+    
     formData.append("myImage", imageFile);
+    let dataString = JSON.stringify(newBanner);
+
 
     let configUpImage = {
         method: "post",
-        url: `${API_URL}/api/upload/image`,
-
-        data: formData,
+        url: `${API_URI}/api/upload/image`,
+        data: formData
     }
 
 
@@ -26,7 +34,7 @@ export const uploadImageANDcreateBanner = async (newBanner: any) => {
             let configCraete = {
                 method: 'post',
                 maxBodyLength: Infinity,
-                url: `${API_URL}/api/bannersImage/${newBanner.productID}`,
+                url: `${API_URI}/api/bannersImage/${newBanner.productID}`,
                 headers: {},
                 data: data
             };

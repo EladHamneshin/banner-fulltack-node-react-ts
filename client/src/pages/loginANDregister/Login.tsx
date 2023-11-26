@@ -1,18 +1,13 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import { Avatar, Box, Button, Grid, Paper, Typography, } from '@mui/material';
+import { Typography, Avatar, Button, Grid, Paper, Link, Box } from '@mui/material';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
-
-import RegisterForm from '../components/loginANDregister/RegisterForm';
+import LoginForm from '../../components/loginANDregister/LoginForm';
 import { useNavigate } from 'react-router-dom';
 
-type Props = {
+const Login = () => {
 
-};
-
-const Register = (props: Props) => {
     const navigate = useNavigate();
-    const handelClickLogin = () => {
-        navigate(`/deshbord/login`)
+    const handelClickSignUp = () => {
+        navigate(`/deshbord/register`)
     }
 
     const paperStyle = {
@@ -36,7 +31,6 @@ const Register = (props: Props) => {
             }}
         >
             <Paper
-                // elevation={10}
                 style={paperStyle}>
                 <Box sx={{
                     padding: '20px'
@@ -54,7 +48,7 @@ const Register = (props: Props) => {
                         </Grid>
                         <Grid item>
                             <Typography variant="h4" gutterBottom>
-                                Signup
+                                login
                             </Typography>
                         </Grid>
                     </Grid>
@@ -63,18 +57,22 @@ const Register = (props: Props) => {
                     display: 'flex',
                     alignItems: "center",
                     flexDirection: 'column'
-
                 }}>
-                    <RegisterForm />
-
-                    <Button onClick={handelClickLogin} >
-                        sign in
-                    </Button>
+                    <LoginForm />
+                    <Typography>
+                        <Link href='#'>
+                            Forgot password?
+                        </Link>
+                    </Typography>
+                    <Typography>
+                        <Button onClick={handelClickSignUp} >
+                            sign Up
+                        </Button>
+                    </Typography>
                 </Box>
-
             </Paper>
         </Grid>
     );
 };
 
-export default Register;
+export default Login;

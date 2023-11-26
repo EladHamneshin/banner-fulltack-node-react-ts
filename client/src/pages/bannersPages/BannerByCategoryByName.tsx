@@ -2,18 +2,19 @@
 import { Box, Stack, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { bannerByCategoryByName } from '../api/banners/bannerByCategoryByName'
-import { ResponseBanner } from '../types/BannerInterface'
-import CardBanner from '../components/CardBanner'
+import { bannerByCategoryByName } from '../../api/banners/bannerByCategoryByName'
+import { ResponseBanner } from '../../types/BannerInterface'
+import CardBanner from '../../components/cards/CardBanner'
 
 
-type Props = {}
 
-const BannerByCategoryByName = (props: Props) => {
+const BannerByCategoryByName = () => {
 
     const navigate = useNavigate();
-    const handelClickLogin = () => { navigate(`/login`) }
-    if (localStorage.getItem('token') === null) { handelClickLogin() }
+    const handelClickLogin = () => { navigate(`login`) }
+    useEffect(() => {
+        if (localStorage.getItem('token') === null) { handelClickLogin() }
+    }, [])
 
     const [message, setMessage] = useState('')
     const [banners, setBanners] = useState<ResponseBanner[] | string>([]);

@@ -22,7 +22,7 @@ const getAllUsers = async () => {
 
 const registerUser = async (user: User) => {
     const client = await postgresPool.connect();
-    const { rows } = await client.query(`INSERT INTO users (id, name, email, password, isadmin) VALUES ($1, $2, $3, $4, $5) RETURNING *`, [user._id ,user.name, user.email, user.password, user.isAdmin]);
+    const { rows } = await client.query(`INSERT INTO users (_id, name, email, password, isAdmin) VALUES ($1, $2, $3, $4, $5) RETURNING *`, [user.id ,user.name, user.email, user.password, user.isadmin]);
     client.release();
     return rows[0];
 };

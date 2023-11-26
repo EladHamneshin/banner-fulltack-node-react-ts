@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { ApiSuccess } from "../utils/ApiSucess";
 import { asyncHandler } from "../middleware/async-middleware";
-import {BannerInterface} from "../types/interfaces/bannerInterface";
+import { BannerInterface } from "../types/interfaces/bannerInterface";
 import { ApiError } from "../utils/ApiError";
 // import service from "../services/bannersImage-service";
 import { errorResponse } from "../middleware/error-middleware";
@@ -18,6 +18,7 @@ import {
   updateBannerImage as serviceUpdateBannerImage,
   createBannerImage as serviceCreateBannerImage,
   deleteBannerImage as serviceDeleteBannerImage,
+  getBannerImagesByQuery as serviceGetBannerImageByQuery,
 } from "../services/bannersImage-service";
 
 // @desc   Get all bannersImage
@@ -46,17 +47,14 @@ export const getBannersImageByProductID = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { productID } = req.params;
 
-    try {
-      const banners: BannerInterface[] = await serviceGetBannersImageByProductID(productID);
+    const banners: BannerInterface[] = await serviceGetBannersImageByProductID(productID);
 
-      if (!banners) {
-        throw new ApiError({}, STATUS_CODES.NOT_FOUND, "Banners not found for the given productID");
-      }
-
-      res.status(STATUS_CODES.OK).json({ success: true, data: banners, message: "Success!" });
-    } catch (error) {
-      next(error);
+    if (!banners) {
+      throw new ApiError({}, STATUS_CODES.NOT_FOUND, "Banners not found for the given productID");
     }
+
+    res.status(STATUS_CODES.OK).json({ success: true, data: banners, message: "Success!" });
+
   }
 );
 
@@ -161,3 +159,9 @@ export const deleteBannerImage = asyncHandler(
   }
 );
 
+const getBannerImagesByQuery = async (req: Request, res: Response, next: NextFunction) => {
+  const { limit, size, category, userID } = req.query;
+  if (!size) throw new ApiError({}, STATUS_CODES.BAD_REQUEST, "Size is required");
+  const response = await serviceGetBannerImageByQuery(req.query);
+  res.status(STATUS_CODES.OK).json({ success: true, data: response, message: "Success!" });
+};

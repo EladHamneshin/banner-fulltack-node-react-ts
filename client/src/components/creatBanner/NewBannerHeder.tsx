@@ -30,7 +30,16 @@ const NewBannerForm = (props: Props) => {
 
 
     const uploadImage = async (image: File, name : string , size : string) => {
-        const getresizeImage = await resizeImage(image, 340, 300);
+        let width = 750
+        let height = 550
+        if (size === 'side'){
+            width = 120
+            height = 650
+        } else if (size === 'top'){
+            width = 770
+            height = 150
+        }   
+        const getresizeImage = await resizeImage(image, width, height);
 
         const FileName = name + size
         const cleanFileName = FileName.replace(/[^a-zA-Z0-9]/g, '')

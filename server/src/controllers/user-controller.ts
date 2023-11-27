@@ -17,7 +17,7 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
   if (error)
     throw new ApiError({}, STATUS_CODES.BAD_REQUEST, error.message);
 
-  if (req.headers.authorization)
+  if (req.cookies.jwt)
     throw new ApiError({}, STATUS_CODES.BAD_REQUEST, 'User already logged in');
 
   const { email, password } = req.body;
@@ -61,6 +61,7 @@ const logoutUser = (req: Request, res: Response) => {
 // @route   GET /api/users/
 // @access  Public
 export const getAllUsers = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+  if (!req.body.isadmin) throw new ApiError({}, STATUS_CODES.FORBIDDEN, 'You are not admin');
   const users = await userService.getAllUsers();
 
   res.status(STATUS_CODES.OK).json(new ApiSuccess<User[]>(users, "Success!"));
@@ -75,7 +76,7 @@ export const getAllUsers = asyncHandler(async (req: Request, res: Response, next
 // @route DELETE /api/users/
 // @access private/admin
 export const deleteUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  // const deletedUser = await userService.deleteUser(req.body.userID);
+  await userService.deleteUser(req.body.id);
 
   res.status(STATUS_CODES.OK).json(new ApiSuccess('', "Success!"));
 });

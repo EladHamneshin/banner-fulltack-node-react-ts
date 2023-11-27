@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { getAllBannersImage } from '../../api/banners/bannersImageFunc';
 import CardBanner from '../../components/cards/CardBanner';
 import { ResponseBanner } from '../../types/BannerInterface';
+import BannerNotFind from './BannerNotFind';
 
 const AllBanners = () => {
     const [message, setMessage] = useState('');
@@ -53,7 +54,8 @@ const AllBanners = () => {
             ) : banners === null ? (
                 <Typography variant="h3">Loading...</Typography>
             ) : typeof banners === 'string' ? (
-                <Typography variant="h3">{banners}</Typography>
+                // <Typography variant="h3">{banners}</Typography>
+                <BannerNotFind />
             ) : (
                 banners.map((banner, index) => (
                     <Stack key={index} spacing={2}>

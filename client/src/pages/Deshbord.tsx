@@ -52,15 +52,15 @@ const Deshbord = () => {
   return (
     <Box sx={styleContainer}>
 
-      <Box sx={{ ...styleHeaderBox, border: '1px solid black' }}>
+      <Box sx={{ ...styleHeaderBox, }}>
         <Header />
       </Box>
-      <Box sx={{ ...styleMainBox, flexDirection: 'row', border: '1px solid black' }}>
-        <Box sx={{ flexGrow: 1, border: '1px solid black' }}>
+      <Box sx={{ ...styleMainBox, flexDirection: 'row', }}>
+        <Box sx={{ flexGrow: 1,  }}>
           <Outlet />
         </Box>
       </Box>
-      <Box sx={{ ...styleFooterBox, border: '1px solid black' }}>
+      <Box sx={{ ...styleFooterBox,  }}>
         <Footer />
       </Box>
     </Box>

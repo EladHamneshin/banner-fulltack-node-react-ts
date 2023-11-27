@@ -1,4 +1,4 @@
-import { CircularProgress, Typography } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import { Box, Stack } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +20,8 @@ const BannerByUserID = () => {
     }, []);
 
     const [message, setMessage] = useState('');
+    console.log(message);
+    
     const [banners, setBanners] = useState<ResponseBanner[] | string>([]);
     const userID = localStorage.getItem('userID');
 

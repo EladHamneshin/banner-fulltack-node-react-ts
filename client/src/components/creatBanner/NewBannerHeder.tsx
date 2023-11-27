@@ -51,7 +51,7 @@ const NewBannerForm = (props: Props) => {
 
        
 
-        setImage(resUrl.toString())
+        setImage(`${API_URI}/images/${cleanFileName}.jpg`)
         console.log(imageUrl);
 
     }

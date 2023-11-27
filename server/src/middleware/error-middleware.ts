@@ -1,10 +1,8 @@
-import STATUS_CODES from "../utils/StatusCodes";
 import { ApiError } from "../types/interfaces/ApiErrorInterface";
 import { Request, Response, NextFunction } from "express";
 
 
 export const errorResponse = (error: ApiError, _req: Request, res: Response, _next: NextFunction) => {
-   console.log(error);
    
    res.status(error.statusCode).json({
       success: false,
@@ -12,4 +10,3 @@ export const errorResponse = (error: ApiError, _req: Request, res: Response, _ne
       message: error.message,
    });
 };
-

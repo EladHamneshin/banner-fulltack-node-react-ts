@@ -9,7 +9,7 @@ const generateToken = (res: Response, userID: string, isadmin: boolean) => {
 
     const token = jwt.sign({ 
         userID: userID,
-        isAdmin: isadmin  
+        isadmin: isadmin  
       }, process.env.JWT_SECRET, {
         expiresIn: '2d'
       })
@@ -20,9 +20,8 @@ const generateToken = (res: Response, userID: string, isadmin: boolean) => {
         sameSite: 'strict', // Prevent CSRF attacks
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
     });
-
-    return token;
-
 };
+
+
 
 export default generateToken;

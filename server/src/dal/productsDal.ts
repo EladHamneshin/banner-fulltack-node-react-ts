@@ -2,49 +2,69 @@ import { ApiError } from "../utils/ApiError";
 import STATUS_CODES from "../utils/StatusCodes";
 
 const fetchAllProducts = async () => {
-    const response = await fetch(`${process.env.ERP_BASE_URL}/api/shopInventory/`);
-    
-    if (!response.ok)
-        throw new ApiError({}, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
+    try {
+        const response = await fetch(`${process.env.ERP_BASE_URL}/api/shopInventory/`);
+        if (!response.ok)
+            throw new ApiError({ response }, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
 
-    const data = await response.json();    
-    return data;
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
+    };
 };
 
 const fetchProductById = async (id: string) => {
-    const response = await fetch(`${process.env.ERP_BASE_URL}/api/shopInventory/${id}`);
-    if (!response.ok)
-        throw new ApiError({}, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
+    try {
+        const response = await fetch(`${process.env.ERP_BASE_URL}/api/shopInventory/${id}`);
+        if (!response.ok)
+            throw new ApiError({ response }, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
 
-    const data = await response.json();
-    return data;
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        throw new ApiError({ err }, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
+    };
 };
 
 const getProductByCategory = async (category: string) => {
-    const response = await fetch(`${process.env.ERP_BASE_URL}/api/shopInventory?category=${category}`);
-    if (!response.ok)
-        throw new ApiError({}, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
+    try {
+        const response = await fetch(`${process.env.ERP_BASE_URL}/api/shopInventory?category=${category}`);
+        if (!response.ok)
+            throw new ApiError({ response }, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
 
-    const data = await response.json();
-    return data;
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
+    }
 };
 
 const getAllCategoryNames = async () => {
-    const response = await fetch(`${process.env.ERP_BASE_URL}/api/shopInventory/categories`);
-    if (!response.ok)
-        throw new ApiError({}, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
+    try {
+        const response = await fetch(`${process.env.ERP_BASE_URL}/api/shopInventory/categories`);
+        if (!response.ok)
+            throw new ApiError({ response }, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
 
-    const data = await response.json();
-    return data;
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        throw new ApiError({ err }, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
+    };
 };
 
 const getProductByProductName = async (product: string) => {
-    const response = await fetch(`${process.env.ERP_BASE_URL}/api/shopInventory?search=${product}`);
-    if (!response.ok)
-        throw new ApiError({}, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
+    try {
+        const response = await fetch(`${process.env.ERP_BASE_URL}/api/shopInventory?search=${product}`);
+        if (!response.ok)
+            throw new ApiError({ response }, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
 
-    const data = await response.json();
-    return data;
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        throw new ApiError({ err }, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
+    };
+
 };
 
 export default {

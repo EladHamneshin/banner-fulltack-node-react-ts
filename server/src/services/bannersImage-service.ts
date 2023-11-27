@@ -62,13 +62,10 @@ export const deleteBannerImage = async (bannerID: string): Promise<BannerInterfa
 
 export const getBannerImagesByQuery = async (queryObject: queryInterface): Promise<BannerInterface[]> => {
   if (!queryObject.limit || queryObject.size === 'homepage') queryObject.limit = '1';
-  queryObject.userID = undefined // בינתיים אין מה לעשות עם זה
-  console.log('Before: ', queryObject);
+  queryObject.userID = undefined; // בינתיים אין מה לעשות עם זה
   
   if (queryObject.size === "homepage") {
-    const bannerArray: BannerInterface[] = [...await dalGetBannerImageByQuery({ ...queryObject, size: "all" }), ...await dalGetBannerImageByQuery({ ...queryObject, size: 'side' }), ...await dalGetBannerImageByQuery({ ...queryObject, size: 'top' })];
-    console.log('After: ', bannerArray);
-    
+    const bannerArray: BannerInterface[] = [...await dalGetBannerImageByQuery({ ...queryObject, size: "all" }), ...await dalGetBannerImageByQuery({ ...queryObject, size: 'side' }), ...await dalGetBannerImageByQuery({ ...queryObject, size: 'top' })];    
     if (bannerArray.length < 3) throw new ApiError({}, STATUS_CODES.NOT_FOUND, "One or more bannerImages not found");
     if (bannerArray.some(item => item instanceof Error)) throw new ApiError({ error: bannerArray.find(item => item instanceof Error) }, STATUS_CODES.BAD_GATEWAY, "One or more bannerImages not found");
     return bannerArray;

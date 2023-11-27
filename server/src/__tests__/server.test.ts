@@ -10,7 +10,7 @@ describe("Server", () => {
 // that test pass
 
   test('use productID to get banners', async () => {
-    const res = await request(app).get('api/bannersImage/product/345'); 
+    const res = await request(app).get('/api/bannersImage/product/345'); 
     expect(res.statusCode).toEqual(200);
   });
   //login users tests - tiota

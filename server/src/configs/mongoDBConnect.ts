@@ -5,7 +5,7 @@ import { MongoMemoryServer } from "mongodb-memory-server";
 const connectToDB = async () => {
     let dbUri = process.env.MONGO_URI!
 
-    if(!process.env.MONGO_URI){
+    if (!process.env.MONGO_URI) {
         console.error('MONGO_URI is not defined');
 
         process.exit(1);
@@ -15,6 +15,8 @@ const connectToDB = async () => {
         let mongoMemoryServer: MongoMemoryServer;
         mongoMemoryServer = await MongoMemoryServer.create();
         dbUri = mongoMemoryServer.getUri();
+        const port = parseInt(dbUri.split(':')[2].split('/')[0]);
+        console.log('MongoDB server running on port:', port);
     }
     try {
         const conn = await mongoose.connect(dbUri);

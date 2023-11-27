@@ -1,10 +1,34 @@
-import { Box } from '@mui/material'
+import { Box, Container, Typography, Link } from '@mui/material';
 
-
-const Futer = () => {
+const Footer = () => {
   return (
-    <Box>Futer</Box>
-  )
-}
+    <Box
+      component="footer"
+      sx={{
+        py: 3,
+        px: 2,
+        mt: 'auto',
+        backgroundColor: (theme) =>
+          theme.palette.mode === 'light'
+            ? theme.palette.grey[200]
+            : theme.palette.grey[800],
+      }}
+    >
+      <Container maxWidth="sm">
+        <Typography variant="body1">
+          Banners Website Footer.
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {'Copyright © '}
+          <Link color="inherit" href="/">
+            Banners Website
+          </Link>{' '}
+          {new Date().getFullYear()}
+          {'.'}
+        </Typography>
+      </Container>
+    </Box>
+  );
+};
 
-export default Futer
+export default Footer;

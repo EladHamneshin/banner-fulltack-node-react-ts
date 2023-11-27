@@ -1,7 +1,6 @@
 import Routs from './routes/Routs'
 function App() {
-
-  return (
+    return (
     <>
       <Routs />
     </>

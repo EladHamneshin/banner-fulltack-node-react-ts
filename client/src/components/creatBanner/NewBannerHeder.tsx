@@ -8,7 +8,7 @@ import { v4 as uuid } from 'uuid'
 
 import { useNavigate } from 'react-router-dom';
 import CardProduct from '../cards/CardProduct';
-import { uploadImageANDcreateBanner } from '../../api/banners/creatNewBanner';
+import { uploadImageANDcreateBanner } from '../../api/banners/createNewBanner';
 
 
 const schema = yup.object({

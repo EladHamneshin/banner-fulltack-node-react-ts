@@ -11,13 +11,13 @@ const uploadRouter = express.Router();
 let imageName = "";
 const storage = multer.diskStorage({
     destination: path.join("public/images"),
-    // filename: function (req, file, cb) {
-    //     // console.log(req.);
-    //     console.log(file);
+    filename: function (req, file, cb) {
+        // console.log(req.);
+        console.log(file);
         
-    //     imageName = "moshe" + path.extname(file.originalname);
-    //     cb(null, file.originalname);
-    // },
+        imageName = path.extname(file.originalname);
+        cb(null, file.originalname);
+    },
 });
 const upload = multer({
     storage: storage,

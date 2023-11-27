@@ -12,7 +12,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handelClickHomePage = () => {
-    navigate(`/`)
+    navigate(localStorage.getItem('token') !== null ? `/` : `/login`)
   }
   const storedUserName = localStorage.getItem('name');
 

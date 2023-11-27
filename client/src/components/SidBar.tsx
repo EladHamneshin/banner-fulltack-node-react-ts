@@ -83,7 +83,7 @@ const SidBar = () => {
             <ListItemButton onClick={toggleDrawer('left', true)}>
                 <MenuOpenOutlinedIcon
                     sx={{
-                        transform: 'rotateY(180deg)',
+                        transform: 'rotateY(180deg)', color: '#fff'
                     }}
                 />
             </ListItemButton>

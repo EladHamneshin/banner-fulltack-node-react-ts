@@ -3,14 +3,15 @@ import { UserInterface as User } from '../types/interfaces/UserInterface';
 import { ApiError } from '../utils/ApiError';
 
 const getUserByEmail = async (email: string) => {
+    let client;
     try {
-        const client = await postgresPool.connect();
+        client = await postgresPool.connect();
         const { rows } = await client.query(`SELECT * FROM users WHERE email = $1`, [email]);
         return rows[0];
     } catch (error) {
         throw new ApiError({ error }, 500, 'Error connecting to database');
     } finally {
-        client.release();
+        client!.release();
     };
 };
 

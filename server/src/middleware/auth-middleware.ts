@@ -22,8 +22,8 @@ const authHandler = asyncHandler(async (req: Request, res: Response, next: NextF
 
     const userID = user.userID;
     const isadmin = user.isadmin;
-    req.userID = userID;
-    req.isadmin = isadmin;
+    req.body.userID = userID;
+    req.body.isadmin = isadmin;
 
     next();
   } catch (error) {

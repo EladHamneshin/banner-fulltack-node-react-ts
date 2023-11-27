@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-ENV VITE_BASE_URL=http://localhost
+ENV VITE_API_URI=http://localhost
 COPY . .
 RUN npm run build
 

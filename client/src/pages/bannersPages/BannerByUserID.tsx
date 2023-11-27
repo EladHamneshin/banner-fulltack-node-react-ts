@@ -41,6 +41,7 @@ const BannerByUserID = () => {
             } catch (error) {
                 console.error('Error fetching banners:', error);
                 setMessage('Error fetching banners');
+                setBanners('')
             } finally {
                 setLoading(false);
             }
@@ -55,17 +56,14 @@ const BannerByUserID = () => {
                 <Stack justifyContent="center" alignItems="center" height="100vh">
                     <CircularProgress />
                 </Stack>
-            ) : message ? (
-                <Stack>
-                    <Typography variant="h3" textAlign="center" color="error">{message}</Typography>
-                </Stack>
             ) : (
                 <Stack spacing={2}>
-                    {typeof banners === 'string' ? (<Box>
-                        {/* <Typography variant="h3" textAlign="center">{banners}</Typography> */}
-                        <BannerNotFind />
+                    {typeof banners === 'string' ? (
+                        <Box>
+                            {/* <Typography variant="h3" textAlign="center">{banners}</Typography> */}
+                            <BannerNotFind />
 
-                    </Box>
+                        </Box>
                     ) : (
                         banners.map((banner, index) => (
                             <CardBanner key={index} banner={banner} />

@@ -44,7 +44,7 @@ const RegisterForm = () => {
       name: name,
       email: email,
       password: password,
-      isAdmin: true
+      isadmin: true
     };
     setLoading(true)
     try {

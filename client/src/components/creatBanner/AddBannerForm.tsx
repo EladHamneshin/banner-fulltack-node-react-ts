@@ -47,21 +47,7 @@ const AddBannerForm = (props: Props) => {
     const onSubmit: SubmitHandler<any> = async (data) => {
         setLoading(true);
         console.log(data);
-        const newBanner = {
-            name: product.name,
-            productID: product.id,
-            catogryID: product.category,
-            click: 0,
-            image: {
-                url: data.image[0],
-                alt: product.name
-            },
-            size: data.size,
-            kind: data.kind,
-            text: data.text,
-            createdAt: Date.now(),
-            author: 'admin',
-        }
+
         const file = new File([data.image[0]], 'example.jpg', { type: 'image/jpeg' });
         await props.uploadImage(file, data.name, data.size)
         // props.setdataForm(newBanner)

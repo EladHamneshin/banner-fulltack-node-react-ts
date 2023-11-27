@@ -5,31 +5,41 @@ import path from 'path'
 
 const uploadRouter = express.Router();
 
-let imageName = "";  
+
+
+
+let imageName = "";
 const storage = multer.diskStorage({
-  destination: path.join("public/images"),
-  filename: function (req, file, cb) {
-    imageName = Date.now() + path.extname(file.originalname);
-    cb(null, imageName);
-  },
+    destination: path.join("public/images"),
+    filename: function (req, file, cb) {
+        // console.log(req.);
+        console.log(file);
+        
+        imageName = path.extname(file.originalname);
+        cb(null, file.originalname);
+    },
 });
 const upload = multer({
-  storage: storage,
-  limits: { fileSize: 3000000 },
+    storage: storage,
+    limits: { fileSize: 3000000 },
 }).single("myImage");
 
-
 uploadRouter.post("/image", (req, res) => {
+    // const { data } = req.body;
+    // console.log(data);
     console.log(req.body);
     
-  upload(req, res, (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      return res.status(201)
-      .json({ url: "http://localhost:5000/images/" + imageName }); 34
-}
-});
+
+
+
+    upload(req, res, (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            return res.status(201)
+                .json({ url: "http://localhost:5000/images/" + imageName }); 34
+        }
+    });
 });
 
 

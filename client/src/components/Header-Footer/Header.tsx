@@ -1,22 +1,18 @@
-import { Box, Button, IconButton, Popover, ThemeProvider, Typography, createTheme } from '@mui/material'
-import React, { useState } from 'react'
-import HomeIcon from '@mui/icons-material/Home'; // Import HomeIcon
+import { Box, IconButton, ThemeProvider, createTheme } from '@mui/material'
+import { useState } from 'react'
+import HomeIcon from '@mui/icons-material/Home';
 import { blue } from '@mui/material/colors';
 import ManageIcon from '../ManageIcon';
 import { useNavigate } from 'react-router-dom';
 import SidBar from '../SidBar';
 
-type Props = {}
 
-const Header = (props: Props) => {
+const Header = () => {
 
   const navigate = useNavigate();
-  const handelClickLogin = () => { navigate(`/login`) }
-  if (localStorage.getItem('token') === null) { handelClickLogin() }
 
   const handelClickHomePage = () => {
-    navigate(`/deshbord `)
-    // window.location.reload();
+    navigate(`/`)
   }
   const storedUserName = localStorage.getItem('name');
 
@@ -26,18 +22,8 @@ const Header = (props: Props) => {
   // Set the initial state based on the stored value or use 'User' as a fallback
   const initialUserName: UserNameType = storedUserName ? storedUserName : 'User';
 
-  const [UserName, setUserName] = useState<UserNameType>(initialUserName);
+  const [UserName] = useState<UserNameType>(initialUserName);
 
-
-
-  // const signOut = () => {
-  //   localStorage.removeItem('token');
-  //   localStorage.removeItem('name');
-  //   setUserName('User')
-  // }
-  // const ifUserIn = () => {
-  //   return localStorage.getItem('token') !== null
-  // }
   const theme = createTheme({
     palette: {
       primary: {
@@ -86,10 +72,6 @@ const containerStyle = {
   background: "#09056A",
 };
 
-const iconButtonStyle = {
-  color: 'white',
-  cursor: 'pointer'
-};
 const textBoxStyle = {
   fontFamily: "Arial, sans-serif",
   fontSize: "16px",

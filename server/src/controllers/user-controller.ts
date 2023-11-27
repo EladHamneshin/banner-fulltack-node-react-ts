@@ -24,7 +24,7 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
 
   const user = await userService.authUser(email, password);
   console.log(user);
-  
+
   generateToken(res, user.id, user.isadmin);
 
   res.status(STATUS_CODES.OK).json(new ApiSuccess({ user }, "Success!"));
@@ -46,8 +46,21 @@ export const registerUser = asyncHandler(async (req: Request, res: Response, nex
 },
 );
 
-export const getAllUsers = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+// @desc    Logout user / clear cookie
+// @route   POST /api/users/auth/logout
+// @access  Public
+const logoutUser = (req: Request, res: Response) => {
+  res.cookie('jwt', '', {
+    httpOnly: true,
+    expires: new Date(0),
+  });
+  res.status(STATUS_CODES.OK).json({ message: 'Logged out successfully' });
+};
 
+// @desc    Get all users
+// @route   GET /api/users/
+// @access  Public
+export const getAllUsers = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   const users = await userService.getAllUsers();
 
   res.status(STATUS_CODES.OK).json(new ApiSuccess<User[]>(users, "Success!"));
@@ -65,8 +78,10 @@ export const deleteUser = asyncHandler(async (req: Request, res: Response, next:
   // const deletedUser = await userService.deleteUser(req.body.userID);
 
   res.status(STATUS_CODES.OK).json(new ApiSuccess('', "Success!"));
-})
-export default { registerUser, loginUser, deleteUser, getAllUsers }
+});
+
+
+export default { registerUser, loginUser, logoutUser, deleteUser, getAllUsers }
 
 
 

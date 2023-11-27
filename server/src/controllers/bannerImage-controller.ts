@@ -113,9 +113,12 @@ export const deleteBannerImage = asyncHandler(
   }
 );
 
-export const getBannerImagesByQuery = async (req: Request, res: Response, next: NextFunction) => {
-  const { size } = req.query;
-  if (!size) throw new ApiError({}, STATUS_CODES.BAD_REQUEST, "Size is required");
-  const response = await serviceGetBannerImageByQuery(req.query);
-  res.status(STATUS_CODES.OK).json({ success: true, data: response, message: "Success!" });
-};
+export const getBannerImagesByQuery = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { size } = req.query;
+    if (!size) throw new ApiError({}, STATUS_CODES.BAD_REQUEST, "Size is required");
+
+    const response = await serviceGetBannerImageByQuery(req.query);
+    
+    res.status(STATUS_CODES.OK).json({ success: true, data: response, message: "Success!" });
+  });

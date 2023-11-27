@@ -2,17 +2,15 @@ import express from "express";
 import userController from "../controllers/user-controller";
 import { authHandler } from "../middleware/auth-middleware";
 
-
 const router = express.Router();
 
-
-// add a token 
 router.get("/", userController.getAllUsers);
-
 
 router.post("/register", userController.registerUser);
 
 router.post("/login", userController.loginUser);
+
+router.post("/logout", authHandler, userController.logoutUser);
 
 router.delete('/', authHandler,userController.deleteUser);
 

@@ -24,8 +24,6 @@ const getProductByProductName = async (product: string) => {
 };
 
 const getTop5Categories = async () => {
-
-
     const categories = await productsDal.getAllCategoryNames();
     if(!categories)
         throw new ApiError({}, STATUS_CODES.INTERNAL_SERVER_ERROR, 'No categories found');
@@ -36,7 +34,6 @@ const getTop5Categories = async () => {
 
 const getTop5Products = async () => {
     const products = await productsDal.fetchAllProducts();
-    
     if (!products)
         throw new ApiError({}, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
 

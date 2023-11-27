@@ -2,9 +2,10 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import { asyncHandler } from "../middleware/async-middleware";
 import STATUS_CODES from '../utils/StatusCodes';
 import { ApiError } from '../utils/ApiError';
+import { NextFunction, Request, Response } from 'express';
 
 
-const authHandler = asyncHandler(async (req, _res, next) => {
+const authHandler = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.jwt;
   if (!token)
     throw new ApiError({}, STATUS_CODES.UNAUTHORIZED, 'No authorized no token provided');
@@ -15,18 +16,14 @@ const authHandler = asyncHandler(async (req, _res, next) => {
   };
 
   try {
-    console.log(token);
-
     const decoded = jwt.verify(token, process.env.JWT_SECRET, { complete: true })
-    console.log(decoded);
 
     const user = decoded.payload as JwtPayload;
 
     const userID = user.userID;
-    const isAdmin = user.isAdmin;
-
-  console.log(userID,isAdmin);
-  
+    const isadmin = user.isadmin;
+    req.userID = userID;
+    req.isadmin = isadmin;
 
     next();
   } catch (error) {

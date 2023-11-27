@@ -4,15 +4,15 @@ import { authHandler } from "../middleware/auth-middleware";
 
 const router = express.Router();
 
-router.get("/", userController.getAllUsers);
+router.get("/", authHandler, userController.getAllUsers);
 
 router.post("/register", userController.registerUser);
 
 router.post("/login", userController.loginUser);
 
-router.post("/logout", authHandler, userController.logoutUser);
+router.post("/logout", userController.logoutUser);
 
-router.delete('/', authHandler,userController.deleteUser);
+router.delete('/', authHandler, userController.deleteUser);
 
 
 export default router;

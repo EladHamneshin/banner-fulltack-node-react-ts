@@ -20,10 +20,10 @@ const authHandler = asyncHandler(async (req: Request, res: Response, next: NextF
 
     const user = decoded.payload as JwtPayload;
 
-    const userID = user.userID;
+    const id = user.id;
     const isadmin = user.isadmin;
-    req.userID = userID;
-    req.isadmin = isadmin;
+    req.body.id = id;
+    req.body.isadmin = isadmin;
 
     next();
   } catch (error) {

@@ -85,7 +85,7 @@ connectToDB().then((res) => {
 
   // insertBanners()
   app.listen(PORT, () => {
-    console.log(`Server is listening on: ${PORT}`);
+    // console.log(`Server is listening on: ${PORT}`);
   });
 }).catch((err) => console.error(err))
 

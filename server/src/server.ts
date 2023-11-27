@@ -16,7 +16,7 @@ dotenv.config();
 // Import routes from the ./routes
 import user from "./routes/user-route";
 
-import  connectToDB  from "./configs/mongoDBConnect";
+import connectToDB from "./configs/mongoDBConnect";
 import productRouter from "./routes/productRoutes";
 
 import { catchErrors, notFound } from "./middleware/errorNOTfound";
@@ -68,7 +68,7 @@ app.use("/api/bannersImage", routerBannersImage);
 app.use("/api/upload", uploadRouter);
 
 
-app.use("/api/ext/bannersProduct",productRouter)
+app.use("/api/ext/bannersProduct", productRouter)
 
 app.use(catchErrors);
 
@@ -79,9 +79,13 @@ app.use(notFound);
 
 // Listen to specified port in .env or default 5000
 connectToDB().then((res) => {
+
+  console.log('Connecting to mongodb');
+  // איתוחל דאטה ראשוני
+
   // insertBanners()
   app.listen(PORT, () => {
-    console.log(`Server is listening on: ${PORT}`);
+    // console.log(`Server is listening on: ${PORT}`);
   });
 }).catch((err) => console.error(err))
 

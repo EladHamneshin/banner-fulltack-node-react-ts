@@ -1,11 +1,10 @@
-import { Avatar, Box, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, Grid, IconButton, IconButtonProps, Typography, styled } from '@mui/material';
-import { blue } from '@mui/material/colors';
+import { Box, Card, CardActions, CardContent, CardMedia, Collapse, Grid, IconButton, IconButtonProps, Typography, styled } from '@mui/material';
 import { useState } from 'react'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { ResponseBanner } from '../types/BannerInterface';
-import { deleteByBannerID } from '../api/banners/deleteByBannerID';
+import { ResponseBanner } from '../../types/BannerInterface';
+import { deleteByBannerID } from '../../api/banners/deleteByBannerID';
 
 import { useNavigate } from 'react-router-dom';
 

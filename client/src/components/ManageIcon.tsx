@@ -1,5 +1,5 @@
-import { Box, Typography, Popover } from '@mui/material';
-import React, { useState } from 'react'
+import { Box } from '@mui/material';
+import React from 'react'
 import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -13,23 +13,20 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 
-type Props = {}
-
-const ManageIcon = (props: Props) => {
+const ManageIcon = () => {
     const navigate = useNavigate();
     const handelClickLogin = () => {
         navigate(`/login`)
     }
     // const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
-    const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
+    // const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
+    //     setAnchorEl(event.currentTarget);
+    // };
 
-    const handlePopoverClose = () => {
-        setAnchorEl(null);
-    };
-    // const open = Boolean(anchorEl);
+    // const handlePopoverClose = () => {
+    //     setAnchorEl(null);
+    // };
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -45,41 +42,9 @@ const ManageIcon = (props: Props) => {
         localStorage.removeItem('token')
         localStorage.removeItem('userID')
         handelClickLogin()
-        // window.location.reload();
-
     }
     return (
         <Box>
-            {/* <Typography
-                aria-owns={open ? 'mouse-over-popover' : undefined}
-                aria-haspopup="true"
-                onMouseEnter={handlePopoverOpen}
-                onMouseLeave={handlePopoverClose}
-            >
-            </Typography>
-            <Popover
-                id="mouse-over-popover"
-                sx={{
-                    pointerEvents: 'none',
-                }}
-                open={open}
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                onClose={handlePopoverClose}
-                disableRestoreFocus
-            >
-                <Typography sx={{ p: 10 }}>I use Popover.</Typography>
-            </Popover> */}
-
-
-
             <React.Fragment>
                 <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                     {/* <Typography sx={{ minWidth: 100 }}>Contact</Typography> */}

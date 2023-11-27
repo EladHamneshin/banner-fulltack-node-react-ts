@@ -1,4 +1,5 @@
 import axios from 'axios';
+const API_URL = import.meta.env.VITE_API_URI
 
 
 export const getAllUsers = async () => {
@@ -8,7 +9,7 @@ export const getAllUsers = async () => {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: "http://localhost:5000/users/",
+        url: `${API_URL}/users/`,
         headers: {},
         data: data
     };

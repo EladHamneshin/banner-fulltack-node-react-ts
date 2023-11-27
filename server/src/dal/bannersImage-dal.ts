@@ -10,20 +10,18 @@ export const getBannersImage = async (): Promise<BannerInterface[]> => {
     const data: BannerInterface[] = await bannerModel.find({});
     return data;
   } catch (error) {
-
     throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, "Banners not found faild in .dal");
-
   }
 };
 
 // Function to get bannersImage by productID
 export const getBannersImageByProductID = async (productID: string) => {
-
-  const data: BannerInterface[] | null = await bannerModel.find({ productID });
-
-  if (!data) { throw new ApiError({}, STATUS_CODES.NO_CONTENT, "Banner by ID not found faild in .dal"); }
-  return data;
-
+  try {
+    const data: BannerInterface[] = await bannerModel.find({ productID });
+    return data;
+  } catch (error) {
+    throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to get bannersImage by productID, stack:1");
+  }
 };
 
 // Function to get bannersImage by category
@@ -32,7 +30,7 @@ export const getBannersImageByCategory = async (categoryName: string): Promise<B
     const data: BannerInterface[] = await bannerModel.find({ categoryName });
     return data;
   } catch (error) {
-    throw new ApiError({ error }, STATUS_CODES.NOT_FOUND, "Banners by category not found faild in .dal");
+    throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to get bannerImages by category, stack:1");
   }
 };
 
@@ -42,7 +40,7 @@ export const getBannersImageByUser = async (userID: string): Promise<BannerInter
     const data: BannerInterface[] = await bannerModel.find({ userID });
     return data;
   } catch (error) {
-    throw new ApiError({ error }, STATUS_CODES.NOT_FOUND, "Banners by user not found faild in .dal");
+    throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to get bannersImages by user, stack:1");
   }
 };
 
@@ -52,18 +50,18 @@ export const updateBannerImage = async (bannerID: string, data: Partial<BannerIn
     const updatedBanner: BannerInterface | null = await bannerModel.findByIdAndUpdate(bannerID, data, { new: true });
     return updatedBanner;
   } catch (error) {
-    throw new ApiError({ error }, STATUS_CODES.NOT_FOUND, "Banners not found faild in .dal");
+    throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, "Error while updating bannerImage, stack:1");
   }
 };
 
 // Function to create bannerImage by productID
 export const createBannerImage = async (productID: string, data: Partial<BannerInterface>): Promise<BannerInterface> => {
   try {
-    const newBanner: BannerInterface = await bannerModel.create({ productID, ...data });
-    return newBanner;
+    const createdBanner: BannerInterface = await bannerModel.create({ ...data, productID: productID });
+    return createdBanner;
   } catch (error) {
-    throw new ApiError({ error }, STATUS_CODES.NOT_FOUND, "Banners not found faild in .dal");
-  }
+    throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, "Error while creating new bannerImage, stack:1");
+  };
 };
 
 // Function to delete bannerImage by bannerID
@@ -72,21 +70,25 @@ export const deleteBannerImage = async (bannerID: string): Promise<BannerInterfa
     const deletedBanner: BannerInterface | null = await bannerModel.findByIdAndDelete(bannerID);
     return deletedBanner;
   } catch (error) {
-    throw new ApiError({ error }, STATUS_CODES.NOT_FOUND, "Banners not found faild in .dal");
+    throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to delete bannerImage, stack:1");
   }
 };
 
 
 export const getBannerImageByQuery = async (queryObject: queryInterface): Promise<BannerInterface[]> => {
-  const query: any = {}
-  if (queryObject.category) {
-    query.categoryName = queryObject.category
+  try {
+    const query: any = {}
+    if (queryObject.category) {
+      query.categoryName = queryObject.category
+    }
+    if (queryObject.size) {
+      query.size = queryObject.size
+    }
+    const data = await bannerModel.find(query).limit(Number(queryObject.limit))
+    return data;
+  } catch (error) {
+    throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to get bannersImages by query, stack:1");
   }
-  if (queryObject.size) {
-    query.size = queryObject.size
-  }
-  const data = await bannerModel.find(query).limit(Number(queryObject.limit))
-  return data;
 };
 
 

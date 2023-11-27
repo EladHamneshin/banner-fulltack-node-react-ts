@@ -1,14 +1,11 @@
 import mongoose from "mongoose";
-
 import { BannerInterface } from "../types/interfaces/bannerInterface";
 
 
-
 const bannerSchema = new mongoose.Schema<BannerInterface>({
-  _id: { type: String, required: true },
   name: { type: String, required: true },
   productID: { type: String, required: true },
-  catogryID: { type: String, required: true },
+  catogryName: { type: String, required: true },
   clickCount: { type: Number, default: 0 },
   image: {
     url: { type: String, required: true },
@@ -19,13 +16,13 @@ const bannerSchema = new mongoose.Schema<BannerInterface>({
   text: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
   author: { type: String, required: true }
+}, {
+  timestamps: true,
 });
 
 const bannerModel = mongoose.model('Banner', bannerSchema);
 
-export {
-  bannerModel,
-}
+export { bannerModel }
 
 
 
@@ -38,7 +35,7 @@ export async function insertBanners() {
     {
       _id: "1",
       productID: "123",
-      catogryID: "456",
+      catogryName: "456",
       clickCount: 0,
       name: "Banner 1",
       image: {
@@ -54,7 +51,7 @@ export async function insertBanners() {
     {
       _id: "2",
       productID: "456",
-      catogryID: "789",
+      catogryName: "789",
       clickCount: 0,
       name: "Banner 2",
       image: {
@@ -70,7 +67,7 @@ export async function insertBanners() {
     {
       _id: "3",
       productID: "789",
-      catogryID: "012",
+      catogryName: "012",
       clickCount: 0,
       name: "Banner 3",
       image: {
@@ -86,7 +83,7 @@ export async function insertBanners() {
     {
       _id: "4",
       productID: "012",
-      catogryID: "345",
+      catogryName: "345",
       clickCount: 0,
       name: "Banner 4", // שם המוצר כאן
       image: {
@@ -102,7 +99,7 @@ export async function insertBanners() {
     {
       _id: "5",
       productID: "345",
-      catogryID: "678",
+      catogryName: "678",
       clickCount: 0,
       name: "Banner 5", // שם המוצר כאן
       image: {

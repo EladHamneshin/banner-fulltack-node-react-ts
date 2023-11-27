@@ -1,6 +1,4 @@
 import express from "express";
-
-// Import controllers from
 import {
     getBannersImage,
     getBannersImageByProductID,
@@ -9,6 +7,7 @@ import {
     updateBannerImage,
     createBannerImage,
     deleteBannerImage,
+    getBannerImagesByQuery,
 } from "../controllers/bannerImage-controller";
 
 
@@ -21,7 +20,7 @@ const routerBannersImage = express.Router();
 routerBannersImage.get("/", getBannersImage);
 
 // @desc   Get bannersImage by productID
-// @route  GET /bannersImage/prudact/:productID
+// @route  GET /bannersImage/product/:productID
 // @access Public
 routerBannersImage.get("/procuct/:productID", getBannersImageByProductID);
 
@@ -49,6 +48,9 @@ routerBannersImage.post("/:productID", createBannerImage);
 // @route  DELETE /bannersImage/:bannerID
 // @access Internal
 routerBannersImage.delete("/:bannerID", deleteBannerImage);
+
+
+routerBannersImage.get("/ext/", getBannerImagesByQuery);
 
 // Export router; should always export as default
 export default routerBannersImage;

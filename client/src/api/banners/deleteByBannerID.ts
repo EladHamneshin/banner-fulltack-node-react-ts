@@ -1,4 +1,6 @@
 import axios from 'axios';
+const API_URL = import.meta.env.VITE_API_URI
+
 
 export const deleteByBannerID = async (bannerID: string) => {
 
@@ -7,7 +9,7 @@ export const deleteByBannerID = async (bannerID: string) => {
     let config = {
         method: 'delete',
         maxBodyLength: Infinity,
-        url: `http://localhost:5000/api/bannersImage/${bannerID}`,
+        url: `${API_URL}/api/bannersImage/${bannerID}`,
         headers: {},
         data: data
     };

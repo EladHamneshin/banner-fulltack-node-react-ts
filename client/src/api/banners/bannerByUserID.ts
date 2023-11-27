@@ -1,4 +1,6 @@
 import axios from 'axios';
+const API_URL = import.meta.env.VITE_API_URI
+
 
 export const bannerByUserID = async (userID: string) => {
 
@@ -7,7 +9,7 @@ export const bannerByUserID = async (userID: string) => {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: ` http://localhost:5000/api/bannersImage/user/${userID}`,
+        url: `${API_URL}/api/bannersImage/user/${userID}`,
         headers: {},
         data: data
     };

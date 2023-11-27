@@ -39,7 +39,7 @@ export async function insertBanners() {
       clickCount: 0,
       name: "Banner 1",
       image: {
-        url: "https://example.com/image1.jpg",
+        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7rBbw6FThUHGkWfi5_JGe0NpqN3p2XS2Rhw&usqp=CAU",
         alt: "Banner 1"
       },
       size: "side",
@@ -55,7 +55,7 @@ export async function insertBanners() {
       clickCount: 0,
       name: "Banner 2",
       image: {
-        url: "https://example.com/image2.jpg",
+        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4r5PwaOdp97FiCsbmhHThLusqv_vd9kWwRg&usqp=CAU",
         alt: "Banner 2"
       },
       size: "top",
@@ -71,7 +71,7 @@ export async function insertBanners() {
       clickCount: 0,
       name: "Banner 3",
       image: {
-        url: "https://example.com/image3.jpg",
+        url: "https://www.tapet3d.co.il/files/products/product23_image1_2021-03-29_11-25-56.jpg",
         alt: "Banner 3"
       },
       size: "all",
@@ -87,7 +87,7 @@ export async function insertBanners() {
       clickCount: 0,
       name: "Banner 4", // שם המוצר כאן
       image: {
-        url: "https://example.com/image4.jpg",
+        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf5x5SoebRbIFuWZbuivoTVfAign9O9Iee0Q&usqp=CAU",
         alt: "Banner 4"
       },
       size: "side",
@@ -103,7 +103,7 @@ export async function insertBanners() {
       clickCount: 0,
       name: "Banner 5", // שם המוצר כאן
       image: {
-        url: "https://example.com/image5.jpg",
+        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZZKsULxS0Tdi9pG2_0--uQ-c46OnV8xaFxw&usqp=CAU",
         alt: "Banner 5"
       },
       size: "top",

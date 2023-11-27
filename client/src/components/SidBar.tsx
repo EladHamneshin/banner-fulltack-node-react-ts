@@ -1,4 +1,4 @@
-import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, Button, Drawer } from '@mui/material';
+import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, Drawer } from '@mui/material';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import React, { useState } from 'react';
@@ -7,36 +7,32 @@ import CardTravelIcon from '@mui/icons-material/CardTravel';
 import { useNavigate } from 'react-router-dom';
 import ViewDaySharpIcon from '@mui/icons-material/ViewDaySharp';
 
-
-type Props = {};
-
-const SidBar = (props: Props) => {
+const SidBar = () => {
     const navigate = useNavigate();
 
     const [state, setState] = useState({ left: false });
 
     const handelClickAllBanners = () => {
-        navigate(`/deshbord/banners`)
-        // window.location.reload();
-    }
+        navigate(`/banners`);
+    };
+
     const handelClickMyBanners = () => {
-        navigate(`banners/user/${localStorage.getItem('name')}`)
-        // window.location.reload();
-    }
+        navigate(`banners/user/${localStorage.getItem('name')}`);
+    };
 
-    const toggleDrawer =
-        (anchor: 'left', open: boolean) =>
-            (event: React.KeyboardEvent | React.MouseEvent) => {
-                if (
-                    event.type === 'keydown' &&
-                    ((event as React.KeyboardEvent).key === 'Tab' ||
-                        (event as React.KeyboardEvent).key === 'Shift')
-                ) {
-                    return;
-                }
+    const toggleDrawer = (_anchor: 'left', open: boolean) => (
+        event: React.KeyboardEvent | React.MouseEvent
+    ) => {
+        if (
+            event.type === 'keydown' &&
+            ((event as React.KeyboardEvent).key === 'Tab' ||
+                (event as React.KeyboardEvent).key === 'Shift')
+        ) {
+            return;
+        }
 
-                setState({ ...state, left: open });
-            };
+        setState({ ...state, left: open });
+    };
 
     const list = (anchor: 'left') => (
         <Box
@@ -46,7 +42,7 @@ const SidBar = (props: Props) => {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['All banners', 'My bannars', 'Send email', 'Drafts'].map((text, index) => (
+                {['All banners', 'My bannars', 'Send email', 'Drafts'].map((text) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton
                             onClick={() => {
@@ -63,7 +59,6 @@ const SidBar = (props: Props) => {
                             </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>
-
                     </ListItem>
                 ))}
             </List>
@@ -80,22 +75,19 @@ const SidBar = (props: Props) => {
                     </ListItem>
                 ))}
             </List>
-        </Box >
+        </Box>
     );
 
     return (
         <div>
-            <Button onClick={toggleDrawer('left', true)}>
+            <ListItemButton onClick={toggleDrawer('left', true)}>
                 <MenuOpenOutlinedIcon
                     sx={{
-                        transform: 'rotateY(180deg)'
-                    }} />
-            </Button>
-            <Drawer
-                anchor="left"
-                open={state.left}
-                onClose={toggleDrawer('left', false)}
-            >
+                        transform: 'rotateY(180deg)', color: '#fff'
+                    }}
+                />
+            </ListItemButton>
+            <Drawer anchor="left" open={state.left} onClose={toggleDrawer('left', false)}>
                 {list('left')}
             </Drawer>
         </div>

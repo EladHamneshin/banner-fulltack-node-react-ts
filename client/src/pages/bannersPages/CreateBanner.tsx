@@ -1,13 +1,10 @@
-import React from 'react';
-import NewBannerForm from '../components/creatBanner/NewBannerHeder';
-import { Grid, Paper, Avatar, Typography } from '@mui/material';
+import { useEffect } from 'react';
+import NewBannerForm from '../../components/creatBanner/NewBannerHeder';
+import { Grid, Avatar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
 
 import { useNavigate } from 'react-router-dom';
-
-
-type Props = {};
 
 const product = {
     id: "1",
@@ -33,12 +30,12 @@ const product = {
     }
 }
 
-const CreateBanner = (props: Props) => {
-
+const CreateBanner = () => {
     const navigate = useNavigate();
-    const handelClickLogin = () => { navigate(`/login`) }
-    if (localStorage.getItem('token') === null) { handelClickLogin() }
-
+    const handelClickLogin = () => { navigate(`login`) }
+    useEffect(() => {
+        if (localStorage.getItem('token') === null) { handelClickLogin() }
+    }, [])
     const paperStyle = {
         margin: '0 auto',
         boxShadow: '0',
@@ -55,7 +52,7 @@ const CreateBanner = (props: Props) => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-        flexDirection: 'column', // Adjusted to column direction
+                flexDirection: 'column', // Adjusted to column direction
 
                 '& .MuiPaper-root': {
                     // Adjust styles for the Paper component
@@ -63,7 +60,6 @@ const CreateBanner = (props: Props) => {
                 },
             }}
         >
-
             {/* <Paper elevation={10}> */}
             <Grid
                 container
@@ -82,12 +78,10 @@ const CreateBanner = (props: Props) => {
                     </Typography>
                 </Grid>
             </Grid>
-            <Box sx={{display:'flex',padding:'33px', alignSelf:'end'}}>
+            <Box sx={{ display: 'flex', padding: '33px', alignSelf: 'end' }}>
                 <NewBannerForm product={product} />
             </Box>
-            
             {/* </Paper> */}
-
         </Grid>
     );
 };

@@ -8,7 +8,7 @@ const generateToken = (res: Response, userID: string, isadmin: boolean) => {
     };
 
     const token = jwt.sign({ 
-        userID: userID,
+        id: userID,
         isadmin: isadmin  
       }, process.env.JWT_SECRET, {
         expiresIn: '2d'

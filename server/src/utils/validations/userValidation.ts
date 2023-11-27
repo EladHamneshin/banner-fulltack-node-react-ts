@@ -22,7 +22,7 @@ const registerUserValidation = (user: UserInterface) => {
             }),
         name: Joi.string()
             .required(),
-        isAdmin: Joi.boolean()
+        isadmin: Joi.boolean()
             .required()
     });
     return schema.validate(user)

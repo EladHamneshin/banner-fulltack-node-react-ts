@@ -33,7 +33,6 @@ export async function insertBanners() {
   const banners: BannerInterface[] = [
 
     {
-      _id: "1",
       productID: "123",
       catogryName: "456",
       clickCount: 0,
@@ -49,7 +48,7 @@ export async function insertBanners() {
       author: "Admin"
     },
     {
-      _id: "2",
+
       productID: "456",
       catogryName: "789",
       clickCount: 0,
@@ -65,7 +64,7 @@ export async function insertBanners() {
       author: "Admin"
     },
     {
-      _id: "3",
+
       productID: "789",
       catogryName: "012",
       clickCount: 0,
@@ -81,7 +80,7 @@ export async function insertBanners() {
       author: "Admin"
     },
     {
-      _id: "4",
+
       productID: "012",
       catogryName: "345",
       clickCount: 0,
@@ -97,7 +96,6 @@ export async function insertBanners() {
       author: "Admin"
     },
     {
-      _id: "5",
       productID: "345",
       catogryName: "678",
       clickCount: 0,

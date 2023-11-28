@@ -8,6 +8,7 @@ import { createBanner } from '../../api/banners/createNewBanner';
 import AddBannerForm from './AddBannerForm';
 import resizeImage from '../../utils/resizeImage';
 import { uploadImageToServer } from '../../api/banners/uploadImage';
+import AppKaka from '../../kaka/CropKaka/AppKaka';
 
 const API_URI = import.meta.env.VITE_API_URI
 
@@ -94,7 +95,7 @@ const NewBannerForm = (props: Props) => {
             <Box>
                 {imageUrl ? <img src={imageUrl} width="100%" alt='fff'></img>
                     :
-                    <p>image not selected</p>}
+                <AppKaka />}
             </Box>
             <Box>
                 <CardProduct product={product} />

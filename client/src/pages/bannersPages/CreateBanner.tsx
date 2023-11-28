@@ -5,6 +5,7 @@ import { Box } from '@mui/system';
 import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
 
 import { useNavigate } from 'react-router-dom';
+// import ImageUploadPreview from '../../kaka/kak3';
 
 const product = {
     id: "1",
@@ -60,6 +61,7 @@ const CreateBanner = () => {
                 },
             }}
         >
+               {/* <ImageUploadPreview /> */}
             {/* <Paper elevation={10}> */}
             <Grid
                 container
@@ -82,6 +84,7 @@ const CreateBanner = () => {
                 <NewBannerForm product={product} />
             </Box>
             {/* </Paper> */}
+         
         </Grid>
     );
 };

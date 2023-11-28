@@ -8,7 +8,7 @@ import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 
 
-import { unless } from "./middleware/unless";
+// import { unless } from "./middleware/unless";
 
 // Setup .env variables for app usage
 dotenv.config();
@@ -22,6 +22,7 @@ import productRouter from "./routes/productRoutes";
 import { catchErrors, notFound } from "./middleware/errorNOTfound";
 import routerBannersImage from "./routes/bannersImage-route";
 import uploadRouter from "./routes/upLoad";
+import { insertBanners } from './models/bannersModel';
 
 // Setup constant variables
 const PORT = process.env.PORT || 5000;
@@ -85,7 +86,7 @@ connectToDB().then((res) => {
 
   // insertBanners()
   app.listen(PORT, () => {
-    // console.log(`Server is listening on: ${PORT}`);
+    console.log(`Server is listening on: ${PORT}`);
   });
 }).catch((err) => console.error(err))
 

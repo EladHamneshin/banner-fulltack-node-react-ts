@@ -96,7 +96,7 @@ const AddBannerForm = (props: Props) => {
                 <Grid key={uuid()} sx={{ display: 'flex', flexDirection: 'column', }}>
 
 
-                    <TextField style={textFieldStyle} label="Name" value={product.name}
+                    <TextField style={textFieldStyle} label="Name" value={`${product.name} ${product.category}`}
                         {...register("name", { required: true, maxLength: 20 })} />
                     <Typography color='red' variant='caption'> {errors.name?.message} </Typography>
 

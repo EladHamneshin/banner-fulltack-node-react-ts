@@ -9,7 +9,7 @@ import AddBannerForm from './AddBannerForm';
 import resizeImage from '../../utils/resizeImage';
 import { uploadImageToServer } from '../../api/banners/uploadImage';
 
-
+const API_URI = import.meta.env.VITE_API_URI
 
 type Props = {
     product: Product
@@ -30,7 +30,16 @@ const NewBannerForm = (props: Props) => {
 
 
     const uploadImage = async (image: File, name : string , size : string) => {
-        const getresizeImage = await resizeImage(image, 340, 300);
+        let width = 750
+        let height = 550
+        if (size === 'side'){
+            width = 120
+            height = 650
+        } else if (size === 'top'){
+            width = 770
+            height = 150
+        }   
+        const getresizeImage = await resizeImage(image, width, height);
 
         const FileName = name + size
         const cleanFileName = FileName.replace(/[^a-zA-Z0-9]/g, '')
@@ -42,7 +51,7 @@ const NewBannerForm = (props: Props) => {
 
        
 
-        setImage(resUrl.toString())
+        setImage(`${API_URI}/images/${cleanFileName}.jpg`)
         console.log(imageUrl);
 
     }
@@ -50,24 +59,28 @@ const NewBannerForm = (props: Props) => {
 
     const onSubmitForm = async (data : any) => {
 
+        const FileName = product.name + product.category + data.size
+        const cleanFileName = FileName.replace(/[^a-zA-Z0-9]/g, '')
         const newBanner = {
             name: product.name + product.category,
-            productID: product.id,
             catogryName: product.category,
-            click: 0,
+            clickCount: 0,
             image: {
-                url: imageUrl,
+                url: `${API_URI}/images/${cleanFileName}.jpg`,
                 alt: product.name
             },
             size: data.size,
-            kind: data.kind,
+            kind: [data.kind],
             text: data.text,
-            createdAt: Date.now(),
+            // createdAt: Date.now(),
             author: 'admin',
         }
-        await createBanner(newBanner);
+        await createBanner(newBanner, product.id);
 
     };
+    
+
+
 
 
 

@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     dir('client') {
-                        sh 'docker run --rm -v $(pwd):/app -w /app node:10.15.3-alpine3.9 npm install'
+                        sh 'docker run --rm -v $(pwd):/app -w /app node:alpine npm install'
                         sh 'npm install'
                         sh 'npm run build'
                     }

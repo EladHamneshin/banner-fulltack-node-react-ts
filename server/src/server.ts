@@ -23,6 +23,7 @@ import { catchErrors, notFound } from "./middleware/errorNOTfound";
 import routerBannersImage from "./routes/bannersImage-route";
 import uploadRouter from "./routes/upLoad";
 import { insertBanners } from './models/bannersModel';
+import { connectToPostgres } from './configs/pgConnect';
 
 // Setup constant variables
 const PORT = process.env.PORT || 5000;
@@ -79,7 +80,8 @@ app.use(notFound);
 
 
 // Listen to specified port in .env or default 5000
-connectToDB().then((res) => {
+connectToPostgres().then(() => {
+connectToDB()}).then((res) => {
 
   console.log('Connecting to mongodb');
   // איתוחל דאטה ראשוני

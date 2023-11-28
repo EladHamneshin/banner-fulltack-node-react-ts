@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Stack, Typography, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { ResponseBanner } from '../../types/BannerInterface';

@@ -2,12 +2,11 @@ import { LocationOn, Edit } from '@mui/icons-material';
 import { Card, Avatar, Typography, IconButton, Divider, Chip, Switch } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { Box, Stack } from '@mui/system';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-type Props = {};
 
-const ProfileUser = (props: Props) => {
+const ProfileUser = () => {
     const [active, setActive] = useState<boolean>(true);
     const navigate = useNavigate();
 

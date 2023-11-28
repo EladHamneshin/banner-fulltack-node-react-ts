@@ -10,6 +10,7 @@ import Register from "../pages/loginANDregister/Register";
 import Login from "../pages/loginANDregister/Login";
 import CreateBanner from "../pages/bannersPages/CreateBanner";
 import BannerByUserID from "../pages/bannersPages/BannerByUserID";
+import HomePage from "../pages/HomePage";
 
 export default function Routs() {
     const router = createBrowserRouter([
@@ -18,11 +19,11 @@ export default function Routs() {
             element: <Deshbord />,
             errorElement: <ErrorPage />,
             children: [
-                // {
-                //     path: "",
-                //     element: <HomePage />,
-                //     errorElement: <ErrorPage />,
-                // },
+                {
+                    path: "",
+                    element: <HomePage />,
+                    errorElement: <ErrorPage />,
+                },
                 {
                     path: "login",
                     element: <Login />,

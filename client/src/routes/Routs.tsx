@@ -11,6 +11,7 @@ import Login from "../pages/loginANDregister/Login";
 import CreateBanner from "../pages/bannersPages/CreateBanner";
 import BannerByUserID from "../pages/bannersPages/BannerByUserID";
 import HomePage from "../pages/HomePage";
+import ProfileUser from "../pages/ProfileUser";
 
 export default function Routs() {
     const router = createBrowserRouter([
@@ -64,9 +65,14 @@ export default function Routs() {
                     element: <BannerByUserID />,
                     errorElement: <ErrorPage />,
                 },
+                {
+                    path: `banners/user/profil`,
+                    element: <ProfileUser />,
+                    errorElement: <ErrorPage />,
+                },
                 // {
-                //     path: "banners/edit/:bannerID",
-                //     element: <BannerCreateOrEdit />,
+                //     path: "banners/products",
+                //     element: <AllProducts />,
                 //     errorElement: <ErrorPage />,
                 // },
                 // {

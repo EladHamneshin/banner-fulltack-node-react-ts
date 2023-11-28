@@ -6,6 +6,7 @@ import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
 import CardTravelIcon from '@mui/icons-material/CardTravel';
 import { useNavigate } from 'react-router-dom';
 import ViewDaySharpIcon from '@mui/icons-material/ViewDaySharp';
+import AddCardIcon from '@mui/icons-material/AddCard';
 
 const SidBar = () => {
     const navigate = useNavigate();
@@ -14,6 +15,9 @@ const SidBar = () => {
 
     const handelClickAllBanners = () => {
         navigate(`/banners`);
+    };
+    const handelClickCreateBanners = () => {
+        navigate(`/createBanner`);
     };
 
     const handelClickMyBanners = () => {
@@ -42,7 +46,7 @@ const SidBar = () => {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['All banners', 'My bannars', 'Send email', 'Drafts'].map((text) => (
+                {['All banners', 'My bannars', 'Add banner', 'Drafts'].map((text) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton
                             onClick={() => {
@@ -50,12 +54,15 @@ const SidBar = () => {
                                     handelClickAllBanners();
                                 } else if (text === 'My bannars') {
                                     handelClickMyBanners();
+                                } else if (text === 'Add banner') {
+                                    handelClickCreateBanners();
                                 }
                             }}
                         >
                             <ListItemIcon>
                                 {text === 'All banners' && <CardTravelIcon />}
                                 {text === 'My bannars' && <ViewDaySharpIcon />}
+                                {text === 'Add banner' && <AddCardIcon />}
                             </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>

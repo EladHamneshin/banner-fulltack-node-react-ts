@@ -12,20 +12,20 @@ export type BannerInterface = {
     author: string;
 }
 const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 70, type: "string" },
-    { field: 'Name', headerName: 'Name', width: 130, type: 'string' },
-    { field: 'productID', headerName: 'Product', type: 'string', width: 70 },
-    { field: 'categoryID', headerName: 'Category', type: 'string', width: 80 },
-    { field: 'author', headerName: 'Author', type: 'string', width: 120 },
+    { field: 'id', headerName: 'ID', width: 40, type: "string" },
+    { field: 'Name', headerName: 'Name', width: 60, type: 'string' },
+    { field: 'productID', headerName: 'Product', type: 'string', width: 40 },
+    { field: 'categoryID', headerName: 'Category', type: 'string', width: 40 },
+    { field: 'author', headerName: 'Author', type: 'string', width: 60 },
     { field: 'creationDate', headerName: 'Creation Date', type: 'dateTime', width: 90 },
-    { field: 'click', headerName: 'Clicks', type: 'number', width: 100 },
-    { field: 'kind', headerName: 'Kind', width: 100 },
-    { field: 'size', headerName: 'Size', width: 90 },
-    { field: 'text', headerName: 'Description', width: 350 }
+    { field: 'click', headerName: 'Clicks', type: 'number', width: 40 },
+    { field: 'kind', headerName: 'Kind', width: 40 },
+    { field: 'size', headerName: 'Size', width: 40 },
+    { field: 'text', headerName: 'Description', width: 110 }
 ];
 
 export default function BannersTable(props: { pro: BannerInterface[] }) {
-    const rows:any = [];
+    const rows: any = [];
     props.pro.forEach((element) => {
         rows.push(
             {
@@ -43,7 +43,7 @@ export default function BannersTable(props: { pro: BannerInterface[] }) {
         );
     })
     return (
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{ height: 400 }}>
             <DataGrid
                 rows={rows}
                 columns={columns}

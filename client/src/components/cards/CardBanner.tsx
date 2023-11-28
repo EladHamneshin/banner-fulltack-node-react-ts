@@ -63,7 +63,7 @@ const CardBanner = (props: Props) => {
   };
 
   return (
-    <>
+    <Box>
       {loading ? (
         <Box
           sx={{
@@ -80,6 +80,7 @@ const CardBanner = (props: Props) => {
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
+              width: '420px'
             }}
           >
             <Typography>Loading.....</Typography>
@@ -91,6 +92,7 @@ const CardBanner = (props: Props) => {
           sx={{
             maxWidth: 250,
             maxHeight: 500,
+            height: 350,
             margin: '5px',
             boxSizing: 'border-box',
             boxShadow: '0 4px 8px rgba(0, 0, 0.9, 0.8)',
@@ -149,7 +151,7 @@ const CardBanner = (props: Props) => {
           </CardActions>
         </Card>
       )}
-    </>
+    </Box>
   );
 };
 

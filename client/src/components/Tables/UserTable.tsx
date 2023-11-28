@@ -1,19 +1,19 @@
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-
-type User = {
-  _id?: string;
-  name: string;
-  email: string;
-  isAdmin: boolean;
-}
+import { UserInterface } from '../../types/UserInterface';
+// type User = {
+//   _id?: string;
+//   name: string;
+//   email: string;
+//   isadmin: boolean;
+// }
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 70 },
   { field: 'name', headerName: 'Name', width: 130 },
   { field: 'email', headerName: 'E-Mail', width: 200 },
-  { field: 'isAdmin', headerName: 'Admin Permission?', width: 120 }
+  { field: 'isadmin', headerName: 'Admin Permission?', width: 120 }
 ];
-export default function UserTable({ user }: { user: User[] }) {
+export default function UserTable({ user }: { user: UserInterface[] }) {
   const rows: any = []
   user.forEach(element => {
     rows.push(
@@ -21,7 +21,7 @@ export default function UserTable({ user }: { user: User[] }) {
         id: element._id,
         name: element.name,
         email: element.email,
-        isAdmin: element.isAdmin
+        isadmin: element.isadmin
 
       })
   })

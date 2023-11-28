@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import ProductTable from '../components/Tables/ProductTable';
-import UserTable from '../components/Tables/UserTable';
 import { Box } from '@mui/system';
 import { getAllUsers } from '../api/users/getUsersFetch';
 import { useNavigate } from 'react-router-dom';
 import { UserInterface } from '../types/UserInterface';
+import BannersTable from '../components/Tables/BannersTable';
+import AllbannersHomePage from './bannersPages/AllbannersHomePage';
 
 const HomePage = () => {
     const [, setMessage] = useState('');
     const [, setUser] = useState<UserInterface[] | null>(null);
-    const [noUserMessage, setNoUserMessage] = useState('');
+    const [, setNoUserMessage] = useState('');
     const [, setLoading] = useState(true);
     const navigate = useNavigate();
 
@@ -42,26 +43,33 @@ const HomePage = () => {
             }
         };
 
-        fetchData();
+        fetchData(); // Uncomment this line
     }, []);
 
     return (
-        <Box sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            padding: 2,
-            gap: 2, // Adjust gap between the two boxes
-        }}>
-            <Box sx={{ flex: 1, minWidth: '100%' }}>
-                <ProductTable prod={[]} />
+        <Box>
+            <Box
+                sx={{
+                    // maxHeight: 400,
+                    maxWidth: '80%',
+                    border: '2px solid black'
+                }}>
+                <AllbannersHomePage />
             </Box>
-            <Box sx={{ flex: 1 }}>
-                {noUserMessage ? (
-                    <p>{noUserMessage}</p>
-                ) : (
-                    <UserTable user={[]} />
-                )}
+            <Box sx={{
+                width: '45%',
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                padding: 2,
+                gap: 2, // Adjust gap between the two boxes
+            }}>
+                <Box sx={{ flex: 1 }}>
+                    <BannersTable pro={[]} />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                    <ProductTable prod={[]} />
+                </Box>
             </Box>
         </Box>
     );

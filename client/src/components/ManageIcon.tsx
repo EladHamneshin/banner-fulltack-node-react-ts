@@ -17,6 +17,11 @@ const ManageIcon = () => {
     const navigate = useNavigate();
     const handelClickLogin = () => {
         navigate(`/login`)
+        window.location.reload()
+    }
+    const handelClickProfil = () => {
+        navigate(`banners/user/profil`)
+        // window.location.reload()
     }
     // const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
@@ -102,7 +107,7 @@ const ManageIcon = () => {
                     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                 >
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem onClick={handelClickProfil}>
                         <Avatar /> Profile
                     </MenuItem>
                     <MenuItem onClick={handleClose}>
@@ -129,7 +134,7 @@ const ManageIcon = () => {
                     </MenuItem>
                 </Menu>
             </React.Fragment>
-        </Box>
+        </Box >
     )
 }
 

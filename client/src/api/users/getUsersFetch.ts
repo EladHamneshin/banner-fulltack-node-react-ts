@@ -9,7 +9,7 @@ export const getAllUsers = async () => {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `${API_URL}/users/`,
+        url: `${API_URL}/api/users/`,
         headers: {},
         data: data
     };

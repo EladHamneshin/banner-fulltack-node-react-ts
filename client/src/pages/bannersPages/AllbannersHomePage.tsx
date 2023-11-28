@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Stack, Typography, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { getAllBannersImage } from '../../api/banners/bannersImageFunc';
-import CardBanner from '../../components/cards/CardBanner';
 import { ResponseBanner } from '../../types/BannerInterface';
 import BannerNotFind from './BannerNotFind';
+import CardHomePage from '../../components/cards/CardHomePage';
+import { getAllBannersImage } from '../../api/banners/bannersImageFunc';
 
-const AllBanners = () => {
+const AllbannersHomePage = () => {
     const [message, setMessage] = useState('');
     const [banners, setBanners] = useState<ResponseBanner[] | string | null>(null);
     const [loading, setLoading] = useState(true);
@@ -54,12 +54,16 @@ const AllBanners = () => {
             ) : banners === null ? (
                 <Typography variant="h3">Loading...</Typography>
             ) : typeof banners === 'string' ? (
-                // <Typography variant="h3">{banners}</Typography>
                 <BannerNotFind />
             ) : (
                 banners.map((banner, index) => (
-                    <Stack key={index} sx={{ width: '250px' }}>
-                        <CardBanner banner={banner} />
+                    <Stack key={index} sx={{ width: '125px', marginBottom: '10px' }}>
+                        {/* Use the new CardHomePage component instead of CardBanner */}
+                        <CardHomePage
+                            banner={banner}
+                            cardSx={{ maxWidth: 125, maxHeight: 125, fontSize: '14px' }}
+                            iconSx={{ fontSize: '16px' }}
+                        />
                     </Stack>
                 ))
             )}
@@ -67,4 +71,4 @@ const AllBanners = () => {
     );
 };
 
-export default AllBanners;
+export default AllbannersHomePage;

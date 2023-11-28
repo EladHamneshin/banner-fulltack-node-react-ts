@@ -19,9 +19,7 @@ const BannerByUserID = () => {
         }
     }, []);
 
-    const [message, setMessage] = useState('');
-    console.log(message);
-    
+    const [, setMessage] = useState('');
     const [banners, setBanners] = useState<ResponseBanner[] | string>([]);
     const userID = localStorage.getItem('userID');
 

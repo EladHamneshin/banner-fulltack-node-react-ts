@@ -37,7 +37,7 @@ uploadRouter.post("/image", (req, res) => {
             console.log(err);
         } else {
             return res.status(201)
-                .json({ url: "http://localhost:5000/images/" + imageName }); 34
+                .json({ url: `${process.env.BANNER_BASE_URL}/images/${imageName}` }); 34
         }
     });
 });

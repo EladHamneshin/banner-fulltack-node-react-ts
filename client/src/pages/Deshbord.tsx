@@ -1,9 +1,9 @@
 import { Box } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useEffect} from 'react'
 import Header from '../components/Header-Footer/Header';
 import Footer from '../components/Header-Footer/Footer';
 import { Outlet, useNavigate } from 'react-router-dom';
-import BannerSide from '../components/production/BannerSide';
+
 
 
 
@@ -46,16 +46,14 @@ const styleFooterBox = {
 const Deshbord = () => {
   const navigate = useNavigate();
   const handelClickLogin = () => { navigate(`/login`) }
-  const [bannerSide, setbannerSide] = useState<JSX.Element | null>(null)
   useEffect(() => {
     if (localStorage.getItem('token') === null) { handelClickLogin() }
-    setbannerSide(<BannerSide limit='1' size='side' />)
-    // return (setbannerSide(null))
+
   }, [])
 
   return (
     <Box sx={styleContainer}>
-     {bannerSide && bannerSide}
+   
       <Box sx={{ ...styleHeaderBox, }}>
         <Header />
       </Box>

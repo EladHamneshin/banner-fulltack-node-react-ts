@@ -46,12 +46,12 @@ app.use(morgan("dev"));
 
 // Limit rate of requests
 // Alternatively, you can pass through specific routes for different limits based on route
-app.use(
-  rateLimit({
-    windowMs: RATE_TIME_LIMIT * 60 * 1000,
-    max: RATE_REQUEST_LIMIT,
-  }),
-);
+// app.use(
+//   rateLimit({
+//     windowMs: RATE_TIME_LIMIT * 60 * 1000,
+//     max: RATE_REQUEST_LIMIT,
+//   }),
+// );
 
 // Enable CORS
 app.use(cors());

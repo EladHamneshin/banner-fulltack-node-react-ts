@@ -6,6 +6,7 @@ pipeline {
             steps {
                 script {
                     dir('client') {
+                        sh 'echo "Installing dependencies..."'
                         sh 'npm install'
                     }
                 }
@@ -27,9 +28,11 @@ pipeline {
 
             post {
                 success {
+                    sh 'echo "Linting passed. You may now merge."'
                     githubNotify context: 'Lint', status: 'SUCCESS'
                 }
                 failure {
+                    sh 'echo "Linting failed. Please fix the linting errors before merging."'
                     githubNotify context: 'Lint', status: 'FAILURE'
                 }
             }

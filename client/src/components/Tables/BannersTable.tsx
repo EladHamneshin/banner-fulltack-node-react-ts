@@ -1,5 +1,6 @@
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { ResponseBanner } from '../../types/BannerInterface';
+import { Box } from '@mui/system';
 
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', minWidth : 60, type: "string" },
@@ -36,7 +37,7 @@ export default function BannersTable(props: Props) {
         );
     })
     return (
-        <div style={{ height: '75vh' }}>
+        <Box sx={{ height: '75vh' }}>
             <DataGrid
                 rows={rows}
                 columns={columns}
@@ -48,6 +49,6 @@ export default function BannersTable(props: Props) {
                 pageSizeOptions={[2, 5, 10, 25]}
                 checkboxSelection
             />
-        </div>
+        </Box>
     );
 }

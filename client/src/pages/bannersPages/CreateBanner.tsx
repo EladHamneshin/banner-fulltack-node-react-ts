@@ -16,7 +16,7 @@ const CreateBanner = () => {
     useEffect(() => {
         const api =  async () => {
             
-            const data = await getProductById("044576d1-dd03-4787-99bb-ed4a74f4eeeb")
+            const data = await getProductById("e0602e49-7a1c-4e64-8fcf-ffa86a0f6b94")
             console.log(data);
             
             setProduct (data)

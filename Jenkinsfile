@@ -24,19 +24,19 @@ pipeline {
                     }
                 }
             }
+
+            post {
+                success {
+                    githubNotify context: 'Lint', status: 'SUCCESS'
+                }
+                failure {
+                    githubNotify context: 'Lint', status: 'FAILURE'
+                }
+            }
         }
     }
 
     triggers {
         githubPush()
-    }
-
-    post {
-        success {
-            githubNotify context: 'Lint', status: 'SUCCESS'
-        }
-        failure {
-            githubNotify context: 'Lint', status: 'FAILURE'
-        }
     }
 }

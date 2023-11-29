@@ -2,12 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Install') {
             steps {
                 script {
                     dir('client') {
                         sh 'npm install'
-                        sh 'npm run build'
                     }
                 }
             }

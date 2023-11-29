@@ -1,5 +1,5 @@
 import {useEffect,useState} from 'react'
-import { Typography, Box, Card } from '@mui/material';
+import { Box, Card } from '@mui/material';
 import { BannerInterface } from '../../types/BannerInterface';
 import { getBannerImageByParams } from '../../api/production/getBannerImage';
 
@@ -33,7 +33,7 @@ export default function BannerSide(props : Props) {
 
   return (
     <>
-    {banner ? <Card sx={{position:'fixed', left:0, top:75, margin:2, }}>
+    {banner ? <Card sx={{position:'fixed', left:0, top:75, zIndex:1000}}>
 
    <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
     <img src={banner?.image.url} alt={banner?.image.alt} style={{ width: '100px' }} />

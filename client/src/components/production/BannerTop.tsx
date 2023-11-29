@@ -1,5 +1,5 @@
 import {useEffect,useState} from 'react'
-import { CardContent, Box, Card } from '@mui/material';
+import { Box, Card } from '@mui/material';
 import { BannerInterface } from '../../types/BannerInterface';
 
 

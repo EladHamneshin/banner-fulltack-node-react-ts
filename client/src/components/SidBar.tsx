@@ -7,6 +7,7 @@ import CardTravelIcon from '@mui/icons-material/CardTravel';
 import { useNavigate } from 'react-router-dom';
 import ViewDaySharpIcon from '@mui/icons-material/ViewDaySharp';
 import AddCardIcon from '@mui/icons-material/AddCard';
+import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions';
 
 const SidBar = () => {
     const navigate = useNavigate();
@@ -15,6 +16,9 @@ const SidBar = () => {
 
     const handelClickAllBanners = () => {
         navigate(`/banners`);
+    };
+    const handelClickAllProducts = () => {
+        navigate(`banners/products`);
     };
     const handelClickCreateBanners = () => {
         navigate(`/createBanner`);
@@ -46,12 +50,14 @@ const SidBar = () => {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['All banners', 'My bannars', 'Add banner', 'Drafts'].map((text) => (
+                {['All banners', 'All products', 'My bannars', 'Drafts'].map((text) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton
                             onClick={() => {
                                 if (text === 'All banners') {
                                     handelClickAllBanners();
+                                } else if (text === 'All products') {
+                                    handelClickAllProducts()
                                 } else if (text === 'My bannars') {
                                     handelClickMyBanners();
                                 } else if (text === 'Add banner') {
@@ -61,6 +67,7 @@ const SidBar = () => {
                         >
                             <ListItemIcon>
                                 {text === 'All banners' && <CardTravelIcon />}
+                                {text === 'All products' && <IntegrationInstructionsIcon />}
                                 {text === 'My bannars' && <ViewDaySharpIcon />}
                                 {text === 'Add banner' && <AddCardIcon />}
                             </ListItemIcon>

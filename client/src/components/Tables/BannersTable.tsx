@@ -1,16 +1,6 @@
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-export type BannerInterface = {
-    _id?: string;
-    name: string;
-    productID: string;
-    catogryID: string;
-    click: number;
-    size: "side" | "top" | "all";
-    kind: ("price" | "sale")[];
-    text: string;
-    createdAt: Date;
-    author: string;
-}
+import { ResponseBanner } from '../../types/BannerInterface';
+
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 40, type: "string" },
     { field: 'Name', headerName: 'Name', width: 60, type: 'string' },
@@ -23,8 +13,11 @@ const columns: GridColDef[] = [
     { field: 'size', headerName: 'Size', width: 40 },
     { field: 'text', headerName: 'Description', width: 110 }
 ];
+type Props = {
+    pro: ResponseBanner[]
+}
 
-export default function BannersTable(props: { pro: BannerInterface[] }) {
+export default function BannersTable(props: Props) {
     const rows: any = [];
     props.pro.forEach((element) => {
         rows.push(
@@ -35,7 +28,7 @@ export default function BannersTable(props: { pro: BannerInterface[] }) {
                 catogryID: element.catogryID,
                 author: element.author,
                 createdAt: element.createdAt,
-                click: element.click,
+                click: element.clickCount,
                 kind: element.kind,
                 size: element.size,
                 text: element.text

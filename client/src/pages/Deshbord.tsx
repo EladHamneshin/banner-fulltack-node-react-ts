@@ -34,11 +34,11 @@ const styleMainBox = {
 
 const styleFooterBox = {
   marginBottom: '60px',
-  order: 3,
+  order: 1,
   position: 'fixed',
   bottom: 2,
   width: '100%',
-  height: '30px'
+  height: '10px'
 };
 
 

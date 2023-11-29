@@ -61,7 +61,8 @@ const HomePage = () => {
             <Box
                 sx={{
                     // maxHeight: 400,
-                    maxWidth: '80%',
+                    // maxWidth: '80%',
+                    width:'100%'
                     // border: '2px solid black'
                 }}>
                 <AllbannersHomePage />

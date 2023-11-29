@@ -40,8 +40,8 @@ const CardHomePage = (props: Props) => {
 
             <Card
                 sx={{
-                    height: '230px',
-                     width: '160px', 
+                    height: '270px',
+                     width: '80%', 
                     margin: '5px',
                     marginBottom: '10px',
                     boxSizing: 'border-box',

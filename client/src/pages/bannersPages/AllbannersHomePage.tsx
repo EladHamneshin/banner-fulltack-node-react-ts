@@ -45,7 +45,7 @@ const AllbannersHomePage = () => {
     }, []);
 
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Box sx={{width:'100%', display: 'flex', justifyContent: 'space-around' }}>
             {loading ? (
                 <Circular />
             ) : message ? (

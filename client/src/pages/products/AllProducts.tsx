@@ -47,7 +47,7 @@ const AllProducts = () => {
         {message && <Typography variant="h3">{message}</Typography>}
         <Box sx={{ display: 'flex' }}>
           {products && products.map((product, index) => (
-            <Link to={`/banners/ProductPage/${product.id}`}
+            <Link to={`/banners/ProductPage/${product.id}`} key={index}
               style={{ textDecoration: 'none' }}>
               <CardProduct key={index} product={product} />
             </Link>

@@ -14,23 +14,17 @@ import CardHomePage from '../../components/cards/CardHomePage';
 const ProductPage = () => {
     const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
-    const [products, setproducts] = useState(true)
+    const [products, setProducts] = useState(true);
     const navigate = useNavigate();
 
     const { productId } = useParams();
-    const [message, setMessage] = useState('')
+    const [message, setMessage] = useState('');
     const [banners, setBanners] = useState<ResponseBanner[]>([]);
+
     useEffect(() => {
         const fetchProduct = async () => {
             try {
                 const result = await getProductById(String(productId));
-                const bannerFetch = await bannerByProducdID(productId!);
-
-                if (bannerFetch.success === false) { setMessage(bannerFetch.message) }
-                if (bannerFetch.success === true) {
-                    const data: ResponseBanner[] = bannerFetch.data
-                    setBanners(data.length === 0 ? [] : data)
-                }
                 setProduct(result);
             } catch (error) {
                 console.error('Error fetching product:', error);
@@ -42,22 +36,39 @@ const ProductPage = () => {
         fetchProduct();
     }, [productId]);
 
+    useEffect(() => {
+        const fetchBanners = async () => {
+            try {
+                const bannerFetch = await bannerByProducdID(productId!);
+
+                if (bannerFetch.success === false) {
+                    setMessage(bannerFetch.message);
+                }
+
+                if (bannerFetch.success === true) {
+                    const data: ResponseBanner[] = bannerFetch.data;
+                    setBanners(data.length === 0 ? [] : data);
+                }
+            } catch (error) {
+                console.error('Error fetching product:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchBanners();
+    }, [productId]);
+
     const handleAddBanner = () => {
         navigate(`/createBanner`);
     };
+
     const handleTable = () => {
-        setproducts(false)
-        return (<BannersTable pro={banners} />)
+        setProducts(true);
     };
-    const handlecards = () => {
-        setproducts(false)
-        return (
-            <>{banners.map((banner, index) => (
-                <Stack key={index} sx={{ width: '125px', marginBottom: '10px' }}>
-                    <CardHomePage banner={banner} />
-                </Stack>
-            ))}</>
-        )
+
+    const handleCards = () => {
+        setProducts(false);
     };
 
     if (loading) {
@@ -68,61 +79,69 @@ const ProductPage = () => {
             </Box>
         );
     }
-    if (message) { return <Typography variant="h3">{message}</Typography> }
+
+    if (message) {
+        return <Typography variant="h3">{message}</Typography>;
+    }
+
     if (!product) {
         return <Typography variant="h3">Product not found</Typography>;
     }
 
     return (
         <Box>
-            <IconButton onClick={handleTable}>
-                <CalendarViewMonthIcon />
-            </IconButton>
-            <IconButton onClick={handlecards}>
-                <AppsIcon />
-            </IconButton>
-            {products &&
-                <>{banners.map((banner, index) => (
-                    <Stack key={index} sx={{ width: '125px', marginBottom: '10px' }}>
-                        <CardHomePage banner={banner} />
+                <IconButton onClick={handleCards}>
+                    <CalendarViewMonthIcon />
+                </IconButton>
+                <IconButton onClick={handleTable}>
+                    <AppsIcon />
+                </IconButton>
+        <Box sx={{display:'flex'}}>
+            <Box sx={{width:'45%',margin:2}}>
+
+
+                {products ? (
+                    <BannersTable pro={banners} />
+                ) : (
+                    <Stack direction="row" spacing={2}>
+                        {banners.map((banner, index) => (
+                            <CardHomePage key={index} banner={banner} />
+                        ))}
                     </Stack>
-                ))}</>
-            }
+                )}
 
-
-            <Card sx={{ width: '45%' }}>
-                <CardMedia
-                    component="img"
-                    height="140"
-                    image={product.image.url}
-                    alt={product.image.alt}
-                />
-                <CardContent>
-                    <Typography variant="h5" component="div">
-                        {product.name}
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary">
-                        Category: {product.category}
-                    </Typography>
-                    {product.salePrice !== undefined && (
-                        <Typography variant="body1" color="text.secondary">
-                            Price: ${product.salePrice.toFixed(2)}
+            </Box>
+            <Box sx={{width:'45%',margin:2}}>
+                <Card sx={{ height:'80vh'}}>
+                    <CardMedia component="img" height="140" image={product.image.url} alt={product.image.alt} />
+                    <CardContent>
+                        <Typography variant="h5" component="div">
+                            {product.name}
                         </Typography>
-                    )}
-                    <Typography variant="body1" color="text.secondary">
-                        Quantity: {product.quantity}
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary">
-                        Description: {product.description}
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary">
-                        Rating: {product.rating}/5
-                    </Typography>
-                    <Button variant="contained" color="primary" onClick={handleAddBanner}>
-                        Add Banner
-                    </Button>
-                </CardContent>
-            </Card>
+                        <Typography variant="body1" color="text.secondary">
+                            Category: {product.category}
+                        </Typography>
+                        {product.salePrice !== undefined && (
+                            <Typography variant="body1" color="text.secondary">
+                                Price: ${product.salePrice.toFixed(2)}
+                            </Typography>
+                        )}
+                        <Typography variant="body1" color="text.secondary">
+                            Quantity: {product.quantity}
+                        </Typography>
+                        <Typography variant="body1" color="text.secondary">
+                            Description: {product.description}
+                        </Typography>
+                        <Typography variant="body1" color="text.secondary">
+                            Rating: {product.rating}/5
+                        </Typography>
+                        <Button variant="contained" color="primary" onClick={handleAddBanner}>
+                            Add Banner
+                        </Button>
+                    </CardContent>
+                </Card>
+            </Box>
+        </Box>
         </Box>
     );
 };

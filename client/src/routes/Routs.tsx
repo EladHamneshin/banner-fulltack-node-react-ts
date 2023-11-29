@@ -12,6 +12,8 @@ import CreateBanner from "../pages/bannersPages/CreateBanner";
 import BannerByUserID from "../pages/bannersPages/BannerByUserID";
 import HomePage from "../pages/HomePage";
 import ProfileUser from "../pages/ProfileUser";
+import AllProducts from "../pages/products/AllProducts";
+import ProductPage from "../pages/products/ProductPage";
 
 export default function Routs() {
     const router = createBrowserRouter([
@@ -48,6 +50,16 @@ export default function Routs() {
                 {
                     path: "banners",
                     element: <AllBanners />,
+                    errorElement: <ErrorPage />,
+                },
+                {
+                    path: "banners/products",
+                    element: <AllProducts />,
+                    errorElement: <ErrorPage />,
+                },
+                {
+                    path: '/banners/ProductPage/:productId',
+                    element: <ProductPage />,
                     errorElement: <ErrorPage />,
                 },
                 {

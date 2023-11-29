@@ -33,11 +33,11 @@ const styleMainBox = {
 
 const styleFooterBox = {
   marginBottom: '60px',
-  order: 3,
+  order: 1,
   position: 'fixed',
   bottom: 2,
   width: '100%',
-  height: '30px'
+  height: '10px'
 };
 
 
@@ -56,11 +56,11 @@ const Deshbord = () => {
         <Header />
       </Box>
       <Box sx={{ ...styleMainBox, flexDirection: 'row', }}>
-        <Box sx={{ flexGrow: 1,  }}>
+        <Box sx={{ flexGrow: 1, }}>
           <Outlet />
         </Box>
       </Box>
-      <Box sx={{ ...styleFooterBox,  }}>
+      <Box sx={{ ...styleFooterBox, }}>
         <Footer />
       </Box>
     </Box>

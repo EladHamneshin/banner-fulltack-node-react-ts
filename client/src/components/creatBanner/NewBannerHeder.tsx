@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import CardProduct from '../cards/CardProduct';
 import { createBanner } from '../../api/banners/createNewBanner';
 import AddBannerForm from './AddBannerForm';
-import resizeImage from '../../utils/resizeImage';
+// import resizeImage from '../../utils/resizeImage';
 import { uploadImageToServer } from '../../api/banners/uploadImage';
 
 const API_URI = import.meta.env.VITE_API_URI
@@ -30,15 +30,15 @@ const NewBannerForm = (props: Props) => {
 
 
     const uploadImage = async (image: File, name : string , size : string) => {
-        let width = 750
-        let height = 550
-        if (size === 'side'){
-            width = 120
-            height = 650
-        } else if (size === 'top'){
-            width = 770
-            height = 150
-        }   
+        // let width = 750
+        // let height = 550
+        // if (size === 'side'){
+        //     width = 120
+        //     height = 650
+        // } else if (size === 'top'){
+        //     width = 770
+        //     height = 150
+        // }   
         // const getresizeImage = await resizeImage(image, width, height);
 
         const FileName = name + size

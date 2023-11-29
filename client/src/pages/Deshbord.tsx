@@ -1,9 +1,10 @@
 import { Box } from '@mui/material'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Header from '../components/Header-Footer/Header';
 import Footer from '../components/Header-Footer/Footer';
 import { Outlet, useNavigate } from 'react-router-dom';
 import BannerSide from '../components/production/BannerSide';
+
 
 
 const styleContainer = {
@@ -28,7 +29,7 @@ const styleMainBox = {
   display: 'flex',
   marginTop: '60px',
   marginBottom: '60px',
-  width: '100vw',
+  width: '70vw',
 };
 
 const styleFooterBox = {
@@ -45,22 +46,25 @@ const styleFooterBox = {
 const Deshbord = () => {
   const navigate = useNavigate();
   const handelClickLogin = () => { navigate(`/login`) }
+  const [bannerSide, setbannerSide] = useState<JSX.Element | null>(null)
   useEffect(() => {
     if (localStorage.getItem('token') === null) { handelClickLogin() }
+    setbannerSide(<BannerSide limit='1' size='side' />)
+    // return (setbannerSide(null))
   }, [])
 
   return (
     <Box sx={styleContainer}>
-<BannerSide limit='1' size='side'/>
+     {bannerSide && bannerSide}
       <Box sx={{ ...styleHeaderBox, }}>
         <Header />
-      BannerSide</Box>
+      </Box>
       <Box sx={{ ...styleMainBox, flexDirection: 'row', }}>
-        <Box sx={{ flexGrow: 1,  }}>
+        <Box sx={{ flexGrow: 1, }}>
           <Outlet />
         </Box>
       </Box>
-      <Box sx={{ ...styleFooterBox,  }}>
+      <Box sx={{ ...styleFooterBox, }}>
         <Footer />
       </Box>
     </Box>

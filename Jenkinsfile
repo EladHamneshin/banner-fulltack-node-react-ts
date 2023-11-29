@@ -30,17 +30,18 @@ pipeline {
                 success {
                     sh 'echo "Linting passed. You may now merge."'
                     githubNotify context: 'Lint', status: 'SUCCESS'
+                    setBuildStatus("Build complete", "SUCCESS");
                 }
                 failure {
                     sh 'echo "Linting failed. Please fix the linting errors before merging."'
                     githubNotify context: 'Lint', status: 'FAILURE'
+                    setBuildStatus("Build complete", "FAILURE");
                 }
             }
         }
     }
 
     triggers {
-        //githubPush()
-        githubPullRequest()
+        githubPush()
     }
 }

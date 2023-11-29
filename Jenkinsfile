@@ -40,6 +40,7 @@ pipeline {
     }
 
     triggers {
-        githubPush()
+        //githubPush()
+        githubPullRequest()
     }
 }

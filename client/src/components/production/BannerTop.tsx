@@ -4,6 +4,7 @@ import { BannerInterface } from '../../types/BannerInterface';
 import { getBannerImageByParams } from '../../api/production/getBannerImage';
 
 type Props = {
+    size : string;
     limit ?: string;
     category ?: string
     userID ?: string

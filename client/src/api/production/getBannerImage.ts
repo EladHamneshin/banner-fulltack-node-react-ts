@@ -16,7 +16,7 @@ export const getBannerImageByParams = async (params: string) => {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: ` ${API_URL}/api/bannersImage/ext/?${params}`,
+        url: ` ${API_URL}/banners/api/bannersImage/ext/?${params}`,
         headers: {},
         data: data
     };

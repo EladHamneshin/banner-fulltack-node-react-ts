@@ -11,7 +11,7 @@ export const bannerByProducdID = async (productID: string) => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: `${API_URL}/api/bannersImage/procuct/${productID}`,
+    url: `${API_URL}/banners/api/bannersImage/procuct/${productID}`,
     headers: {},
     data: data
   };

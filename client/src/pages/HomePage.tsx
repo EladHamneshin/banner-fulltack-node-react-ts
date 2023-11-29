@@ -51,7 +51,7 @@ const HomePage = () => {
     const [bannerTop, setbannerTop] = useState<JSX.Element | null>(null)
   useEffect(() => {
     setbannerSide(<BannerSide limit='1' size='side' />)
-    setbannerTop(<BannerTop limit='1' />)
+    setbannerTop(<BannerSide limit='1' size='top'/>)
     // return (setbannerSide(null))
   }, [])
 

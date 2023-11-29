@@ -9,7 +9,7 @@ export const deleteByBannerID = async (bannerID: string) => {
     let config = {
         method: 'delete',
         maxBodyLength: Infinity,
-        url: `${API_URL}/api/bannersImage/${bannerID}`,
+        url: `${API_URL}/banners/api/bannersImage/${bannerID}`,
         headers: {},
         data: data
     };

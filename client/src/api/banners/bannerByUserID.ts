@@ -9,7 +9,7 @@ export const bannerByUserID = async (userID: string) => {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `${API_URL}/api/bannersImage/user/${userID}`,
+        url: `${API_URL}/banners/api/bannersImage/user/${userID}`,
         headers: {},
         data: data
     };

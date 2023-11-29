@@ -9,7 +9,7 @@ export const loginFetch = async (user: string) => {
     let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: `${API_URL}/api/users/login`,
+        url: `${API_URL}/banners/api/users/login`,
         headers: {
             'Content-Type': 'application/json'
         },

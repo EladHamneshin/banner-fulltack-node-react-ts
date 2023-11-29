@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import BannersTable from '../components/Tables/BannersTable';
 import AllbannersHomePage from './bannersPages/AllbannersHomePage';
 import BannerSide from '../components/production/BannerSide';
-import BannerTop from '../components/production/BannerTop';
 
 const HomePage = () => {
     // const [, setMessage] = useState('');
@@ -51,7 +50,7 @@ const HomePage = () => {
     const [bannerTop, setbannerTop] = useState<JSX.Element | null>(null)
   useEffect(() => {
     setbannerSide(<BannerSide limit='1' size='side' />)
-    setbannerTop(<BannerTop limit='1' />)
+    setbannerTop(<BannerSide limit='1' size='top'/>)
     // return (setbannerSide(null))
   }, [])
 

@@ -9,7 +9,7 @@ export const regiterFetch = async (user: UserInterface) => {
     let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: `${API_URL}/api/users/register`,
+        url: `${API_URL}/banners/api/users/register`,
         headers: {
             'Content-Type': 'application/json'
         },

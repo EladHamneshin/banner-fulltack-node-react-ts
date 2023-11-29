@@ -39,11 +39,11 @@ const NewBannerForm = (props: Props) => {
             width = 770
             height = 150
         }   
-        const getresizeImage = await resizeImage(image, width, height);
+        // const getresizeImage = await resizeImage(image, width, height);
 
         const FileName = name + size
         const cleanFileName = FileName.replace(/[^a-zA-Z0-9]/g, '')
-        const blob = new Blob([getresizeImage], { type: 'image/jpeg' });
+        const blob = new Blob([image], { type: 'image/jpeg' });
 
         const file = new File([blob], `${cleanFileName}.jpg`);
         const resUrl = await uploadImageToServer(file)
@@ -59,7 +59,7 @@ const NewBannerForm = (props: Props) => {
 
     const onSubmitForm = async (data : any) => {
 
-        const FileName = product.name + product.category + data.size
+        const FileName = product.name + data.size
         const cleanFileName = FileName.replace(/[^a-zA-Z0-9]/g, '')
         const newBanner = {
             name: product.name + product.category,

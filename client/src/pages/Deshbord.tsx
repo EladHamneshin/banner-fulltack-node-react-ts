@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import Header from '../components/Header-Footer/Header';
 import Footer from '../components/Header-Footer/Footer';
 import { Outlet, useNavigate } from 'react-router-dom';
-
+import BannerSide from '../components/production/BannerSide';
 
 
 const styleContainer = {
@@ -51,10 +51,10 @@ const Deshbord = () => {
 
   return (
     <Box sx={styleContainer}>
-
+<BannerSide limit='1' size='side'/>
       <Box sx={{ ...styleHeaderBox, }}>
         <Header />
-      </Box>
+      BannerSide</Box>
       <Box sx={{ ...styleMainBox, flexDirection: 'row', }}>
         <Box sx={{ flexGrow: 1,  }}>
           <Outlet />

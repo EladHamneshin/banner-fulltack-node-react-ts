@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import BannersTable from '../components/Tables/BannersTable';
 import AllbannersHomePage from './bannersPages/AllbannersHomePage';
 import BannerSide from '../components/production/BannerSide';
-import BannerTop from '../components/production/BannerTop';
 
 const HomePage = () => {
     // const [, setMessage] = useState('');

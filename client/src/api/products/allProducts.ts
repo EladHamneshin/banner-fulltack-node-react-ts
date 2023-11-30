@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// const API_URL = import.meta.env.ERP_BASE_URL
+const API_URL = import.meta.env.VITE_API_URI
 
 
 export const getAllProducts = async () => {
@@ -10,7 +10,7 @@ export const getAllProducts = async () => {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `https://inventory-service-erp.onrender.com/api/shopInventory`,
+        url: `${API_URL}/banners/api/ext/bannersProduct/top5/products`,
 
     };
     try {

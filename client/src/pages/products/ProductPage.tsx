@@ -11,6 +11,7 @@ import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
 import AppsIcon from '@mui/icons-material/Apps';
 import CardHomePage from '../../components/cards/CardHomePage';
 import BannerSide from '../../components/production/BannerSide';
+import TableRowsIcon from '@mui/icons-material/TableRows';
 
 const ProductPage = () => {
     const [product, setProduct] = useState<Product | null>(null);
@@ -88,7 +89,7 @@ const ProductPage = () => {
         return <Typography variant="h3">{message}</Typography>;
     }
 
-    if (!product) {
+    if (!product && !loading) {
         return <Typography variant="h3">Product not found</Typography>;
     }
 
@@ -101,7 +102,7 @@ const ProductPage = () => {
                     <CalendarViewMonthIcon />
                 </IconButton>
                 <IconButton onClick={handleTable}>
-                    <AppsIcon />
+                    <TableRowsIcon />
                 </IconButton>
                 <Box sx={{ display: 'flex' }}>
                     <Box sx={{ width: '45%', margin: 2 }}>

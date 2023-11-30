@@ -93,7 +93,7 @@ const SidBar = () => {
     );
 
     return (
-        <div>
+        <Box sx={{ zIndex:'9100'}}>
             <ListItemButton onClick={toggleDrawer('left', true)}>
                 <MenuOpenOutlinedIcon
                     sx={{
@@ -104,7 +104,7 @@ const SidBar = () => {
             <Drawer anchor="left" open={state.left} onClose={toggleDrawer('left', false)}>
                 {list('left')}
             </Drawer>
-        </div>
+        </Box>
     );
 };
 

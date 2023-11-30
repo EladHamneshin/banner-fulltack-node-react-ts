@@ -2,6 +2,16 @@ pipeline {
     agent any
 
     stages {
+
+         stage('Checkout') {
+            steps {
+                script {
+                    def prBranch = "PR-${CHANGE_ID}-branch"
+                    checkout([$class: 'GitSCM', branches: [[name: prBranch]], userRemoteConfigs: [[url: 'https://github.com/EladHamneshin/banner-fulltack-node-react-ts']]])
+                }
+            }
+        }
+
         stage('Install') {
             steps {
                 script {
@@ -29,13 +39,13 @@ pipeline {
             post {
                 success {
                     sh 'echo "Linting passed. You may now merge."'
-                    githubNotify context: 'Lint', status: 'SUCCESS'
-                    setBuildStatus("Build complete", "SUCCESS");
                 }
                 failure {
-                    sh 'echo "Linting failed. Please fix the linting errors before merging."'
-                    githubNotify context: 'Lint', status: 'FAILURE'
-                    setBuildStatus("Build complete", "FAILURE");
+                    echo 'Pipeline failed. Blocking pull request merge.'
+                    script {
+                        currentBuild.result = 'FAILURE'
+                        error('Pipeline failed. Pull request merge blocked.')
+                    }
                 }
             }
         }

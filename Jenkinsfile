@@ -13,32 +13,32 @@ pipeline {
             }
         }
 
-        // stage('Lint') {
-        //     steps {
-        //         script {
-        //             dir('client') {
-        //                 try {
-        //                     sh 'npm run lint'
-        //                 } catch (Exception e) {
-        //                     error("Linting failed. Please fix the linting errors before merging.")
-        //                 }
-        //             }
-        //         }
-        //     }
+        stage('Lint') {
+            steps {
+                script {
+                    dir('client') {
+                        try {
+                            sh 'npm run lint'
+                        } catch (Exception e) {
+                            error("Linting failed. Please fix the linting errors before merging.")
+                        }
+                    }
+                }
+            }
 
-        //     post {
-        //         success {
-        //             sh 'echo "Linting passed. You may now merge."'
-        //             githubNotify context: 'Lint', status: 'SUCCESS'
-        //             setBuildStatus("Build complete", "SUCCESS");
-        //         }
-        //         failure {
-        //             sh 'echo "Linting failed. Please fix the linting errors before merging."'
-        //             githubNotify context: 'Lint', status: 'FAILURE'
-        //             setBuildStatus("Build complete", "FAILURE");
-        //         }
-        //     }
-        // }
+            post {
+                success {
+                    sh 'echo "Linting passed. You may now merge."'
+                    githubNotify context: 'Lint', status: 'SUCCESS'
+                    setBuildStatus("Build complete", "SUCCESS");
+                }
+                failure {
+                    sh 'echo "Linting failed. Please fix the linting errors before merging."'
+                    githubNotify context: 'Lint', status: 'FAILURE'
+                    setBuildStatus("Build complete", "FAILURE");
+                }
+            }
+        }
 
         
         // stage('Build') {
@@ -56,5 +56,5 @@ pipeline {
     triggers {
         githubPush()
     }
-    //TEST12288888
+
 }

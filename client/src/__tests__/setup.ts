@@ -1,5 +1,4 @@
-//./src/tests/setup.ts
-import { afterEach } from "vitest";
+//./src/tests/setup.tsimport { afterEach } from "vitest";
 import { cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/vitest";
 // runs a cleanup after each test case (e.g. clearing jsdom)

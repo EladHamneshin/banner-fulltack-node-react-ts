@@ -22,7 +22,7 @@ import productRouter from "./routes/productRoutes";
 import { catchErrors, notFound } from "./middleware/errorNOTfound";
 import routerBannersImage from "./routes/bannersImage-route";
 import uploadRouter from "./routes/upLoad";
-import { insertBanners } from './models/bannersModel';
+// import { insertBanners } from './models/bannersModel';
 import { connectToPostgres } from './configs/pgConnect';
 
 // Setup constant variables

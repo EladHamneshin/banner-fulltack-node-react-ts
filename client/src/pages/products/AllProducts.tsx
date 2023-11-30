@@ -26,10 +26,11 @@ const AllProducts = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result: Product[] = await getAllProducts();
+        const result = await getAllProducts();
+        const data : Product[] = result.data
         console.log('fetch resulte:', result);
 
-        setProduct(result)
+        setProduct(data)
       } catch (error) {
         console.error('Error fetching products:', error);
         setMessage('Error fetching products');

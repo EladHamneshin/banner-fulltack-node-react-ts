@@ -60,10 +60,7 @@ const HomePage = () => {
               {bannerTop && bannerTop}
             <Box
                 sx={{
-                    // maxHeight: 400,
-                    // maxWidth: '80%',
                     width:'100%'
-                    // border: '2px solid black'
                 }}>
                 <AllbannersHomePage />
             </Box>
@@ -73,7 +70,7 @@ const HomePage = () => {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 padding: 2,
-                gap: 2, // Adjust gap between the two boxes
+                gap: 2, 
             }}>
                 <Box sx={{ flex: 1 }}>
                     <BannersTable pro={[]} />

@@ -33,7 +33,7 @@ export default function Routs() {
                     errorElement: <ErrorPage />,
                 },
                 {
-                    path: "createBanner",
+                    path: "createBanner/:productID",
                     element: <CreateBanner />,
                     errorElement: <ErrorPage />,
                 },

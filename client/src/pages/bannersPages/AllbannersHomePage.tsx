@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Box, Stack, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ResponseBanner } from '../../types/BannerInterface';
 import BannerNotFind from './BannerNotFind';
 import CardHomePage from '../../components/cards/CardHomePage';
@@ -45,7 +45,7 @@ const AllbannersHomePage = () => {
     }, []);
 
     return (
-        <Box sx={{width:'100%', display: 'flex', justifyContent: 'space-around' }}>
+        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-around' }}>
             {loading ? (
                 <Circular />
             ) : message ? (
@@ -58,13 +58,12 @@ const AllbannersHomePage = () => {
                 <BannerNotFind />
             ) : (
                 banners.map((banner, index) => (
-                    <Stack key={index} sx={{  }}>
-                        {/* Use the new CardHomePage component instead of CardBanner */}
-                        <CardHomePage
-                            banner={banner}
-                        // cardSx={{ maxWidth: 125, maxHeight: 125, fontSize: '14px' }}
-                        // iconSx={{ fontSize: '16px' }}
-                        />
+                    <Stack key={index} sx={{}}>
+                        <Link to={`/banners/ProductPage/${banner.productID}`} key={index}
+                            style={{ textDecoration: 'none' }}>
+                            <CardHomePage
+                                banner={banner}
+                            /></Link>
                     </Stack>
                 ))
             )}

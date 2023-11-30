@@ -40,11 +40,9 @@ const ProductPage = () => {
         const fetchBanners = async () => {
             try {
                 const bannerFetch = await bannerByProducdID(productId!);
-
                 if (bannerFetch.success === false) {
                     setMessage(bannerFetch.message);
                 }
-
                 if (bannerFetch.success === true) {
                     const data: ResponseBanner[] = bannerFetch.data;
                     setBanners(data.length === 0 ? [] : data);
@@ -55,21 +53,20 @@ const ProductPage = () => {
                 setLoading(false);
             }
         };
-
         fetchBanners();
     }, [productId]);
 
-    const handleAddBanner = () => {
-        navigate(`/createBanner`);
-    };
+    const handleAddBanner = () => navigate(`/createBanner/${productId}`);
 
-    const handleTable = () => {
-        setProducts(true);
-    };
 
-    const handleCards = () => {
-        setProducts(false);
-    };
+
+    const handleTable = () => setProducts(true);
+
+
+
+    const handleCards = () => setProducts(false);
+
+
 
     if (loading) {
         return (
@@ -90,58 +87,62 @@ const ProductPage = () => {
 
     return (
         <Box>
-                <IconButton onClick={handleCards}>
-                    <CalendarViewMonthIcon />
-                </IconButton>
-                <IconButton onClick={handleTable}>
-                    <AppsIcon />
-                </IconButton>
-        <Box sx={{display:'flex'}}>
-            <Box sx={{width:'45%',margin:2}}>
+            <IconButton onClick={handleCards}>
+                <CalendarViewMonthIcon />
+            </IconButton>
+            <IconButton onClick={handleTable}>
+                <AppsIcon />
+            </IconButton>
+            <Box sx={{ display: 'flex' }}>
+                <Box sx={{ width: '45%', margin: 2 }}>
 
 
-                {products ? (
-                    <BannersTable pro={banners} />
-                ) : (
-                    <Stack direction="row" spacing={2}>
-                        {banners.map((banner, index) => (
-                            <CardHomePage key={index} banner={banner} />
-                        ))}
-                    </Stack>
-                )}
+                    {products ? (
+                        <BannersTable pro={banners} />
+                    ) : (
+                        <Stack direction="row" spacing={2}>
+                            {banners.map((banner, index) => (
+                                <CardHomePage key={index} banner={banner} />
+                            ))}
+                        </Stack>
+                    )}
 
-            </Box>
-            <Box sx={{width:'45%',margin:2}}>
-                <Card sx={{ height:'80vh'}}>
-                    <CardMedia component="img" height="140" image={product.image.url} alt={product.image.alt} />
-                    <CardContent>
-                        <Typography variant="h5" component="div">
-                            {product.name}
-                        </Typography>
-                        <Typography variant="body1" color="text.secondary">
-                            Category: {product.category}
-                        </Typography>
-                        {product.salePrice !== undefined && (
-                            <Typography variant="body1" color="text.secondary">
-                                Price: ${product.salePrice.toFixed(2)}
+                </Box>
+                <Box sx={{ width: '45%', margin: 2 }}>
+                    <Card sx={{ height: '80vh' }}>
+                        <CardMedia
+                            component="img"
+                            height="35%"
+                            image={product.image.url} // Replace with your product image URL
+                            alt={product.image.alt}
+                        />                        <CardContent>
+                            <Typography variant="h5" component="div" sx={{ margin: '4px' }} >
+                                {product.name}
                             </Typography>
-                        )}
-                        <Typography variant="body1" color="text.secondary">
-                            Quantity: {product.quantity}
-                        </Typography>
-                        <Typography variant="body1" color="text.secondary">
-                            Description: {product.description}
-                        </Typography>
-                        <Typography variant="body1" color="text.secondary">
-                            Rating: {product.rating}/5
-                        </Typography>
-                        <Button variant="contained" color="primary" onClick={handleAddBanner}>
-                            Add Banner
-                        </Button>
-                    </CardContent>
-                </Card>
+                            <Typography variant="body1" color="text.secondary" sx={{ margin: '4px' }} >
+                                Category: {product.category}
+                            </Typography>
+                            {product.salePrice !== undefined && (
+                                <Typography variant="body1" color="text.secondary" sx={{ margin: '4px' }} >
+                                    Price: ${product.salePrice.toFixed(2)}
+                                </Typography>
+                            )}
+                            <Typography variant="body1" color="text.secondary" sx={{ margin: '4px' }} >
+                                Quantity: {product.quantity}
+                            </Typography>
+                            <Typography variant="body1" color="text.secondary" sx={{ margin: '4px' }} >
+                                Description: {product.description}
+                            </Typography>
+                            <Typography variant="body1" color="text.secondary" sx={{ margin: '4px' }} >
+                                Rating: {product.rating}/5
+                            </Typography>
+                            <Button variant="contained" color="primary" onClick={handleAddBanner} sx={{ margin: '4px' }} >
+                                Add Banner
+                            </Button>
+                        </CardContent>
+                    </Card>
+                </Box>
             </Box>
-        </Box>
         </Box>
     );
 };

@@ -8,8 +8,8 @@ export default defineConfig({
     test: {
         globals: true,
         environment: "jsdom",
-        // setupFiles: "./src/tests/setup.ts",
-        setupFiles: "C:/Users/yonathan/u/final_project/banner-fulltack-node-react-ts/client/src/__tests__/setup.ts",
+        setupFiles: "./src/tests/setup.ts",
+        // setupFiles: "C:/Users/yonathan/u/final_project/banner-fulltack-node-react-ts/client/src/__tests__/setup.ts",
         include: ['**/?(*.)test.ts?(x)'],
     },
 });

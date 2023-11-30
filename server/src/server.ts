@@ -70,23 +70,20 @@ app.use("/api/upload", uploadRouter);
 
 app.use("/api/ext/bannersProduct", productRouter)
 
+app.use(notFound);
 app.use(catchErrors);
 
 
-app.use(notFound);
 
 
 
 // Listen to specified port in .env or default 5000
-connectToDB().then((res) => {
-
-  console.log('Connecting to mongodb');
-  // איתוחל דאטה ראשוני
-
-  // insertBanners()
-  app.listen(PORT, () => {
-    console.log(`Server is listening on: ${PORT}`);
-  });
-}).catch((err) => console.error(err))
+if (process.env.NODE_ENV !== "test") {
+  connectToDB().then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server is listening on: ${PORT}`);
+    });
+  }).catch((err) => console.error(err))
+}
 
 

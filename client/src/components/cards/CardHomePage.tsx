@@ -8,20 +8,22 @@ type Props = {
 }
 
 const CardHomePage = (props: Props) => {
+    const { banner } = props;
     const navigate = useNavigate();
     const handelClickLogin = () => navigate('login');
-
+    const handelClickCardProduct = () => navigate(`/banners/ProductPage/${banner.productID}`);
+    // {`/banners/ProductPage/${banner.productID}`} 
     useEffect(() => {
         if (localStorage.getItem('token') === null) {
             handelClickLogin();
         }
     }, []);
 
-    const { banner } = props;
 
     return (
-        <Box>
+        <Box onClick={handelClickCardProduct}>
             <Card
+            
                 sx={{
                     height: '270px',
                      width: '80%', 

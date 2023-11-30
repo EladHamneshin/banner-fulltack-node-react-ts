@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const Register = () => {
     const navigate = useNavigate();
     const handelClickLogin = () => {
-        navigate(`/login`)
+        navigate(`/banners/login`)
     }
 
     const paperStyle = {

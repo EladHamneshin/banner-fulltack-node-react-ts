@@ -12,7 +12,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handelClickHomePage = () => {
-    navigate(localStorage.getItem('token') !== null ? `/` : `/login`)
+    navigate(localStorage.getItem('token') !== null ? `/banner/` : `/banner/login`)
   }
   const storedUserName = localStorage.getItem('name');
 
@@ -50,7 +50,7 @@ const Header = () => {
           </IconButton>
           <IconButton onClick={handelClickHomePage}>
             <img src='\public\bannars-high-resolution-logo-transparent.png' alt='logo'
-            height={'40px'}></img>
+              height={'40px'}></img>
             {/* <HomeIcon
 
               sx={{
@@ -80,5 +80,6 @@ const textBoxStyle = {
   fontSize: "16px",
   color: "white",
   padding: "0 10px 0 10px",
+  alignItems: 'center'
 };
 export default Header

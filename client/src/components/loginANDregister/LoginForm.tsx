@@ -48,7 +48,7 @@ const LoginForm = () => {
 
         setLoading(true)
         const handelClickHomePage = () => {
-            navigate(`/`)
+            navigate(`/banners/`)
             window.location.reload();
         }
         try {

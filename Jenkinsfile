@@ -41,16 +41,16 @@ pipeline {
         // }
 
         
-        stage('Build') {
-            steps {
-                script {
-                    dir('client') {
-                        sh 'echo "Building..."'
-                        sh 'npm run build'
-                    }
-                }
-            }
-        }
+        // stage('Build') {
+        //     steps {
+        //         script {
+        //             dir('client') {
+        //                 sh 'echo "Building..."'
+        //                 sh 'npm run build'
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     // triggers {

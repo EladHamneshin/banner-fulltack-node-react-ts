@@ -100,7 +100,7 @@ const AddBannerForm = (props: Props) => {
                         {...register("name", { required: true, maxLength: 20 })} />
                     <Typography color='red' variant='caption'> {errors.name?.message} </Typography>
 
-                    <TextField style={textFieldStyle} label="Discription" placeholder="Discription"
+                    <TextField style={textFieldStyle} label="Description" placeholder="Description"
                         {...register("text", { required: true, maxLength: 20 })} />
                     <Typography color='red' variant='caption'> {errors.text?.message} </Typography>
 
@@ -109,6 +109,7 @@ const AddBannerForm = (props: Props) => {
 
                             <InputLabel htmlFor="size">Select size</InputLabel>
                             <Select
+                                title='size'
                                 style={textFieldStyle}
                                 label="size"
                                 defaultValue="side"
@@ -125,13 +126,14 @@ const AddBannerForm = (props: Props) => {
 
                             <InputLabel htmlFor="kind">Select kind</InputLabel>
                             <Select
+                                title='kind'
                                 style={textFieldStyle}
                                 label="kind"
                                 defaultValue="price"
                                 {...register("kind", { required: true })}
                             >
                                 <MenuItem value="price">price</MenuItem>
-                                <MenuItem value="saile">saile</MenuItem>
+                                <MenuItem value="sale">sale</MenuItem>
                             </Select>
                             <Typography color='red' variant='caption'>{errors.kind?.message}</Typography>
                         </Box>

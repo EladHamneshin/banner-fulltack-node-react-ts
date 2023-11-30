@@ -1,9 +1,6 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-// import { act } from 'react-dom/test-utils';
+import { render, screen } from '@testing-library/react';
 import AddBannerForm from '../components/creatBanner/AddBannerForm';
 
-// Mock the functions passed as props
 const mockUploadImage = vi.fn();
 const mockOnSubmitForm = vi.fn();
 
@@ -45,39 +42,10 @@ describe('AddBannerForm', () => {
   it('renders the form', () => {
     setup();
     expect(screen.getByLabelText(/Name/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Discription/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Select size/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Select kind/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Description/i)).toBeInTheDocument();
+    expect(screen.getByTitle(/size/i)).toBeInTheDocument();
+    expect(screen.getByTitle(/kind/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Image/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Submit/i })).toBeInTheDocument();
   });
-
-//   it('submits the form with valid data', async () => {
-//     setup();
-
-//     // Fill in form fields
-//     userEvent.type(screen.getByLabelText(/Name/i), 'Test Name');
-//     userEvent.type(screen.getByLabelText(/Discription/i), 'Test Description');
-//     userEvent.selectOptions(screen.getByLabelText(/Select size/i), 'side');
-//     userEvent.selectOptions(screen.getByLabelText(/Select kind/i), 'price');
-
-//     // Create a file to simulate uploading an image
-//     const file = new File(['test image content'], 'test-image.jpg', { type: 'image/jpeg' });
-//     fireEvent.change(screen.getByLabelText(/Image/i), { target: { files: [file] } });
-
-//     // Submit the form
-//     fireEvent.click(screen.getByRole('button', { name: /Submit/i }));
-
-//     // Wait for asynchronous actions to complete
-//     await waitFor(() => {
-//       expect(mockUploadImage).toHaveBeenCalledWith(file, 'Test Name', 'side');
-//       expect(mockOnSubmitForm).toHaveBeenCalledWith({
-//         name: 'Test Name',
-//         text: 'Test Description',
-//         size: 'side',
-//         kind: 'price',
-//         image: [file],
-//       });
-//     });
-//   });
 });

@@ -20,9 +20,9 @@ const SidBar = () => {
     const handelClickAllProducts = () => {
         navigate(`banners/products`);
     };
-    const handelClickCreateBanners = () => {
-        navigate(`/createBanner`);
-    };
+    // const handelClickCreateBanners = () => {
+    //     navigate(`/createBanner`);
+    // };
 
     const handelClickMyBanners = () => {
         navigate(`banners/user/${localStorage.getItem('name')}`);
@@ -61,7 +61,7 @@ const SidBar = () => {
                                 } else if (text === 'My bannars') {
                                     handelClickMyBanners();
                                 } else if (text === 'Add banner') {
-                                    handelClickCreateBanners();
+                                    // handelClickCreateBanners();
                                 }
                             }}
                         >

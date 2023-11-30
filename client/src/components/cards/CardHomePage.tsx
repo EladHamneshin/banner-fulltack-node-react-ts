@@ -3,21 +3,10 @@ import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { ResponseBanner } from '../../types/BannerInterface';
 import { useNavigate } from 'react-router-dom';
 
-
-// Styled component for ExpandMore button
 type Props = {
     banner: ResponseBanner
-    // cardSx: {
-    //     maxWidth: number;
-    //     maxHeight: number;
-    //     fontSize: string;
-    // };
-    // iconSx: {
-    //     fontSize: string;
-    // }
 }
 
-// Component
 const CardHomePage = (props: Props) => {
     const navigate = useNavigate();
     const handelClickLogin = () => navigate('login');
@@ -29,15 +18,9 @@ const CardHomePage = (props: Props) => {
     }, []);
 
     const { banner } = props;
-    // const [loading, setLoading] = useState(false);
-    // const [expanded, setExpanded] = useState(false);
-    // const [message, setMessage] = useState('');
-
-
 
     return (
         <Box>
-
             <Card
                 sx={{
                     height: '270px',
@@ -57,14 +40,13 @@ const CardHomePage = (props: Props) => {
                     alt={banner.image.alt}
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h6" component="div">
+                    <Typography gutterBottom variant="h6" component="div" sx={{margin:'4px'}}>
                         {banner.name}
                     </Typography>
                     <Typography variant="body2" component="div" sx={{margin:'4px'}}>
                         {banner.author}
                     </Typography>
-                    {/* <br /> */}
-                    <Typography variant="body2" component="div" >
+                    <Typography variant="body2" component="div" sx={{margin:'4px'}} >
                         {banner.createdAt}
                     </Typography>
                 </CardContent>

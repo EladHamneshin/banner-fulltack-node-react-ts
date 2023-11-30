@@ -33,8 +33,8 @@ const styleMainBox = {
   padding: '10px',
   display: 'flex',
   marginTop: '60px',
-  marginBottom: '60px',
-  width: '70vw',
+  // marginBottom: '60px',
+  maxWidth: '70wh',
   
 };
 
@@ -51,7 +51,7 @@ const styleFooterBox = {
 
 const Deshbord = () => {
   const navigate = useNavigate();
-  const handelClickLogin = () => { navigate(`/login`) }
+  const handelClickLogin = () => { navigate(`/banners/login`) }
   useEffect(() => {
     if (localStorage.getItem('token') === null) { handelClickLogin() }
 

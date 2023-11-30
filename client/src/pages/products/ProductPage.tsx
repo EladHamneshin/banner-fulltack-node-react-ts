@@ -8,7 +8,6 @@ import BannersTable from '../../components/Tables/BannersTable';
 import { bannerByProducdID } from '../../api/banners/bannerByProducdID';
 import { ResponseBanner } from '../../types/BannerInterface';
 import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
-import AppsIcon from '@mui/icons-material/Apps';
 import CardHomePage from '../../components/cards/CardHomePage';
 import BannerSide from '../../components/production/BannerSide';
 import TableRowsIcon from '@mui/icons-material/TableRows';
@@ -57,6 +56,7 @@ const ProductPage = () => {
                 }
             } catch (error) {
                 console.error('Error fetching product:', error);
+                setMessage('Product not found')
             } finally {
                 setLoading(false);
             }
@@ -64,7 +64,7 @@ const ProductPage = () => {
         fetchBanners();
     }, [productId]);
 
-    const handleAddBanner = () => navigate(`/createBanner/${productId}`);
+    const handleAddBanner = () => navigate(`/banners/createBanner/${productId}`);
 
 
 
@@ -83,19 +83,20 @@ const ProductPage = () => {
                 <Circular />
             </Box>
         );
-    } else if (!product) {
-        return <Typography variant="h3">Product not found</Typography>;
     }
 
-    if (message) {
-        return <Typography variant="h3">{message}</Typography>;
-    }
+
+    if (message) { return <Typography variant="h3">{message}</Typography> }
 
 
 
 
     return (
         <Box>
+            <Typography variant="h3" component="div"
+             sx={{textAlign:'center', margin: '4px' }} >
+                Product Page
+            </Typography>
             {bannerSide && bannerSide}
             {bannerTop && bannerTop}
             <Box sx={{}}>
@@ -120,14 +121,14 @@ const ProductPage = () => {
                         )}
 
                     </Box>
-                    <Box sx={{ width: '45%', margin: 2 }}>
+                    {product && <Box sx={{ width: '45%', margin: 2 }}>
                         <Card sx={{ height: '80vh' }}>
                             <CardMedia
                                 component="img"
                                 height="35%"
                                 image={product.image.url} // Replace with your product image URL
-                                alt={product.image.alt}
-                            />                        <CardContent>
+                                alt={product.image.alt} />
+                            <CardContent>
                                 <Typography variant="h5" component="div" sx={{ margin: '4px' }} >
                                     {product.name}
                                 </Typography>
@@ -153,7 +154,7 @@ const ProductPage = () => {
                                 </Button>
                             </CardContent>
                         </Card>
-                    </Box>
+                    </Box>}
                 </Box>
             </Box>
         </Box>

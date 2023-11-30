@@ -37,7 +37,7 @@ export default function BannersTable(props: Props) {
         );
     })
     return (
-        <Box sx={{ height: '75vh' }}>
+        <Box sx={{ height: '60vh' }}>
             <DataGrid
                 rows={rows}
                 columns={columns}

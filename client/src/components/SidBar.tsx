@@ -15,17 +15,17 @@ const SidBar = () => {
     const [state, setState] = useState({ left: false });
 
     const handelClickAllBanners = () => {
-        navigate(`/banners`);
+        navigate(`/banners/banners`);
     };
     const handelClickAllProducts = () => {
-        navigate(`banners/products`);
+        navigate(`/banners/banners/products`);
     };
     // const handelClickCreateBanners = () => {
-    //     navigate(`/createBanner`);
+    //     navigate(`/banners/createBanner`);
     // };
 
     const handelClickMyBanners = () => {
-        navigate(`banners/user/${localStorage.getItem('name')}`);
+        navigate(`/banners/banners/user/${localStorage.getItem('name')}`);
     };
 
     const toggleDrawer = (_anchor: 'left', open: boolean) => (

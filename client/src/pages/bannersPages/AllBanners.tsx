@@ -1,5 +1,5 @@
-import { SetStateAction, useEffect, useState } from 'react';
-import { Box, Stack, Typography, CircularProgress } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Box, Stack, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { getAllBannersImage } from '../../api/banners/bannersImageFunc';
 import CardBanner from '../../components/cards/CardBanner';
@@ -14,9 +14,8 @@ const AllBanners = () => {
     const [triger, setTriger] = useState(true)
     const navigate = useNavigate();
 
-    const handleLoginRedirect = () => {
-        navigate('/login');
-    };
+    const handleLoginRedirect = () => navigate('/banner/login');
+
 
     useEffect(() => {
         if (localStorage.getItem('token') === null) {
@@ -46,28 +45,40 @@ const AllBanners = () => {
     }, [triger]);
 
     return (
-        <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-            {loading ? (
-                <Circular/>
-            ) : message ? (
-                <Stack>
+        <Box>
+            <Typography variant="h3" sx={{
+                display: 'flex',
+                justifyContent: 'center'
+            }}>All Banners</Typography>
+            <Box sx={{ width: '80vw' }}>
+                {loading ? (
+                    <Circular />
+                ) : message ? (
                     <Typography variant="h3">{message}</Typography>
-                </Stack>
-            ) : banners === null ? (
-                <Typography variant="h3">Loading...</Typography>
-            ) : typeof banners === 'string' ? (
-                // <Typography variant="h3">{banners}</Typography>
-                <BannerNotFind />
-            ) : (
-                banners.map((banner, index) => (
-                    <Stack key={index} sx={{ width: '250px' }}>
-                        <CardBanner banner={banner} triger={{
-                            triger: triger,
-                            trigerSet:setTriger
-                        }} />
-                    </Stack>
-                ))
-            )}
+                ) : banners === null ? (
+                    <Typography variant="h3">Loading...</Typography>
+                ) : typeof banners === 'string' ? (
+                    <BannerNotFind />
+                ) : (
+                    <Box sx={{
+                        width: '100%',
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'space-around'
+                    }}>
+                        {banners.map((banner, index) => (
+                            <Stack key={index} sx={{ width: '250px' }}>
+                                <CardBanner
+                                    banner={banner}
+                                    triger={{
+                                        triger: triger,
+                                        trigerSet: setTriger
+                                    }} />
+                            </Stack>
+                        ))}
+                    </Box>
+                )}
+            </Box>
         </Box>
     );
 };

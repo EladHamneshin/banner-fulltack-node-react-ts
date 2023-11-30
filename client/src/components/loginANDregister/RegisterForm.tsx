@@ -33,7 +33,7 @@ const RegisterForm = () => {
   const onSubmit: SubmitHandler<any> = async (data) => {
 
     const moveToLogin = () => {
-      navigate(`/login`)
+      navigate(`/banners/login`)
     }
 
     const name = data.firstName + ' ' + data.lastName;

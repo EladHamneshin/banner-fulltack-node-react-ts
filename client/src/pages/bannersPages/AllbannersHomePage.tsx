@@ -35,7 +35,7 @@ const AllbannersHomePage = () => {
                 }
             } catch (error) {
                 console.error('Error fetching banners:', error);
-                setMessage('Error fetching banners');
+                setMessage('no banners in DB');
             } finally {
                 setLoading(false);
             }

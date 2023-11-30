@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { Box, Stack, Typography, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { getAllBannersImage } from '../../api/banners/bannersImageFunc';
 import CardBanner from '../../components/cards/CardBanner';
 import { ResponseBanner } from '../../types/BannerInterface';
 import BannerNotFind from './BannerNotFind';
+import Circular from '../../components/Circular';
 
 const AllBanners = () => {
     const [message, setMessage] = useState('');
     const [banners, setBanners] = useState<ResponseBanner[] | string | null>(null);
     const [loading, setLoading] = useState(true);
+    const [triger, setTriger] = useState(true)
     const navigate = useNavigate();
 
     const handleLoginRedirect = () => {
@@ -34,19 +36,19 @@ const AllBanners = () => {
                 }
             } catch (error) {
                 console.error('Error fetching banners:', error);
-                setMessage('Error fetching banners');
+                setMessage('no banners in DB');
             } finally {
                 setLoading(false);
             }
         };
 
         fetchData();
-    }, []);
+    }, [triger]);
 
     return (
         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
             {loading ? (
-                <CircularProgress />
+                <Circular/>
             ) : message ? (
                 <Stack>
                     <Typography variant="h3">{message}</Typography>
@@ -59,7 +61,10 @@ const AllBanners = () => {
             ) : (
                 banners.map((banner, index) => (
                     <Stack key={index} sx={{ width: '250px' }}>
-                        <CardBanner banner={banner} />
+                        <CardBanner banner={banner} triger={{
+                            triger: triger,
+                            trigerSet:setTriger
+                        }} />
                     </Stack>
                 ))
             )}

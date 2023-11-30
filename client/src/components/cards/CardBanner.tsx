@@ -6,6 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { ResponseBanner } from '../../types/BannerInterface';
 import { deleteByBannerID } from '../../api/banners/deleteByBannerID';
 import { useNavigate } from 'react-router-dom';
+import Circular from '../Circular';
 
 // Interface for ExpandMore button props
 interface ExpandMoreProps extends IconButtonProps {
@@ -24,7 +25,11 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }));
 type Props = {
-  banner: ResponseBanner
+  banner: ResponseBanner,
+  triger: {
+    triger: boolean,
+    trigerSet: React.Dispatch<React.SetStateAction<boolean>>
+  }
 }
 
 // Component
@@ -47,14 +52,14 @@ const CardBanner = (props: Props) => {
     try {
       const result = await deleteByBannerID(banner._id);
       setMessage(result.message);
+
     } catch (error) {
       setMessage(String(error));
     } finally {
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-        window.location.reload();
-      }, 2000);
+      props.triger.trigerSet(prev => !prev)
+      setLoading(false);
+      // window.location.reload();
+
     }
   };
 
@@ -65,27 +70,10 @@ const CardBanner = (props: Props) => {
   return (
     <Box>
       {loading ? (
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-around',
-            minWidth: '420px',
-            minHeight: '360px',
-          }}
-        >
-          <Grid
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '420px'
-            }}
-          >
-            <Typography>Loading.....</Typography>
-            {message && <Typography>{message}</Typography>}
-          </Grid>
+        <Box>
+          <Circular />
+          <Typography>Loading.....</Typography>
+          {message && <Typography>{message}</Typography>}
         </Box>
       ) : (
         <Card

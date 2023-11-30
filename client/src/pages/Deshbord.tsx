@@ -11,7 +11,8 @@ const styleContainer = {
   height: '99%',
   width: '99%',
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
+  
 };
 
 const styleHeaderBox = {
@@ -19,10 +20,14 @@ const styleHeaderBox = {
   position: 'fixed',
   top: 0,
   width: '100%',
-  height: '60px'
+  height: '60px',
+  zIndex:'5000'
 };
 
 const styleMainBox = {
+  marginLeft: '120px',
+  marginRight: '120px',
+  // marginTop: '120px',
   order: 2,
   flexGrow: 1,
   padding: '10px',
@@ -30,6 +35,7 @@ const styleMainBox = {
   marginTop: '60px',
   marginBottom: '60px',
   width: '70vw',
+  
 };
 
 const styleFooterBox = {

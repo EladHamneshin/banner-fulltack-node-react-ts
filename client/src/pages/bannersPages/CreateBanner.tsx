@@ -5,7 +5,7 @@ import { Box } from '@mui/system';
 import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
 
 import { useNavigate, useParams } from 'react-router-dom';
-import { getProductById } from '../../api/product/getProductById';
+import { getProductById } from '../../api/products/productById';
 
 
 

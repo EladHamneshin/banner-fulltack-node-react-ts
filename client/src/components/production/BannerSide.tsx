@@ -10,7 +10,7 @@ type Props = {
     userID ?: string
 }
 export default function BannerSide(props : Props) {
-    const styleTop = {position:'fixed', bottom:0,left:'33%' ,height: '150px', zIndex:1000}
+    const styleTop = {position:'fixed', bottom:0,left:'10%' ,height: '150px', zIndex:1000}
     const styleSide = {position:'fixed',height: '500px', left:0, top:75, zIndex:1000}
     const [style, setstyle] = useState<any>(styleSide)
     const [banner, setBanner] = useState<BannerInterface| null>(null)

@@ -72,12 +72,12 @@ app.use("/banners/api/upload", uploadRouter);
 
 app.use("/banners/api/ext/bannersProduct", productRouter)
 
-app.use(catchErrors);
+
 
 
 app.use(notFound);
 
-
+app.use(catchErrors);
 
 // Listen to specified port in .env or default 5000
 connectToPostgres().then(() => {

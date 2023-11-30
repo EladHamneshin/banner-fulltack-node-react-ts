@@ -83,15 +83,16 @@ const ProductPage = () => {
                 <Circular />
             </Box>
         );
+    } else if (!product) {
+        return <Typography variant="h3">Product not found</Typography>;
     }
 
     if (message) {
         return <Typography variant="h3">{message}</Typography>;
     }
 
-    if (!product && !loading) {
-        return <Typography variant="h3">Product not found</Typography>;
-    }
+
+
 
     return (
         <Box>

@@ -53,8 +53,8 @@ pipeline {
         // }
     }
 
-    // triggers {
-    //     githubPush()
-    // }
+    triggers {
+        githubPush()
+    }
     //TEST
 }

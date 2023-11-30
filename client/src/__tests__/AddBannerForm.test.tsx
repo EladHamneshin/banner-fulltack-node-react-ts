@@ -43,10 +43,8 @@ describe('AddBannerForm', () => {
     setup();
     expect(screen.getByLabelText(/Name/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Discription/i)).toBeInTheDocument();
-    const selectElement = screen.getByRole('checbox', { 'name':'size' });
-    expect(selectElement).toBeInTheDocument();
-    // expect(screen.getByRole()).toBeInTheDocument();
-    // expect(screen.getByRole(/kind/i)).toBeInTheDocument();
+    expect(screen.getByText('Select size',{selector:'label'})).toBeInTheDocument();
+    expect(screen.getByText('Select kind', { selector:'label'})).toBeInTheDocument();
     expect(screen.getByLabelText(/Image/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Submit/i })).toBeInTheDocument();
   });

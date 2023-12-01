@@ -38,7 +38,7 @@ pipeline {
                 echo 'Linting passed. You may now merge.'
                 setGitHubPullRequestStatus(
                     context: 'Jenkins Build',
-                    state: 'success',
+                    state: 'SUCCESS',
                     message: 'Build and test passed',
                 )
             }
@@ -49,7 +49,7 @@ pipeline {
                 echo 'Pipeline failed. Blocking pull request merge.'
                 setGitHubPullRequestStatus(
                     context: 'Jenkins Build',
-                    state: 'failure',
+                    state: 'FAILURE',
                     message: 'Build and test failed',
                 )
             }
@@ -57,4 +57,4 @@ pipeline {
     }
 
 }
-// Path: Jenkinsfile11s
+// Path: Jenkinsfile

@@ -39,13 +39,11 @@ pipeline {
             post {
                 success {
                     sh 'echo "Linting passed. You may now merge."'
+                    currentBuild.setGitHubPRStatus(state: 'SUCCESS', description: 'Build and test passed successfully')
                 }
                 failure {
                     echo 'Pipeline failed. Blocking pull request merge.'
-                    script {
-                        currentBuild.result = 'FAILURE'
-                        error('Pipeline failed. Pull request merge blocked.')
-                    }
+                    currentBuild.setGitHubPRStatus(state: 'FAILURE', description: "Build and test failed. Error: ${e.message}")
                 }
             }
         }

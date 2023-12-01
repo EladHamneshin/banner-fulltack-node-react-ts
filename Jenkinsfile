@@ -39,7 +39,7 @@ pipeline {
                 setGitHubPullRequestStatus(
                     context: 'Jenkins Build',
                     state: 'success',
-                    description: 'Build and test passed',
+                    message: 'Build and test passed',
                 )
             }
         }
@@ -50,11 +50,11 @@ pipeline {
                 setGitHubPullRequestStatus(
                     context: 'Jenkins Build',
                     state: 'failure',
-                    description: 'Build and test failed',
+                    message: 'Build and test failed',
                 )
             }
         }
     }
 
 }
-// Path: Jenkinsfile1
+// Path: Jenkinsfile11s

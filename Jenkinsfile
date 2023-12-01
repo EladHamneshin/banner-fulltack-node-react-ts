@@ -28,9 +28,9 @@ pipeline {
         }
     }
 
-    triggers {
-        githubPush()
-    }
+    // triggers {
+    //     githubPush()
+    // }
 
     post {
         success {

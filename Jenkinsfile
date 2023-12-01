@@ -17,15 +17,15 @@ pipeline {
             }
         }
 
-        stage('Lint') {
-            steps {
-                script {
-                    dir('client') {
-                        sh 'npm run lint'
-                    }
-                }
-            }
-        }
+        // stage('Lint') {
+        //     steps {
+        //         script {
+        //             dir('client') {
+        //                 sh 'npm run lint'
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     // triggers {

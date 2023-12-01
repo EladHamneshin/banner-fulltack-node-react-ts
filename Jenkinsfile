@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        PR_BRANCH = "${env.GITHUB_PULL_REQUEST}"
+    }
+
     stages {
         stage('Install') {
             steps {
@@ -17,35 +21,30 @@ pipeline {
             steps {
                 script {
                     dir('client') {
-                        try {
-                            sh 'npm run lint'
-                        } catch (Exception e) {
-                            error("Linting failed. Please fix the linting errors before merging.")
-                        }
+                        sh 'npm run lint'
                     }
                 }
             }
         }
     }
-//test134
+
     triggers {
         githubPush()
     }
 
     post {
         success {
-            script{
-                sh 'echo "Linting passed. You may now merge."'
+            script {
+                echo 'Linting passed. You may now merge.'
                 currentBuild.setGitHubPRStatus(state: 'SUCCESS', description: 'Build and test passed successfully')
             }
-            
         }
+        
         failure {
-            script{
+            script {
                 echo 'Pipeline failed. Blocking pull request merge.'
-                currentBuild.setGitHubPRStatus(state: 'FAILURE', description: "Build and test failed. Error: ${e.message}")
+                currentBuild.setGitHubPRStatus(state: 'FAILURE', description: "Build and test failed on branch: ${PR_BRANCH}")
             }
         }
     }
-
 }

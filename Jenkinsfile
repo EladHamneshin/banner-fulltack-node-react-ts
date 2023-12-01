@@ -26,26 +26,26 @@ pipeline {
                 }
             }
         }
-
-        post {
-            success {
-                script{
-                    sh 'echo "Linting passed. You may now merge."'
-                    currentBuild.setGitHubPRStatus(state: 'SUCCESS', description: 'Build and test passed successfully')
-                }
-                
-            }
-            failure {
-                script{
-                    echo 'Pipeline failed. Blocking pull request merge.'
-                    currentBuild.setGitHubPRStatus(state: 'FAILURE', description: "Build and test failed. Error: ${e.message}")
-                }
-            }
-        }
     }
 //test13
     triggers {
         githubPush()
+    }
+
+    post {
+        success {
+            script{
+                sh 'echo "Linting passed. You may now merge."'
+                currentBuild.setGitHubPRStatus(state: 'SUCCESS', description: 'Build and test passed successfully')
+            }
+            
+        }
+        failure {
+            script{
+                echo 'Pipeline failed. Blocking pull request merge.'
+                currentBuild.setGitHubPRStatus(state: 'FAILURE', description: "Build and test failed. Error: ${e.message}")
+            }
+        }
     }
 
 }

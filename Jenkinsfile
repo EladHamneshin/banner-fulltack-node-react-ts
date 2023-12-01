@@ -36,15 +36,10 @@ pipeline {
         success {
             script {
                 echo 'Linting passed. You may now merge.'
-                githubChecks(
-                    name: 'Jenkins Build',
-                    conclusion: 'SUCCESS',
-                    detailsURL: 'https://your-build-url',
-                    output: [
-                        title: 'Jenkins Build',
-                        summary: 'Build and test passed successfully',
-                        text: 'Detailed information about the build results.'
-                    ]
+                setGitHubPullRequestStatus(
+                    context: 'Jenkins Build',
+                    state: 'success',
+                    description: 'Build and test passed',
                 )
             }
         }
@@ -52,15 +47,10 @@ pipeline {
         failure {
             script {
                 echo 'Pipeline failed. Blocking pull request merge.'
-                githubChecks(
-                    name: 'Jenkins Build',
-                    conclusion: 'FAILURE',
-                    detailsURL: 'https://your-build-url',
-                    output: [
-                        title: 'Jenkins Build',
-                        summary: "Build and test failed on branch: ${PR_BRANCH}",
-                        text: "Detailed information about the build failure."
-                    ]
+                setGitHubPullRequestStatus(
+                    context: 'Jenkins Build',
+                    state: 'failure',
+                    description: 'Build and test failed',
                 )
             }
         }

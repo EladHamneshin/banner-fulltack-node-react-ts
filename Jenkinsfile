@@ -2,16 +2,6 @@ pipeline {
     agent any
 
     stages {
-
-         stage('Checkout') {
-            steps {
-                script {
-                    def prBranch = "PR-${CHANGE_ID}-branch"
-                    checkout([$class: 'GitSCM', branches: [[name: prBranch]], userRemoteConfigs: [[url: 'https://github.com/EladHamneshin/banner-fulltack-node-react-ts']]])
-                }
-            }
-        }
-
         stage('Install') {
             steps {
                 script {

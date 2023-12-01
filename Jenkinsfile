@@ -62,7 +62,7 @@ pipeline {
         //     }
         // }
     }
-//test
+//test1
     triggers {
         githubPush()
     }

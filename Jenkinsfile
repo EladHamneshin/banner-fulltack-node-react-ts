@@ -1,15 +1,16 @@
 pipeline {
     agent any
 
-    environment {
-        PR_BRANCH = "${env.GITHUB_PULL_REQUEST}"
-    }
+    // environment {
+    //     PR_BRANCH = "${env.CHANGE_BRANCH}"//chck if this is correct
+    // }   
 
     stages {
         stage('Install') {
             steps {
                 script {
                     dir('client') {
+                        sh 'echo "Installing dependencies... test"'
                         sh 'echo "Installing dependencies..."'
                         sh 'npm install'
                     }

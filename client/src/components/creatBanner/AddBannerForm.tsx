@@ -124,6 +124,34 @@ const AddBannerForm = (props: Props) => {
                             </Box>
                             <TextField
                                 style={textFieldStyle}
+// <<<<<<< HEAD
+//                                 label="size"
+//                                 defaultValue="side"
+//                                 {...register("size", { required: true })}
+//                             >
+//                                 <MenuItem value="all">ALL</MenuItem>
+//                                 <MenuItem value="side">SIDE</MenuItem>
+//                                 <MenuItem value="top">TOP</MenuItem>
+//                             </Select>
+//                             <Typography color='red' variant='caption'>{errors.size?.message}</Typography>
+//                         </Box>
+
+//                         <Box>
+
+//                             <InputLabel htmlFor="kind">Select kind</InputLabel>
+//                             <Select
+//                                 style={textFieldStyle}
+//                                 label="kind"
+//                                 defaultValue="price"
+//                                 {...register("kind", { required: true })}
+//                             >
+//                                 <MenuItem value="price">price</MenuItem>
+//                                 <MenuItem value="sale">sale</MenuItem>
+//                             </Select>
+//                             <Typography color='red' variant='caption'>{errors.kind?.message}</Typography>
+//                         </Box>
+
+// =======
                                 type="file"
                                 label="Image"
                                 {...register("image")}
@@ -136,6 +164,7 @@ const AddBannerForm = (props: Props) => {
                                 {errors.image?.message}
                             </Typography>
                         </Grid>
+
                     </Box>
                 </Grid>
             }

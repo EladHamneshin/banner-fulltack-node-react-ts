@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import Header from '../components/Header-Footer/Header';
 
 describe('Header component', () => {
-  it('renders username correctly', () => {
+    it('renders username correctly', () => {      
     localStorage.setItem('name', 'John Doe');
     render(
       <MemoryRouter>

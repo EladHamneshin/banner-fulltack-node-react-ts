@@ -59,6 +59,7 @@ const ManageIcon = () => {
                             onClick={handleClick}
                             size="small"
                             sx={{ ml: 2 }}
+                            aria-label='IconButton'
                             aria-controls={open ? 'account-menu' : undefined}
                             aria-haspopup="true"
                             aria-expanded={open ? 'true' : undefined}

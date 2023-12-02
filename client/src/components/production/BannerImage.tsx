@@ -17,9 +17,11 @@ export default function BannerSide(props : Props) {
 
     const handelClickBanner = () => {
         setBanner(null);
-        setTimeout(() => {
-            getProducts()
-        }, 10000)
+        if (props.size === 'side'){
+            setTimeout(() => {
+                getProducts()
+            }, 10000)
+        }
     }
     async function getProducts() {
         let params = '';
@@ -38,7 +40,7 @@ export default function BannerSide(props : Props) {
    useEffect(() => {
     setTimeout(() => {
         getProducts()
-    }, 5000)
+    }, 2000)
    }, [])
 
 

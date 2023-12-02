@@ -73,7 +73,9 @@ app.use("/banners/api/upload", uploadRouter);
 app.use("/banners/api/ext/bannersProduct", productRouter)
 
 
+
 app.use(notFound);
+
 app.use(catchErrors);
 
 

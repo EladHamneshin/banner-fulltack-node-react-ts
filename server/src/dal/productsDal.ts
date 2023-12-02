@@ -3,7 +3,9 @@ import STATUS_CODES from "../utils/StatusCodes";
 
 const fetchAllProducts = async () => {
     try {
+
         const response = await fetch(`${process.env.ERP_BASE_URL}/shopInventory/`);
+
         if (!response.ok)
             throw new ApiError({ response }, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
 

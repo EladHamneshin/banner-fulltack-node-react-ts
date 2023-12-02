@@ -1,41 +1,37 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import NewBannerForm from '../../components/creatBanner/NewBannerHeder';
 import { Grid, Avatar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getProductById } from '../../api/products/productById';
 
-const product = {
-    id: "1",
-    name: "Product 1",
-    salePrice: 20,
-    quantity: 50,
-    description: "Description for Product 1",
-    category: "Category 1",
-    discountPercentage: 10,
-    rating: 4.5,
-    click: 100,
-    coordinate: {
-        longitude1: 34.7789,
-        longitude2: 34.7890,
-        longitude3: 34.7991,
-        latitude1: 32.0678,
-        latitude2: 32.0789,
-        latitude3: 32.0900
-    },
-    image: {
-        url: "http://localhost:5000/ford.png",
-        alt: "Product 1 Image"
-    }
-}
+
+
+
 
 const CreateBanner = () => {
+    const {productID} = useParams()
+    const [product , setProduct] = useState(null)
+    useEffect(() => {
+        const api =  async () => {
+            
+            const data = await getProductById(productID!)
+            console.log(data);
+            
+            setProduct (data)
+        }
+        api()
+        
+        
+    }, [])
     const navigate = useNavigate();
-    const handelClickLogin = () => { navigate(`login`) }
+    const handelClickLogin = () => { navigate(`/banners/login`) }
     useEffect(() => {
         if (localStorage.getItem('token') === null) { handelClickLogin() }
     }, [])
+    
     const paperStyle = {
         margin: '0 auto',
         boxShadow: '0',
@@ -60,6 +56,7 @@ const CreateBanner = () => {
                 },
             }}
         >
+
             {/* <Paper elevation={10}> */}
             <Grid
                 container
@@ -79,7 +76,7 @@ const CreateBanner = () => {
                 </Grid>
             </Grid>
             <Box sx={{ display: 'flex', padding: '33px', alignSelf: 'end' }}>
-                <NewBannerForm product={product} />
+                {product && <NewBannerForm product={product} />}
             </Box>
             {/* </Paper> */}
         </Grid>

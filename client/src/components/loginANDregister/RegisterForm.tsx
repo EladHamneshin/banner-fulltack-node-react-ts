@@ -33,7 +33,7 @@ const RegisterForm = () => {
   const onSubmit: SubmitHandler<any> = async (data) => {
 
     const moveToLogin = () => {
-      navigate(`/login`)
+      navigate(`/banners/login`)
     }
 
     const name = data.firstName + ' ' + data.lastName;
@@ -44,7 +44,7 @@ const RegisterForm = () => {
       name: name,
       email: email,
       password: password,
-      isAdmin: true
+      isadmin: true
     };
     setLoading(true)
     try {

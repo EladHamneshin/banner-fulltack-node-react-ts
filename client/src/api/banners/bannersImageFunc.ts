@@ -9,7 +9,7 @@ export const getAllBannersImage = async () => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: `${API_URL}/api/bannersImage`,
+    url: `${API_URL}/banners/api/bannersImage`,
     headers: {},
     data: data
   };

@@ -47,6 +47,7 @@ export async function insertBanners() {
       author: "Admin"
     },
     {
+
       productID: "456",
       categoryName: "789",
       clickCount: 0,
@@ -77,6 +78,7 @@ export async function insertBanners() {
       author: "Admin"
     },
     {
+
       productID: "012",
       categoryName: "345",
       clickCount: 0,

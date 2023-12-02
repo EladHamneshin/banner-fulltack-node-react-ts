@@ -8,7 +8,7 @@ import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 
 
-import { unless } from "./middleware/unless";
+// import { unless } from "./middleware/unless";
 
 // Setup .env variables for app usage
 dotenv.config();
@@ -22,6 +22,8 @@ import productRouter from "./routes/productRoutes";
 import { catchErrors, notFound } from "./middleware/errorNOTfound";
 import routerBannersImage from "./routes/bannersImage-route";
 import uploadRouter from "./routes/upLoad";
+import { insertBanners } from './models/bannersModel';
+import { connectToPostgres } from './configs/pgConnect';
 
 // Setup constant variables
 const PORT = process.env.PORT || 5000;
@@ -44,12 +46,12 @@ app.use(morgan("dev"));
 
 // Limit rate of requests
 // Alternatively, you can pass through specific routes for different limits based on route
-app.use(
-  rateLimit({
-    windowMs: RATE_TIME_LIMIT * 60 * 1000,
-    max: RATE_REQUEST_LIMIT,
-  }),
-);
+// app.use(
+//   rateLimit({
+//     windowMs: RATE_TIME_LIMIT * 60 * 1000,
+//     max: RATE_REQUEST_LIMIT,
+//   }),
+// );
 
 // Enable CORS
 app.use(cors());
@@ -63,27 +65,33 @@ app.use(helmet());
 // app.use(unless(["/users/login"], verify));
 
 
-app.use("/api/users", user);
-app.use("/api/bannersImage", routerBannersImage);
-app.use("/api/upload", uploadRouter);
+app.use("/banners/api/users", user);
+app.use("/banners/api/bannersImage", routerBannersImage);
+app.use("/banners/api/upload", uploadRouter);
 
 
-app.use("/api/ext/bannersProduct", productRouter)
+app.use("/banners/api/ext/bannersProduct", productRouter)
+
 
 app.use(notFound);
 app.use(catchErrors);
 
 
-
-
-
 // Listen to specified port in .env or default 5000
+
 if (process.env.NODE_ENV !== "test") {
-  connectToDB().then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server is listening on: ${PORT}`);
-    });
-  }).catch((err) => console.error(err))
+connectToPostgres().then(() => {
+connectToDB()}).then((res) => {
+
+  console.log('Connecting to mongodb');
+  // איתוחל דאטה ראשוני
+
+  // insertBanners()
+  app.listen(PORT, () => {
+    console.log(`Server is listening on: ${PORT}`);
+  });
+}).catch((err) => console.error(err))
 }
+
 
 

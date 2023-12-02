@@ -11,7 +11,8 @@ const styleContainer = {
   height: '99%',
   width: '99%',
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
+  
 };
 
 const styleHeaderBox = {
@@ -19,17 +20,22 @@ const styleHeaderBox = {
   position: 'fixed',
   top: 0,
   width: '100%',
-  height: '60px'
+  height: '60px',
+  zIndex:'5000'
 };
 
 const styleMainBox = {
+  marginLeft: '120px',
+  marginRight: '120px',
+  // marginTop: '120px',
   order: 2,
   flexGrow: 1,
   padding: '10px',
   display: 'flex',
   marginTop: '60px',
-  marginBottom: '60px',
-  width: '70vw',
+  // marginBottom: '60px',
+  maxWidth: '70wh',
+  
 };
 
 const styleFooterBox = {
@@ -45,7 +51,7 @@ const styleFooterBox = {
 
 const Deshbord = () => {
   const navigate = useNavigate();
-  const handelClickLogin = () => { navigate(`/login`) }
+  const handelClickLogin = () => { navigate(`/banners/login`) }
   useEffect(() => {
     if (localStorage.getItem('token') === null) { handelClickLogin() }
 

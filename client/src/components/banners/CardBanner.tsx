@@ -34,7 +34,7 @@ const CardBanner = (props: Props) => {
 
 
   const navigate = useNavigate();
-  const handelClickLogin = () => { navigate(`/login`) }
+  const handelClickLogin = () => { navigate(`/banners/login`) }
   if (localStorage.getItem('token') === null) { handelClickLogin() }
 
 

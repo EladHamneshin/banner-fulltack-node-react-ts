@@ -1,11 +1,16 @@
 pipeline {
     agent any
 
+    // environment {
+    //     PR_BRANCH = "${env.CHANGE_BRANCH}"//chck if this is correct
+    // }   
+
     stages {
         stage('Install') {
             steps {
                 script {
                     dir('client') {
+                        sh 'echo "Installing dependencies... test"'
                         sh 'echo "Installing dependencies..."'
                         sh 'npm install'
                     }
@@ -17,44 +22,40 @@ pipeline {
         //     steps {
         //         script {
         //             dir('client') {
-        //                 try {
-        //                     sh 'npm run lint'
-        //                 } catch (Exception e) {
-        //                     error("Linting failed. Please fix the linting errors before merging.")
-        //                 }
+        //                 sh 'npm run lint'
         //             }
         //         }
         //     }
-
-        //     post {
-        //         success {
-        //             sh 'echo "Linting passed. You may now merge."'
-        //             githubNotify context: 'Lint', status: 'SUCCESS'
-        //             setBuildStatus("Build complete", "SUCCESS");
-        //         }
-        //         failure {
-        //             sh 'echo "Linting failed. Please fix the linting errors before merging."'
-        //             githubNotify context: 'Lint', status: 'FAILURE'
-        //             setBuildStatus("Build complete", "FAILURE");
-        //         }
-        //     }
         // }
+    }
 
+    // triggers {
+    //     githubPush()
+    // }
+
+    post {
+        success {
+            script {
+                echo 'Linting passed. You may now merge.'
+                setGitHubPullRequestStatus(
+                    context: 'Jenkins Build',
+                    state: 'SUCCESS',
+                    message: 'Build and test passed',
+                )
+            }
+        }
         
-        // stage('Build') {
-        //     steps {
-        //         script {
-        //             dir('client') {
-        //                 sh 'echo "Building..."'
-        //                 sh 'npm run build'
-        //             }
-        //         }
-        //     }
-        // }
+        failure {
+            script {
+                echo 'Pipeline failed. Blocking pull request merge.'
+                setGitHubPullRequestStatus(
+                    context: 'Jenkins Build',
+                    state: 'FAILURE',
+                    message: 'Build and test failed',
+                )
+            }
+        }
     }
 
-    triggers {
-        githubPush()
-    }
-    //TEST1
 }
+// Path: Jenkinsfile1

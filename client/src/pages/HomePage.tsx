@@ -16,7 +16,7 @@ const HomePage = () => {
     const navigate = useNavigate();
 
     const handleLoginRedirect = () => {
-        navigate('/login');
+        navigate('/banner/login');
     };
 
     useEffect(() => {
@@ -48,19 +48,19 @@ const HomePage = () => {
     // }, []);
     const [bannerSide, setbannerSide] = useState<JSX.Element | null>(null)
     const [bannerTop, setbannerTop] = useState<JSX.Element | null>(null)
-  useEffect(() => {
-    setbannerSide(<BannerSide limit='1' size='side' />)
-    setbannerTop(<BannerSide limit='1' size='top'/>)
-    // return (setbannerSide(null))
-  }, [])
+    useEffect(() => {
+        setbannerSide(<BannerSide limit='1' size='side' />)
+        setbannerTop(<BannerSide limit='1' size='top' />)
+        return (setbannerSide(null))
+    }, [])
 
     return (
         <Box>
-              {bannerSide && bannerSide}
-              {bannerTop && bannerTop}
+            {bannerSide && bannerSide}
+            {bannerTop && bannerTop}
             <Box
                 sx={{
-                    width:'100%'
+                    width: '100%'
                 }}>
                 <AllbannersHomePage />
             </Box>
@@ -70,7 +70,7 @@ const HomePage = () => {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 padding: 2,
-                gap: 2, 
+                gap: 2,
             }}>
                 <Box sx={{ flex: 1 }}>
                     <BannersTable pro={[]} />

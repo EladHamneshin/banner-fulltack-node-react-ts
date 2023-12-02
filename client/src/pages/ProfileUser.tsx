@@ -11,7 +11,7 @@ const ProfileUser = () => {
     const navigate = useNavigate();
 
     const handleLoginRedirect = () => {
-        navigate('/login');
+        navigate('/banner/login');
     };
 
     useEffect(() => {

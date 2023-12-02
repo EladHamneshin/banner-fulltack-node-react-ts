@@ -7,7 +7,7 @@ import userService from "../services/user-service";
 import STATUS_CODES from "../utils/StatusCodes";
 import { registerUserValidation, loginUserValidation } from "../utils/validations/userValidation";
 import generateToken from "../utils/jwtUtils";
-
+import jwt from 'jsonwebtoken';
 
 // @desc Auth user & login
 // @route POST /api/users/login
@@ -17,17 +17,19 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
   if (error)
     throw new ApiError({}, STATUS_CODES.BAD_REQUEST, error.message);
 
-  if (req.cookies.jwt)
-    throw new ApiError({}, STATUS_CODES.BAD_REQUEST, 'User already logged in');
+  if (req.cookies.jwt) {
+    jwt.verify(req.cookies.jwt, process.env.JWT_SECRET!, (err: any, decoded: any) => {
+      if (!err) throw new ApiError({}, STATUS_CODES.BAD_REQUEST, 'User already logged in');
+    }
+    )
+  }
 
   const { email, password } = req.body;
 
   const user = await userService.authUser(email, password);
-  console.log(user);
-
   generateToken(res, user.id, user.isadmin);
 
-  res.status(STATUS_CODES.OK).json(new ApiSuccess({ user }, "Success!"));
+  res.status(STATUS_CODES.OK).json(new ApiSuccess( user , "Success!"));
 });
 
 

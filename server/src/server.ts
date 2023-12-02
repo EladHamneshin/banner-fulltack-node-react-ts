@@ -80,6 +80,8 @@ app.use(catchErrors);
 
 
 // Listen to specified port in .env or default 5000
+
+if (process.env.NODE_ENV !== "test") {
 connectToPostgres().then(() => {
 connectToDB()}).then((res) => {
 
@@ -91,5 +93,7 @@ connectToDB()}).then((res) => {
     console.log(`Server is listening on: ${PORT}`);
   });
 }).catch((err) => console.error(err))
+}
+
 
 

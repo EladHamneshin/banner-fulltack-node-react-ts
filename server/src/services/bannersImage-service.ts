@@ -49,9 +49,11 @@ export const updateBannerImage = async (bannerID: string, data: Partial<BannerIn
 };
 
 // Function to create bannerImage by productID
-export const createBannerImage = async (productID: string, data: Partial<BannerInterface>): Promise<BannerInterface> => {
-  return await dalCreateBannerImage(productID, data);
-};
+
+export const createBannerImage = async (productID: string, data: Partial<BannerInterface>,userID:string): Promise<BannerInterface> => {
+  return await dalCreateBannerImage(productID,data,userID);
+ };
+
 
 // Function to delete bannerImage by bannerID
 export const deleteBannerImage = async (bannerID: string): Promise<BannerInterface | null> => {

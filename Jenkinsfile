@@ -6,6 +6,19 @@ pipeline {
     }   
 
     stages {
+        stage('Checkout') {
+            steps {
+                checkout([
+                    $class: 'GitSCM', 
+                    branches: [[name: "${PR_BRANCH}"]],
+                    doGenerateSubmoduleConfigurations: false, 
+                    extensions: [], 
+                    submoduleCfg: [], 
+                    userRemoteConfigs: [[url: 'https://github.com/EladHamneshin/banner-fulltack-node-react-ts.git']]
+                ])
+            }
+        }
+
         stage('Install') {
             steps {
                 script {

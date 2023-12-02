@@ -10,7 +10,7 @@ export const getProductById = async (productID: string) => {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `https://erp-server-zqf9.onrender.com/api/inventory/${productID}`,
+        url: `https://erp-server-zqf9.onrender.com/inventory/${productID}`,
 
     };
     try {

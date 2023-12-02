@@ -2,7 +2,7 @@ import {useEffect,useState} from 'react'
 import { Box, Button, Card } from '@mui/material';
 import { BannerInterface } from '../../types/BannerInterface';
 import { getBannerImageByParams } from '../../api/production/getBannerImage';
-
+ 
 type Props = {
     limit ?: string;
     size : string;

@@ -33,45 +33,29 @@ pipeline {
     //     githubPush()
     // }
 
-    // post {
-    //     success {
-    //         script {
-    //             echo 'Linting passed. You may now merge.'
-    //             setGitHubPullRequestStatus(
-    //                 state: 'SUCCESS',
-    //                 message: 'Build and test passed',
-    //             )
-    //         }
-    //     }
-        
-    //     failure {
-    //         script {
-    //             echo 'Pipeline failed. Blocking pull request merge.'
-    //             setGitHubPullRequestStatus(
-    //                 state: 'FAILURE',
-    //                 message: 'Build and test failed',
-    //             )
-    //         }
-    //     }
-    // }
-
     post {
-    success {
-        script {
-            echo 'Linting passed. You may now merge.'
-            githubNotify status: 'SUCCESS',
-                         description: 'Build and test passed'
+        success {
+            script {
+                echo 'Linting passed. You may now merge.'
+                setGitHubPullRequestStatus(
+                    state: 'SUCCESS',
+                    message: 'Build and test passed',
+                )
+            }
+        }
+        
+        failure {
+            script {
+                echo 'Pipeline failed. Blocking pull request merge.'
+                setGitHubPullRequestStatus(
+                    state: 'FAILURE',
+                    message: 'Build and test failed',
+                )
+            }
         }
     }
-    
-    failure {
-        script {
-            echo 'Pipeline failed. Blocking pull request merge.'
-            githubNotify status: 'FAILURE',
-                         description: 'Build and test failed'
-        }
-    }
-}
+
+  
 
 }
 // Path: Jenkinsfile

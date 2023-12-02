@@ -1,4 +1,4 @@
-import { Box, Card, CardActions, CardContent, CardMedia, Collapse, Grid, IconButton, IconButtonProps, Typography, styled } from '@mui/material';
+import { Box, Card, CardActions, CardContent, CardMedia, Collapse, IconButton, IconButtonProps, Typography, styled } from '@mui/material';
 import { useState } from 'react'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -7,6 +7,7 @@ import { ResponseBanner } from '../../types/BannerInterface';
 import { deleteByBannerID } from '../../api/banners/deleteByBannerID';
 
 import { useNavigate } from 'react-router-dom';
+import Circular from '../Circular';
 
 
 type Props = {
@@ -33,7 +34,7 @@ const CardBanner = (props: Props) => {
 
 
   const navigate = useNavigate();
-  const handelClickLogin = () => { navigate(`/login`) }
+  const handelClickLogin = () => { navigate(`/banners/login`) }
   if (localStorage.getItem('token') === null) { handelClickLogin() }
 
 
@@ -68,24 +69,9 @@ const CardBanner = (props: Props) => {
   };
   return (<>
     {loading ?
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-around',
-          minWidth: '420px',
-          minHeight: '360px'
-        }}>
-        <Grid
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}>
-          <Typography>Loding.....</Typography>
-          {message && <Typography>{message}</Typography>}
-        </Grid>
+      <Box>
+        <Circular />
+        {message && <Typography>{message}</Typography>}
       </Box>
       :
       <Card

@@ -11,7 +11,7 @@ export  const uploadImageToServer = async (image: File) => {
 
     let configUpImage = {
         method: "post",
-        url: `${API_URI}/api/upload/image`,
+        url: `${API_URI}/banners/api/upload/image`,
         data: formData
     }
 

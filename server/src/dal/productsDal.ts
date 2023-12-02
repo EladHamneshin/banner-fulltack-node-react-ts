@@ -3,7 +3,7 @@ import STATUS_CODES from "../utils/StatusCodes";
 
 const fetchAllProducts = async () => {
     try {
-        const response = await fetch(`${process.env.ERP_BASE_URL}/api/shopInventory/`);
+        const response = await fetch(`${process.env.ERP_BASE_URL}/shopInventory/`);
         if (!response.ok)
             throw new ApiError({ response }, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
 
@@ -16,7 +16,7 @@ const fetchAllProducts = async () => {
 
 const fetchProductById = async (id: string) => {
     try {
-        const response = await fetch(`${process.env.ERP_BASE_URL}/api/shopInventory/${id}`);
+        const response = await fetch(`${process.env.ERP_BASE_URL}/shopInventory/${id}`);
         if (!response.ok)
             throw new ApiError({ response }, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
 
@@ -29,7 +29,7 @@ const fetchProductById = async (id: string) => {
 
 const getProductByCategory = async (category: string) => {
     try {
-        const response = await fetch(`${process.env.ERP_BASE_URL}/api/shopInventory?category=${category}`);
+        const response = await fetch(`${process.env.ERP_BASE_URL}/shopInventory?category=${category}`);
         if (!response.ok)
             throw new ApiError({ response }, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
 
@@ -42,7 +42,7 @@ const getProductByCategory = async (category: string) => {
 
 const getAllCategoryNames = async () => {
     try {
-        const response = await fetch(`${process.env.ERP_BASE_URL}/api/shopInventory/categories`);
+        const response = await fetch(`${process.env.ERP_BASE_URL}/shopInventory/categories`);
         if (!response.ok)
             throw new ApiError({ response }, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
 
@@ -55,7 +55,7 @@ const getAllCategoryNames = async () => {
 
 const getProductByProductName = async (product: string) => {
     try {
-        const response = await fetch(`${process.env.ERP_BASE_URL}/api/shopInventory?search=${product}`);
+        const response = await fetch(`${process.env.ERP_BASE_URL}/shopInventory?search=${product}`);
         if (!response.ok)
             throw new ApiError({ response }, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong');
 

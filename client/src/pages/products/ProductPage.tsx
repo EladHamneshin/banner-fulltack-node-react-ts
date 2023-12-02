@@ -9,7 +9,7 @@ import { bannerByProducdID } from '../../api/banners/bannerByProducdID';
 import { ResponseBanner } from '../../types/BannerInterface';
 import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
 import CardHomePage from '../../components/cards/CardHomePage';
-import BannerSide from '../../components/production/BannerSide';
+import BannerSide from '../../components/production/BannerImage';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 
 const ProductPage = () => {
@@ -31,7 +31,9 @@ const ProductPage = () => {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const result = await getProductById(String(productId));
+                const result = await getProductById(productId!);
+                console.log(result);
+                
                 setProduct(result);
             } catch (error) {
                 console.error('Error fetching product:', error);
@@ -86,7 +88,7 @@ const ProductPage = () => {
     }
 
 
-    if (message) { return <Typography variant="h3">{message}</Typography> }
+    // if (message) { return <Typography variant="h3">{message}</Typography> }
 
 
 

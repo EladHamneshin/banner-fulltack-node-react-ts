@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    // environment {
-    //     PR_BRANCH = "${env.CHANGE_BRANCH}"//chck if this is correct
-    // }   
+    environment {
+        PR_BRANCH = "${env.CHANGE_BRANCH}"//chck if this is correct
+    }   
 
     stages {
         stage('Install') {

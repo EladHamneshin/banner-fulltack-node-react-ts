@@ -38,7 +38,6 @@ pipeline {
             script {
                 echo 'Linting passed. You may now merge.'
                 setGitHubPullRequestStatus(
-                    context: 'Jenkins Build',
                     state: 'SUCCESS',
                     message: 'Build and test passed',
                 )
@@ -49,7 +48,6 @@ pipeline {
             script {
                 echo 'Pipeline failed. Blocking pull request merge.'
                 setGitHubPullRequestStatus(
-                    context: 'Jenkins Build',
                     state: 'FAILURE',
                     message: 'Build and test failed',
                 )

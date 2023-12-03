@@ -3,14 +3,14 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 const columns: GridColDef[] = [
   // { field: 'id', headerName: 'ID', width: 20 },
-  { field: 'name', headerName: 'Name', width: 40 },
+  { field: 'name', headerName: 'Name', width: 80 },
   { field: 'category', headerName: 'Category', width: 80 },
   // { field: 'quantity', headerName: 'Quantity', width: 80 },
-  { field: 'rating', headerName: 'Rate', width: 40 },
+  { field: 'rating', headerName: 'Rate', width: 80 },
   // { field: 'clickCount', headerName: 'Clicks', width: 60 },
-  { field: 'salePrice', headerName: 'Price', width: 50 },
+  { field: 'salePrice', headerName: 'Price', width: 80 },
   // { field: 'discountPercentage', headerName: 'Discount', width: 80 },
-  { field: 'realPrice', headerName: 'Sale', width: 40 },
+  { field: 'realPrice', headerName: 'Sale', width: 80 },
   // { field: 'description', headerName: 'Description', width: 110 }
 ];
 export type product = {
@@ -42,7 +42,7 @@ export default function ProductTable({ prod }: { prod: product[] }) {
       })
   })
   return (
-    <Box sx={{ height: '75vh' }}>
+    <Box sx={{ height: '60vh', width: '40vw' }}>
       <DataGrid
         rows={rows}
         columns={columns}

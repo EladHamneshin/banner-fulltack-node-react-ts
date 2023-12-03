@@ -1,14 +1,18 @@
 pipeline {
     agent any
 
-    // environment {
-    //     PR_BRANCH = "${env.CHANGE_BRANCH}"//chck if this is correct
-    // }   
+    environment {
+        PR_BRANCH = "${env.CHANGE_BRANCH}"//chck if this is correct
+    }   
 
     stages {
         stage('Checkout') {
-            steps {
-                checkout scm
+              steps {
+                script {
+                    // Assuming GITHUB_SOURCE_BRANCH is the environment variable provided by Jenkins
+                    def pullRequestBranch = env.GITHUB_SOURCE_BRANCH
+                    checkout([$class: 'GitSCM', branches: [[name: "*/${env.CHANGE_BRANCH}"]], userRemoteConfigs: [[url: 'https://github.com/EladHamneshin/banner-fulltack-node-react-ts']]])
+                }
             }
         }
 
@@ -16,7 +20,7 @@ pipeline {
             steps {
                 script {
                     dir('client') {
-                        sh 'echo "test1"'
+                        sh 'echo "test3"'
                         sh 'echo "Installing dependencies..."'
                         sh 'npm install'
                     }

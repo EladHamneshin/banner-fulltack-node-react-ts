@@ -1,4 +1,3 @@
-import { CircularProgress } from "@mui/material";
 import { Box, Stack } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -6,11 +5,12 @@ import { bannerByUserID } from "../../api/banners/bannerByUserID";
 import CardBanner from "../../components/cards/CardBanner";
 import { ResponseBanner } from "../../types/BannerInterface";
 import BannerNotFind from "./BannerNotFind";
+import Circular from "../../components/Circular";
 
 const BannerByUserID = () => {
     const navigate = useNavigate();
     const handleClickLogin = () => {
-        navigate('login');
+        navigate('/banner/login');
     };
 
     useEffect(() => {
@@ -19,9 +19,7 @@ const BannerByUserID = () => {
         }
     }, []);
 
-    const [message, setMessage] = useState('');
-    console.log(message);
-    
+    const [, setMessage] = useState('');
     const [banners, setBanners] = useState<ResponseBanner[] | string>([]);
     const userID = localStorage.getItem('userID');
 
@@ -56,7 +54,7 @@ const BannerByUserID = () => {
         <Box>
             {loading ? (
                 <Stack justifyContent="center" alignItems="center" height="100vh">
-                    <CircularProgress />
+                    <Circular />
                 </Stack>
             ) : (
                 <Stack spacing={2}>

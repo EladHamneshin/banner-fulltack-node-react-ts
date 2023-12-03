@@ -46,12 +46,12 @@ app.use(morgan("dev"));
 
 // Limit rate of requests
 // Alternatively, you can pass through specific routes for different limits based on route
-app.use(
-  rateLimit({
-    windowMs: RATE_TIME_LIMIT * 60 * 1000,
-    max: RATE_REQUEST_LIMIT,
-  }),
-);
+// app.use(
+//   rateLimit({
+//     windowMs: RATE_TIME_LIMIT * 60 * 1000,
+//     max: RATE_REQUEST_LIMIT,
+//   }),
+// );
 
 // Enable CORS
 app.use(cors());
@@ -65,21 +65,23 @@ app.use(helmet());
 // app.use(unless(["/users/login"], verify));
 
 
-app.use("/api/users", user);
-app.use("/api/bannersImage", routerBannersImage);
-app.use("/api/upload", uploadRouter);
+app.use("/banners/api/users", user);
+app.use("/banners/api/bannersImage", routerBannersImage);
+app.use("/banners/api/upload", uploadRouter);
 
 
-app.use("/api/ext/bannersProduct", productRouter)
+app.use("/banners/api/ext/bannersProduct", productRouter)
 
-app.use(catchErrors);
 
 
 app.use(notFound);
 
+app.use(catchErrors);
 
 
 // Listen to specified port in .env or default 5000
+
+if (process.env.NODE_ENV !== "test") {
 connectToPostgres().then(() => {
 connectToDB()}).then((res) => {
 
@@ -91,5 +93,7 @@ connectToDB()}).then((res) => {
     console.log(`Server is listening on: ${PORT}`);
   });
 }).catch((err) => console.error(err))
+}
+
 
 

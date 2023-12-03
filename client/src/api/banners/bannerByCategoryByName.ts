@@ -14,7 +14,7 @@ export const bannerByCategoryByName = async (name: string) => {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: ` ${API_URL}/api/bannersImage/category/${name}`,
+        url: ` ${API_URL}/banners/api/bannersImage/category/${name}`,
         headers: {},
         data: data
     };

@@ -16,7 +16,12 @@ import { useNavigate } from 'react-router-dom';
 const ManageIcon = () => {
     const navigate = useNavigate();
     const handelClickLogin = () => {
-        navigate(`/login`)
+        navigate(`/banners/login`)
+        window.location.reload()
+    }
+    const handelClickProfil = () => {
+        navigate(`/banners/banners/user/profil`)
+        // window.location.reload()
     }
     // const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
@@ -54,6 +59,7 @@ const ManageIcon = () => {
                             onClick={handleClick}
                             size="small"
                             sx={{ ml: 2 }}
+                            aria-label='IconButton'
                             aria-controls={open ? 'account-menu' : undefined}
                             aria-haspopup="true"
                             aria-expanded={open ? 'true' : undefined}
@@ -102,7 +108,7 @@ const ManageIcon = () => {
                     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                 >
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem onClick={handelClickProfil}>
                         <Avatar /> Profile
                     </MenuItem>
                     <MenuItem onClick={handleClose}>
@@ -129,7 +135,7 @@ const ManageIcon = () => {
                     </MenuItem>
                 </Menu>
             </React.Fragment>
-        </Box>
+        </Box >
     )
 }
 

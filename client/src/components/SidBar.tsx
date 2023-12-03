@@ -6,6 +6,8 @@ import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
 import CardTravelIcon from '@mui/icons-material/CardTravel';
 import { useNavigate } from 'react-router-dom';
 import ViewDaySharpIcon from '@mui/icons-material/ViewDaySharp';
+import AddCardIcon from '@mui/icons-material/AddCard';
+import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions';
 
 const SidBar = () => {
     const navigate = useNavigate();
@@ -13,11 +15,17 @@ const SidBar = () => {
     const [state, setState] = useState({ left: false });
 
     const handelClickAllBanners = () => {
-        navigate(`/banners`);
+        navigate(`/banners/banners`);
     };
+    const handelClickAllProducts = () => {
+        navigate(`/banners/banners/products`);
+    };
+    // const handelClickCreateBanners = () => {
+    //     navigate(`/banners/createBanner`);
+    // };
 
     const handelClickMyBanners = () => {
-        navigate(`banners/user/${localStorage.getItem('name')}`);
+        navigate(`/banners/banners/user/${localStorage.getItem('name')}`);
     };
 
     const toggleDrawer = (_anchor: 'left', open: boolean) => (
@@ -42,20 +50,26 @@ const SidBar = () => {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['All banners', 'My bannars', 'Send email', 'Drafts'].map((text) => (
+                {['All banners', 'All products', 'My bannars', 'Drafts'].map((text) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton
                             onClick={() => {
                                 if (text === 'All banners') {
                                     handelClickAllBanners();
+                                } else if (text === 'All products') {
+                                    handelClickAllProducts()
                                 } else if (text === 'My bannars') {
                                     handelClickMyBanners();
+                                } else if (text === 'Add banner') {
+                                    // handelClickCreateBanners();
                                 }
                             }}
                         >
                             <ListItemIcon>
                                 {text === 'All banners' && <CardTravelIcon />}
+                                {text === 'All products' && <IntegrationInstructionsIcon />}
                                 {text === 'My bannars' && <ViewDaySharpIcon />}
+                                {text === 'Add banner' && <AddCardIcon />}
                             </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>
@@ -79,7 +93,7 @@ const SidBar = () => {
     );
 
     return (
-        <div>
+        <Box sx={{ zIndex:'9100'}}>
             <ListItemButton onClick={toggleDrawer('left', true)}>
                 <MenuOpenOutlinedIcon
                     sx={{
@@ -90,7 +104,7 @@ const SidBar = () => {
             <Drawer anchor="left" open={state.left} onClose={toggleDrawer('left', false)}>
                 {list('left')}
             </Drawer>
-        </div>
+        </Box>
     );
 };
 

@@ -35,7 +35,11 @@ function centerAspectCrop(
     )
 }
 
-export default function AppKaka() {
+type Props = {
+    setimage: React.Dispatch<React.SetStateAction<string  | null>>
+}
+
+export default function AppKaka(props : Props) {
     const [imgSrc, setImgSrc] = useState('')
     const previewCanvasRef = useRef<HTMLCanvasElement>(null)
     const imgRef = useRef<HTMLImageElement>(null)
@@ -110,6 +114,7 @@ export default function AppKaka() {
             URL.revokeObjectURL(blobUrlRef.current)
         }
         blobUrlRef.current = URL.createObjectURL(blob)
+        props.setimage(blobUrlRef.current)
         hiddenAnchorRef.current!.href = blobUrlRef.current
         hiddenAnchorRef.current!.click()
     }

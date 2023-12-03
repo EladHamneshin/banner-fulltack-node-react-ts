@@ -5,6 +5,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Product } from '../../types/ProductInterface';
 import { v4 as uuid } from 'uuid'
+import Circular from '../Circular';
+import AppKaka from '../../kaka/CropKaka/AppKaka';
+import Canvas from '../../kaka/Canvas';
 
 // type SchemaData : yup.ObjectSchema<{
 //     name: string;
@@ -29,12 +32,16 @@ type Props = {
     onSubmitForm: (data: any) => Promise<void>
 }
 
+
+
 const AddBannerForm = (props: Props) => {
-    
+
+
     const product = props.product
-    
+
     const [message] = useState('');
     const [loading, setLoading] = useState(false);
+
 
 
 
@@ -61,105 +68,94 @@ const AddBannerForm = (props: Props) => {
 
 
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-    {loading ?
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-around',
-                minWidth: '420px',
-                minHeight: '360px',
-            }}
-        >
-            <Grid
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}
-            >
-                <Typography>Loding.....</Typography>
-                {message && <Typography>{message}</Typography>}
-            </Grid>
-        </Box>
-        :
-        <Grid>
-            <Box sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-            }}>
+    return (
+        <form onSubmit={handleSubmit(onSubmit)}>
+            {loading ?
+                <Box>
+                    <Circular />
+                    <Typography>Loding.....</Typography>
+                    {message && <Typography>{message}</Typography>}
+                </Box>
+                :
+                <Grid>
+                    <Box sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                    }}>
 
 
-                <Grid key={uuid()} sx={{ display: 'flex', flexDirection: 'column', }}>
+                        <Grid key={uuid()} sx={{ display: 'flex', flexDirection: 'column', }}>
 
 
-                    <TextField style={textFieldStyle} label="Name" value={`${product.name} ${product.category}`}
-                        {...register("name", { required: true, maxLength: 20 })} />
-                    <Typography color='red' variant='caption'> {errors.name?.message} </Typography>
+                            <TextField style={textFieldStyle} label="Name" value={`${product.name}`}
+                                {...register("name", { required: true, maxLength: 20 })} />
+                            <Typography color='red' variant='caption'> {errors.name?.message} </Typography>
 
-                    <TextField style={textFieldStyle} label="Discription" placeholder="Discription"
-                        {...register("text", { required: true, maxLength: 20 })} />
-                    <Typography color='red' variant='caption'> {errors.text?.message} </Typography>
+                            <TextField style={textFieldStyle} label="Discription" placeholder="Discription"
+                                {...register("text", { required: true, maxLength: 20 })} />
+                            <Typography color='red' variant='caption'> {errors.text?.message} </Typography>
 
-                    <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
-                        <Box>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
+                                <Box>
 
-                            <InputLabel htmlFor="size">Select size</InputLabel>
-                            <Select
+                                    <InputLabel htmlFor="size">Select size</InputLabel>
+                                    <Select
+                                        style={textFieldStyle}
+                                        label="size"
+                                        defaultValue="side"
+                                        {...register("size", { required: true })}
+                                    >
+                                        <MenuItem value="all">ALL</MenuItem>
+                                        <MenuItem value="side">SIDE</MenuItem>
+                                        <MenuItem value="top">TOP</MenuItem>
+                                    </Select>
+                                    <Typography color='red' variant='caption'>{errors.size?.message}</Typography>
+                                </Box>
+
+                                <Box>
+
+                                    <InputLabel htmlFor="kind">Select kind</InputLabel>
+                                    <Select
+                                        style={textFieldStyle}
+                                        label="kind"
+                                        defaultValue="price"
+                                        {...register("kind", { required: true })}
+                                    >
+                                        <MenuItem value="price">price</MenuItem>
+                                        <MenuItem value="saile">saile</MenuItem>
+                                    </Select>
+                                    <Typography color='red' variant='caption'>{errors.kind?.message}</Typography>
+                                </Box>
+
+                            </Box>
+                            <TextField
                                 style={textFieldStyle}
-                                label="size"
-                                defaultValue="side"
-                                {...register("size", { required: true })}
-                            >
-                                <MenuItem value="all">ALL</MenuItem>
-                                <MenuItem value="side">SIDE</MenuItem>
-                                <MenuItem value="top">TOP</MenuItem>
-                            </Select>
-                            <Typography color='red' variant='caption'>{errors.size?.message}</Typography>
-                        </Box>
+                                type="file"
+                                label="Image"
+                                {...register("image")}
+                                inputProps={{
+                                    accept: "image/*",
+                                }}
+                            //    onChange={getImageFile} 
+                            />
+                            <Typography color="red" variant="caption">
+                                {errors.image?.message}
+                            </Typography>
 
-                        <Box>
+                             <Canvas/> 
 
-                            <InputLabel htmlFor="kind">Select kind</InputLabel>
-                            <Select
-                                style={textFieldStyle}
-                                label="kind"
-                                defaultValue="price"
-                                {...register("kind", { required: true })}
-                            >
-                                <MenuItem value="price">price</MenuItem>
-                                <MenuItem value="saile">saile</MenuItem>
-                            </Select>
-                            <Typography color='red' variant='caption'>{errors.kind?.message}</Typography>
-                        </Box>
+                        </Grid>
+
 
                     </Box>
-                    <TextField
-                        style={textFieldStyle}
-                        type="file"
-                        label="Image"
-                        {...register("image")}
-                        inputProps={{
-                            accept: "image/*",
-                        }}
-                    //    onChange={getImageFile} 
-                    />
-                    <Typography color="red" variant="caption">
-                        {errors.image?.message}
-                    </Typography>
                 </Grid>
-            </Box>
-        </Grid>
-    }
+            }
 
-    <Button type="submit" variant="contained" color="primary">
-        Submit
-    </Button>
-</form>
-  )
+            <Button type="submit" variant="contained" color="primary">
+                Submit
+            </Button>
+        </form>
+    )
 }
 
 export default AddBannerForm

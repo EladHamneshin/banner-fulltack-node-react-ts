@@ -15,7 +15,7 @@ export const createBanner = async (newBanner: any, productID : string) => {
             let configCraete = {
                 method: 'post',
                 maxBodyLength: Infinity,
-                url: `${API_URI}/api/bannersImage/${productID}`,
+                url: `${API_URI}/banners/api/bannersImage/${productID}`,
                 data: newBanner
             };
             const res = await axios.request(configCraete)

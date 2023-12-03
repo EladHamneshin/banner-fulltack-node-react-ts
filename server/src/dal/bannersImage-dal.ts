@@ -37,7 +37,7 @@ export const getBannersImageByCategory = async (categoryName: string): Promise<B
 // Function to get bannersImage by user
 export const getBannersImageByUser = async (userID: string): Promise<BannerInterface[]> => {
   try {
-    const data: BannerInterface[] = await bannerModel.find({ userID });
+    const data: BannerInterface[] = await bannerModel.find({ author: userID });
     return data;
   } catch (error) {
     throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to get bannersImages by user, stack:1");
@@ -55,11 +55,16 @@ export const updateBannerImage = async (bannerID: string, data: Partial<BannerIn
 };
 
 // Function to create bannerImage by productID
-export const createBannerImage = async (productID: string, data: Partial<BannerInterface>): Promise<BannerInterface> => {
+export const createBannerImage = async (productID: string, data: Partial<BannerInterface>, userID: string): Promise<BannerInterface> => {
   try {
-    const createdBanner: BannerInterface = await bannerModel.create({ ...data, productID: productID });
+    console.log(data);
+    
+    const createdBanner: BannerInterface = await bannerModel.create({ ...data, author: userID, productID: productID });
+    
+    
     return createdBanner;
   } catch (error) {
+    console.log(error);
     throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, "Error while creating new bannerImage, stack:1");
   };
 };

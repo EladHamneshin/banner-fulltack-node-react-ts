@@ -10,26 +10,30 @@ import Register from "../pages/loginANDregister/Register";
 import Login from "../pages/loginANDregister/Login";
 import CreateBanner from "../pages/bannersPages/CreateBanner";
 import BannerByUserID from "../pages/bannersPages/BannerByUserID";
+import HomePage from "../pages/HomePage";
+import ProfileUser from "../pages/ProfileUser";
+import AllProducts from "../pages/products/AllProducts";
+import ProductPage from "../pages/products/ProductPage";
 
 export default function Routs() {
     const router = createBrowserRouter([
         {
-            path: "/",
+            path: "/banners",
             element: <Deshbord />,
             errorElement: <ErrorPage />,
             children: [
-                // {
-                //     path: "",
-                //     element: <HomePage />,
-                //     errorElement: <ErrorPage />,
-                // },
+                {
+                    path: "",
+                    element: <HomePage />,
+                    errorElement: <ErrorPage />,
+                },
                 {
                     path: "login",
                     element: <Login />,
                     errorElement: <ErrorPage />,
                 },
                 {
-                    path: "createBanner",
+                    path: "createBanner/:productID",
                     element: <CreateBanner />,
                     errorElement: <ErrorPage />,
                 },
@@ -49,6 +53,16 @@ export default function Routs() {
                     errorElement: <ErrorPage />,
                 },
                 {
+                    path: "banners/products",
+                    element: <AllProducts />,
+                    errorElement: <ErrorPage />,
+                },
+                {
+                    path: '/banners/ProductPage/:productId',
+                    element: <ProductPage />,
+                    errorElement: <ErrorPage />,
+                },
+                {
                     path: "banners/:productID",
                     element: <BannerByProducdID />,
                     errorElement: <ErrorPage />,
@@ -63,9 +77,14 @@ export default function Routs() {
                     element: <BannerByUserID />,
                     errorElement: <ErrorPage />,
                 },
+                {
+                    path: `banners/user/profil`,
+                    element: <ProfileUser />,
+                    errorElement: <ErrorPage />,
+                },
                 // {
-                //     path: "banners/edit/:bannerID",
-                //     element: <BannerCreateOrEdit />,
+                //     path: "banners/products",
+                //     element: <AllProducts />,
                 //     errorElement: <ErrorPage />,
                 // },
                 // {

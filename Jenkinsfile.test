@@ -1,7 +1,9 @@
-pipeline{
+pipeline {
     agent any
-        stages {
-            parallel  {
+
+    stages {
+        stage('Parallel Stage') {
+            parallel {
                 stage('Install and Test Client') {
                     steps {
                         dir('client') {
@@ -29,33 +31,33 @@ pipeline{
                 }
             }
         }
-    
+    }
 
-    post{
-        success{
-            script{
-                //set commit status to success
-                echo 'test passed.'
+    post {
+        success {
+            script {
+                // Set commit status to success
+                echo 'Tests passed.'
                 githubCommitStatus(
                     context: 'ESLINT-banners',
                     state: 'SUCCESS',
-                    message: 'Build and test passed',
+                    message: 'Build and tests passed',
                 )
             }
         }
-        failure{
-            script{
-                echo 'test failed.'
+        failure {
+            script {
+                echo 'Tests failed.'
                 githubCommitStatus(
                     context: 'ESLINT-banners',
                     state: 'FAILURE',
-                    message: 'Build and test failed',
+                    message: 'Build and tests failed',
                 )
             }
         }
     }
 
-    triggers{
+    triggers {
         githubPush()
     }
 }

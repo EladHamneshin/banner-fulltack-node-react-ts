@@ -11,7 +11,7 @@ pipeline {
                                 echo 'Installing dependencies...'
                                 sh 'npm install'
                                 echo 'Running tests...'
-                                sh 'npm test'
+                                sh 'npm run test'
                             }
                         }
                     }
@@ -24,7 +24,7 @@ pipeline {
                                 echo 'Installing dependencies...'
                                 sh 'npm install'
                                 echo 'Running tests...'
-                                sh 'npm test'
+                                sh 'npm run test'
                             }
                         }
                     }

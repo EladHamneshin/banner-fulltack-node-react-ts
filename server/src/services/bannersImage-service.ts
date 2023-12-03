@@ -3,10 +3,10 @@ import { ApiError } from "../utils/ApiError";
 import STATUS_CODES from "../utils/StatusCodes";
 import { BannerInterface } from "../types/interfaces/bannerInterface";
 import {
-  getBannersImage as dalGetBannersImage,
+  getAllBannersImages as dalGetBannersImage,
   getBannersImageByProductID as dalGetBannersImageByProductID,
-  getBannersImageByCategory as dalGetBannersImageByCategory,
-  getBannersImageByUser as dalGetBannersImageByUser,
+  getBannersImagesByCategory as dalGetBannersImageByCategory,
+  getBannersImagesByUser as dalGetBannersImageByUser,
   updateBannerImage as dalUpdateBannerImage,
   createBannerImage as dalCreateBannerImage,
   deleteBannerImage as dalDeleteBannerImage,

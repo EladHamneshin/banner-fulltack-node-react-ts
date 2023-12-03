@@ -57,10 +57,12 @@ export const updateBannerImage = async (bannerID: string, data: Partial<BannerIn
 // Function to create bannerImage by productID
 export const createBannerImage = async (productID: string, data: Partial<BannerInterface>, userID: string): Promise<BannerInterface> => {
   try {
+
     const createdBanner: BannerInterface = await bannerModel.create({ ...data, author: userID, productID: productID },);
     return createdBanner;
   } catch (error) {
     throw new ApiError( error , STATUS_CODES.INTERNAL_SERVER_ERROR, "Error while creating new bannerImage, stack:1");
+
   };
 };
 

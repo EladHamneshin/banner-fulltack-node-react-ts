@@ -1,0 +1,67 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install and Test Client') {
+            steps {
+                script {
+                    dir('client') {
+                        sh 'rm -rf node_modules'
+                        echo 'Installing dependencies...'
+                        sh 'npm install'
+                        echo 'Running tests...'
+                        sh 'npm run test'
+                    }
+                }
+            }
+        }
+
+        stage('Install and Test Server') {
+            steps {
+                script {
+                    dir('server') {
+                        sh 'rm -rf node_modules'
+                        echo 'Installing dependencies...'
+                        sh 'npm install'
+                        echo 'Running tests...'
+                        sh 'npm run test'
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            script {
+                // Set commit status to success
+                echo 'Tests passed.'
+                githubCommitStatus(
+                    context: 'ESLINT-banners',
+                    state: 'SUCCESS',
+                    message: 'Build and tests passed',
+                )
+            }
+        }
+        failure {
+            script {
+                echo 'Tests failed.'
+                githubCommitStatus(
+                    context: 'ESLINT-banners',
+                    state: 'FAILURE',
+                    message: 'Build and tests failed',
+                )
+            }
+        }
+    }
+
+    triggers {
+        githubPush()
+    }
+}

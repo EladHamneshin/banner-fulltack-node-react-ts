@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     dir('client') {
-                        sh 'echo "test"'
+                        sh 'echo "test final test"'
                         sh 'echo "Installing dependencies..."'
                         sh 'npm install'
                     }
@@ -49,6 +49,7 @@ pipeline {
                 echo 'Linting passed. You may now merge.'
                 setGitHubPullRequestStatus(
                     state: 'SUCCESS',
+                    context: 'ESLINT-banners',
                     message: 'Build and test passed',
                 )
             }
@@ -59,6 +60,7 @@ pipeline {
                 echo 'Pipeline failed. Blocking pull request merge.'
                 setGitHubPullRequestStatus(
                     state: 'FAILURE',
+                    context: 'ESLINT-banners',
                     message: 'Build and test failed',
                 )
             }

@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    environment {
-        PR_BRANCH = "${env.CHANGE_BRANCH}"//chck if this is correct
-    }   
+    // environment {
+    //     PR_BRANCH = "${env.CHANGE_BRANCH}"//chck if this is correct
+    // }   
 
     stages {
         stage('Checkout') {
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     dir('client') {
-                        sh 'echo "test test"'
+                        sh 'echo "test test test"'
                         sh 'echo "Installing dependencies..."'
                         sh 'npm install'
                     }

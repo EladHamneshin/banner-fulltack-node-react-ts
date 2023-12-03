@@ -43,7 +43,7 @@ routerBannersImage.put("/:bannerID", updateBannerImage);
 // @desc   Create bannerImage by productID
 // @route  POST /bannersImage/:productID
 // @access Internal
-routerBannersImage.post("/:productID",authHandler, createBannerImage);
+routerBannersImage.post("/:productID", createBannerImage);
 
 // @desc   Delete bannerImage by bannerID
 // @route  DELETE /bannersImage/:bannerID

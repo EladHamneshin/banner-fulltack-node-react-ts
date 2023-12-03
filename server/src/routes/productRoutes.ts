@@ -15,6 +15,12 @@ productRouter.get('/top5/:category', productControllers.getTop5ProductsByCategor
 // A product of the store by category
 productRouter.get('/:category/similar', productControllers.get5RandomProductsByCategory);
 
+// A product of the store by ID
+productRouter.get('/:id', productControllers.getProductByID);
+
+// All products of the store
+productRouter.get('/', productControllers.getAllProducts)
+
 // A product of the store by category that is promoted (currently not in use)
 productRouter.get('/:category/promoted', productControllers.getRandomProductByCategory);
 

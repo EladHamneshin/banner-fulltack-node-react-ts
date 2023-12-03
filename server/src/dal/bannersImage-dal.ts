@@ -5,42 +5,42 @@ import { ApiError } from "../utils/ApiError";
 import STATUS_CODES from "../utils/StatusCodes";
 
 // Function to get all bannersImage
-export const getBannersImage = async (): Promise<BannerInterface[]> => {
+export const getAllBannersImages = async (): Promise<BannerInterface[]> => {
   try {
     const data: BannerInterface[] = await bannerModel.find({});
     return data;
   } catch (error) {
-    throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, "Banners not found faild in .dal");
+    throw new ApiError( error , STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to get bannersImage by productID, stack:1");
   }
 };
 
 // Function to get bannersImage by productID
-export const getBannersImageByProductID = async (productID: string) => {
+export const getBannersImageByProductID = async (productID: string): Promise<BannerInterface[]> => {
   try {
     const data: BannerInterface[] = await bannerModel.find({ productID });
     return data;
   } catch (error) {
-    throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to get bannersImage by productID, stack:1");
+    throw new ApiError( error , STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to get bannersImage by productID, stack:1");
   }
 };
 
 // Function to get bannersImage by category
-export const getBannersImageByCategory = async (categoryName: string): Promise<BannerInterface[]> => {
+export const getBannersImagesByCategory = async (categoryName: string): Promise<BannerInterface[]> => {
   try {
     const data: BannerInterface[] = await bannerModel.find({ categoryName });
     return data;
   } catch (error) {
-    throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to get bannerImages by category, stack:1");
+    throw new ApiError( error , STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to get bannerImages by category, stack:1");
   }
 };
 
 // Function to get bannersImage by user
-export const getBannersImageByUser = async (userID: string): Promise<BannerInterface[]> => {
+export const getBannersImagesByUser = async (userID: string): Promise<BannerInterface[]> => {
   try {
     const data: BannerInterface[] = await bannerModel.find({ author: userID });
     return data;
   } catch (error) {
-    throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to get bannersImages by user, stack:1");
+    throw new ApiError( error , STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to get bannersImages by user, stack:1");
   }
 };
 
@@ -50,17 +50,17 @@ export const updateBannerImage = async (bannerID: string, data: Partial<BannerIn
     const updatedBanner: BannerInterface | null = await bannerModel.findByIdAndUpdate(bannerID, data, { new: true });
     return updatedBanner;
   } catch (error) {
-    throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, "Error while updating bannerImage, stack:1");
+    throw new ApiError( error , STATUS_CODES.INTERNAL_SERVER_ERROR, "Error while updating bannerImage, stack:1");
   }
 };
 
 // Function to create bannerImage by productID
 export const createBannerImage = async (productID: string, data: Partial<BannerInterface>, userID: string): Promise<BannerInterface> => {
   try {
-    const createdBanner: BannerInterface = await bannerModel.create({ ...data, author: userID, productID: productID });
+    const createdBanner: BannerInterface = await bannerModel.create({ ...data, author: userID, productID: productID },);
     return createdBanner;
   } catch (error) {
-    throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, "Error while creating new bannerImage, stack:1");
+    throw new ApiError( error , STATUS_CODES.INTERNAL_SERVER_ERROR, "Error while creating new bannerImage, stack:1");
   };
 };
 
@@ -70,7 +70,7 @@ export const deleteBannerImage = async (bannerID: string): Promise<BannerInterfa
     const deletedBanner: BannerInterface | null = await bannerModel.findByIdAndDelete(bannerID);
     return deletedBanner;
   } catch (error) {
-    throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to delete bannerImage, stack:1");
+    throw new ApiError( error , STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to delete bannerImage, stack:1");
   }
 };
 
@@ -87,7 +87,7 @@ export const getBannerImageByQuery = async (queryObject: queryInterface): Promis
     const data = await bannerModel.find(query).limit(Number(queryObject.limit))
     return data;
   } catch (error) {
-    throw new ApiError({ error }, STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to get bannersImages by query, stack:1");
+    throw new ApiError( error , STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to get bannersImages by query, stack:1");
   }
 };
 

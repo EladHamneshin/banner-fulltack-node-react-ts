@@ -1,12 +1,11 @@
 import { Box, Button, Grid, TextField, Typography } from '@mui/material';
-import { useState } from 'react'
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { loginFetch } from '../../api/users/loginFetch';
 import { Response } from '../../types/UserInterface';
 import { useNavigate } from 'react-router-dom';
-import Circular from '../Circular';
+import { toastError, toastSuccess } from '../../api/banners/toast';
 
 
 const schema = yup.object({
@@ -29,49 +28,51 @@ const textFieldStyle = { padding: '2px', margin: '4px auto ' }
 const LoginForm = () => {
     const navigate = useNavigate();
 
-    const [loading, setLoading] = useState(false)
-    const [message, setMessage] = useState('')
 
     const { register, formState: { errors }, handleSubmit } = useForm<UserFormInput>({
         resolver: yupResolver(schema),
     });
 
     const onSubmit: SubmitHandler<UserFormInput> = async (data) => {
-
+        
         const email = data.email
         const password = data.password
-
+        
         const user = JSON.stringify({
             email: email,
             password: password
         });
-
-        setLoading(true)
+        
+        // setLoading(true)
         const handelClickHomePage = () => {
             navigate(`/banners/`)
             window.location.reload();
+        }
+        const handelClickLogIn= () => {
+            navigate(`/banners/login`)
         }
         try {
             const data: Response = await loginFetch(user)
             
             if (data.success === true) {
-             
+                toastSuccess(data.message)
+                
                 localStorage.setItem('token', data.data.name)
                 localStorage.setItem('name', data.data.name)
                 localStorage.setItem('userID', data.data.id)
-                setLoading(false)
-                handelClickHomePage()
-            } 
-
-            setMessage(data.message)
-
-            setTimeout(() => {
-                setLoading(false)
-            }, 1000);
+                localStorage.setItem('email', data.data.email)
+                setTimeout(() => {
+                    handelClickHomePage()
+                }, 2000);
+            }
+            
+            
+          
         } catch (err) {
-            setMessage('login error - try again');
+            // setMessage('');
+            toastError('login error - try again')
             setTimeout(() => {
-                setLoading(false);
+                handelClickLogIn()
             }, 2000);
             console.log(err);
         }
@@ -79,12 +80,7 @@ const LoginForm = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            {loading ?
-                <Box>
-                    <Circular />
-                    {message && <Typography>{message}</Typography>}
-                </Box>
-                :
+            
                 <Grid>
                     <Box
                         sx={{
@@ -175,7 +171,7 @@ const LoginForm = () => {
                             {errors.password?.message}
                         </Typography>
                     </Grid>
-                </Grid>}
+                </Grid>
             <Button
                 type='submit'
                 variant="contained"

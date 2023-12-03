@@ -4,12 +4,12 @@ import LoginForm from '../../components/loginANDregister/LoginForm';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-
+    
     const navigate = useNavigate();
     const handelClickSignUp = () => {
         navigate(`/banners/register`)
     }
-
+    
     const paperStyle = {
         padding: 20,
         margin: '0 auto ',
@@ -18,17 +18,17 @@ const Login = () => {
         alignItems: 'center'
     };
     const avatarStyle = { backgroundColor: 'green' };
-
-
+    
+    
     return (
         <Grid
-            container
-            justifyContent="center"
-            alignItems="center"
-            style={{
-                minHeight: '70vh',
-                display: 'flex'
-            }}
+        container
+        justifyContent="center"
+        alignItems="center"
+        style={{
+            minHeight: '70vh',
+            display: 'flex'
+        }}
         >
             <Paper
                 style={paperStyle}>
@@ -40,7 +40,7 @@ const Login = () => {
                         direction="column"
                         justifyContent="center"
                         alignItems="center"
-                    >
+                        >
                         <Grid item>
                             <Avatar style={avatarStyle}>
                                 <LockOpenOutlinedIcon />

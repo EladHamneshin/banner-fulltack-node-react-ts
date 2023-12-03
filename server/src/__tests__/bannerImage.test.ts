@@ -63,57 +63,56 @@ describe("GET /api/bannersImage/user/:userID", () => {
   },10000);
 });
 
-// describe("PUT /api/bannersImage/:bannerID", () => {
-//   test("should update bannerImage by bannerID", async () => {
-//     const res = await request(app).get("/api/bannersImage/");
-//     console.log(res);
-//     console.log("this is the data",res.body.data);
-//     const bannerID = res.body.data[Math.floor(Math.random() * res.body.data.length)]._id
-//     const updatedBanner = {
-//       title: "New Title",
-//       description: "New Description",
-//       imageUrl: "newImageUrl",
-//     };
-//     const response = await request(app).put(`/api/bannersImage/${bannerID}`).send(updatedBanner);
-//     expect(response.status).toBe(200);
-//     expect(response.body.success).toBe(true);
-//     expect(response.body.data).toEqual(updatedBanner);
-//   });
-// });
+describe("PUT /api/bannersImage/:bannerID", () => {
+  test("should update bannerImage by bannerID", async () => {
+    const res = await request(app).get("/api/bannersImage/");
+    console.log(res);
+    console.log("this is the data",res.body.data);
+    const bannerID = res.body.data[Math.floor(Math.random() * res.body.data.length)]._id
+    const updatedBanner = {
+      title: "New Title",
+      description: "New Description",
+      imageUrl: "newImageUrl",
+    };
+    const response = await request(app).put(`/api/bannersImage/${bannerID}`).send(updatedBanner);
+    expect(response.status).toBe(200);
+    expect(response.body.success).toBe(true);
+  });
+});
 
-// describe("POST /api/bannersImage/:productID", () => {
-//   test("should create bannerImage by productID", async () => {
-//     const productID = "1234567890";
-//     const newBanner = {
-//       name: "Cyber Monday Sale",
-//       productID: "09876",
-//       catogryID: "09876",
-//       clickCount: 123,
-//       image: {
-//         url: "https://example.com/cyber-monday.jpg",
-//         alt: "Cyber Monday"
-//       },
-//       size: "side",
-//       kind: [
-//         "sale"
-//       ],
-//       text: "Don't miss out on our Cyber Monday deals!",
-//       createdAt: "2023-11-26T10:36:00Z",
-//       author: "David Brown"
-//     };
-//     const response = await request(app).post(`/api/bannersImage/${productID}`).send(newBanner);
-//     expect(response.status).toBe(201);
-//     expect(response.body.success).toBe(true);
-//     expect(response.body.data).toEqual(newBanner);
-//   });
-// });
+describe("POST /api/bannersImage/:productID", () => {
+  test("should create bannerImage by productID", async () => {
+    const productID = "1234567890";
+    const newBanner = {
+      name: "Cyber Monday Sale",
+      productID: "09876",
+      catogryID: "09876",
+      clickCount: 123,
+      image: {
+        url: "https://example.com/cyber-monday.jpg",
+        alt: "Cyber Monday"
+      },
+      size: "side",
+      kind: [
+        "sale"
+      ],
+      text: "Don't miss out on our Cyber Monday deals!",
+      createdAt: "2023-11-26T10:36:00Z",
+      author: "David Brown"
+    };
+    const response = await request(app).post(`/api/bannersImage/${productID}`).send(newBanner);
+    expect(response.status).toBe(201);
+    expect(response.body.success).toBe(true);
+    expect(response.body.data).toEqual(newBanner);
+  });
+});
 
-// describe("DELETE /api/bannersImage/:bannerID", () => {
-//   test("should delete bannerImage by bannerID", async () => {
-//     const bannerID = "6566682341ec4afc00c859fe";
-//     const response = await request(app).delete(`/api/bannersImage/${bannerID}`);
-//     expect(response.status).toBe(200);
-//     expect(response.body.success).toBe(true);
-//     expect(response.body.data).toEqual(bannerID);
-//   });
-// });
+describe("DELETE /api/bannersImage/:bannerID", () => {
+  test("should delete bannerImage by bannerID", async () => {
+    const bannerID = "6566682341ec4afc00c859fe";
+    const response = await request(app).delete(`/api/bannersImage/${bannerID}`);
+    expect(response.status).toBe(200);
+    expect(response.body.success).toBe(true);
+    expect(response.body.data).toEqual(bannerID);
+  });
+});

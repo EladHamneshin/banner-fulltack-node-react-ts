@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-} from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { Product } from '../../types/ProductInterface';
 
 interface ProductCardProps {
@@ -16,37 +10,17 @@ const CardProduct: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <Card sx={{ width: '250px', height: '500px', margin: 2 }}>
       <CardMedia
-        sx={{
-          top: 0,
-          objectFit: 'cover',
-          maxWidth: '100%',
-          display: 'inline-block',
-          verticalAlign: 'bottom'
-        }}
         component="img"
-        height="35%"
-        image={product.image.url} // Replace with your product image URL
+        image={product.image.url}
         alt={product.image.alt}
-      />
-      <CardContent sx={{
-        flexDirection: 'column',
-        background: '#f0f0f0',
-        height: '60%',
-        display: 'flex',
-        padding: '16px',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        textAlign: 'left'
-      }}>
+        sx={CardMediaStyle}/>
+      <CardContent sx={CardContentstyle}>
         <Box sx={{ height: '100px' }}>
           <Typography gutterBottom variant="h5" component="div" sx={{ margin: '4px' }} >
             {product.name}
           </Typography>
           <Typography variant="body2" color="text.secondary"
-            sx={{ display: 'flex', margin: '4px' ,
-            lineHeight: '1.5',
-            fontSize: '1rem',
-            fontFamily: 'Public Sans,sans-serif'}}>
+            sx={TypographyBody2style}>
             {product.description}
           </Typography>
           {product.salePrice !== undefined && (
@@ -64,4 +38,34 @@ const CardProduct: React.FC<ProductCardProps> = ({ product }) => {
     </Card>
   );
 };
+
 export default CardProduct;
+
+const CardMediaStyle = {
+  height: '35%',
+  maxWidth: '100%',
+  maxHeight: '100%',
+  objectFit: 'cover',
+  display: 'block',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  // borderRadius: '50px'
+}
+
+const CardContentstyle = {
+  flexDirection: 'column',
+  background: '#f0f0f0',
+  height: '60%',
+  display: 'flex',
+  padding: '16px',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+  textAlign: 'left'
+}
+const TypographyBody2style = {
+  display: 'flex',
+  margin: '4px',
+  lineHeight: '1.5',
+  fontSize: '1rem',
+  fontFamily: 'Public Sans, sans-serif'
+}

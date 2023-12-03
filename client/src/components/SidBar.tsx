@@ -9,6 +9,7 @@ import ViewDaySharpIcon from '@mui/icons-material/ViewDaySharp';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions';
 
+
 const SidBar = () => {
     const navigate = useNavigate();
 
@@ -93,7 +94,7 @@ const SidBar = () => {
     );
 
     return (
-        <Box sx={{ zIndex:'9100'}}>
+        <Box sx={{ zIndex: '9100' }}>
             <ListItemButton onClick={toggleDrawer('left', true)}>
                 <MenuOpenOutlinedIcon
                     sx={{

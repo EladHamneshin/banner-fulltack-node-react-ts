@@ -33,7 +33,7 @@ const styleMainBox = {
   padding: '10px',
   display: 'flex',
   marginTop: '60px',
-  // marginBottom: '60px',
+  marginBottom: '60px',
   maxWidth: '70wh',
   
 };

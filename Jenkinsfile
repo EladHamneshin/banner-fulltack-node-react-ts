@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    triggers {
+        githubPullRequests()
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -11,13 +15,23 @@ pipeline {
             }
         }
 
-        stage('Install') {
+        stage('client build') {
             steps {
                 script {
                     dir('client') {
-                        sh 'echo "Test 3 zehoo"'
-                        sh 'echo "Installing dependencies..."'
-                        sh 'npm install'
+                        sh 'echo "Building..."'
+                        sh 'docker build -t banner-client .'
+                    }
+                }
+            }
+        }
+
+        stage('server build') {
+            steps {
+                script {
+                    dir('server') {
+                        sh 'echo "Building..."'
+                        sh 'docker build -t banner-server .'
                     }
                 }
             }

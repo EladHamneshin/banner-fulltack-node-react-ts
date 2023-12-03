@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    triggers {
+        githubPullRequests()
+    }
+
     stages {
         stage('Checkout') {
             steps {

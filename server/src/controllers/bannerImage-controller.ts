@@ -91,7 +91,7 @@ export const updateBannerImage = asyncHandler(
 export const createBannerImage = asyncHandler(
   async (req: Request, res: Response) => {
     const { productID } = req.params;
-    const newBanner: BannerInterface = await serviceCreateBannerImage(productID, req.body, req.userID);
+    const newBanner: BannerInterface = await serviceCreateBannerImage(productID, req.body, "admin");
 
     if (!newBanner) { throw new ApiError({}, 500, "Something went wrong. Please try again, stack:3") };
 

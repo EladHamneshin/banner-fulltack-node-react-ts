@@ -36,4 +36,9 @@ pipeline{
             }
         }
     }
+
+    triggers{
+        githubPush()
+        githubPullRequest()
+    }
 }

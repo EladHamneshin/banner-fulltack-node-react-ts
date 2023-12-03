@@ -9,7 +9,7 @@ import {
     deleteBannerImage,
     getBannerImagesByQuery,
 } from "../controllers/bannerImage-controller";
-import { authHandler } from "../middleware/auth-middleware";
+// import { authHandler } from "../middleware/auth-middleware";
 
 
 // Setup router

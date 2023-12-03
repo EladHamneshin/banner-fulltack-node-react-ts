@@ -63,7 +63,7 @@ const NewBannerForm = (props: Props) => {
         const cleanFileName = FileName.replace(/[^a-zA-Z0-9]/g, '')
         const newBanner = {
             name: product.name,
-            catogryName: product.category,
+            categoryName: product.category,
             clickCount: 0,
             image: {
                 url: `${API_URI}/images/${cleanFileName}.jpg`,

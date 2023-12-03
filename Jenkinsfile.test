@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Install and Test Client') {
             steps {
-                dir('client') {
-                    script {
+                script {
+                    dir('client') {
                         echo 'Installing dependencies...'
                         sh 'npm install'
                         echo 'Running tests...'
@@ -17,8 +17,8 @@ pipeline {
 
         stage('Install and Test Server') {
             steps {
-                dir('server') {
-                    script {
+                script {
+                    dir('server') {
                         echo 'Installing dependencies...'
                         sh 'npm install'
                         echo 'Running tests...'

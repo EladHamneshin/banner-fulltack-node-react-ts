@@ -42,7 +42,7 @@ export default function ProductTable({ prod }: { prod: product[] }) {
       })
   })
   return (
-    <Box sx={{ height: 400 }}>
+    <Box sx={{ height: '75vh' }}>
       <DataGrid
         rows={rows}
         columns={columns}

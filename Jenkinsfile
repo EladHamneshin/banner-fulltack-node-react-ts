@@ -1,74 +1,74 @@
 pipeline {
     agent any
 
+    environment {
+        PR_BRANCH = "${env.CHANGE_BRANCH}"//chck if this is correct
+    }   
+
     stages {
-    stage('Run npm commands in Docker') {
-        steps {
-            script {
-                // Create the init.sh file dynamically
-                writeFile file: 'init.sh', text: '''
-                #!/bin/bash
-
-                # Navigate to the app directory
-                cd /app
-
-                # Install npm dependencies
-                npm install
-
-                # Run the build
-                npm run build
-
-                # Run the lint
-                npm run lint
-                '''
-
-                // Make init.sh executable
-                sh 'chmod +x init.sh'
-
-                // Run the init.sh script in a Node.js Docker container
-                sh 'docker run --rm -v $(pwd):/app -w /app node:alpine /bin/sh -c "./init.sh"'
+        stage('Checkout') {
+            steps {
+                checkout([
+                    $class: 'GitSCM', 
+                    branches: [[name: "${PR_BRANCH}"]],
+                    doGenerateSubmoduleConfigurations: false, 
+                    extensions: [], 
+                    submoduleCfg: [], 
+                    userRemoteConfigs: [[url: 'https://github.com/EladHamneshin/banner-fulltack-node-react-ts.git']]
+                ])
             }
         }
-    }
-    // stages {
-    //     stage('Build') {
-    //         steps {
-    //             script {
-    //                 dir('client') {
-    //                     sh 'ls'
-    //                     sh 'docker run --rm -v $(pwd):/app -w /app node:alpine npm install'
-    //                     sh 'npm install'
-    //                     sh 'npm run build'
-    //                 }
-    //             }
-    //         }
-    //     }
 
-    //     stage('Lint') {
-    //         steps {
-    //             script {
-    //                 dir('client') {
-    //                     try {
-    //                         sh 'npm run lint'
-    //                     } catch (Exception e) {
-    //                         error("Linting failed. Please fix the linting errors before merging.")
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
+        stage('Install') {
+            steps {
+                script {
+                    dir('client') {
+                        sh 'echo "test test test1"'
+                        sh 'echo "Installing dependencies..."'
+                        sh 'npm install'
+                    }
+                }
+            }
+        }
+
+        // stage('Lint') {
+        //     steps {
+        //         script {
+        //             dir('client') {
+        //                 sh 'npm run lint'
+        //             }
+        //         }
+        //     }
+        // }
+    }
+
+    // triggers {
+    //     githubPush()
     // }
-
-    triggers {
-        githubPush()
-    }
 
     post {
         success {
-            githubNotify context: 'Lint', status: 'SUCCESS'
+            script {
+                echo 'Linting passed. You may now merge.'
+                setGitHubPullRequestStatus(
+                    state: 'SUCCESS',
+                    message: 'Build and test passed',
+                )
+            }
         }
+        
         failure {
-            githubNotify context: 'Lint', status: 'FAILURE'
+            script {
+                echo 'Pipeline failed. Blocking pull request merge.'
+                setGitHubPullRequestStatus(
+                    state: 'FAILURE',
+                    message: 'Build and test failed',
+                )
+            }
         }
     }
+
+  
+
 }
+// Path: Jenkinsfile

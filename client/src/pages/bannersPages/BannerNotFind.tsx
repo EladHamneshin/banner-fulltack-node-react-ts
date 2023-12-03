@@ -6,6 +6,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
+// import { toastSuccess } from '../../api/banners/toast';
 
 export default function BannerNotFind() {
     const [open, setOpen] = React.useState(true);
@@ -14,17 +16,19 @@ export default function BannerNotFind() {
 
     const handelClickcreateBanner = () => {
         setOpen(false);
-        navigate(`/createBanner`)
+        navigate(`/banners/banners/products`)
     }
     const handelClickAllBanners = () => {
         setOpen(false);
-        navigate(`/banners`);
+        navigate(`/banners/banners`);
     };
     const handleClose = () => {
         setOpen(false);
     };
 
     return (
+    <Box>
+
         <React.Fragment>
             <Dialog
                 open={open}
@@ -37,7 +41,7 @@ export default function BannerNotFind() {
                         backgroundColor: 'blue',
                     },
                 }}
-            >
+                >
                 <DialogTitle id="alert-dialog-title">
                     {"There are no banners on your name"}
                 </DialogTitle>
@@ -54,5 +58,6 @@ export default function BannerNotFind() {
                 </DialogActions>
             </Dialog>
         </React.Fragment>
+                </Box>
     );
 }

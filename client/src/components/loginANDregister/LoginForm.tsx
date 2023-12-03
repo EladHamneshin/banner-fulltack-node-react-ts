@@ -6,6 +6,7 @@ import * as yup from "yup"
 import { loginFetch } from '../../api/users/loginFetch';
 import { Response } from '../../types/UserInterface';
 import { useNavigate } from 'react-router-dom';
+import Circular from '../Circular';
 
 
 const schema = yup.object({
@@ -47,19 +48,20 @@ const LoginForm = () => {
 
         setLoading(true)
         const handelClickHomePage = () => {
-            navigate(`/`)
+            navigate(`/banners/`)
             window.location.reload();
         }
         try {
             const data: Response = await loginFetch(user)
-
+            
             if (data.success === true) {
-                localStorage.setItem('token', data.data.token)
-                localStorage.setItem('name', data.data.user.name)
-                localStorage.setItem('userID', data.data.user.id)
+             
+                localStorage.setItem('token', data.data.name)
+                localStorage.setItem('name', data.data.name)
+                localStorage.setItem('userID', data.data.id)
                 setLoading(false)
                 handelClickHomePage()
-            }
+            } 
 
             setMessage(data.message)
 
@@ -78,24 +80,9 @@ const LoginForm = () => {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             {loading ?
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-around',
-                        minWidth: '420px',
-                        minHeight: '360px'
-                    }}>
-                    <Grid
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center'
-                        }}>
-                        <Typography>Loding.....</Typography>
-                        {message && <Typography>{message}</Typography>}
-                    </Grid>
+                <Box>
+                    <Circular />
+                    {message && <Typography>{message}</Typography>}
                 </Box>
                 :
                 <Grid>

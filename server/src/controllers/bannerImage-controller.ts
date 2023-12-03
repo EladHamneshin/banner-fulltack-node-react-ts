@@ -91,7 +91,7 @@ export const updateBannerImage = asyncHandler(
 export const createBannerImage = asyncHandler(
   async (req: Request, res: Response) => {
     const { productID } = req.params;
-    const newBanner: BannerInterface = await serviceCreateBannerImage(productID, req.body);
+    const newBanner: BannerInterface = await serviceCreateBannerImage(productID, req.body, req.userID);
 
     if (!newBanner) { throw new ApiError({}, 500, "Something went wrong. Please try again, stack:3") };
 
@@ -119,6 +119,6 @@ export const getBannerImagesByQuery = asyncHandler(
     if (!size) throw new ApiError({}, STATUS_CODES.BAD_REQUEST, "Size is required");
 
     const response = await serviceGetBannerImageByQuery(req.query);
-    
+
     res.status(STATUS_CODES.OK).json({ success: true, data: response, message: "Success!" });
   });

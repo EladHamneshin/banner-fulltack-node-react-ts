@@ -10,7 +10,7 @@ export const getAllProducts = async () => {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `${API_URL}/banners/api/ext/bannersProduct/top5/products`,
+        url: `${API_URL}/banners/api/ext/bannersProduct/`,
 
     };
     try {

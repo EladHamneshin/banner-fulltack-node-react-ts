@@ -8,6 +8,7 @@ import { v4 as uuid } from 'uuid'
 import Circular from '../Circular';
 import AppKaka from '../../kaka/CropKaka/AppKaka';
 import Canvas from '../../kaka/Canvas';
+import BannerCanvas from '../../kaka/Canvas2';
 
 // type SchemaData : yup.ObjectSchema<{
 //     name: string;
@@ -142,7 +143,8 @@ const AddBannerForm = (props: Props) => {
                                 {errors.image?.message}
                             </Typography>
 
-                             <Canvas/> 
+                             <Canvas product={product}/> 
+                             <BannerCanvas width={600} height={120} product={product}/>
 
                         </Grid>
 

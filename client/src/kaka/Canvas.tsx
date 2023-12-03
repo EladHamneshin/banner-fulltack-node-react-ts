@@ -1,6 +1,7 @@
 import { Box, Button, Dialog, Slide, Typography } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 import React from "react";
+import { Product } from "../types/ProductInterface";
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
@@ -11,12 +12,13 @@ const Transition = React.forwardRef(function Transition(
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-
+const API_URL = import.meta.env.VITE_API_URI;
 
 type Props = {
+    product: Product;
 };
 
-const Canvas: React.FC<Props> = () => {
+const Canvas: React.FC<Props> = (props) => {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -27,39 +29,55 @@ const Canvas: React.FC<Props> = () => {
         setOpen(false);
     };
 
-
-    const handleCanvasClick = () => {
-        const canvas = document.getElementById('myCanvas') as HTMLCanvasElement;
-        const context = canvas.getContext('2d');
-        context!.fillStyle = 'blue';
-        context!.fillRect(8, 7, 166, 222);
-        context!.fillStyle = 'red';
-        context!.beginPath();
-        context!.arc(canvas.width / 2, canvas.height / 2, 50, 0, 2 * Math.PI);
-        context!.fill();
-    };
+    const images = [
+        { src: `${API_URL}/backround/1.jpg`, name: 'Background 1' },
+        { src: `${API_URL}/backround/2.jpg`, name: 'Background 2' },
+        { src: `${API_URL}/backround/3.jpg`, name: 'Background 3' },
+        { src: `${API_URL}/backround/4.jpg`, name: 'Background 4' },
+    ];
 
     const handleButtonClick = () => {
         const canvas = document.getElementById('myCanvas') as HTMLCanvasElement;
         const context = canvas.getContext('2d');
+
+        const secondImage = new Image();
+        secondImage.src = props.product.image.url;
+        secondImage.onload = function () {
+            const scaleRatio = 0.25;
+            const scaledWidth = secondImage.width * scaleRatio;
+            const scaledHeight = secondImage.height * scaleRatio;
+            const x = (canvas.width / 4) - scaledWidth / 2;
+            const y = (canvas.height - scaledHeight) / 2;
+
+            context!.drawImage(secondImage, x, y, scaledWidth, scaledHeight);
+        };
+    };
+
+    const handleClickChangeBackround = (src: string) => {
+        const canvas = document.getElementById('myCanvas') as HTMLCanvasElement;
+        const context = canvas.getContext('2d');
         const backgroundImage = new Image();
-        backgroundImage.src = 'https://zem.outbrainimg.com/p/srv/sha/b9/17/f1/8cafebcb972772c952fbbd1cc7991f86e8.jpg?w=300&h=157&fit=fill&fill=blur&thomcrop&q=45&fm=jpg&testgroup';
+        backgroundImage.src = src;
         backgroundImage.onload = function () {
             context!.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
         };
+    };
 
-        const secondImage = new Image();
-        secondImage.src = 'https://zem.outbrainimg.com/p/srv/sha/8a/69/5c/373dcc646a5bd26fba1369fa9aedbeff94.jpg?w=300&h=157&fit=crop&crop=edges&thomcrop&q=45&fm=jpg&auto=enhance&testgroup'; // שנה לנתיב של תמונת הרקע השנייה
-        secondImage.onload = function () {
-            // מיקום מסוים וגודל רבע מהתמונה הרקעית
-            const x = 50;
-            const y = 30;
-            const width = canvas.width / 4;
-            const height = canvas.height / 4;
+    const handleClickAddText = (text: string) => {
+        const canvas = document.getElementById('myCanvas') as HTMLCanvasElement;
+        const context = canvas.getContext('2d');
 
-            context!.drawImage(secondImage, x, y, width, height);
-        };
+        context!.imageSmoothingEnabled = false;
 
+        const fontSize = canvas.width / 20;
+        context!.font = `${fontSize}px Arial`;
+        context!.fillStyle = 'white';
+
+        const textWidth = context!.measureText(text).width;
+        const x = canvas.width - textWidth - 10;
+        const y = canvas.height / 2;
+
+        context!.fillText(text, x, y);
     };
 
     return (
@@ -68,25 +86,61 @@ const Canvas: React.FC<Props> = () => {
                 Slide in alert dialog
             </Button>
             <Dialog
-
                 fullScreen
                 open={open}
                 TransitionComponent={Transition}
                 keepMounted
                 onClose={handleClose}
-                aria-describedby="alert-dialog-slide-description"
             >
-                <Box sx={{ padding: 13, }}>
+                <Box sx={{ padding: 13 }}>
                     <Typography variant="h5">new banner</Typography>
-                    <canvas onClick={handleCanvasClick} id="myCanvas"
+                    <canvas
+                        id="myCanvas"
                         style={{
                             border: '1px solid black',
                             objectFit: 'cover',
-                            width: 720,
-                            height: 100,
-                        }}></canvas>
-                        <img src="https://drive.google.com/file/d/1-hIgSFC7TfWQUVU8MYMK_aKgTpRc1m0r/view?usp=sharing" alt="reka1"></img>
-                    <Button onClick={handleButtonClick}>Change Background</Button>
+                            width: 2000,
+                            height: 200,
+                        }}
+                    ></canvas>
+                    <Typography variant="h6">choose background</Typography>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            padding: '2px',
+                            justifyContent: 'space-around',
+                            flexWrap: 'wrap',
+                        }}
+                    >
+
+                        {images.map((image, index) => (
+                            <img
+                                key={index}
+                                onClick={() => {
+                                    handleClickChangeBackround(image.src);
+                                }}
+                                src={image.src}
+                                style={{ padding: '4px' }}
+                                width="200px"
+                                alt={image.name}
+                            ></img>
+                        ))}
+
+
+                    </Box>
+                    <Button onClick={handleButtonClick}>add product image</Button>
+                    <Typography variant="h6">choose text</Typography>
+                    <Box>
+                        <Button onClick={() => handleClickAddText(props.product.name)}>
+                            Name: {props.product.name}
+                        </Button>
+                        <Button onClick={() => handleClickAddText(props.product.discountPercentage.toString())}>
+                            discount: {props.product.discountPercentage}
+                        </Button>
+                        <Button onClick={() => handleClickAddText("Additional Text")}>
+                            Add Additional Text
+                        </Button>
+                    </Box>
                     <Button onClick={handleClose}>Disagree</Button>
                     <Button onClick={handleClose}>Agree</Button>
                 </Box>
@@ -96,3 +150,4 @@ const Canvas: React.FC<Props> = () => {
 };
 
 export default Canvas;
+

@@ -12,6 +12,7 @@ pipeline {
             steps {
                 script {
                     dir('client') {
+                        sh 'rm -rf node_modules'
                         echo 'Installing dependencies...'
                         sh 'npm install'
                         echo 'Running tests...'
@@ -25,6 +26,7 @@ pipeline {
             steps {
                 script {
                     dir('server') {
+                        sh 'rm -rf node_modules'
                         echo 'Installing dependencies...'
                         sh 'npm install'
                         echo 'Running tests...'

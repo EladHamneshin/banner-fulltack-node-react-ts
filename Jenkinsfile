@@ -1,17 +1,12 @@
 pipeline {
     agent any
 
-    // environment {
-    //     PR_BRANCH = "${env.CHANGE_BRANCH}"//chck if this is correct
-    // }   
-
     stages {
         stage('Checkout') {
-              steps {
+            steps {
                 script {
                     def pullRequestBranch = env.GITHUB_PR_SOURCE_BRANCH
-                    checkout([$class: 'GitSCM', branches: [[name: "*/${GITHUB_PR_SOURCE_BRANCH}"]], userRemoteConfigs: [[url: 'https://github.com/EladHamneshin/banner-fulltack-node-react-ts']]])
-                    sh 'printenv'
+                    checkout([$class: 'GitSCM', branches: [[name: "*/${pullRequestBranch}"]], userRemoteConfigs: [[url: 'https://github.com/EladHamneshin/banner-fulltack-node-react-ts']]])
                 }
             }
         }
@@ -20,28 +15,13 @@ pipeline {
             steps {
                 script {
                     dir('client') {
-                        sh 'echo "test final test"'
                         sh 'echo "Installing dependencies..."'
                         sh 'npm install'
                     }
                 }
             }
         }
-
-        // stage('Lint') {
-        //     steps {
-        //         script {
-        //             dir('client') {
-        //                 sh 'npm run lint'
-        //             }
-        //         }
-        //     }
-        // }
     }
-
-    // triggers {
-    //     githubPush()
-    // }
 
     post {
         success {
@@ -66,8 +46,4 @@ pipeline {
             }
         }
     }
-
-  
-
 }
-// Path: Jenkinsfile

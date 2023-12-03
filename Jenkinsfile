@@ -15,9 +15,19 @@ pipeline {
             steps {
                 script {
                     dir('client') {
-                        sh 'echo "Test 3 zehoo"'
                         sh 'echo "Installing dependencies..."'
                         sh 'npm install'
+                    }
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    dir('client') {
+                        sh 'echo "Building..."'
+                        sh 'npm run build'
                     }
                 }
             }

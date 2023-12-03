@@ -11,24 +11,23 @@ pipeline {
             }
         }
 
-        stage('Install') {
-            steps {
-                script {
-                    dir('client') {
-                        sh 'echo "test1"'
-                        sh 'echo "Installing dependencies..."'
-                        sh 'npm install'
-                    }
-                }
-            }
-        }
-
-        stage('Build') {
+        stage('client build') {
             steps {
                 script {
                     dir('client') {
                         sh 'echo "Building..."'
                         sh 'docker build -t banner-client .'
+                    }
+                }
+            }
+        }
+
+        stage('server build') {
+            steps {
+                script {
+                    dir('server') {
+                        sh 'echo "Building..."'
+                        sh 'docker build -t banner-server .'
                     }
                 }
             }

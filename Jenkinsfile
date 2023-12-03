@@ -28,7 +28,7 @@ pipeline {
                 script {
                     dir('client') {
                         sh 'echo "Building..."'
-                        sh 'npm run build'
+                        sh 'docker build -t banner-client .'
                     }
                 }
             }

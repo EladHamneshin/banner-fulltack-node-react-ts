@@ -1,0 +1,44 @@
+pipeline{
+    agent any
+    stages{
+        stage('install'){
+            steps{
+                sh 'npm install'
+            }
+        }
+        stage('test'){
+            steps{
+                sh 'npm test'
+            }
+        }
+    }
+
+    post{
+        success{
+            script{
+                //set commit status to success
+                echo 'test passed.'
+                githubCommitStatus(
+                    context: 'ESLINT-banners',
+                    state: 'SUCCESS',
+                    message: 'Build and test passed',
+                )
+            }
+        }
+        failure{
+            script{
+                echo 'test failed.'
+                githubCommitStatus(
+                    context: 'ESLINT-banners',
+                    state: 'FAILURE',
+                    message: 'Build and test failed',
+                )
+            }
+        }
+    }
+
+    triggers{
+        githubPush()
+        githubPullRequest()
+    }
+}

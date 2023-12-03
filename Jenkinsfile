@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     dir('client') {
-                        sh 'echo "test test test1"'
+                        sh 'echo "test1"'
                         sh 'echo "Installing dependencies..."'
                         sh 'npm install'
                     }

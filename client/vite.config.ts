@@ -21,7 +21,7 @@ export default ({ mode }) => {
       port: 5173,
       proxy: {
         '/api': {
-        //   target: process.env.VITE_BASE_URI,
+          target: process.env.VITE_API_URI,
           changeOrigin: true,
         },
       },

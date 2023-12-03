@@ -14,14 +14,13 @@ export interface LoginInterface {
 export interface Response {
     success: boolean;
     data: {
-        token: string,
-        user: {
+
             id: string,
             name: string,
             email: string,
             password: string,
             isadmin: boolean
-        }
+
     };
     message: string;
 }

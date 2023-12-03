@@ -53,14 +53,15 @@ const LoginForm = () => {
         }
         try {
             const data: Response = await loginFetch(user)
-
+            
             if (data.success === true) {
-                localStorage.setItem('token', data.data.token)
-                localStorage.setItem('name', data.data.user.name)
-                localStorage.setItem('userID', data.data.user.id)
+             
+                localStorage.setItem('token', data.data.name)
+                localStorage.setItem('name', data.data.name)
+                localStorage.setItem('userID', data.data.id)
                 setLoading(false)
                 handelClickHomePage()
-            }
+            } 
 
             setMessage(data.message)
 

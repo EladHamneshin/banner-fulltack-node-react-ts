@@ -19,7 +19,6 @@ const getUserByEmail = async (email: string) => {
         if (connectionError instanceof ApiError) throw connectionError;
         throw new ApiError(connectionError , STATUS_CODES.BAD_GATEWAY, 'Could not connect to the database, stack: 1');
     }
-
 };
 
 const registerUser = async (user: User) => {

@@ -2,33 +2,42 @@ pipeline{
     agent any
     stages{
         stage('install client'){
-            dir('client'){
-                steps{
-                    sh 'npm install'
+            script{
+                dir('client'){
+                    steps{
+                        sh 'npm install'
+                    }
                 }
             }
+           
         }
-        
+
         stage('test client'){
-            dir('client'){
-                steps{
-                    sh 'npm test'
+            script{
+                dir('client'){
+                    steps{
+                        sh 'npm test'
+                    }
                 }
             }
         }
 
         stage('install server'){
-            dir('server'){
-                steps{
-                    sh 'npm install'
+            script{
+                dir('server'){
+                    steps{
+                        sh 'npm install'
+                    }
                 }
             }
         }
 
         stage('test server'){
-            dir('server'){
-                steps{
-                    sh 'npm test'
+            script{
+                dir('server'){
+                    steps{
+                        sh 'npm test'
+                    }
                 }
             }
         }

@@ -10,8 +10,9 @@ pipeline {
               steps {
                 script {
                     // Assuming GITHUB_SOURCE_BRANCH is the environment variable provided by Jenkins
-                    def pullRequestBranch = env.GITHUB_SOURCE_BRANCH
-                    checkout([$class: 'GitSCM', branches: [[name: "*/${env.CHANGE_BRANCH}"]], userRemoteConfigs: [[url: 'https://github.com/EladHamneshin/banner-fulltack-node-react-ts']]])
+                    // def pullRequestBranch = env.GITHUB_SOURCE_BRANCH
+                    // checkout([$class: 'GitSCM', branches: [[name: "*/${env.CHANGE_BRANCH}"]], userRemoteConfigs: [[url: 'https://github.com/EladHamneshin/banner-fulltack-node-react-ts']]])
+                    sh 'printenv'
                 }
             }
         }

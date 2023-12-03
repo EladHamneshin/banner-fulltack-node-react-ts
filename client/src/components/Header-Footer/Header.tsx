@@ -76,10 +76,13 @@ const containerStyle = {
 };
 
 const textBoxStyle = {
+  display: 'flex',
+  padding: ' 0px 25px',
+  flexDirection: 'column' as 'column', // Ensure flexDirection is of type 'column'
+  alignItems: 'center',
+  justifyContent: 'center',
   fontFamily: "Arial, sans-serif",
   fontSize: "16px",
-  color: "white",
-  padding: "0 10px 0 10px",
-  alignItems: 'center'
+  color: "white"
 };
 export default Header

@@ -6,7 +6,6 @@ import BannerNotFind from './BannerNotFind';
 import CardHomePage from '../../components/cards/CardHomePage';
 import { getAllBannersImage } from '../../api/banners/bannersImageFunc';
 import Circular from '../../components/Circular';
-// import { toastSuccess } from '../../api/banners/toast';
 
 
 const AllbannersHomePage = () => {
@@ -48,7 +47,7 @@ const AllbannersHomePage = () => {
 
     return (
         <Box>
-            <Typography variant="h3" sx={{ display: 'flex',justifyContent: 'center'}}>Top 5 Banners</Typography>
+            <Typography variant="h2" sx={{ display: 'flex',justifyContent: 'center',margin:'10px'}}>Top 5 Banners</Typography>
             <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-around' }}>
                 {loading ? (
                     <Circular />
@@ -62,7 +61,7 @@ const AllbannersHomePage = () => {
                     <BannerNotFind />
                 ) : (
                     banners.map((banner, index) => (
-                        <Stack key={index} sx={{ cursor: 'pointer', width: '200px' }}>
+                        <Stack key={index} sx={{ cursor: 'pointer', width: '200px',margin:'30px' }}>
                             <CardHomePage
                                 banner={banner} />
                         </Stack>

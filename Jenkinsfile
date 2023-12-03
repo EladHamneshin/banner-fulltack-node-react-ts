@@ -41,7 +41,7 @@ pipeline {
                 setGitHubPullRequestStatus(
                     state: 'SUCCESS',
                     context: 'ESLINT-banners',
-                    message: 'Build and test passed',
+                    message: 'Build passed',
                 )
             }
         }
@@ -52,7 +52,7 @@ pipeline {
                 setGitHubPullRequestStatus(
                     state: 'FAILURE',
                     context: 'ESLINT-banners',
-                    message: 'Build and test failed',
+                    message: 'Build failed  run npm run build to see errors',
                 )
             }
         }

@@ -2,17 +2,10 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Install and Test Client') {
             steps {
                 script {
                     dir('client') {
-                        cache(steps: [npm('node_modules')], key: 'npm-${NODE_ENV}')
                         echo 'Installing dependencies...'
                         sh 'npm install'
                         echo 'Running tests...'

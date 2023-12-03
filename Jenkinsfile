@@ -1,21 +1,14 @@
 pipeline {
     agent any
 
-    environment {
-        PR_BRANCH = "${env.CHANGE_BRANCH}"//chck if this is correct
-    }   
+    // environment {
+    //     PR_BRANCH = "${env.CHANGE_BRANCH}"//chck if this is correct
+    // }   
 
     stages {
         stage('Checkout') {
             steps {
-                checkout([
-                    $class: 'GitSCM', 
-                    branches: [[name: "${PR_BRANCH}"]],
-                    doGenerateSubmoduleConfigurations: false, 
-                    extensions: [], 
-                    submoduleCfg: [], 
-                    userRemoteConfigs: [[url: 'https://github.com/EladHamneshin/banner-fulltack-node-react-ts.git']]
-                ])
+                checkout scm
             }
         }
 

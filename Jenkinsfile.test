@@ -2,33 +2,30 @@ pipeline {
     agent any
 
     stages {
-        stage('Parallel Stage') {
-            stage('Install and Test Client') {
-                steps {
-                    dir('client') {
-                        script {
-                            echo 'Installing dependencies...'
-                            sh 'npm install'
-                            echo 'Running tests...'
-                            sh 'npm run test'
-                        }
+        stage('Install and Test Client') {
+            steps {
+                dir('client') {
+                    script {
+                        echo 'Installing dependencies...'
+                        sh 'npm install'
+                        echo 'Running tests...'
+                        sh 'npm run test'
                     }
                 }
             }
+        }
 
-            stage('Install and Test Server') {
-                steps {
-                    dir('server') {
-                        script {
-                            echo 'Installing dependencies...'
-                            sh 'npm install'
-                            echo 'Running tests...'
-                            sh 'npm run test'
-                        }
+        stage('Install and Test Server') {
+            steps {
+                dir('server') {
+                    script {
+                        echo 'Installing dependencies...'
+                        sh 'npm install'
+                        echo 'Running tests...'
+                        sh 'npm run test'
                     }
                 }
             }
-    
         }
     }
 

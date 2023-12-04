@@ -52,7 +52,10 @@ app.use(morgan("dev"));
 //     max: RATE_REQUEST_LIMIT,
 //   }),
 // );
-
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Expose-Headers', 'Authorization');
+  next();
+});
 // Enable CORS
 app.use(cors());
 

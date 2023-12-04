@@ -46,7 +46,7 @@ const LoginForm = () => {
         // setLoading(true)
         const handelClickHomePage = () => {
             navigate(`/banner/`)
-            window.location.reload();
+            // window.location.reload();
         }
         const handelClickLogIn= () => {
             navigate(`/banner/login`)

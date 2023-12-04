@@ -14,7 +14,7 @@ const AllProducts = () => {
   const navigate = useNavigate();
 
   const handleLoginRedirect = () => {
-    navigate('/login');
+    navigate('/banner/login');
   };
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const AllProducts = () => {
     const fetchData = async () => {
       try {
         const result = await getAllProducts();
-        const data : Product[] = result.data
+        const data: Product[] = result.data
         console.log('fetch resulte:', result);
 
         setProduct(data)
@@ -46,9 +46,12 @@ const AllProducts = () => {
       <Box>
         {loading && <Circular />}
         {message && <Typography variant="h3">{message}</Typography>}
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{
+          display: 'flex', flexWrap: 'wrap',
+          justifyContent: 'space-around'
+        }}>
           {products && products.map((product, index) => (
-            <Link to={`/banners/ProductPage/${product.id}`} key={index}
+            <Link to={`/banner/banners/ProductPage/${product.id}`} key={index}
               style={{ textDecoration: 'none' }}>
               <CardProduct key={index} product={product} />
             </Link>

@@ -1,17 +1,19 @@
-import { LocationOn, Edit } from '@mui/icons-material';
-import { Card, Avatar, Typography, IconButton, Divider, Chip, Switch } from '@mui/material';
-import { grey } from '@mui/material/colors';
+import { Edit } from '@mui/icons-material';
+import { Card, Avatar, Typography, IconButton, } from '@mui/material';
+import { green } from '@mui/material/colors';
 import { Box, Stack } from '@mui/system';
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
 const ProfileUser = () => {
-    const [active, setActive] = useState<boolean>(true);
+    // const [active, setActive] = useState<boolean>(true);
+
+    
     const navigate = useNavigate();
 
     const handleLoginRedirect = () => {
-        navigate('/login');
+        navigate('/banner/login');
     };
 
     useEffect(() => {
@@ -21,9 +23,9 @@ const ProfileUser = () => {
     }, []);
 
 
-    const handleSwitchChange = () => {
-        setActive((prevActive) => !prevActive);
-    };
+    // const handleSwitchChange = () => {
+    //     setActive((prevActive) => !prevActive);
+    // };
 
     return (
         <Box
@@ -32,28 +34,35 @@ const ProfileUser = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                height: '50vh', // Adjust the height based on your layout needs
+                height: '60vh', // Adjust the height based on your layout needs
                 backgroundColor: '#f5d4d4', // Change the background color
                 padding: '20px', // Add padding
             }}
         >
             <Card>
-                <Box sx={{ p: 4, display: 'flex' }}>
-                    <Avatar variant="rounded" src="avatar.jpg" />
-                    <Stack spacing={0.5}>
-                        <Typography fontWeight="bold">
+                <Box sx={{ p: 8, display: 'flex',alignItems: 'center' }}>
+                    <Avatar  src="avatar.jpg" sx={{
+                         bgcolor: green[500],
+                         margin:'20px', 
+                         width: 56, 
+                         height: 56}}>
+                            {localStorage.getItem('name')?.slice(0,1).toUpperCase()}
+                         </Avatar>
+                    <Stack spacing={4}>
+                        <Typography variant="h6"  fontWeight="bold" sx={{margin:'10px'}}>
                             {localStorage.getItem('name')}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            <LocationOn sx={{ color: grey[500] }} /> Scranton, PA, United States
+                        <Typography variant="h6" color="text.secondary" sx={{margin:'10px'}}>
+                            {/* <LocationOn sx={{ color: grey[500] }} /> */}
+                            {localStorage.getItem('email')}
                         </Typography>
                     </Stack>
-                    <IconButton size="small">
-                        <Edit fontSize="small" />
+                    <IconButton sx={{margin:'40px'}}>
+                        <Edit   fontSize="large"/>
                     </IconButton>
                 </Box>
-                <Divider />
-                <Stack
+                {/* <Divider /> */}
+                {/* <Stack
                     direction="row"
                     alignItems="center"
                     justifyContent="space-between"
@@ -65,7 +74,7 @@ const ProfileUser = () => {
                         size="small"
                     />
                     <Switch checked={active} onChange={handleSwitchChange} />
-                </Stack>
+                </Stack> */}
             </Card>
         </Box>
     );

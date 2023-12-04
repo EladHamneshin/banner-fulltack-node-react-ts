@@ -2,58 +2,59 @@ pipeline {
     agent any
 
     stages {
-        stage('Install') {
+        stage('Checkout') {
+            steps {
+                script {
+                    def pullRequestBranch = env.GITHUB_PR_SOURCE_BRANCH
+                    checkout([$class: 'GitSCM', branches: [[name: "*/${pullRequestBranch}"]], userRemoteConfigs: [[url: 'https://github.com/EladHamneshin/banner-fulltack-node-react-ts']]])
+                }
+            }
+        }
+
+        stage('client build') {
             steps {
                 script {
                     dir('client') {
-                        sh 'echo "Installing dependencies..."'
-                        sh 'npm install'
+                        sh 'echo "Building..."'
+                        sh 'docker build -t banner-client .'
                     }
                 }
             }
         }
 
-        // stage('Lint') {
-        //     steps {
-        //         script {
-        //             dir('client') {
-        //                 try {
-        //                     sh 'npm run lint'
-        //                 } catch (Exception e) {
-        //                     error("Linting failed. Please fix the linting errors before merging.")
-        //                 }
-        //             }
-        //         }
-        //     }
-
-        //     post {
-        //         success {
-        //             sh 'echo "Linting passed. You may now merge."'
-        //             githubNotify context: 'Lint', status: 'SUCCESS'
-        //             setBuildStatus("Build complete", "SUCCESS");
-        //         }
-        //         failure {
-        //             sh 'echo "Linting failed. Please fix the linting errors before merging."'
-        //             githubNotify context: 'Lint', status: 'FAILURE'
-        //             setBuildStatus("Build complete", "FAILURE");
-        //         }
-        //     }
-        // }
-
-        
-        stage('Build') {
+        stage('server build') {
             steps {
                 script {
-                    dir('client') {
+                    dir('server') {
                         sh 'echo "Building..."'
-                        sh 'npm run build'
+                        sh 'docker build -t banner-server .'
                     }
                 }
             }
         }
     }
 
-    triggers {
-        githubPush()
+    post {
+        success {
+            script {
+                echo 'Linting passed. You may now merge.'
+                setGitHubPullRequestStatus(
+                    state: 'SUCCESS',
+                    context: 'ESLINT-banners',
+                    message: 'Build passed',
+                )
+            }
+        }
+        
+        failure {
+            script {
+                echo 'Pipeline failed. Blocking pull request merge.'
+                setGitHubPullRequestStatus(
+                    state: 'FAILURE',
+                    context: 'ESLINT-banners',
+                    message: 'Build failed  run npm run build to see errors',
+                )
+            }
+        }
     }
 }

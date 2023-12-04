@@ -16,11 +16,11 @@ import { useNavigate } from 'react-router-dom';
 const ManageIcon = () => {
     const navigate = useNavigate();
     const handelClickLogin = () => {
-        navigate(`/login`)
+        navigate(`/banner/login`)
         window.location.reload()
     }
     const handelClickProfil = () => {
-        navigate(`banners/user/profil`)
+        navigate(`/banner/banners/user/profil`)
         // window.location.reload()
     }
     // const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -59,6 +59,7 @@ const ManageIcon = () => {
                             onClick={handleClick}
                             size="small"
                             sx={{ ml: 2 }}
+                            aria-label='IconButton'
                             aria-controls={open ? 'account-menu' : undefined}
                             aria-haspopup="true"
                             aria-expanded={open ? 'true' : undefined}

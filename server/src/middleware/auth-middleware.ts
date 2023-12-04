@@ -6,7 +6,7 @@ import { NextFunction, Request, Response } from 'express';
 
 
 const authHandler = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  const token = req.cookies.jwt;
+  const token = req.headers.authorization;
   if (!token)
     throw new ApiError({}, STATUS_CODES.UNAUTHORIZED, 'No authorized no token provided');
 
@@ -23,9 +23,8 @@ const authHandler = asyncHandler(async (req: Request, res: Response, next: NextF
     const id = user.id;
     const isadmin = user.isadmin;
 
-    req.body.id = id;
-
-    req.body.isadmin = isadmin;
+    req.userID = id;
+    req.isadmin = isadmin;
 
     next();
   } catch (error) {

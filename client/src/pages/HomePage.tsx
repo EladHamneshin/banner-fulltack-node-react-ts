@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 // import { UserInterface } from '../types/UserInterface';
 import BannersTable from '../components/Tables/BannersTable';
 import AllbannersHomePage from './bannersPages/AllbannersHomePage';
-import BannerSide from '../components/production/BannerSide';
+import BannerSide from '../components/production/BannerImage';
 
 const HomePage = () => {
     // const [, setMessage] = useState('');
@@ -16,7 +16,7 @@ const HomePage = () => {
     const navigate = useNavigate();
 
     const handleLoginRedirect = () => {
-        navigate('/login');
+        navigate('/banner/login');
     };
 
     useEffect(() => {
@@ -48,22 +48,19 @@ const HomePage = () => {
     // }, []);
     const [bannerSide, setbannerSide] = useState<JSX.Element | null>(null)
     const [bannerTop, setbannerTop] = useState<JSX.Element | null>(null)
-  useEffect(() => {
-    setbannerSide(<BannerSide limit='1' size='side' />)
-    setbannerTop(<BannerSide limit='1' size='top'/>)
-    // return (setbannerSide(null))
-  }, [])
+    useEffect(() => {
+        setbannerSide(<BannerSide limit='1' size='side' />)
+        setbannerTop(<BannerSide limit='1' size='top' />)
+        return (setbannerSide(null))
+    }, [])
 
     return (
         <Box>
-              {bannerSide && bannerSide}
-              {bannerTop && bannerTop}
+            {bannerSide && bannerSide}
+            {bannerTop && bannerTop}
             <Box
                 sx={{
-                    // maxHeight: 400,
-                    // maxWidth: '80%',
-                    width:'100%'
-                    // border: '2px solid black'
+                    width: '100%'
                 }}>
                 <AllbannersHomePage />
             </Box>
@@ -73,7 +70,7 @@ const HomePage = () => {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 padding: 2,
-                gap: 2, // Adjust gap between the two boxes
+                gap: 2,
             }}>
                 <Box sx={{ flex: 1 }}>
                     <BannersTable pro={[]} />

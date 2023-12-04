@@ -18,7 +18,7 @@ type Props = {
 const NewBannerForm = (props: Props) => {
 
     const navigate = useNavigate();
-    const handelClickLogin = () => { navigate(`/login`) }
+    const handelClickLogin = () => { navigate(`/banner/login`) }
     if (localStorage.getItem('token') === null) { handelClickLogin() }
 
     const product = props.product
@@ -63,7 +63,7 @@ const NewBannerForm = (props: Props) => {
         const cleanFileName = FileName.replace(/[^a-zA-Z0-9]/g, '')
         const newBanner = {
             name: product.name,
-            catogryName: product.category,
+            categoryName: product.category,
             clickCount: 0,
             image: {
                 url: `${API_URI}/images/${cleanFileName}.jpg`,
@@ -78,13 +78,6 @@ const NewBannerForm = (props: Props) => {
         await createBanner(newBanner, product.id);
 
     };
-    
-
-
-
-
-
-
     return (
         <Box sx={{ display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-around', width: '95vw' }}>
             <AddBannerForm

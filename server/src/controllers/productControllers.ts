@@ -6,6 +6,12 @@ import { ApiError } from "../utils/ApiError";
 import { ApiSuccess } from "../utils/ApiSucess";
 import STATUS_CODES from "../utils/StatusCodes";
 
+const getAllProducts = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const products = await productService.getAllProducts();
+    
+    if (!products) { throw new ApiError({},STATUS_CODES.INTERNAL_SERVER_ERROR,'Something went wrong ..... Please try again')}
+    res.status(STATUS_CODES.OK).json(new ApiSuccess<Product[]>(products,'success!'));
+});
 
 const getTop5Categories = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const top5Categories = await productService.getTop5Categories();
@@ -42,15 +48,25 @@ const getRandomProductByCategory = asyncHandler(async (req: Request, res: Respon
     const randomProductByCategory = await productService.getRandomProductByCategory(category);
 
     if (!randomProductByCategory) throw new ApiError({}, 500, "Something went wrong.... please try again");
-    res.status(STATUS_CODES.OK).send(new ApiSuccess<Product>(randomProductByCategory,'success'));
+    res.status(STATUS_CODES.OK).send(new ApiSuccess<Product>(randomProductByCategory, 'success'));
+});
+
+const getProductByID = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const product = await productService.getProductById(id);
+
+    if (!product) throw new ApiError({}, 500, "Something went wrong.... please try again");
+    res.status(STATUS_CODES.OK).send(new ApiSuccess<Product>(product, 'success'));
 });
 
 
 
 export default {
+    getProductByID,
     getTop5Categories,
     getTop5Products,
     get5RandomProductsByCategory,
     getTop5ProductsByCategory,
-    getRandomProductByCategory
+    getRandomProductByCategory,
+    getAllProducts
 };

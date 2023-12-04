@@ -7,7 +7,7 @@ import userService from "../services/user-service";
 import STATUS_CODES from "../utils/StatusCodes";
 import { registerUserValidation, loginUserValidation } from "../utils/validations/userValidation";
 import generateToken from "../utils/jwtUtils";
-
+import jwt from 'jsonwebtoken';
 
 // @desc Auth user & login
 // @route POST /api/users/login
@@ -17,17 +17,19 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
   if (error)
     throw new ApiError({}, STATUS_CODES.BAD_REQUEST, error.message);
 
-  if (req.cookies.jwt)
-    throw new ApiError({}, STATUS_CODES.BAD_REQUEST, 'User already logged in');
+  if (req.headers.authorization) {
+    jwt.verify(req.headers.authorization, process.env.JWT_SECRET!, (err: any, decoded: any) => {
+      if (!err) throw new ApiError({}, STATUS_CODES.BAD_REQUEST, 'User already logged in');
+    }
+    )
+  }
 
   const { email, password } = req.body;
 
   const user = await userService.authUser(email, password);
-  console.log(user);
-
   generateToken(res, user.id, user.isadmin);
 
-  res.status(STATUS_CODES.OK).json(new ApiSuccess({ user }, "Success!"));
+  res.status(STATUS_CODES.OK).json(new ApiSuccess(user, "Success!"));
 });
 
 
@@ -61,7 +63,7 @@ const logoutUser = (req: Request, res: Response) => {
 // @route   GET /api/users/
 // @access  Public
 export const getAllUsers = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  if (!req.body.isadmin) throw new ApiError({}, STATUS_CODES.FORBIDDEN, 'You are not admin');
+  if (!req.isadmin) throw new ApiError({}, STATUS_CODES.FORBIDDEN, 'You are not admin');
   const users = await userService.getAllUsers();
 
   res.status(STATUS_CODES.OK).json(new ApiSuccess<User[]>(users, "Success!"));
@@ -76,13 +78,21 @@ export const getAllUsers = asyncHandler(async (req: Request, res: Response, next
 // @route DELETE /api/users/
 // @access private/admin
 export const deleteUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  await userService.deleteUser(req.body.id);
+  const user = await userService.deleteUser(req.userID);
 
-  res.status(STATUS_CODES.OK).json(new ApiSuccess('', "Success!"));
+  res.status(STATUS_CODES.OK).json(new ApiSuccess(user, "Success!"));
+});
+
+// @desc Update a user
+// @route PUT /api/users/
+// @access private/admin
+export const updateUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+  const user = await userService.updateUser(req.userID, req.body);
+  res.status(STATUS_CODES.OK).json(new ApiSuccess(user, "Success!"));
 });
 
 
-export default { registerUser, loginUser, logoutUser, deleteUser, getAllUsers }
+export default { registerUser, loginUser, logoutUser, deleteUser, getAllUsers, updateUser };
 
 
 

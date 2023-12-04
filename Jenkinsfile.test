@@ -1,0 +1,66 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Install and Test Client') {
+            steps {
+                script {
+                    dir('client') {
+                        sh 'printenv'
+                        echo 'Installing dependencies...'
+                        sh 'npm install'
+                        echo 'Running tests...'
+                        sh 'npm run test'
+                    }
+                }
+            }
+        }
+
+        stage('Install and Test Server') {
+            steps {
+                script {
+                    dir('server') {
+                        echo 'Installing dependencies...'
+                        sh 'npm install'
+                        echo 'Running tests...'
+                        sh 'npm run test'
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            script {
+                // Notify success to GitHub
+                echo 'Tests passed.'
+                githubNotify account: 'EladHamneshin',
+                            repo: 'banner-fulltack-node-react-ts',
+                            context: 'ESLINT-banners',
+                            status: 'SUCCESS',
+                            description: 'Tests passed.',
+                            sha: "${env.GIT_COMMIT}",
+                            credentialsId: 'test'
+            }
+        }
+
+        failure {
+            script {
+                // Notify failure to GitHub
+                echo 'Tests failed.'
+                githubNotify account: 'EladHamneshin',
+                            repo: 'banner-fulltack-node-react-ts',
+                            context: 'ESLINT-banners',
+                            status: 'FAILURE',
+                            description: 'Tests failed.',
+                            sha: "${env.GIT_COMMIT}",
+                            credentialsId: 'test'
+            }
+        }
+    }
+
+    triggers {
+        githubPush()
+    }
+}

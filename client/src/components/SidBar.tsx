@@ -9,23 +9,24 @@ import ViewDaySharpIcon from '@mui/icons-material/ViewDaySharp';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions';
 
+
 const SidBar = () => {
     const navigate = useNavigate();
 
     const [state, setState] = useState({ left: false });
 
     const handelClickAllBanners = () => {
-        navigate(`/banners`);
+        navigate(`/banner/banners`);
     };
     const handelClickAllProducts = () => {
-        navigate(`banners/products`);
+        navigate(`/banner/banners/products`);
     };
-    const handelClickCreateBanners = () => {
-        navigate(`/createBanner`);
-    };
+    // const handelClickCreateBanners = () => {
+    //     navigate(`/banners/createBanner`);
+    // };
 
     const handelClickMyBanners = () => {
-        navigate(`banners/user/${localStorage.getItem('name')}`);
+        navigate(`/banner/banners/user/${localStorage.getItem('name')}`);
     };
 
     const toggleDrawer = (_anchor: 'left', open: boolean) => (
@@ -61,7 +62,7 @@ const SidBar = () => {
                                 } else if (text === 'My bannars') {
                                     handelClickMyBanners();
                                 } else if (text === 'Add banner') {
-                                    handelClickCreateBanners();
+                                    // handelClickCreateBanners();
                                 }
                             }}
                         >
@@ -93,7 +94,7 @@ const SidBar = () => {
     );
 
     return (
-        <div>
+        <Box sx={{ zIndex: '9100' }}>
             <ListItemButton onClick={toggleDrawer('left', true)}>
                 <MenuOpenOutlinedIcon
                     sx={{
@@ -104,7 +105,7 @@ const SidBar = () => {
             <Drawer anchor="left" open={state.left} onClose={toggleDrawer('left', false)}>
                 {list('left')}
             </Drawer>
-        </div>
+        </Box>
     );
 };
 

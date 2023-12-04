@@ -3,14 +3,15 @@ import { ApiError } from "../utils/ApiError";
 import STATUS_CODES from "../utils/StatusCodes";
 import { BannerInterface } from "../types/interfaces/bannerInterface";
 import {
-  getBannersImage as dalGetBannersImage,
+  getAllBannersImages as dalGetBannersImage,
   getBannersImageByProductID as dalGetBannersImageByProductID,
-  getBannersImageByCategory as dalGetBannersImageByCategory,
-  getBannersImageByUser as dalGetBannersImageByUser,
+  getBannersImagesByCategory as dalGetBannersImageByCategory,
+  getBannersImagesByUser as dalGetBannersImageByUser,
   updateBannerImage as dalUpdateBannerImage,
   createBannerImage as dalCreateBannerImage,
   deleteBannerImage as dalDeleteBannerImage,
   getBannerImageByQuery as dalGetBannerImageByQuery,
+  getTop5BannersImages as dalGetTop5BannersImages
 } from "../dal/bannersImage-dal";
 
 // Function to get all bannersImage
@@ -20,24 +21,31 @@ export const getBannersImage = async (): Promise<BannerInterface[]> => {
   return banners;
 };
 
+// Function to 5 top clicked bannersImages
+export const getTop5BannersImages = async (): Promise<BannerInterface[]> => {
+  const banners: BannerInterface[] = await dalGetTop5BannersImages();
+  if (banners.length === 0) throw new ApiError({}, STATUS_CODES.NOT_FOUND, "No banners found, stack:2");
+  return banners;
+}
+
 // Function to get bannersImage by productID
 export const getBannerImageByProductID = async (productID: string) => {
   const banners: BannerInterface[] = await dalGetBannersImageByProductID(productID);
-  // if (banners.length === 0) throw new ApiError({}, STATUS_CODES.NOT_FOUND, "No banners found for this productID, stack:2");
+  if (banners.length === 0) throw new ApiError({}, STATUS_CODES.NOT_FOUND, "No banners found for this productID, stack:2");
   return banners;
 };
 
 // Function to get bannersImage by category
 export const getBannersImageByCategory = async (categoryName: string): Promise<BannerInterface[]> => {
   const banners: BannerInterface[] = await dalGetBannersImageByCategory(categoryName);
-  // if (banners.length === 0) throw new ApiError({}, STATUS_CODES.NOT_FOUND, "No banners found for this category, stack:2");
+  if (banners.length === 0) throw new ApiError({}, STATUS_CODES.NOT_FOUND, "No banners found for this category, stack:2");
   return banners;
 };
 
 // Function to get bannersImage by user
 export const getBannersImageByUser = async (userID: string): Promise<BannerInterface[]> => {
   const banners: BannerInterface[] = await dalGetBannersImageByUser(userID);
-  // if (banners.length === 0) throw new ApiError({}, STATUS_CODES.NOT_FOUND, "No banners found for this userID, stack:2");
+  if (banners.length === 0) throw new ApiError({}, STATUS_CODES.NOT_FOUND, "No banners found for this userID, stack:2");
   return banners;
 };
 
@@ -49,9 +57,11 @@ export const updateBannerImage = async (bannerID: string, data: Partial<BannerIn
 };
 
 // Function to create bannerImage by productID
-export const createBannerImage = async (productID: string, data: Partial<BannerInterface>): Promise<BannerInterface> => {
-  return await dalCreateBannerImage(productID, data);
-};
+
+export const createBannerImage = async (productID: string, data: Partial<BannerInterface>,userID:string): Promise<BannerInterface> => {
+  return await dalCreateBannerImage(productID,data,userID);
+ };
+
 
 // Function to delete bannerImage by bannerID
 export const deleteBannerImage = async (bannerID: string): Promise<BannerInterface | null> => {

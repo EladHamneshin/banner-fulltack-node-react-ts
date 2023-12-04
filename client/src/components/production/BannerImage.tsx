@@ -2,7 +2,7 @@ import {useEffect,useState} from 'react'
 import { Box, Button, Card } from '@mui/material';
 import { BannerInterface } from '../../types/BannerInterface';
 import { getBannerImageByParams } from '../../api/production/getBannerImage';
-
+ 
 type Props = {
     limit ?: string;
     size : string;
@@ -10,16 +10,18 @@ type Props = {
     userID ?: string
 }
 export default function BannerSide(props : Props) {
-    const styleTop = {position:'fixed', bottom:0,left:'33%' ,height: '150px', zIndex:1000}
+    const styleTop = {position:'fixed', bottom:0,left:'10%' ,height: '150px', zIndex:1000}
     const styleSide = {position:'fixed',height: '500px', left:0, top:75, zIndex:1000}
     const [style, setstyle] = useState<any>(styleSide)
     const [banner, setBanner] = useState<BannerInterface| null>(null)
 
     const handelClickBanner = () => {
         setBanner(null);
-        setTimeout(() => {
-            getProducts()
-        }, 10000)
+        if (props.size === 'side'){
+            setTimeout(() => {
+                getProducts()
+            }, 10000)
+        }
     }
     async function getProducts() {
         let params = '';
@@ -30,7 +32,7 @@ export default function BannerSide(props : Props) {
 
         if (props.size === 'top') {setstyle(styleTop)}
         const response = await getBannerImageByParams(params)
-        console.log(response);
+       
         
         setBanner(response.data[0]);
     }
@@ -38,7 +40,7 @@ export default function BannerSide(props : Props) {
    useEffect(() => {
     setTimeout(() => {
         getProducts()
-    }, 5000)
+    }, 2000)
    }, [])
 
 

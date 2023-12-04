@@ -7,6 +7,7 @@ import CardHomePage from '../../components/cards/CardHomePage';
 import { getAllBannersImage } from '../../api/banners/bannersImageFunc';
 import Circular from '../../components/Circular';
 
+
 const AllbannersHomePage = () => {
     const [message, setMessage] = useState('');
     const [banners, setBanners] = useState<ResponseBanner[] | string | null>(null);
@@ -14,7 +15,7 @@ const AllbannersHomePage = () => {
     const navigate = useNavigate();
 
     const handleLoginRedirect = () => {
-        navigate('/login');
+        navigate('/banner/login');
     };
 
     useEffect(() => {
@@ -35,7 +36,7 @@ const AllbannersHomePage = () => {
                 }
             } catch (error) {
                 console.error('Error fetching banners:', error);
-                setMessage('Error fetching banners');
+                setMessage('no banners in DB');
             } finally {
                 setLoading(false);
             }
@@ -45,29 +46,28 @@ const AllbannersHomePage = () => {
     }, []);
 
     return (
-        <Box sx={{width:'100%', display: 'flex', justifyContent: 'space-around' }}>
-            {loading ? (
-                <Circular />
-            ) : message ? (
-                <Stack>
-                    <Typography variant="h3">{message}</Typography>
-                </Stack>
-            ) : banners === null ? (
-                <Typography variant="h3">Loading...</Typography>
-            ) : typeof banners === 'string' ? (
-                <BannerNotFind />
-            ) : (
-                banners.map((banner, index) => (
-                    <Stack key={index} sx={{  }}>
-                        {/* Use the new CardHomePage component instead of CardBanner */}
-                        <CardHomePage
-                            banner={banner}
-                        // cardSx={{ maxWidth: 125, maxHeight: 125, fontSize: '14px' }}
-                        // iconSx={{ fontSize: '16px' }}
-                        />
+        <Box>
+            <Typography variant="h2" sx={{ display: 'flex',justifyContent: 'center',margin:'10px'}}>Top 5 Banners</Typography>
+            <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-around' }}>
+                {loading ? (
+                    <Circular />
+                ) : message ? (
+                    <Stack>
+                        <Typography variant="h3">{message}</Typography>
                     </Stack>
-                ))
-            )}
+                ) : banners === null ? (
+                    <Typography variant="h3">Loading...</Typography>
+                ) : typeof banners === 'string' ? (
+                    <BannerNotFind />
+                ) : (
+                    banners.map((banner, index) => (
+                        <Stack key={index} sx={{ cursor: 'pointer', width: '200px',margin:'30px' }}>
+                            <CardHomePage
+                                banner={banner} />
+                        </Stack>
+                    ))
+                )}
+            </Box>
         </Box>
     );
 };

@@ -4,29 +4,30 @@ import { Grid, Avatar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
 
-import { useNavigate } from 'react-router-dom';
-import { getProductById } from '../../api/product/getProductById';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getProductById } from '../../api/products/productById';
 
 
 
 
 
 const CreateBanner = () => {
+    const {productID} = useParams()
     const [product , setProduct] = useState(null)
     useEffect(() => {
         const api =  async () => {
             
-            const data = await getProductById("e0602e49-7a1c-4e64-8fcf-ffa86a0f6b94")
+            const data = await getProductById(productID!)
             console.log(data);
             
-            setProduct (data)
+            setProduct (data.data)
         }
         api()
         
         
     }, [])
     const navigate = useNavigate();
-    const handelClickLogin = () => { navigate(`login`) }
+    const handelClickLogin = () => { navigate(`/banner/login`) }
     useEffect(() => {
         if (localStorage.getItem('token') === null) { handelClickLogin() }
     }, [])

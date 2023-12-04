@@ -18,7 +18,7 @@ import ProductPage from "../pages/products/ProductPage";
 export default function Routs() {
     const router = createBrowserRouter([
         {
-            path: "/",
+            path: "/banner",
             element: <Deshbord />,
             errorElement: <ErrorPage />,
             children: [
@@ -33,7 +33,7 @@ export default function Routs() {
                     errorElement: <ErrorPage />,
                 },
                 {
-                    path: "createBanner",
+                    path: "createBanner/:productID",
                     element: <CreateBanner />,
                     errorElement: <ErrorPage />,
                 },
@@ -58,7 +58,7 @@ export default function Routs() {
                     errorElement: <ErrorPage />,
                 },
                 {
-                    path: '/banners/ProductPage/:productId',
+                    path: 'banners/ProductPage/:productId',
                     element: <ProductPage />,
                     errorElement: <ErrorPage />,
                 },

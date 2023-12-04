@@ -1,6 +1,6 @@
 import { Box, IconButton, ThemeProvider, createTheme } from '@mui/material'
 import { useState } from 'react'
-import HomeIcon from '@mui/icons-material/Home';
+// import HomeIcon from '@mui/icons-material/Home';
 import { blue } from '@mui/material/colors';
 import ManageIcon from '../ManageIcon';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +12,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handelClickHomePage = () => {
-    navigate(localStorage.getItem('token') !== null ? `/` : `/login`)
+    navigate(localStorage.getItem('token') !== null ? `/banner/` : `/banner/login`)
   }
   const storedUserName = localStorage.getItem('name');
 
@@ -49,13 +49,16 @@ const Header = () => {
             <SidBar />
           </IconButton>
           <IconButton onClick={handelClickHomePage}>
-            <HomeIcon
+            <img src='\public\bannars-high-resolution-logo-transparent.png' alt='logo'
+              height={'40px'}></img>
+            {/* <HomeIcon
 
               sx={{
                 bgcolor: `primary.light`,
                 borderRadius: '50% '
-              }} fontSize="large"
-              color="primary" />
+              }} 
+              fontSize="large"
+              color="primary" /> */}
           </IconButton>
         </Box>
       </ThemeProvider>
@@ -69,13 +72,17 @@ const containerStyle = {
   justifyContent: "space-between",
   textAlign: "center",
   padding: "3px",
-  background: "#09056A",
+  background: "#5a54e9",
 };
 
 const textBoxStyle = {
+  display: 'flex',
+  padding: ' 0px 25px',
+  flexDirection: 'column' as 'column', // Ensure flexDirection is of type 'column'
+  alignItems: 'center',
+  justifyContent: 'center',
   fontFamily: "Arial, sans-serif",
   fontSize: "16px",
-  color: "white",
-  padding: "0 10px 0 10px",
+  color: "white"
 };
 export default Header

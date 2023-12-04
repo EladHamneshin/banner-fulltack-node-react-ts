@@ -14,6 +14,7 @@ import {
   createBannerImage as serviceCreateBannerImage,
   deleteBannerImage as serviceDeleteBannerImage,
   getBannerImagesByQuery as serviceGetBannerImageByQuery,
+  getTop5BannersImages as serviceGetTop5BannersImages,
 } from "../services/bannersImage-service";
 
 // @desc   Get all bannersImage
@@ -112,6 +113,20 @@ export const deleteBannerImage = asyncHandler(
     res.status(STATUS_CODES.OK).json({ success: true, data: deletedBanner, message: "Deletion successful!" });
   }
 );
+
+// @desc Get top 5 clicked bannersImages
+// @route GET /bannersImage/top5
+// @access public
+export const getTop5BannersImages = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const banners:BannerInterface[] = await serviceGetTop5BannersImages();
+    if (!banners) { throw new ApiError({}, 500, "Something went wrong. Please try again, stack:3") }
+
+    res.status(STATUS_CODES.OK).json({ success: true, data: banners, message: "Success!" });
+  });
+
+
+
 
 export const getBannerImagesByQuery = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {

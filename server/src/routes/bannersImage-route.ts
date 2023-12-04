@@ -49,7 +49,7 @@ routerBannersImage.post("/:productID",authHandler, createBannerImage);
 // @desc   Delete bannerImage by bannerID
 // @route  DELETE /bannersImage/:bannerID
 // @access Internal
-routerBannersImage.delete("/:bannerID",authHandler ,deleteBannerImage);
+routerBannersImage.delete("/:bannerID" ,deleteBannerImage);
 
 
 routerBannersImage.get("/ext/", getBannerImagesByQuery);

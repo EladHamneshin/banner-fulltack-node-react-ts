@@ -16,11 +16,11 @@ import { useNavigate } from 'react-router-dom';
 const ManageIcon = () => {
     const navigate = useNavigate();
     const handelClickLogin = () => {
-        navigate(`/banners/login`)
+        navigate(`/banner/login`)
         window.location.reload()
     }
     const handelClickProfil = () => {
-        navigate(`/banners/banners/user/profil`)
+        navigate(`/banner/banners/user/profil`)
         // window.location.reload()
     }
     // const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);

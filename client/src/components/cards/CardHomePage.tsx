@@ -11,7 +11,7 @@ const CardHomePage = (props: Props) => {
     const { banner } = props;
     const navigate = useNavigate();
     const handelClickLogin = () => navigate('login');
-    const handelClickCardProduct = () => navigate(`/banners/ProductPage/${banner.productID}`);
+    const handelClickCardProduct = () => navigate(`/banner/ProductPage/${banner.productID}`);
     // {`/banners/ProductPage/${banner.productID}`} 
     useEffect(() => {
         if (localStorage.getItem('token') === null) {

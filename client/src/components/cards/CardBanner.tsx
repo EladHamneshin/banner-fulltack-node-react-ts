@@ -36,7 +36,7 @@ type Props = {
 // Component
 const CardBanner = (props: Props) => {
   const navigate = useNavigate();
-  const handelClickLogin = () => navigate('/banners/login');
+  const handelClickLogin = () => navigate('/banner/login');
 
   useEffect(() => {
     if (localStorage.getItem('token') === null) {
@@ -69,7 +69,7 @@ const CardBanner = (props: Props) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const handelClickCardProduct = () => navigate(`/banners/ProductPage/${banner.productID}`);
+  const handelClickCardProduct = () => navigate(`/banner/ProductPage/${banner.productID}`);
 
   return (
     <Box >

@@ -16,11 +16,11 @@ export default function BannerNotFind() {
 
     const handelClickcreateBanner = () => {
         setOpen(false);
-        navigate(`/banners/banners/products`)
+        navigate(`/banner/banners/products`)
     }
     const handelClickAllBanners = () => {
         setOpen(false);
-        navigate(`/banners/banners`);
+        navigate(`/banner/banners`);
     };
     const handleClose = () => {
         setOpen(false);

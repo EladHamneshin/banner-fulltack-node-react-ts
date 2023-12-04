@@ -1,50 +1,38 @@
 pipeline {
     agent any
 
-    environment {
-        PR_BRANCH = "${env.CHANGE_BRANCH}"//chck if this is correct
-    }   
-
     stages {
         stage('Checkout') {
             steps {
-                checkout([
-                    $class: 'GitSCM', 
-                    branches: [[name: "${PR_BRANCH}"]],
-                    doGenerateSubmoduleConfigurations: false, 
-                    extensions: [], 
-                    submoduleCfg: [], 
-                    userRemoteConfigs: [[url: 'https://github.com/EladHamneshin/banner-fulltack-node-react-ts.git']]
-                ])
+                script {
+                    def pullRequestBranch = env.GITHUB_PR_SOURCE_BRANCH
+                    checkout([$class: 'GitSCM', branches: [[name: "*/${pullRequestBranch}"]], userRemoteConfigs: [[url: 'https://github.com/EladHamneshin/banner-fulltack-node-react-ts']]])
+                }
             }
         }
 
-        stage('Install') {
+        stage('client build') {
             steps {
                 script {
                     dir('client') {
-                        sh 'echo "test test test1"'
-                        sh 'echo "Installing dependencies..."'
-                        sh 'npm install'
+                        sh 'echo "Building..."'
+                        sh 'docker build -t banner-client .'
                     }
                 }
             }
         }
 
-        // stage('Lint') {
-        //     steps {
-        //         script {
-        //             dir('client') {
-        //                 sh 'npm run lint'
-        //             }
-        //         }
-        //     }
-        // }
+        stage('server build') {
+            steps {
+                script {
+                    dir('server') {
+                        sh 'echo "Building..."'
+                        sh 'docker build -t banner-server .'
+                    }
+                }
+            }
+        }
     }
-
-    // triggers {
-    //     githubPush()
-    // }
 
     post {
         success {
@@ -52,6 +40,7 @@ pipeline {
                 echo 'Linting passed. You may now merge.'
                 setGitHubPullRequestStatus(
                     state: 'SUCCESS',
+                    context: 'ESLINT-banners',
                     message: 'Build and test passed',
                 )
             }
@@ -62,13 +51,10 @@ pipeline {
                 echo 'Pipeline failed. Blocking pull request merge.'
                 setGitHubPullRequestStatus(
                     state: 'FAILURE',
+                    context: 'ESLINT-banners',
                     message: 'Build and test failed',
                 )
             }
         }
     }
-
-  
-
 }
-// Path: Jenkinsfile

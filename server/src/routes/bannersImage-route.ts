@@ -10,7 +10,7 @@ import {
     getBannerImagesByQuery,
     getTop5BannersImages,
 } from "../controllers/bannerImage-controller";
-import { authHandler } from "../middleware/auth-middleware";
+// import { authHandler } from "../middleware/auth-middleware";
 
 
 // Setup router
@@ -44,7 +44,7 @@ routerBannersImage.put("/:bannerID", updateBannerImage);
 // @desc   Create bannerImage by productID
 // @route  POST /bannersImage/:productID
 // @access Internal
-routerBannersImage.post("/:productID",authHandler, createBannerImage);
+routerBannersImage.post("/:productID", createBannerImage);
 
 // @desc   Delete bannerImage by bannerID
 // @route  DELETE /bannersImage/:bannerID

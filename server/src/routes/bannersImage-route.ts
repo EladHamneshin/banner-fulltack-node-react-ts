@@ -9,6 +9,7 @@ import {
     deleteBannerImage,
     getBannerImagesByQuery,
 } from "../controllers/bannerImage-controller";
+import { authHandler } from "../middleware/auth-middleware";
 // import { authHandler } from "../middleware/auth-middleware";
 
 
@@ -43,12 +44,12 @@ routerBannersImage.put("/:bannerID", updateBannerImage);
 // @desc   Create bannerImage by productID
 // @route  POST /bannersImage/:productID
 // @access Internal
-routerBannersImage.post("/:productID", createBannerImage);
+routerBannersImage.post("/:productID",authHandler, createBannerImage);
 
 // @desc   Delete bannerImage by bannerID
 // @route  DELETE /bannersImage/:bannerID
 // @access Internal
-routerBannersImage.delete("/:bannerID", deleteBannerImage);
+routerBannersImage.delete("/:bannerID",authHandler ,deleteBannerImage);
 
 
 routerBannersImage.get("/ext/", getBannerImagesByQuery);

@@ -40,7 +40,8 @@ pipeline {
                             context: 'ESLINT-banners',
                             status: 'SUCCESS',
                             description: 'Tests passed.',
-                            sha: "${env.GIT_COMMIT}"
+                            sha: "${env.GIT_COMMIT}",
+                            credentialsId: '67f5fce3-a1f5-42e2-b9cc-dffd639c9c31'
             }
         }
 
@@ -53,7 +54,8 @@ pipeline {
                             context: 'ESLINT-banners',
                             status: 'FAILURE',
                             description: 'Tests failed.',
-                            sha: "${env.GIT_COMMIT}"
+                            sha: "${env.GIT_COMMIT}",
+                            credentialsId: '67f5fce3-a1f5-42e2-b9cc-dffd639c9c31'
             }
         }
     }

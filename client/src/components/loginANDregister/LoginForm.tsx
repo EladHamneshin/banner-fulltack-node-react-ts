@@ -34,29 +34,28 @@ const LoginForm = () => {
     });
 
     const onSubmit: SubmitHandler<UserFormInput> = async (data) => {
-        
+
         const email = data.email
         const password = data.password
-        
+
         const user = JSON.stringify({
             email: email,
             password: password
         });
-        
-        // setLoading(true)
+
         const handelClickHomePage = () => {
             navigate(`/banners/`)
             window.location.reload();
         }
-        const handelClickLogIn= () => {
-            navigate(`/banners/login`)
-        }
+        const handelClickLogIn = () => navigate(`/banners/login`)
+
+
         try {
             const data: Response = await loginFetch(user)
-            
+
             if (data.success === true) {
                 toastSuccess(data.message)
-                
+
                 localStorage.setItem('token', data.data.name)
                 localStorage.setItem('name', data.data.name)
                 localStorage.setItem('userID', data.data.id)
@@ -65,11 +64,8 @@ const LoginForm = () => {
                     handelClickHomePage()
                 }, 2000);
             }
-            
-            
-          
+
         } catch (err) {
-            // setMessage('');
             toastError('login error - try again')
             setTimeout(() => {
                 handelClickLogIn()
@@ -80,58 +76,12 @@ const LoginForm = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            
-                <Grid>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'space-between'
-                        }}>
-                        <Grid
-                            sx={{
-                                display: 'flex',
-                                flexDirection: 'column'
-                            }}>
-                            <TextField
-                                style={textFieldStyle}
-                                label="First Name"
-                                placeholder="Enter first name"
-                                {...register("firstName",
-                                    { required: true, maxLength: 20 }
-                                )}
-                                aria-invalid={
-                                    errors.firstName ? "true" : "false"
-                                } />
-                            <Typography
-                                color='red'
-                                variant='caption'
-                            >
-                                {errors.firstName?.message}
-                            </Typography>
-                        </Grid>
-
-                        <Grid
-                            sx={{
-                                display: 'flex',
-                                flexDirection: 'column'
-                            }}>
-                            <TextField
-                                style={textFieldStyle}
-                                label="Last Name"
-                                placeholder="Enter last name"
-                                {...register("lastName", {
-                                    required: true, maxLength: 20
-                                })}
-                                aria-invalid={errors.lastName ? "true" : "false"} />
-                            <Typography
-                                color='red'
-                                variant='caption'
-                            >
-                                {errors.lastName?.message}
-                            </Typography>
-                        </Grid>
-                    </Box>
-
+            <Grid>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                    }}>
                     <Grid
                         sx={{
                             display: 'flex',
@@ -139,16 +89,18 @@ const LoginForm = () => {
                         }}>
                         <TextField
                             style={textFieldStyle}
-                            label="Email"
-                            placeholder="Enter your email"
-                            fullWidth
-                            {...register("email", { required: true, pattern: /^\S+@\S+\.\S+$/ })}
-                            aria-invalid={errors.email ? "true" : "false"} />
+                            label="First Name"
+                            placeholder="Enter first name"
+                            {...register("firstName",
+                                { required: true, maxLength: 20 }
+                            )}
+                            aria-invalid={
+                                errors.firstName ? "true" : "false"
+                            } />
                         <Typography
                             color='red'
-                            variant='caption'
-                        >
-                            {errors.email?.message}
+                            variant='caption'>
+                            {errors.firstName?.message}
                         </Typography>
                     </Grid>
 
@@ -159,29 +111,67 @@ const LoginForm = () => {
                         }}>
                         <TextField
                             style={textFieldStyle}
-                            label="Password"
-                            placeholder="Enter your password"
-                            fullWidth
-                            {...register("password", { required: true, min: 4, max: 12 })}
-                            aria-invalid={errors.password ? "true" : "false"} />
+                            label="Last Name"
+                            placeholder="Enter last name"
+                            {...register("lastName", {
+                                required: true, maxLength: 20
+                            })}
+                            aria-invalid={errors.lastName ? "true" : "false"} />
                         <Typography
                             color='red'
                             variant='caption'
                         >
-                            {errors.password?.message}
+                            {errors.lastName?.message}
                         </Typography>
                     </Grid>
+                </Box>
+
+                <Grid
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column'
+                    }}>
+                    <TextField
+                        style={textFieldStyle}
+                        label="Email"
+                        placeholder="Enter your email"
+                        fullWidth
+                        {...register("email", { required: true, pattern: /^\S+@\S+\.\S+$/ })}
+                        aria-invalid={errors.email ? "true" : "false"} />
+                    <Typography
+                        color='red'
+                        variant='caption'>
+                        {errors.email?.message}
+                    </Typography>
                 </Grid>
+
+                <Grid
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column'
+                    }}>
+                    <TextField
+                        style={textFieldStyle}
+                        label="Password"
+                        placeholder="Enter your password"
+                        fullWidth
+                        {...register("password", { required: true, min: 4, max: 12 })}
+                        aria-invalid={errors.password ? "true" : "false"} />
+                    <Typography
+                        color='red'
+                        variant='caption'>
+                        {errors.password?.message}
+                    </Typography>
+                </Grid>
+            </Grid>
             <Button
                 type='submit'
                 variant="contained"
                 color="primary"
-                fullWidth
-            >
+                fullWidth>
                 sign in
             </Button>
         </form >
-
     )
 }
 

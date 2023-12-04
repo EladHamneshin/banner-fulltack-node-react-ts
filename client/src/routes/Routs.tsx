@@ -11,9 +11,10 @@ import Login from "../pages/loginANDregister/Login";
 import CreateBanner from "../pages/bannersPages/CreateBanner";
 import BannerByUserID from "../pages/bannersPages/BannerByUserID";
 import HomePage from "../pages/HomePage";
-import ProfileUser from "../pages/ProfileUser";
+import ProfileUser from "../pages/users/ProfileUser";
 import AllProducts from "../pages/products/AllProducts";
 import ProductPage from "../pages/products/ProductPage";
+import EditUserForm from "../pages/users/EditUserForm";
 
 export default function Routs() {
     const router = createBrowserRouter([
@@ -58,7 +59,7 @@ export default function Routs() {
                     errorElement: <ErrorPage />,
                 },
                 {
-                    path: '/banners/ProductPage/:productId',
+                    path: 'banners/ProductPage/:productId',
                     element: <ProductPage />,
                     errorElement: <ErrorPage />,
                 },
@@ -78,8 +79,13 @@ export default function Routs() {
                     errorElement: <ErrorPage />,
                 },
                 {
-                    path: `banners/user/profil`,
+                    path: `banners/user/profile`,
                     element: <ProfileUser />,
+                    errorElement: <ErrorPage />,
+                },
+                {
+                    path: `banners/user/edit`,
+                    element: <EditUserForm />,
                     errorElement: <ErrorPage />,
                 },
                 // {

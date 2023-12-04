@@ -42,7 +42,7 @@ describe('ManageIcon component', () => {
     //     const profileItem = getByRole('menuitem', { name: 'Profile' });
     //     fireEvent.click(profileItem);
     //     await waitFor(() => {
-    //         expect(window.location.pathname).toBe('/banners/user/profil');
+    //         expect(window.location.pathname).toBe('/banners/user/profile');
     //     });
 
     //     const myAccountItem = getByRole('menuitem', { name: 'My account' });

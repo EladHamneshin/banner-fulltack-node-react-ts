@@ -19,7 +19,7 @@ const BannerCanvas: React.FC<BannerCanvasProps> = ({ width, height, product }) =
   const [text, setText] = useState('');
 
   const [element, setElement] = useState({
-    image: product.image,
+    image: product.image.url,
     x: 20,
     y: 60,
     isDragging: false,
@@ -100,20 +100,20 @@ const BannerCanvas: React.FC<BannerCanvasProps> = ({ width, height, product }) =
     }
   }, [bgImage, element, text, width, height]);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (canvas) {
-      canvas.addEventListener('mousedown', startDragging);
-      canvas.addEventListener('mousemove', handleMouseMove);
-      canvas.addEventListener('mouseup', stopDragging);
+//   useEffect(() => {
+//     const canvas = canvasRef.current;
+//     if (canvas) {
+//       canvas.addEventListener('mousedown', startDragging);
+//       canvas.addEventListener('mousemove', handleMouseMove);
+//       canvas.addEventListener('mouseup', stopDragging);
 
-      return () => {
-        canvas.removeEventListener('mousedown', startDragging);
-        canvas.removeEventListener('mousemove', handleMouseMove);
-        canvas.removeEventListener('mouseup', stopDragging);
-      };
-    }
-  }, [element.isDragging]);
+//       return () => {
+//         canvas.removeEventListener('mousedown', startDragging);
+//         canvas.removeEventListener('mousemove', handleMouseMove);
+//         canvas.removeEventListener('mouseup', stopDragging);
+//       };
+//     }
+//   }, [element.isDragging]);
 
   return (
     <Box>

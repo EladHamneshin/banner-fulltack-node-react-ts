@@ -1,41 +1,126 @@
 import { Box, Button, Dialog, Slide, Typography } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Product } from "../types/ProductInterface";
 
-const Transition = React.forwardRef(function Transition(
-    props: TransitionProps & {
-        children: React.ReactElement<any, any>;
-    },
-    ref: React.Ref<unknown>,
-) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
+
 
 const API_URL = import.meta.env.VITE_API_URI;
 
-type Props = {
+interface BannerCanvasProps {
+    width: number;
+    height: number;
     product: Product;
-};
+  }
 
-const Canvas: React.FC<Props> = (props) => {
+const images = [
+    { src: `${API_URL}/backround/1.jpg`, name: 'Background 1' },
+    { src: `${API_URL}/backround/2.jpg`, name: 'Background 2' },
+    { src: `${API_URL}/backround/3.jpg`, name: 'Background 3' },
+    { src: `${API_URL}/backround/4.jpg`, name: 'Background 4' },
+];
+const Canvas = (props : BannerCanvasProps) => {
     const [open, setOpen] = React.useState(false);
-
+    
+    const product = props.product
+    const width = props.width
+    const height = props.height
+    
+    
+    
     const handleClickOpen = () => {
         setOpen(true);
     };
-
+    
     const handleClose = () => {
         setOpen(false);
     };
-
-    const images = [
-        { src: `${API_URL}/backround/1.jpg`, name: 'Background 1' },
-        { src: `${API_URL}/backround/2.jpg`, name: 'Background 2' },
-        { src: `${API_URL}/backround/3.jpg`, name: 'Background 3' },
-        { src: `${API_URL}/backround/4.jpg`, name: 'Background 4' },
-    ];
-
+    
+    const [bgImage, setBgImage] = useState<string | undefined>();
+    const [text, setText] = useState('');
+  
+    const [element, setElement] = useState({
+      image: product.image.url,
+      x: 20,
+      y: 60,
+      isDragging: false,
+    });
+  
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+  
+    const setDimensions = () => {
+      const canvas = canvasRef.current;
+      if (canvas) {
+        canvas.width = width;
+        canvas.height = height;
+      }
+    };
+  
+    const handleBackgroundClicked = (bg: { src: string }) => {
+      setBgImage(bg.src);
+    };
+  
+    const handleTextClicked = (newText: string) => {
+      setText(newText);
+    };
+  
+    // const handleDownloadClick = () => {
+    //   const canvas = canvasRef.current;
+    //   if (canvas) {
+    //     const dataUrl = canvas.toDataURL();
+    //     downloadFromDataUrl(dataUrl, 'banner.png');
+    //   }
+    // };
+  
+    // const startDragging = () => {
+    //   setElement((prevState) => ({
+    //     ...prevState,
+    //     isDragging: true,
+    //   }));
+    // };
+  
+    // const stopDragging = () => {
+    //   setElement((prevState) => ({
+    //     ...prevState,
+    //     isDragging: false,
+    //   }));
+    // };
+  
+    // const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    //   if (element.isDragging) {
+    //     setElement((prevState) => ({
+    //       ...prevState,
+    //       x: e.clientX,
+    //       y: e.clientY,
+    //     }));
+    //   }
+    // };
+  
+    useEffect(() => {
+      const canvas = canvasRef.current;
+      const ctx = canvas?.getContext('2d');
+  
+      // Draw background
+      if (bgImage && ctx) {
+        const bgImg = new Image();
+        bgImg.src = bgImage;
+        bgImg.onload = () => ctx.drawImage(bgImg, 0, 0, width, height);
+      }
+  
+      // Draw product Image
+      const img = new Image();
+      img.src = element.image;
+      img.onload = () => {
+        ctx?.drawImage(img, element.x, element.y);
+      };
+  
+      // Draw text
+      if (ctx) {
+        ctx.font = '20px Sans-Serif';
+        ctx.fillText(text, 20, 40);
+      }
+    }, [bgImage, element, text, width, height]);
+  
     const handleButtonClick = () => {
         const canvas = document.getElementById('myCanvas') as HTMLCanvasElement;
         const context = canvas.getContext('2d');
@@ -88,7 +173,6 @@ const Canvas: React.FC<Props> = (props) => {
             <Dialog
                 fullScreen
                 open={open}
-                TransitionComponent={Transition}
                 keepMounted
                 onClose={handleClose}
             >
@@ -98,9 +182,9 @@ const Canvas: React.FC<Props> = (props) => {
                         id="myCanvas"
                         style={{
                             border: '1px solid black',
-                            objectFit: 'cover',
-                            width: 2000,
-                            height: 200,
+                            
+                            width: 650,
+                            height: 120,
                         }}
                     ></canvas>
                     <Typography variant="h6">choose background</Typography>
@@ -134,8 +218,8 @@ const Canvas: React.FC<Props> = (props) => {
                         <Button onClick={() => handleClickAddText(props.product.name)}>
                             Name: {props.product.name}
                         </Button>
-                        <Button onClick={() => handleClickAddText(props.product.discountPercentage.toString())}>
-                            discount: {props.product.discountPercentage}
+                        <Button onClick={() => handleClickAddText(props.product.discount.toString())}>
+                            discount: {`${props.product.discount} %`}
                         </Button>
                         <Button onClick={() => handleClickAddText("Additional Text")}>
                             Add Additional Text

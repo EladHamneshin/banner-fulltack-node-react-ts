@@ -5,7 +5,7 @@ export interface Product {
     quantity: number,
     description: string,
     category: string,
-    discountPercentage: number,
+    discount: number,
     rating: number,
     click: number
     coordinate: {

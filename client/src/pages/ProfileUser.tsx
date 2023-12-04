@@ -1,13 +1,15 @@
-import { LocationOn, Edit } from '@mui/icons-material';
-import { Card, Avatar, Typography, IconButton, Divider, Chip, Switch } from '@mui/material';
-import { green, grey } from '@mui/material/colors';
+import { Edit } from '@mui/icons-material';
+import { Card, Avatar, Typography, IconButton, } from '@mui/material';
+import { green } from '@mui/material/colors';
 import { Box, Stack } from '@mui/system';
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
 const ProfileUser = () => {
-    const [active, setActive] = useState<boolean>(true);
+    // const [active, setActive] = useState<boolean>(true);
+
+    
     const navigate = useNavigate();
 
     const handleLoginRedirect = () => {
@@ -21,9 +23,9 @@ const ProfileUser = () => {
     }, []);
 
 
-    const handleSwitchChange = () => {
-        setActive((prevActive) => !prevActive);
-    };
+    // const handleSwitchChange = () => {
+    //     setActive((prevActive) => !prevActive);
+    // };
 
     return (
         <Box

@@ -41,7 +41,7 @@ pipeline {
                             status: 'SUCCESS',
                             description: 'Tests passed.',
                             sha: "${env.GIT_COMMIT}",
-                            credentialsId: 'test'
+                            credentialsId: '67f5fce3-a1f5-42e2-b9cc-dffd639c9c31'
             }
         }
 
@@ -55,7 +55,7 @@ pipeline {
                             status: 'FAILURE',
                             description: 'Tests failed.',
                             sha: "${env.GIT_COMMIT}",
-                            credentialsId: 'test'
+                            credentialsId: '67f5fce3-a1f5-42e2-b9cc-dffd639c9c31'
             }
         }
     }

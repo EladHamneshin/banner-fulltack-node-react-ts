@@ -6,9 +6,6 @@ pipeline {
             steps {
                 script {
                     dir('client') {
-                        sh 'rm -rf /var/jenkins_home/jobs/test-banners/workspace/client/node_modules'
-                        sh 'npm cache clean -f'
-                        sh 'npm install -g n'
                         echo 'Installing dependencies...'
                         sh 'npm install'
                         echo 'Running tests...'
@@ -22,9 +19,6 @@ pipeline {
             steps {
                 script {
                     dir('server') {
-                        sh 'rm -rf /var/jenkins_home/jobs/test-banners/workspace/server/node_modules'
-                        sh 'npm cache clean -f'
-                        sh 'npm install -g n'
                         echo 'Installing dependencies...'
                         sh 'npm install'
                         echo 'Running tests...'

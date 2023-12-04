@@ -51,7 +51,9 @@ const SidBar = () => {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['Drafts','All banners', 'All products', 'My bannars' ].map((text) => (
+
+                {[ 'Drafts','All banners', 'All products', 'My bannars'].map((text) => (
+
                     <ListItem key={text} disablePadding>
                         <ListItemButton
                             onClick={() => {

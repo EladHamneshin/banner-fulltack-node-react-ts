@@ -1,7 +1,8 @@
 import { Edit } from '@mui/icons-material';
 
-import { Card, Avatar, Typography, IconButton,Box, Stack } from '@mui/material';
+import { Card, Avatar, Typography, IconButton } from '@mui/material';
 import { green } from '@mui/material/colors';
+import { Box, Stack } from '@mui/system';
 import { useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
@@ -13,15 +14,15 @@ const ProfileUser = () => {
 
     const handleLoginRedirect = () => navigate('/banner/login');
         
+
     const goToEditUser = () =>   navigate('/banner/banners/user/edit');
+
 
     useEffect(() => {
         if (localStorage.getItem('token') === null) {
             handleLoginRedirect();
         }
     }, []);
-
-
 
 
     return (

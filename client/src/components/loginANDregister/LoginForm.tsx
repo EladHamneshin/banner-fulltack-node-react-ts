@@ -43,14 +43,16 @@ const LoginForm = () => {
             password: password
         });
 
-        // setLoading(true)
+
         const handelClickHomePage = () => {
             navigate(`/banner/`)
             // window.location.reload();
         }
+
         const handelClickLogIn = () => {
             navigate(`/banner/login`)
         }
+
         try {
             const data: Response = await loginFetch(user)
 
@@ -67,9 +69,7 @@ const LoginForm = () => {
             }
 
 
-
         } catch (err) {
-            // setMessage('');
             toastError('login error - try again')
             setTimeout(() => {
                 handelClickLogIn()
@@ -104,8 +104,9 @@ const LoginForm = () => {
                             } />
                         <Typography
                             color='red'
-                            variant='caption'
-                        >
+
+                            variant='caption'>
+
                             {errors.firstName?.message}
                         </Typography>
                     </Grid>
@@ -146,8 +147,8 @@ const LoginForm = () => {
                         aria-invalid={errors.email ? "true" : "false"} />
                     <Typography
                         color='red'
-                        variant='caption'
-                    >
+                        variant='caption'>
+
                         {errors.email?.message}
                     </Typography>
                 </Grid>
@@ -166,8 +167,8 @@ const LoginForm = () => {
                         aria-invalid={errors.password ? "true" : "false"} />
                     <Typography
                         color='red'
-                        variant='caption'
-                    >
+                        variant='caption'>
+
                         {errors.password?.message}
                     </Typography>
                 </Grid>
@@ -176,12 +177,10 @@ const LoginForm = () => {
                 type='submit'
                 variant="contained"
                 color="primary"
-                fullWidth
-            >
+                fullWidth>
                 sign in
             </Button>
         </form >
-
     )
 }
 

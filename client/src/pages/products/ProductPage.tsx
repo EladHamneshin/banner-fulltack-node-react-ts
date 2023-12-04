@@ -31,7 +31,7 @@ const ProductPage = () => {
         const fetchProduct = async () => {
             try {
                 const result = await getProductById(productId!);
-                setProduct(result);
+                setProduct(result.data);
             } catch (error) {
                 console.error('Error fetching product:', error);
             } finally {
@@ -45,7 +45,11 @@ const ProductPage = () => {
         const fetchBanners = async () => {
             try {
                 if (productId) {
-                    const bannerFetch = await bannerByProducdID(productId);
+                    const bannerFetch = await bannerByProducdID(productId!);
+                    
+                    // if ( !bannerFetch) {
+                    //     setMessage('bannerFetch.message');
+                    // }
                     if (bannerFetch.success === false) {
                         setMessage(bannerFetch.message);
                     }
@@ -98,7 +102,7 @@ const ProductPage = () => {
                 </IconButton>
                 <Box sx={{ display: 'flex' }}>
                     <Box sx={{ width: '45%', margin: 2 }}>
-                        {products ? (
+                        {products ? ( 
                             <BannersTable pro={banners} />
                         ) : (
                             <Stack direction="row" spacing={2}>

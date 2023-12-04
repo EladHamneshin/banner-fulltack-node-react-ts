@@ -8,7 +8,7 @@ const columns: GridColDef[] = [
     { field: 'productID', headerName: 'Product', type: 'string', minWidth: 90 },
     { field: 'categoryID', headerName: 'Category', type: 'string', minWidth: 90 },
     { field: 'author', headerName: 'Author', type: 'string', minWidth: 90 },
-    { field: 'creationDate', headerName: 'Creation Date', type: 'dateTime', minWidth: 110 },
+    { field: 'creationDate', headerName: 'Creation Date', type: 'string', minWidth: 110 },
     // { field: 'click', headerName: 'Clicks', type: 'number', width: 40 },
     // { field: 'kind', headerName: 'Kind', width: 40 },
     // { field: 'size', headerName: 'Size', width: 40 },

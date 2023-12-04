@@ -7,7 +7,7 @@ const Login = () => {
     
     const navigate = useNavigate();
     const handelClickSignUp = () => {
-        navigate(`/banners/register`)
+        navigate(`/banner/register`)
     }
     
     const paperStyle = {

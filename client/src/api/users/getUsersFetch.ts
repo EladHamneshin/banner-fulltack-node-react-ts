@@ -5,7 +5,8 @@ const API_URL = import.meta.env.VITE_API_URI
 export const getAllUsers = async () => {
 
     let data = '';
-    const token = localStorage.getItem('banner_token');
+    let token = localStorage.getItem('banner_token');
+    if (!token) { token = ''}
     
     
     let config = {

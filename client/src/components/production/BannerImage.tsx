@@ -32,7 +32,7 @@ export default function BannerSide(props : Props) {
 
         if (props.size === 'top') {setstyle(styleTop)}
         const response = await getBannerImageByParams(params)
-        console.log(response);
+       
         
         setBanner(response.data[0]);
     }

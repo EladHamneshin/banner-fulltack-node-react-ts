@@ -9,7 +9,7 @@ export const loginFetch = async (user: string) => {
     let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: `${API_URL}/banners/api/users/login`,
+        url: `${API_URL}/users/login`,
         headers: {
             'Content-Type': 'application/json'
         },
@@ -19,6 +19,7 @@ export const loginFetch = async (user: string) => {
     try {
         const res = await axios.request(config)
         const token  = res.headers.Authorization
+        console.log(token)
         localStorage.setItem('banner_token', token)
         console.log('token insert success');
         return res.data

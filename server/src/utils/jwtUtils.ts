@@ -14,7 +14,7 @@ const generateToken = (res: Response, userID: string, isadmin: boolean) => {
         expiresIn: '2d'
       })
 
-    res.setHeader('authorization',token)
+    res.setHeader('Authorization',token)
 };
 
 

@@ -45,11 +45,11 @@ const EditUserForm = () => {
     });
     const onSubmit: SubmitHandler<any> = async (data) => {
 
-        const moveToEditUser = () => navigate('/banners/banners/user/edit');
+        const moveToEditUser = () => navigate('/banner/banners/user/edit');
 
 
         const handelClickHomePage = () => {
-            navigate(`/banners/`)
+            navigate(`/banner/`)
             window.location.reload();
         }
 

@@ -13,7 +13,7 @@ const ProfileUser = () => {
 
     const handleLoginRedirect = () => navigate('/banner/login');
         
-    const goToEditUser = () =>   navigate('/banners/banners/user/edit');
+    const goToEditUser = () =>   navigate('/banner/banners/user/edit');
 
     useEffect(() => {
         if (localStorage.getItem('token') === null) {

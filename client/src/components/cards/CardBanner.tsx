@@ -69,7 +69,7 @@ const CardBanner = (props: Props) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const handelClickCardProduct = () => navigate(`/banner/ProductPage/${banner.productID}`);
+  const handelClickCardProduct = () => navigate(`/banner/banners/ProductPage/${banner.productID}`);
 
   return (
     <Box >

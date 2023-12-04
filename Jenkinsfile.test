@@ -34,7 +34,7 @@ pipeline {
             script {
                 // Notify success to GitHub
                 echo 'Tests passed.'
-                githubNotify description: 'This is a shorted example',  status: 'SUCCESS'
+                githubNotify description: 'This is a shorted example',  status: 'SUCCESS', account: 'EladHamneshin', repo: 'banner-fulltack-node-react-ts', context: 'ESLINT-banners', sha: 'main'
 
             }
         }
@@ -42,7 +42,7 @@ pipeline {
             script {
                 // Notify failure to GitHub
                 echo 'Tests failed.'
-                githubNotify description: 'This is a shorted example',  status: 'FAILURE'
+                githubNotify description: 'This is a shorted example',  status: 'FAILURE', account: 'EladHamneshin', repo: 'banner-fulltack-node-react-ts', context: 'ESLINT-banners', sha: 'main'
 
             }
         }

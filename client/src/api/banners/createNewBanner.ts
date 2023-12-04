@@ -10,7 +10,9 @@ export const createBanner = async (newBanner: any, productID: string) => {
     try {
 
         // let data = await JSON.stringify(newBanner);
-        const token = localStorage.getItem('banner_token');
+        let token = localStorage.getItem('banner_token');
+        if (!token) { token = ''}
+console.log(token);
 
         let configCraete = {  
             method: 'post',

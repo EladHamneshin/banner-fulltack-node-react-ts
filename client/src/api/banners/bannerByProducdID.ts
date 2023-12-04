@@ -3,7 +3,9 @@ const API_URL = import.meta.env.VITE_API_URI
 
 
 export const bannerByProducdID = async (productID: string) => {
-  const token = localStorage.getItem('banner_token');
+
+  let token = localStorage.getItem('banner_token');
+  if (!token) { token = ''}
   
   
   let data = '';
@@ -11,7 +13,7 @@ export const bannerByProducdID = async (productID: string) => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: `${API_URL}/bannersImage/procuct/${productID}`,
+    url: `${API_URL}/bannersImage/product/${productID}`,
     headers: { 
         'Authorization': token, 
         'Content-Type': 'application/json'
@@ -20,6 +22,7 @@ export const bannerByProducdID = async (productID: string) => {
   };
   try {
     const res = await axios.request(config)
+    
     return res.data
   } catch (error) {
     console.log(error);

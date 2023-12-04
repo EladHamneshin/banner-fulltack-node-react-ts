@@ -20,7 +20,7 @@ const CreateBanner = () => {
             const data = await getProductById(productID!)
             console.log(data);
             
-            setProduct (data)
+            setProduct (data.data)
         }
         api()
         

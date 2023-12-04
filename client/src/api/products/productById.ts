@@ -5,7 +5,8 @@ const API_URL = import.meta.env.VITE_API_URI
 
 export const getProductById = async (productID: string) => {
 
-    const token = localStorage.getItem('banner_token');
+    let token = localStorage.getItem('banner_token');
+    if (!token) { token = ''}
 
     
     let config = {
@@ -20,6 +21,7 @@ export const getProductById = async (productID: string) => {
     };
     try {
         const res = await axios.request(config)
+        
         return res.data
     } catch (error) {
         console.log(error);

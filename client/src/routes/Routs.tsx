@@ -58,7 +58,7 @@ export default function Routs() {
                     errorElement: <ErrorPage />,
                 },
                 {
-                    path: '/banners/ProductPage/:productId',
+                    path: 'banners/ProductPage/:productId',
                     element: <ProductPage />,
                     errorElement: <ErrorPage />,
                 },

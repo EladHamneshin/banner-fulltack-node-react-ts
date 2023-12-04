@@ -47,7 +47,7 @@ pipeline {
         failure {
             script {
                 // Notify failure to GitHub
-                echo 'Tests failed.''
+                echo 'Tests failed.'
                 githubNotify account: 'EladHamneshin',
                             repo: 'banner-fulltack-node-react-ts',
                             context: 'ESLINT-banners',

@@ -32,22 +32,23 @@ pipeline {
     post {
         success {
             script {
-                // Set commit status to success
+                // Notify success to GitHub
                 echo 'Tests passed.'
-                githubCommitStatus(
+                githubNotify(
                     context: 'ESLINT-banners',
-                    state: 'SUCCESS',
-                    message: 'Build and tests passed',
+                    description: 'Build and tests passed',
+                    status: 'SUCCESS',
                 )
             }
         }
         failure {
             script {
+                // Notify failure to GitHub
                 echo 'Tests failed.'
-                githubCommitStatus(
+                githubNotify(
                     context: 'ESLINT-banners',
-                    state: 'FAILURE',
-                    message: 'Build and tests failed',
+                    description: 'Build and tests failed',
+                    status: 'FAILURE',
                 )
             }
         }

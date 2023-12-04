@@ -5,6 +5,7 @@ export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
   return defineConfig({
     plugins: [react()],
+    base: '/banner',
 
     test: {
         globals: true,
@@ -15,12 +16,7 @@ export default ({ mode }) => {
 
     server: {
       port: 5173,
-      proxy: {
-        '/api': {
-          target: process.env.VITE_API_URI,
-          changeOrigin: true,
-        },
-      },
+      
     },
   });
 };

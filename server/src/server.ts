@@ -65,12 +65,12 @@ app.use(helmet());
 // app.use(unless(["/users/login"], verify));
 
 
-app.use("/banners/api/users", user);
-app.use("/banners/api/bannersImage", routerBannersImage);
-app.use("/banners/api/upload", uploadRouter);
+app.use("/users", user);
+app.use("/bannersImage", routerBannersImage);
+app.use("/upload", uploadRouter);
 
 
-app.use("/banners/api/ext/bannersProduct", productRouter)
+app.use("/ext/bannersProduct", productRouter)
 
 
 

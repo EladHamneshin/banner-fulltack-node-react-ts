@@ -12,12 +12,16 @@ export const getBannerImageByParams = async (params: string) => {
     
 
     let data = '';
-
+    const token = localStorage.getItem('banner_token');
+    
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: ` ${API_URL}/banners/api/bannersImage/ext/?${params}`,
-        headers: {},
+        url: ` ${API_URL}/bannersImage/ext/?${params}`,
+        headers: { 
+            'Authorization': token, 
+            'Content-Type': 'application/json'
+          },
         data: data
     };
     try {

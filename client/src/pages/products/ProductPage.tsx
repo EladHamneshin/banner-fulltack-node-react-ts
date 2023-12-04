@@ -64,7 +64,7 @@ const ProductPage = () => {
         fetchBanners();
     }, [productId]);
 
-    const handleAddBanner = () => navigate(`/banners/createBanner/${productId}`);
+    const handleAddBanner = () => navigate(`/banner/createBanner/${productId}`);
 
     const handleTable = () => setProducts(true);
 

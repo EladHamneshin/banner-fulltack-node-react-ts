@@ -45,11 +45,11 @@ const LoginForm = () => {
         
         // setLoading(true)
         const handelClickHomePage = () => {
-            navigate(`/banners/`)
+            navigate(`/banner/`)
             window.location.reload();
         }
         const handelClickLogIn= () => {
-            navigate(`/banners/login`)
+            navigate(`/banner/login`)
         }
         try {
             const data: Response = await loginFetch(user)

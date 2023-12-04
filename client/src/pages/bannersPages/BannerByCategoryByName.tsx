@@ -11,7 +11,7 @@ import CardBanner from '../../components/cards/CardBanner'
 const BannerByCategoryByName = () => {
 
     const navigate = useNavigate();
-    const handelClickLogin = () => { navigate(`/banners/login`) }
+    const handelClickLogin = () => { navigate(`/banner/login`) }
     useEffect(() => {
         if (localStorage.getItem('token') === null) { handelClickLogin() }
     }, [])

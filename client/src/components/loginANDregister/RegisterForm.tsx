@@ -30,10 +30,10 @@ const RegisterForm = () => {
   const onSubmit: SubmitHandler<any> = async (data) => {
 
     const moveToLogin = () => {
-      navigate(`/banners/login`)
+      navigate(`/banner/login`)
     }
     const handelClickSignUp = () => {
-      navigate(`/banners/register`)
+      navigate(`/banner/register`)
     }
 
     const name = data.firstName + ' ' + data.lastName;

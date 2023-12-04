@@ -5,12 +5,16 @@ const API_URL = import.meta.env.VITE_API_URI
 export const getAllBannersImage = async () => {
 
   let data = '';
-
+  const token = localStorage.getItem('banner_token');
+  
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: `${API_URL}/banners/api/bannersImage`,
-    headers: {},
+    url: `${API_URL}/bannersImage`,
+    headers: { 
+        'Authorization': token, 
+        'Content-Type': 'application/json'
+      },
     data: data
   };
   try {

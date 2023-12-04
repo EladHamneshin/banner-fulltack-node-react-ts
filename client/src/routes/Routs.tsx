@@ -18,7 +18,7 @@ import ProductPage from "../pages/products/ProductPage";
 export default function Routs() {
     const router = createBrowserRouter([
         {
-            path: "/banners",
+            path: "/banner",
             element: <Deshbord />,
             errorElement: <ErrorPage />,
             children: [

@@ -7,11 +7,16 @@ export  const uploadImageToServer = async (image: File) => {
 
     const formData = new FormData();  //create new form object
     formData.append("myImage", image);
-
-
+    const token = localStorage.getItem('banner_token');
+    
+    
     let configUpImage = {
         method: "post",
-        url: `${API_URI}/banners/api/upload/image`,
+        url: `${API_URI}/upload/image`,
+        headers: { 
+            'Authorization': token, 
+            'Content-Type': 'application/json'
+          },
         data: formData
     }
 

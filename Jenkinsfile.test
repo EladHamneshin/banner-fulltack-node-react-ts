@@ -6,6 +6,7 @@ pipeline {
             steps {
                 script {
                     dir('client') {
+                        sh 'printenv'
                         echo 'Installing dependencies...'
                         sh 'npm install'
                         echo 'Running tests...'
@@ -19,7 +20,6 @@ pipeline {
             steps {
                 script {
                     dir('server') {
-                        cache(steps: [npm('node_modules')], key: 'npm-${NODE_ENV}')
                         echo 'Installing dependencies...'
                         sh 'npm install'
                         echo 'Running tests...'
@@ -33,23 +33,29 @@ pipeline {
     post {
         success {
             script {
-                // Set commit status to success
+                // Notify success to GitHub
                 echo 'Tests passed.'
-                githubCommitStatus(
-                    context: 'ESLINT-banners',
-                    state: 'SUCCESS',
-                    message: 'Build and tests passed',
-                )
+                githubNotify account: 'EladHamneshin',
+                            repo: 'banner-fulltack-node-react-ts',
+                            context: 'ESLINT-banners',
+                            status: 'SUCCESS',
+                            description: 'Tests passed.',
+                            sha: "${env.GIT_COMMIT}",
+                            credentialsId: 'test'
             }
         }
+
         failure {
             script {
+                // Notify failure to GitHub
                 echo 'Tests failed.'
-                githubCommitStatus(
-                    context: 'ESLINT-banners',
-                    state: 'FAILURE',
-                    message: 'Build and tests failed',
-                )
+                githubNotify account: 'EladHamneshin',
+                            repo: 'banner-fulltack-node-react-ts',
+                            context: 'ESLINT-banners',
+                            status: 'FAILURE',
+                            description: 'Tests failed.',
+                            sha: "${env.GIT_COMMIT}",
+                            credentialsId: 'test'
             }
         }
     }

@@ -1,18 +1,22 @@
-import { LocationOn, Edit } from '@mui/icons-material';
-import { Card, Avatar, Typography, IconButton, Divider, Chip, Switch } from '@mui/material';
-import { green, grey } from '@mui/material/colors';
+import { Edit } from '@mui/icons-material';
+
+import { Card, Avatar, Typography, IconButton } from '@mui/material';
+import { green } from '@mui/material/colors';
 import { Box, Stack } from '@mui/system';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 
 
 const ProfileUser = () => {
-    const [active, setActive] = useState<boolean>(true);
+
     const navigate = useNavigate();
 
-    const handleLoginRedirect = () => {
-        navigate('/banner/login');
-    };
+    const handleLoginRedirect = () => navigate('/banner/login');
+        
+
+    const goToEditUser = () =>   navigate('/banner/banners/user/edit');
+
 
     useEffect(() => {
         if (localStorage.getItem('token') === null) {
@@ -21,10 +25,6 @@ const ProfileUser = () => {
     }, []);
 
 
-    const handleSwitchChange = () => {
-        setActive((prevActive) => !prevActive);
-    };
-
     return (
         <Box
             sx={{
@@ -32,11 +32,10 @@ const ProfileUser = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                height: '60vh', // Adjust the height based on your layout needs
-                backgroundColor: '#f5d4d4', // Change the background color
-                padding: '20px', // Add padding
-            }}
-        >
+                height: '60vh', 
+                backgroundColor: '#f5d4d4',
+                padding: '20px',
+            }}>
             <Card>
                 <Box sx={{ p: 8, display: 'flex',alignItems: 'center' }}>
                     <Avatar  src="avatar.jpg" sx={{
@@ -51,11 +50,11 @@ const ProfileUser = () => {
                             {localStorage.getItem('name')}
                         </Typography>
                         <Typography variant="h6" color="text.secondary" sx={{margin:'10px'}}>
-                            {/* <LocationOn sx={{ color: grey[500] }} /> */}
                             {localStorage.getItem('email')}
                         </Typography>
                     </Stack>
-                    <IconButton sx={{margin:'40px'}}>
+                    <IconButton sx={{margin:'40px'}}
+                    onClick={goToEditUser}>
                         <Edit   fontSize="large"/>
                     </IconButton>
                 </Box>

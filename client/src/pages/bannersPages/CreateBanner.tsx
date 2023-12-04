@@ -22,14 +22,16 @@ const CreateBanner = () => {
             const data = await getProductById(productID!)
             console.log(data);
 
-            setProduct(data)
+            
+            setProduct (data.data)
+
         }
         api()
 
 
     }, [])
     const navigate = useNavigate();
-    const handelClickLogin = () => { navigate(`/banners/login`) }
+    const handelClickLogin = () => { navigate(`/banner/login`) }
     useEffect(() => {
         if (localStorage.getItem('token') === null) { handelClickLogin() }
     }, [])

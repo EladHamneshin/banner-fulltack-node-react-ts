@@ -51,7 +51,7 @@ const AllProducts = () => {
           justifyContent: 'space-around'
         }}>
           {products && products.map((product, index) => (
-            <Link to={`/banners/ProductPage/${product.id}`} key={index}
+            <Link to={`/banner/banners/ProductPage/${product.id}`} key={index}
               style={{ textDecoration: 'none' }}>
               <CardProduct key={index} product={product} />
             </Link>

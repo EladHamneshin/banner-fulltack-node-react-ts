@@ -6,8 +6,8 @@ import { ApiError } from "../utils/ApiError";
 
 export const notFound = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     console.log('not found');
-    const error = new ApiError({},STATUS_CODES.NOT_FOUND,`Not Found - ${req.originalUrl}`);
-    next(error);
+    throw new ApiError({},STATUS_CODES.NOT_FOUND,`URL - ${req.originalUrl} not found`);
+    // next();
   },
   );
 

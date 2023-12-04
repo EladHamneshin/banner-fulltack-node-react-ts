@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { useNavigate } from 'react-router-dom';
 import { regiterFetch } from '../../api/users/regiterFetch';
-import { toastError, toastSuccess } from '../../api/banners/toast';
+import { toastError, toastSuccess } from '../../utils/toast';
 
 const schema = yup.object({
   firstName: yup.string().max(12).required(),
@@ -30,10 +30,10 @@ const RegisterForm = () => {
   const onSubmit: SubmitHandler<any> = async (data) => {
 
     const moveToLogin = () => {
-      navigate(`/banners/login`)
+      navigate(`/banner/login`)
     }
     const handelClickSignUp = () => {
-      navigate(`/banners/register`)
+      navigate(`/banner/register`)
     }
 
     const name = data.firstName + ' ' + data.lastName;

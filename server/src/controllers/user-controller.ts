@@ -17,8 +17,8 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
   if (error)
     throw new ApiError({}, STATUS_CODES.BAD_REQUEST, error.message);
 
-  if (req.cookies.jwt) {
-    jwt.verify(req.cookies.jwt, process.env.JWT_SECRET!, (err: any, decoded: any) => {
+  if (req.headers.authorization) {
+    jwt.verify(req.headers.authorization, process.env.JWT_SECRET!, (err: any, decoded: any) => {
       if (!err) throw new ApiError({}, STATUS_CODES.BAD_REQUEST, 'User already logged in');
     }
     )

@@ -1,15 +1,17 @@
+import { UserInterface } from "../../types/UserInterface";
 import axios from 'axios';
-
 const API_URL = import.meta.env.VITE_API_URI
 
-export const loginFetch = async (user: string) => {
+export const editUserFetch = async (user: UserInterface) => {
 
     let data = user
 
     let config = {
-        method: 'post',
+        method: 'put',
         maxBodyLength: Infinity,
-        url: `${API_URL}/users/login`,
+
+        url: `${API_URL}/users/`,
+
         headers: {
             'Content-Type': 'application/json'
         },
@@ -18,14 +20,11 @@ export const loginFetch = async (user: string) => {
 
     try {
         const res = await axios.request(config)
-
-        
-        const token  = res.headers.authorization
-        console.log(token)
-        localStorage.setItem('banner_token', token)
-        console.log('token insert success');
         return res.data
     } catch (error) {
         console.log(error);
     }
 }
+
+
+

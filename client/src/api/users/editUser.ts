@@ -9,7 +9,9 @@ export const editUserFetch = async (user: UserInterface) => {
     let config = {
         method: 'put',
         maxBodyLength: Infinity,
-        url: `${API_URL}/banners/api/users/`,
+
+        url: `${API_URL}/users/`,
+
         headers: {
             'Content-Type': 'application/json'
         },

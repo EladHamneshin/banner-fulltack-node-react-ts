@@ -54,6 +54,16 @@ export const updateBannerImage = async (bannerID: string, data: Partial<BannerIn
   }
 };
 
+// Function to get the top 5 bannersImages
+export const getTop5BannersImages = async (): Promise<BannerInterface[]> => {
+  try {
+    const data: BannerInterface[] = await bannerModel.find().sort({ clickCount: -1 }).limit(5);
+    return data;
+  } catch (error) {
+    throw new ApiError( error, STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to get top 5 bannersImages, stack:1");
+  };
+};
+
 // Function to create bannerImage by productID
 export const createBannerImage = async (productID: string, data: Partial<BannerInterface>, userID: string): Promise<BannerInterface> => {
   try {

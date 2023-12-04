@@ -52,7 +52,10 @@ app.use(morgan("dev"));
 //     max: RATE_REQUEST_LIMIT,
 //   }),
 // );
-
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Expose-Headers', 'Authorization');
+  next();
+});
 // Enable CORS
 app.use(cors());
 
@@ -65,12 +68,12 @@ app.use(helmet());
 // app.use(unless(["/users/login"], verify));
 
 
-app.use("/banners/api/users", user);
-app.use("/banners/api/bannersImage", routerBannersImage);
-app.use("/banners/api/upload", uploadRouter);
+app.use("/users", user);
+app.use("/bannersImage", routerBannersImage);
+app.use("/upload", uploadRouter);
 
 
-app.use("/banners/api/ext/bannersProduct", productRouter)
+app.use("/ext/bannersProduct", productRouter)
 
 
 
@@ -81,19 +84,16 @@ app.use(catchErrors);
 
 // Listen to specified port in .env or default 5000
 
-if (process.env.NODE_ENV !== "test") {
+
 connectToPostgres().then(() => {
-connectToDB()}).then((res) => {
+  connectToDB()
+}).then((res) => {
 
   console.log('Connecting to mongodb');
-  // איתוחל דאטה ראשוני
-
-  // insertBanners()
-  app.listen(PORT, () => {
-    console.log(`Server is listening on: ${PORT}`);
-  });
+  if (process.env.NODE_ENV !== "test") {
+    app.listen(PORT, () => {
+      console.log(`Server is listening on: ${PORT}`);
+    });
+  }
 }).catch((err) => console.error(err))
-}
-
-
 

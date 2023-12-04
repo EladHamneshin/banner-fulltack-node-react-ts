@@ -1,3 +1,4 @@
+
 import { Box,Tooltip,IconButton,Divider,ListItemIcon,MenuItem,Menu,Avatar} from '@mui/material';
 import React, { useState } from 'react'
 import {Settings,Logout} from '@mui/icons-material';
@@ -9,17 +10,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
 
+
 const ManageIcon = () => {
 
     const navigate = useNavigate();
     const handelClickHomePage = () => navigate(`/banners/`)
 
     const handelClickLogin = () => {
-        navigate(`/banners/login`)
+        navigate(`/banner/login`)
         window.location.reload()
     }
     const handelClickProfil = () => navigate(`/banners/banners/user/profile`)
     const handelClickEditUser = () => navigate('/banners/banners/user/edit');
+
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);

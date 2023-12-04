@@ -5,7 +5,7 @@ import * as yup from "yup"
 import { loginFetch } from '../../api/users/loginFetch';
 import { Response } from '../../types/UserInterface';
 import { useNavigate } from 'react-router-dom';
-import { toastError, toastSuccess } from '../../api/banners/toast';
+import { toastError, toastSuccess } from '../../utils/toast';
 
 
 const schema = yup.object({
@@ -43,12 +43,15 @@ const LoginForm = () => {
             password: password
         });
 
-        const handelClickHomePage = () => {
-            navigate(`/banners/`)
-            window.location.reload();
-        }
-        const handelClickLogIn = () => navigate(`/banners/login`)
 
+        const handelClickHomePage = () => {
+            navigate(`/banner/`)
+            // window.location.reload();
+        }
+
+        const handelClickLogIn = () => {
+            navigate(`/banner/login`)
+        }
 
         try {
             const data: Response = await loginFetch(user)
@@ -65,6 +68,7 @@ const LoginForm = () => {
                 }, 2000);
             }
 
+
         } catch (err) {
             toastError('login error - try again')
             setTimeout(() => {
@@ -76,6 +80,7 @@ const LoginForm = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
+
             <Grid>
                 <Box
                     sx={{
@@ -99,7 +104,9 @@ const LoginForm = () => {
                             } />
                         <Typography
                             color='red'
+
                             variant='caption'>
+
                             {errors.firstName?.message}
                         </Typography>
                     </Grid>
@@ -141,6 +148,7 @@ const LoginForm = () => {
                     <Typography
                         color='red'
                         variant='caption'>
+
                         {errors.email?.message}
                     </Typography>
                 </Grid>
@@ -160,6 +168,7 @@ const LoginForm = () => {
                     <Typography
                         color='red'
                         variant='caption'>
+
                         {errors.password?.message}
                     </Typography>
                 </Grid>

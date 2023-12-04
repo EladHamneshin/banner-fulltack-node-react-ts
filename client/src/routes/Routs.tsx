@@ -19,7 +19,7 @@ import EditUserForm from "../pages/users/EditUserForm";
 export default function Routs() {
     const router = createBrowserRouter([
         {
-            path: "/banners",
+            path: "/banner",
             element: <Deshbord />,
             errorElement: <ErrorPage />,
             children: [

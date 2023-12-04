@@ -16,17 +16,17 @@ const SidBar = () => {
     const [state, setState] = useState({ left: false });
 
     const handelClickAllBanners = () => {
-        navigate(`/banners/banners`);
+        navigate(`/banner/banners`);
     };
     const handelClickAllProducts = () => {
-        navigate(`/banners/banners/products`);
+        navigate(`/banner/banners/products`);
     };
     // const handelClickCreateBanners = () => {
     //     navigate(`/banners/createBanner`);
     // };
 
     const handelClickMyBanners = () => {
-        navigate(`/banners/banners/user/${localStorage.getItem('name')}`);
+        navigate(`/banner/banners/user/${localStorage.getItem('name')}`);
     };
 
     const toggleDrawer = (_anchor: 'left', open: boolean) => (
@@ -51,7 +51,9 @@ const SidBar = () => {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
+
                 {[ 'Drafts','All banners', 'All products', 'My bannars'].map((text) => (
+
                     <ListItem key={text} disablePadding>
                         <ListItemButton
                             onClick={() => {

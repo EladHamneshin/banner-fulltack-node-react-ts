@@ -3,11 +3,13 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { useNavigate } from 'react-router-dom';
+
 import { toastError, toastSuccess } from '../../api/banners/toast';
 import React,{ useEffect } from 'react';
 import { editUserFetch } from '../../api/users/editUser';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import { Response } from '../../types/UserInterface';
+
 
 const schema = yup.object({
     Name: yup.string().max(25).required(),
@@ -43,11 +45,13 @@ const EditUserForm = () => {
     });
     const onSubmit: SubmitHandler<any> = async (data) => {
 
-        const moveToEditUser = () => navigate('/banners/banners/user/edit');
+
+        const moveToEditUser = () => navigate('/banner/banners/user/edit');
 
 
         const handelClickHomePage = () => {
-            navigate(`/banners/`)
+            navigate(`/banner/`)
+
             window.location.reload();
         }
 

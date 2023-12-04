@@ -8,7 +8,9 @@ import {
     createBannerImage,
     deleteBannerImage,
     getBannerImagesByQuery,
+    getTop5BannersImages,
 } from "../controllers/bannerImage-controller";
+import { authHandler } from "../middleware/auth-middleware";
 // import { authHandler } from "../middleware/auth-middleware";
 
 
@@ -43,12 +45,20 @@ routerBannersImage.put("/:bannerID", updateBannerImage);
 // @desc   Create bannerImage by productID
 // @route  POST /bannersImage/:productID
 // @access Internal
-routerBannersImage.post("/:productID", createBannerImage);
+routerBannersImage.post("/:productID",authHandler, createBannerImage);
 
 // @desc   Delete bannerImage by bannerID
 // @route  DELETE /bannersImage/:bannerID
 // @access Internal
-routerBannersImage.delete("/:bannerID", deleteBannerImage);
+routerBannersImage.delete("/:bannerID" ,deleteBannerImage);
+
+
+// @desc Get top 5 clicked bannersImages
+// @route GET /bannersImage/top5
+// @access Internal
+
+routerBannersImage.get("/top5", getTop5BannersImages);
+
 
 
 routerBannersImage.get("/ext/", getBannerImagesByQuery);

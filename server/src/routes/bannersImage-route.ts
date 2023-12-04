@@ -50,7 +50,7 @@ routerBannersImage.post("/:productID",authHandler, createBannerImage);
 // @desc   Delete bannerImage by bannerID
 // @route  DELETE /bannersImage/:bannerID
 // @access Internal
-routerBannersImage.delete("/:bannerID",authHandler ,deleteBannerImage);
+routerBannersImage.delete("/:bannerID" ,deleteBannerImage);
 
 
 // @desc Get top 5 clicked bannersImages

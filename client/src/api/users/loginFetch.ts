@@ -18,10 +18,9 @@ export const loginFetch = async (user: string) => {
 
     try {
         const res = await axios.request(config)
-        console.log('res.headers', res.headers.authorization);
 
         
-        const token  = res.headers.Authorization
+        const token  = res.headers.authorization
         console.log(token)
         localStorage.setItem('banner_token', token)
         console.log('token insert success');

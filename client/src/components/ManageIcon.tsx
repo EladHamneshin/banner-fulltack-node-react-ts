@@ -1,26 +1,30 @@
-import { Box } from '@mui/material';
-import React from 'react'
-import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
-import Avatar from '@mui/material/Avatar';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
+import { Box, Tooltip, IconButton, Divider, ListItemIcon, MenuItem, Menu, Avatar } from '@mui/material';
+import React, { useState } from 'react'
+import { Settings, Logout } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { deleteUserFetch } from '../api/users/deleteUserFetch';
+import { Response } from '../types/UserInterface';
+// import { toastError, toastSuccess } from '../utils/toast';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
+import { toastSuccess, toastError } from '../utils/toast';
 
 const ManageIcon = () => {
+
     const navigate = useNavigate();
+    const handelClickHomePage = () => navigate(`/banners/`)
+
     const handelClickLogin = () => {
         navigate(`/banner/login`)
         window.location.reload()
     }
     const handelClickProfil = () => {
         navigate(`/banner/banners/user/profil`)
+        // window.location.reload()
+    }
+    const handelClickEditUser = () => {
+        navigate(`/banner/banners/user/edit`)
         // window.location.reload()
     }
     // const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -33,7 +37,7 @@ const ManageIcon = () => {
     //     setAnchorEl(null);
     // };
 
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -46,14 +50,31 @@ const ManageIcon = () => {
         localStorage.removeItem('name')
         localStorage.removeItem('token')
         localStorage.removeItem('userID')
+        localStorage.removeItem('email')
         handelClickLogin()
     }
+    const deleteUser = async () => {
+        try {
+            const data: Response = await deleteUserFetch()
+            if (data.success === true) {
+                toastSuccess(data.message)
+                setTimeout(() => {
+                    logout()
+                }, 2000);
+            }
+
+        } catch (err) {
+            toastError('deleted failed - try again');
+            setTimeout(() => {
+                handelClickHomePage()
+            }, 2000);
+            console.log(err);
+        }
+    };
     return (
         <Box>
             <React.Fragment>
                 <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-                    {/* <Typography sx={{ minWidth: 100 }}>Contact</Typography> */}
-                    {/* <Typography sx={{ minWidth: 100 }}>Profile</Typography> */}
                     <Tooltip title="Account settings">
                         <IconButton
                             onClick={handleClick}
@@ -64,12 +85,9 @@ const ManageIcon = () => {
                             aria-haspopup="true"
                             aria-expanded={open ? 'true' : undefined}
                         >
-                            {/* <Avatar sx={{ width: 32, height: 32 }}> */}
                             <ManageAccountsRoundedIcon sx={{
                                 color: '#fff'
                             }} />
-
-                            {/* </Avatar> */}
                         </IconButton>
                     </Tooltip>
                 </Box>
@@ -111,16 +129,19 @@ const ManageIcon = () => {
                     <MenuItem onClick={handelClickProfil}>
                         <Avatar /> Profile
                     </MenuItem>
-                    <MenuItem onClick={handleClose}>
-                        <Avatar /> My account
+                    <MenuItem onClick={handelClickEditUser}>
+                        <Avatar>
+                            <ModeEditIcon />
+                        </Avatar>
+                        Edit User Details
+                    </MenuItem>
+                    <MenuItem onClick={deleteUser}>
+                        <Avatar>
+                            <DeleteIcon />
+                        </Avatar>
+                        Delete User Details
                     </MenuItem>
                     <Divider />
-                    <MenuItem onClick={handleClose}>
-                        <ListItemIcon>
-                            <PersonAdd fontSize="small" />
-                        </ListItemIcon>
-                        Add another account
-                    </MenuItem>
                     <MenuItem onClick={handleClose}>
                         <ListItemIcon>
                             <Settings fontSize="small" />
@@ -129,7 +150,7 @@ const ManageIcon = () => {
                     </MenuItem>
                     <MenuItem onClick={logout}>
                         <ListItemIcon>
-                            <Logout fontSize="small" />
+                            <Logout />
                         </ListItemIcon >
                         Logout
                     </MenuItem>

@@ -6,6 +6,7 @@ pipeline {
             steps {
                 script {
                     dir('client') {
+                        sh 'printenv'
                         echo 'Installing dependencies...'
                         sh 'npm install'
                         echo 'Running tests...'
@@ -42,11 +43,11 @@ pipeline {
                             sha: "${env.GIT_COMMIT}"
             }
         }
-        
+
         failure {
             script {
                 // Notify failure to GitHub
-                echo 'Tests failed.'
+                echo 'Tests failed.''
                 githubNotify account: 'EladHamneshin',
                             repo: 'banner-fulltack-node-react-ts',
                             context: 'ESLINT-banners',

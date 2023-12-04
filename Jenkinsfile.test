@@ -34,22 +34,16 @@ pipeline {
             script {
                 // Notify success to GitHub
                 echo 'Tests passed.'
-                githubNotify(
-                    context: 'ESLINT-banners',
-                    description: 'Build and tests passed',
-                    status: 'SUCCESS',
-                )
+                githubNotify description: 'This is a shorted example',  status: 'SUCCESS'
+
             }
         }
         failure {
             script {
                 // Notify failure to GitHub
                 echo 'Tests failed.'
-                githubNotify(
-                    context: 'ESLINT-banners',
-                    description: 'Build and tests failed',
-                    status: 'FAILURE',
-                )
+                githubNotify description: 'This is a shorted example',  status: 'FAILURE'
+
             }
         }
     }

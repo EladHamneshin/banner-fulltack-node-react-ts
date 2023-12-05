@@ -53,6 +53,7 @@ app.use(morgan("dev"));
 //   }),
 // );
 app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Expose-Headers', 'Authorization');
   next();
 });

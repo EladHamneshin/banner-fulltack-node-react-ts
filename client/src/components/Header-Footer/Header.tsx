@@ -49,7 +49,7 @@ const Header = () => {
             <SidBar />
           </IconButton>
           <IconButton onClick={handelClickHomePage}>
-            <img src='\public\bannars-high-resolution-logo-transparent.png' alt='logo'
+            <img src='\public\logo.svg' alt='logo'
               height={'40px'}></img>
             {/* <HomeIcon
 

@@ -59,10 +59,10 @@ const LoginForm = () => {
             if (data.success === true) {
                 toastSuccess(data.message)
 
-                localStorage.setItem('token', data.data.name)
-                localStorage.setItem('name', data.data.name)
-                localStorage.setItem('userID', data.data.id)
-                localStorage.setItem('email', data.data.email)
+                localStorage.setItem('token', data.data!.name)
+                localStorage.setItem('name', data.data!.name)
+                localStorage.setItem('userID', data.data!.id)
+                localStorage.setItem('email', data.data!.email)
                 setTimeout(() => {
                     handelClickHomePage()
                 }, 2000);

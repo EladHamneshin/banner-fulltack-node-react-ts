@@ -13,7 +13,8 @@ export const getAllProducts = async () => {
         method: 'get',
         maxBodyLength: Infinity,
 
-        url: `${API_URL}/ext/bannersProduct/top5/products`,
+        url: `${API_URL}/ext/bannersProduct/`,
+
         headers: { 
             'Authorization': token, 
             'Content-Type': 'application/json'

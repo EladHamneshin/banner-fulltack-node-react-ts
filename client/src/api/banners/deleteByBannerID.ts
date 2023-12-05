@@ -4,7 +4,7 @@ const API_URL = import.meta.env.VITE_API_URI
 
 export const deleteByBannerID = async (bannerID: string) => {
 
-    let data = '';
+
     let token = localStorage.getItem('banner_token');
     if (!token) { token = ''}
 
@@ -17,7 +17,7 @@ export const deleteByBannerID = async (bannerID: string) => {
             'Authorization': token, 
             'Content-Type': 'application/json'
           },
-        data: data
+
     };
     try {
         const res = await axios.request(config)

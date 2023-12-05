@@ -5,23 +5,26 @@ import {Settings,Logout} from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { deleteUserFetch } from '../api/users/deleteUserFetch';
 import { Response } from '../types/UserInterface';
-import { toastError, toastSuccess } from '../utils/toast';
+
+// import { toastError, toastSuccess } from '../api/banners/toast';
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
+import { toastSuccess, toastError } from '../utils/toast';
 
 
 const ManageIcon = () => {
 
     const navigate = useNavigate();
-    const handelClickHomePage = () => navigate(`/banners/`)
+    const handelClickHomePage = () => navigate(`/banner/`)
 
     const handelClickLogin = () => {
         navigate(`/banner/login`)
         window.location.reload()
     }
-    const handelClickProfil = () => navigate(`/banners/banners/user/profile`)
-    const handelClickEditUser = () => navigate('/banners/banners/user/edit');
+    const handelClickProfil = () => navigate(`/banner/banners/user/profile`)
+    const handelClickEditUser = () => navigate('/banner/banners/user/edit');
 
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

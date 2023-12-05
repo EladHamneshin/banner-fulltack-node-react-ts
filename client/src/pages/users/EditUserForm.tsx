@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { useNavigate } from 'react-router-dom';
 
-import { toastError, toastSuccess } from '../../api/banners/toast';
+import { toastError, toastSuccess } from '../../utils/toast';
 import React,{ useEffect } from 'react';
 import { editUserFetch } from '../../api/users/editUser';
 import { VisibilityOff, Visibility } from '@mui/icons-material';

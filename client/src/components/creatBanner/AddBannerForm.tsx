@@ -143,7 +143,7 @@ const AddBannerForm = (props: Props) => {
                                 {errors.image?.message}
                             </Typography>
 
-                             <Canvas width={600} height={120}  product={product}/> 
+                             <Canvas width={1000} height={200}  product={product}/> 
                              {/* <BannerCanvas width={600} height={120} product={product}/> */}
 
                         </Grid>

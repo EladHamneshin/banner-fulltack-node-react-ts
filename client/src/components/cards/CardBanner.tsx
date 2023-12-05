@@ -1,82 +1,75 @@
-import { useEffect, useState } from 'react';
-import { Box, Card, CardActions, CardContent, CardMedia, Collapse, Grid, IconButton, IconButtonProps, styled, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Card, CardActions, CardContent, CardMedia, Collapse, Grid, IconButton, IconButtonProps, Typography, useTheme } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { ResponseBanner } from '../../types/BannerInterface';
+import { Response } from '../../types/UserInterface';
 import { deleteByBannerID } from '../../api/banners/deleteByBannerID';
 import { useNavigate } from 'react-router-dom';
 import Circular from '../Circular';
-import { toastSuccess } from '../../api/banners/toast';
+import { toastError, toastSuccess } from '../../utils/toast';
 
-// Interface for ExpandMore button props
+interface Props {
+  banner: ResponseBanner;
+  triger?: {
+    triger: boolean;
+    trigerSet: React.Dispatch<React.SetStateAction<boolean>>;
+  };
+}
+
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
 
-// Styled component for ExpandMore button
-const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
-type Props = {
-  banner: ResponseBanner,
-  triger?: {
-    triger: boolean,
-    trigerSet: React.Dispatch<React.SetStateAction<boolean>>
-  }
-}
+const ExpandMore = (props: ExpandMoreProps) => (
+  <IconButton {...props} />
+);
 
-// Component
 const CardBanner = (props: Props) => {
   const navigate = useNavigate();
-  const handelClickLogin = () => navigate('/banner/login');
+  const [loading, setLoading] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [message] = useState('');
+  const theme = useTheme();
 
   useEffect(() => {
     if (localStorage.getItem('token') === null) {
-      handelClickLogin();
+      navigate('/banner/login');
     }
-  }, []);
-
-  const { banner } = props;
-  const [loading, setLoading] = useState(false);
-  const [expanded, setExpanded] = useState(false);
-  const [message, setMessage] = useState('');
+  }, [navigate]);
 
   const deleteBanner = async () => {
     try {
-      const result = await deleteByBannerID(banner._id);
-      toastSuccess('message')
-
-      setMessage(result.message);
-
+      setLoading(true);
+      const result: Response = await deleteByBannerID(props.banner._id);
+      if (result && result.success === true) {
+        toastSuccess(result.message);
+      } else {
+        toastError('Delete failed');
+      }
     } catch (error) {
-      setMessage(String(error));
+      toastError(String(error));
     } finally {
-      props.triger!.trigerSet(prev => !prev)
+      props.triger?.trigerSet((prev) => !prev);
       setLoading(false);
-      // window.location.reload();
-
     }
   };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const handelClickCardProduct = () => navigate(`/banner/ProductPage/${banner.productID}`);
+
+  const handleCardClick = () => {
+    navigate(`/banner/banners/ProductPage/${props.banner.productID}`);
+  };
 
   return (
-    <Box >
+    <Box>
       {loading ? (
         <Box>
           <Circular />
-          <Typography>Loading.....</Typography>
+          <Typography>Loading...</Typography>
           {message && <Typography>{message}</Typography>}
         </Box>
       ) : (
@@ -84,74 +77,73 @@ const CardBanner = (props: Props) => {
           sx={{
             maxWidth: 250,
             minHeight: 350,
-            // height: 350,
-            margin: '5px',
+            margin: '15px',
             boxSizing: 'border-box',
-            boxShadow: '0 4px 8px rgba(0, 0, 0.9, 0.8)',
-            marginBlock: '10px',
+            boxShadow: '0 4px 8px rgba(0, 0, 0.2)',
+            marginBlock: '20px',
             transition: 'transform 0.3s',
-          }}>
-          <Grid
-            onClick={handelClickCardProduct}
-            sx={{cursor:'pointer'}}
-            >
-
+            marginBottom: '10px',
+            borderRadius: theme.shape.borderRadius,
+            '&:hover': {
+              transform: 'scale(1.05)',
+              transition: 'transform 0.3s',
+              boxShadow: theme.shadows[3],
+            },
+          }}
+        >
+          <Grid onClick={handleCardClick} sx={{ cursor: 'pointer' }}>
             <CardMedia
               component="img"
               height="105"
-              // width="100"
-              image={banner.image.url}
-              alt={banner.image.alt}
-              />
+              image={props.banner.image.url}
+              alt={props.banner.image.alt}
+            />
             <CardContent>
-              <Typography gutterBottom variant="h4" component="div">
-                {banner.name}
+              <Typography gutterBottom variant="h4" component="div" sx={{ color: theme.palette.primary.main }}>
+                {props.banner.name}
               </Typography>
-              <Typography variant="h6" component="div">
-                clicks: {banner.clickCount}
+              <Typography variant="h6" component="div" sx={{ color: theme.palette.secondary.main }}>
+                Clicks: {props.banner.clickCount}
               </Typography>
             </CardContent>
-              </Grid>
+          </Grid>
 
-            <CardActions >
-              <ExpandMore
-                expand={expanded}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
-              >
-                <ExpandMoreIcon />
-              </ExpandMore>
-            </CardActions>
-           
-              <Grid
-                onClick={handelClickCardProduct}
-                sx={{cursor:'pointer'}}
-                >
+          <CardActions>
+            <ExpandMore
+              expand={expanded}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+              sx={{ color: theme.palette.text.primary }}
+            >
+              <ExpandMoreIcon />
+            </ExpandMore>
+          </CardActions>
 
+          <Grid onClick={handleCardClick} sx={{ cursor: 'pointer' }}>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
               <CardContent>
                 <Typography variant="body1" color="text.secondary">
-                  size: {banner.size}
+                  Size: {props.banner.size}
                 </Typography>
                 <Typography variant="body1" color="text.secondary">
-                  kind: {banner.kind}
+                  Kind: {props.banner.kind}
                 </Typography>
                 <Typography variant="body1" color="text.secondary">
-                  text: {banner.text}
+                  Text: {props.banner.text}
                 </Typography>
                 <Typography variant="body1" color="text.secondary">
-                  author: {banner.author}
+                  Author: {props.banner.author}
                 </Typography>
               </CardContent>
             </Collapse>
-              </Grid>
+          </Grid>
 
           <CardActions>
-            <IconButton onClick={deleteBanner}>
+            <IconButton onClick={deleteBanner} sx={{ color: '#dc2f02'}}>
               <DeleteIcon />
             </IconButton>
-            <IconButton>
+            <IconButton sx={{ color: theme.palette.primary.main }}>
               <EditIcon />
             </IconButton>
           </CardActions>

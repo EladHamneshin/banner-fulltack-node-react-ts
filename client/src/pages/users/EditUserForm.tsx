@@ -4,11 +4,12 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { useNavigate } from 'react-router-dom';
 
-import { toastError, toastSuccess } from '../../api/banners/toast';
-import React,{ useEffect } from 'react';
+// import { toastError, toastSuccess } from '../../api/banners/toast';
+import React, { useEffect } from 'react';
 import { editUserFetch } from '../../api/users/editUser';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import { Response } from '../../types/UserInterface';
+import { toastSuccess, toastError } from '../../utils/toast';
 
 
 const schema = yup.object({
@@ -50,26 +51,25 @@ const EditUserForm = () => {
 
 
         const handelClickHomePage = () => {
-            navigate(`/banner/`)
+            navigate(`/banner/banners`)
 
             window.location.reload();
         }
 
-        const name = data.Name;
-        const email = data.email
-        const password = data.password
+        // const name = data.Name;
+        // const email = data.email
+        // const password = data.password
 
-        const user = {
-            name: name,
-            email: email,
-            password: password,
-            isadmin: true
-        };
+        // const user = {
+        //     name: name,
+        //     email: email,
+        //     password: password,
+        //     isadmin: true
+        // };
         try {
-            const data: Response = await editUserFetch(user)
+            const responseData: Response = await editUserFetch(data);
 
-
-            if (data.success === true) {
+            if (responseData && responseData.success === true) {
                 toastSuccess(data.message)
 
                 localStorage.setItem('token', data.data.name)
@@ -79,15 +79,23 @@ const EditUserForm = () => {
                 setTimeout(() => {
                     handelClickHomePage()
                 }, 2000);
+                // Your existing success logic
+            } else {
+                // Handle cases where 'success' is not present or false
+                toastError('Edit failed - try again');
+                setTimeout(() => {
+                    moveToEditUser();
+                }, 2000);
             }
 
 
+
         } catch (err) {
-            toastError('edited faild - try again');
+            console.error(err);
+            toastError('Edit failed - try again');
             setTimeout(() => {
-                moveToEditUser()
+                moveToEditUser();
             }, 2000);
-            console.log(err);
         }
     }
 

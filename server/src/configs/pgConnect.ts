@@ -2,9 +2,9 @@
 import  { Pool } from 'pg';
 
 
-const connectionString = process.env.PG_URI
 
-const postgresPool = new Pool({connectionString,});
+
+const postgresPool = new Pool({});
 export const connectToPostgres = async () => {
 
     const connect = await postgresPool.connect()

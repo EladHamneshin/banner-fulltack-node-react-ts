@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, ThemeProvider, Typography, createTheme, Theme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { getAllBannersImage } from '../../api/banners/bannersImageFunc';
 import CardBanner from '../../components/cards/CardBanner';
@@ -11,17 +11,46 @@ const AllBanners = () => {
     const [message, setMessage] = useState('');
     const [banners, setBanners] = useState<ResponseBanner[] | string | null>(null);
     const [loading, setLoading] = useState(true);
-    const [triger, setTriger] = useState(true)
+    const [triger, setTriger] = useState(true);
     const navigate = useNavigate();
 
     const handleLoginRedirect = () => navigate('/banner/login');
-
 
     useEffect(() => {
         if (localStorage.getItem('token') === null) {
             handleLoginRedirect();
         }
     }, []);
+
+    const themeOptions = {
+        palette: {
+            primary: {
+                main: '#03045e', // Adjust this color
+            },
+            secondary: {
+                main: '#4CAF50', // Adjust this color
+            },
+            error: {
+                main: '#FF5722', // Adjust this color
+            },
+            text: {
+                primary: '#212121', // Adjust this color
+            },
+        },
+        typography: {
+            h2: {
+                fontSize: '2.5rem',
+                '@media (min-width:800px)': {
+                    fontSize: '2.7rem',
+                },
+                '@media (min-width:960px)': {
+                    fontSize: '2.8rem',
+                },
+            },
+        },
+    };
+
+    const theme: Theme = createTheme(themeOptions);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,15 +75,19 @@ const AllBanners = () => {
 
     return (
         <Box>
-            <Typography variant="h3" sx={{
-                display: 'flex',
-                justifyContent: 'center'
-            }}>All Banners</Typography>
+            <ThemeProvider theme={theme}>
+                <Typography variant="h2" sx={{
+                    margin: '20px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    color: theme.palette.primary.main,
+                }}>All Banners</Typography>
+            </ThemeProvider>
             <Box sx={{ width: '80vw' }}>
                 {loading ? (
                     <Circular />
                 ) : message ? (
-                    <Typography variant="h3">{message}</Typography>
+                    <Typography variant="h3" sx={{ color: theme.palette.error.main }}>{message}</Typography>
                 ) : banners === null ? (
                     <Typography variant="h3">Loading...</Typography>
                 ) : typeof banners === 'string' ? (

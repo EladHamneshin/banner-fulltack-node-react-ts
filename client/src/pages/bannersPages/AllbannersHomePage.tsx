@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, ThemeProvider, Typography, createTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { ResponseBanner } from '../../types/BannerInterface';
 import BannerNotFind from './BannerNotFind';
@@ -44,10 +44,24 @@ const AllbannersHomePage = () => {
 
         fetchData();
     }, []);
+    const theme = createTheme();
+
+    theme.typography.h2 = {
+        fontSize: '2rem',
+        '@media (min-width:600px)': {
+            fontSize: '2.2rem',
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '2.5rem',
+        },
+    };
 
     return (
         <Box>
-            <Typography variant="h2" sx={{ display: 'flex',justifyContent: 'center',margin:'10px'}}>Top 5 Banners</Typography>
+            <ThemeProvider theme={theme}>
+
+                <Typography variant="h2" sx={{ display: 'flex', justifyContent: 'center', margin: '10px' }}>Top 5 Banners</Typography>
+            </ThemeProvider>
             <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-around' }}>
                 {loading ? (
                     <Circular />
@@ -61,7 +75,7 @@ const AllbannersHomePage = () => {
                     <BannerNotFind />
                 ) : (
                     banners.map((banner, index) => (
-                        <Stack key={index} sx={{ cursor: 'pointer', width: '200px',margin:'30px' }}>
+                        <Stack key={index} sx={{ cursor: 'pointer', width: '200px', margin: '30px' }}>
                             <CardHomePage
                                 banner={banner} />
                         </Stack>

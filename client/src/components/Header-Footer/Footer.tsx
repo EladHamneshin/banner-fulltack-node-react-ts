@@ -8,10 +8,8 @@ const Footer = () => {
         py: 3,
         px: 2,
         mt: 'auto',
-        backgroundColor: (theme) =>
-          theme.palette.mode === 'light'
-            ? theme.palette.grey[200]
-            : theme.palette.grey[800],
+        backgroundColor: '#496178', // Change this to your desired background color
+        color: '#FFFFFF', // Change this to your desired text color
       }}
     >
       <Container maxWidth="sm">
@@ -20,7 +18,7 @@ const Footer = () => {
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {'Copyright © '}
-          <Link color="inherit" href="/">
+          <Link color="inherit" href="/" underline="none">
             Banners Website
           </Link>{' '}
           {new Date().getFullYear()}

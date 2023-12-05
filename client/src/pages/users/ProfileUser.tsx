@@ -1,29 +1,21 @@
 import { Edit } from '@mui/icons-material';
-
-import { Card, Avatar, Typography, IconButton } from '@mui/material';
-import { green } from '@mui/material/colors';
+import { Card, Avatar, Typography, IconButton, Button } from '@mui/material';
+import { green, blue } from '@mui/material/colors';
 import { Box, Stack } from '@mui/system';
 import { useEffect } from 'react';
-
 import { useNavigate } from 'react-router-dom';
 
-
 const ProfileUser = () => {
-
     const navigate = useNavigate();
 
     const handleLoginRedirect = () => navigate('/banner/login');
-        
-
-    const goToEditUser = () =>   navigate('/banner/banners/user/edit');
-
+    const goToEditUser = () => navigate('/banner/banners/user/edit');
 
     useEffect(() => {
         if (localStorage.getItem('token') === null) {
             handleLoginRedirect();
         }
     }, []);
-
 
     return (
         <Box
@@ -32,46 +24,41 @@ const ProfileUser = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                height: '60vh', 
+                height: '60vh',
                 backgroundColor: '#f5d4d4',
                 padding: '20px',
-            }}>
-            <Card>
-                <Box sx={{ p: 8, display: 'flex',alignItems: 'center' }}>
-                    <Avatar  src="avatar.jpg" sx={{
-                         bgcolor: green[500],
-                         margin:'20px', 
-                         width: 56, 
-                         height: 56}}>
-                            {localStorage.getItem('name')?.slice(0,1).toUpperCase()}
-                         </Avatar>
+            }}
+        >
+            <Card sx={{ maxWidth: 600, width: '80%', textAlign: 'center' }}>
+                <Box sx={{ p: 8, display: 'flex', alignItems: 'center' }}>
+                    <Avatar
+                        src="avatar.jpg"
+                        sx={{
+                            bgcolor: green[500],
+                            margin: '20px',
+                            width: 80,
+                            height: 80,
+                        }}
+                    >
+                        {localStorage.getItem('name')?.slice(0, 1).toUpperCase()}
+                    </Avatar>
                     <Stack spacing={4}>
-                        <Typography variant="h6"  fontWeight="bold" sx={{margin:'10px'}}>
+                        <Typography variant="h5" fontWeight="bold" sx={{ margin: '10px', color: blue[800] }}>
                             {localStorage.getItem('name')}
                         </Typography>
-                        <Typography variant="h6" color="text.secondary" sx={{margin:'10px'}}>
+                        <Typography variant="h6" color="text.secondary" sx={{ margin: '10px' }}>
                             {localStorage.getItem('email')}
                         </Typography>
                     </Stack>
-                    <IconButton sx={{margin:'40px'}}
-                    onClick={goToEditUser}>
-                        <Edit   fontSize="large"/>
+                    <IconButton sx={{ margin: '40px', color: blue[800] }} onClick={goToEditUser}>
+                        <Edit fontSize="large" />
                     </IconButton>
                 </Box>
-                {/* <Divider /> */}
-                {/* <Stack
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="space-between"
-                    sx={{ px: 2, py: 1, bgcolor: 'background.default' }}
-                >
-                    <Chip
-                        label={active ? 'Active account' : 'Inactive account'}
-                        color={active ? 'success' : 'default'}
-                        size="small"
-                    />
-                    <Switch checked={active} onChange={handleSwitchChange} />
-                </Stack> */}
+                <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+                    <Button variant="contained" sx={{ backgroundColor: blue[800], color: '#fff' }} onClick={goToEditUser}>
+                        Edit Profile
+                    </Button>
+                </Box>
             </Card>
         </Box>
     );

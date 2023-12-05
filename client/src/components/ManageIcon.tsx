@@ -15,7 +15,7 @@ import { toastSuccess, toastError } from '../utils/toast';
 const ManageIcon = () => {
 
     const navigate = useNavigate();
-    const handelClickHomePage = () => navigate(`/banners/`)
+    const handelClickHomePage = () => navigate(`/banner/`)
 
     const handelClickLogin = () => {
         navigate(`/banner/login`)

@@ -12,6 +12,7 @@ const styleContainer = {
   width: '99%',
   display: 'flex',
   flexDirection: 'column',
+  margin:'0'
   
 };
 
@@ -33,7 +34,7 @@ const styleMainBox = {
   padding: '10px',
   display: 'flex',
   marginTop: '60px',
-  marginBottom: '60px',
+  marginBottom: '80px',
   maxWidth: '70wh',
   
 };

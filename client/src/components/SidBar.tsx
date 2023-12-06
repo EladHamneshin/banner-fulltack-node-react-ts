@@ -1,12 +1,11 @@
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, Drawer } from '@mui/material';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import React, { useState } from 'react';
 import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
 import CardTravelIcon from '@mui/icons-material/CardTravel';
 import { useNavigate } from 'react-router-dom';
 import ViewDaySharpIcon from '@mui/icons-material/ViewDaySharp';
 import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
 const SidBar = () => {
     const navigate = useNavigate();
@@ -65,11 +64,16 @@ const SidBar = () => {
             </List>
             <Divider />
             <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                {['All users', 'Trash', 'Spam'].map((text) => (
                     <ListItem key={text} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={() => {
+                            const handelClickAllUsers = () => navigate(`/banner/banners/user/users`);
+                            if (text === 'All users') {
+                                handelClickAllUsers();
+                            }
+                        }}>
                             <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                {text === 'All users' && <AccountBoxIcon />}
                             </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>

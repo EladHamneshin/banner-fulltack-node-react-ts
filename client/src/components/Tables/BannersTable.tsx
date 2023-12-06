@@ -62,6 +62,7 @@ export default function BannersTable(props: Props) {
         rows={rows}
         columns={columns}
         autoPageSize
+        pagination
         pageSizeOptions={[2, 5, 10, 25]}
         getRowId={(row) => row.id}
         components={{
@@ -77,7 +78,8 @@ export default function BannersTable(props: Props) {
               No banners available.
             </Box>
           ),
-        }} />
+        }} 
+        />
     </Box>
   );
 }

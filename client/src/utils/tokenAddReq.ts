@@ -1,5 +1,3 @@
-
-
 export const addTokenToHeader = () => {
     const token = localStorage.getItem('banner_token');
     var myHeaders = new Headers();

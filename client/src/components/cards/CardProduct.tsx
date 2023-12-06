@@ -64,5 +64,5 @@ const CardContentStyle = {
   justifyContent: 'space-between',
   alignItems: 'center',
   textAlign: 'left',
-  boxShadow: '0px 0px 10px 2px rgba(0,0,0,0.1)', // Added a subtle box shadow
+  boxShadow: '0px 0px 10px 2px rgba(0,0,0,0.1)',
 };

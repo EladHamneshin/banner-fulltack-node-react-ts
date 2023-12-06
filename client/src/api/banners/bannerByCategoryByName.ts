@@ -1,18 +1,11 @@
 import axios from 'axios';
 const API_URL = import.meta.env.VITE_API_URI
 
-
-
-
-
-
-
 export const bannerByCategoryByName = async (name: string) => {
 
     let data = '';
     let token = localStorage.getItem('banner_token');
     if (!token) { token = ''}
-
     
     let config = {
         method: 'get',

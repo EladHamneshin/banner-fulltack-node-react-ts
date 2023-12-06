@@ -34,9 +34,7 @@ const CardBanner = (props: Props) => {
   const theme = useTheme();
 
   useEffect(() => {
-    if (localStorage.getItem('token') === null) {
-      navigate('/banner/login');
-    }
+    if (localStorage.getItem('token') === null) navigate('/banner/login');
   }, [navigate]);
 
   const deleteBanner = async () => {
@@ -56,13 +54,9 @@ const CardBanner = (props: Props) => {
     }
   };
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  const handleExpandClick = () => setExpanded(!expanded);
 
-  const handleCardClick = () => {
-    navigate(`/banner/banners/ProductPage/${props.banner.productID}`);
-  };
+  const handleCardClick = () => navigate(`/banner/banners/ProductPage/${props.banner.productID}`);
 
   return (
     <Box>
@@ -140,7 +134,7 @@ const CardBanner = (props: Props) => {
           </Grid>
 
           <CardActions>
-            <IconButton onClick={deleteBanner} sx={{ color: '#dc2f02'}}>
+            <IconButton onClick={deleteBanner} sx={{ color: '#dc2f02' }}>
               <DeleteIcon />
             </IconButton>
             <IconButton sx={{ color: theme.palette.primary.main }}>

@@ -4,13 +4,7 @@ const Footer = () => {
   return (
     <Box
       component="footer"
-      sx={{
-        py: 3,
-        px: 2,
-        mt: 'auto',
-        backgroundColor: '#496178', // Change this to your desired background color
-        color: '#FFFFFF', // Change this to your desired text color
-      }}
+      sx={{py: 3,px: 2, mt: 'auto',backgroundColor: '#496178',color: '#FFFFFF'}}
     >
       <Container maxWidth="sm">
         <Typography variant="body1">

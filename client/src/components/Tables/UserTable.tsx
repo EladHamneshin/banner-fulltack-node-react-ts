@@ -1,11 +1,6 @@
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { UserInterface } from '../../types/UserInterface';
-// type User = {
-//   _id?: string;
-//   name: string;
-//   email: string;
-//   isadmin: boolean;
-// }
+import { Box } from '@mui/system';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 70 },
@@ -22,11 +17,11 @@ export default function UserTable({ user }: { user: UserInterface[] }) {
         name: element.name,
         email: element.email,
         isadmin: element.isadmin
-
       })
   })
+
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <Box sx={{ height: 400, width: '100%' }}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -38,6 +33,6 @@ export default function UserTable({ user }: { user: UserInterface[] }) {
         pageSizeOptions={[2, 5, 10, 25]}
         checkboxSelection
       />
-    </div>
+    </Box>
   );
 }

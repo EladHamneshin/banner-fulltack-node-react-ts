@@ -6,9 +6,7 @@ export const deleteUserFetch = async () => {
     let config = {
         method: 'delete',
         maxBodyLength: Infinity,
-
         url: `${API_URL}/users/`,
-
         headers: {
             'Content-Type': 'application/json'
         },

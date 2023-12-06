@@ -7,7 +7,7 @@ pipeline {
                 script {
                     dir('client') {
                         sh 'printenv'
-                        echo 'Installing dependencies...'
+                        echo 'Installing dependencies... test'
                         sh 'npm install'
                         echo 'Running tests...'
                         sh 'npm run test'

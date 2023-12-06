@@ -4,7 +4,7 @@ import { Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 export default function Circular() {
-    return (<>
+    return (
         <Box
             sx={{
                 display: 'flex',
@@ -28,5 +28,5 @@ export default function Circular() {
                 <Typography>Loding.....</Typography>
             </Grid>
         </Box>
-    </>);
+    );
 }

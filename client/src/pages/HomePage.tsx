@@ -12,7 +12,6 @@ import { ResponseBanner } from '../types/BannerInterface';
 import Circular from '../components/Circular';
 
 const HomePage = () => {
-//   const [message, setMessage] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
@@ -20,9 +19,8 @@ const HomePage = () => {
   const [bannerSide, setBannerSide] = useState<JSX.Element | null>(null);
   const [bannerTop, setBannerTop] = useState<JSX.Element | null>(null);
 
-  const handleLoginRedirect = () => {
-    navigate('/banner/login');
-  };
+  const handleLoginRedirect = () => navigate('/banner/login')
+
 
   const fetchData = async (apiCall: () => Promise<any>, setState: React.Dispatch<React.SetStateAction<any>>) => {
     try {
@@ -30,7 +28,6 @@ const HomePage = () => {
       setState(result.data || []);
     } catch (error) {
       console.error('Error:', error);
-    //   setMessage(`Error: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -55,24 +52,26 @@ const HomePage = () => {
     <Box>
       {bannerSide && bannerSide}
       {bannerTop && bannerTop}
-      <Box sx={{ width: '100%' }}>
+      <Box sx={{ display: 'flex' }}>
         <AllbannersHomePage />
       </Box>
       <Box
         sx={{
-          width: '45%',
           display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          padding: 2,
+          padding: 3,
+          margin: 4,
           gap: 2,
         }}
       >
         <Box sx={{ flex: 1 }}>
-          {loading ? <Box> <Circular />Loading Banners...</Box> : <BannersTable pro={banners} />}
+          {loading ?
+            <Box> <Circular />Loading Banners...</Box>
+            : <BannersTable pro={banners} />}
         </Box>
         <Box sx={{ flex: 1 }}>
-          {loading ? <Box> <Circular />Loading Products...</Box> : <ProductTable prod={products} />}
+          {loading ?
+            <Box> <Circular />Loading Products...</Box>
+            : <ProductTable prod={products} />}
         </Box>
       </Box>
     </Box>

@@ -1,15 +1,7 @@
 import axios from 'axios';
 const API_URL = import.meta.env.VITE_API_URI
 
-
-
-
-
-
-
 export const getBannerImageByParams = async (params: string) => {
-   
-    
 
     let data = '';
     let token = localStorage.getItem('banner_token');
@@ -26,8 +18,6 @@ export const getBannerImageByParams = async (params: string) => {
         data: data
     };
     try {
-        
-        
         const res = await axios.request(config)
         return res.data
     } catch (error) {

@@ -17,7 +17,6 @@ export const editUserFetch = async (user: UserInterface) => {
         },
         data: data
     };
-
     try {
         const res = await axios.request(config)
         return res.data

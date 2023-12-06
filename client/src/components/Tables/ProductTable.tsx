@@ -5,11 +5,11 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Product } from '../../types/ProductInterface';
 
 const columns: GridColDef[] = [
-  { field: 'name', headerName: 'Name', width: 100 },
-  { field: 'category', headerName: 'Category', width: 100 },
-  { field: 'rating', headerName: 'Rate', width: 100 },
-  { field: 'salePrice', headerName: 'Price', width: 100 },
-  { field: 'realPrice', headerName: 'Sale', width: 100 },
+  { field: 'name', headerName: 'Name', width: 160 },
+  { field: 'category', headerName: 'Category', width: 160 },
+  { field: 'rating', headerName: 'Rate', width: 80 },
+  { field: 'salePrice', headerName: 'Price', width: 80 },
+  { field: 'realPrice', headerName: 'Sale', width: 80 },
 ];
 
 interface ProductTableProps {
@@ -31,23 +31,23 @@ const ProductTable: React.FC<ProductTableProps> = ({ prod }) => {
     },
     palette: {
       primary: {
-        main: '#2196F3', // Blue
+        main: '#2196F3',
       },
       secondary: {
-        main: '#FF9800', // Orange
+        main: '#FF9800',
       },
     },
   });
 
   const rows = prod.map((element, index) => ({
-    id: index + 1, // Assuming index is a valid unique identifier
+    id: index + 1,
     name: element.name,
     category: element.category,
     rating: element.rating,
     salePrice: element.salePrice,
     realPrice: element.salePrice - (element.salePrice * element.discountPercentage) / 100,
   }));
-  
+
   return (
     <Box sx={{ height: '60vh', width: '40vw' }}>
       <ThemeProvider theme={theme}>
@@ -60,7 +60,6 @@ const ProductTable: React.FC<ProductTableProps> = ({ prod }) => {
         columns={columns}
         autoPageSize
         pageSizeOptions={[2, 5, 10, 25]}
-        checkboxSelection
         components={{
           NoRowsOverlay: () => (
             <Box
@@ -70,13 +69,11 @@ const ProductTable: React.FC<ProductTableProps> = ({ prod }) => {
                 alignItems: 'center',
                 height: '100%',
                 color: theme.palette.secondary.main,
-              }}
-            >
+              }}>
               No products available.
             </Box>
           ),
-        }}
-      />
+        }} />
     </Box>
   );
 };

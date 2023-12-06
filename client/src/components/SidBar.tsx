@@ -6,28 +6,18 @@ import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
 import CardTravelIcon from '@mui/icons-material/CardTravel';
 import { useNavigate } from 'react-router-dom';
 import ViewDaySharpIcon from '@mui/icons-material/ViewDaySharp';
-import AddCardIcon from '@mui/icons-material/AddCard';
 import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions';
-
 
 const SidBar = () => {
     const navigate = useNavigate();
 
     const [state, setState] = useState({ left: false });
 
-    const handelClickAllBanners = () => {
-        navigate(`/banner/banners`);
-    };
-    const handelClickAllProducts = () => {
-        navigate(`/banner/banners/products`);
-    };
-    // const handelClickCreateBanners = () => {
-    //     navigate(`/banners/createBanner`);
-    // };
+    const handelClickAllBanners = () => navigate(`/banner/banners`);
 
-    const handelClickMyBanners = () => {
-        navigate(`/banner/banners/user/${localStorage.getItem('name')}`);
-    };
+    const handelClickAllProducts = () => navigate(`/banner/banners/products`);
+
+    const handelClickMyBanners = () => navigate(`/banner/banners/user/${localStorage.getItem('name')}`);
 
     const toggleDrawer = (_anchor: 'left', open: boolean) => (
         event: React.KeyboardEvent | React.MouseEvent
@@ -39,7 +29,6 @@ const SidBar = () => {
         ) {
             return;
         }
-
         setState({ ...state, left: open });
     };
 
@@ -51,9 +40,7 @@ const SidBar = () => {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-
-                {[ 'Drafts','All banners', 'All products', 'My bannars'].map((text) => (
-
+                {['Drafts', 'All banners', 'All products', 'My bannars'].map((text) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton
                             onClick={() => {
@@ -63,8 +50,6 @@ const SidBar = () => {
                                     handelClickAllProducts()
                                 } else if (text === 'My bannars') {
                                     handelClickMyBanners();
-                                } else if (text === 'Add banner') {
-                                    // handelClickCreateBanners();
                                 }
                             }}
                         >
@@ -72,7 +57,6 @@ const SidBar = () => {
                                 {text === 'All banners' && <CardTravelIcon />}
                                 {text === 'All products' && <IntegrationInstructionsIcon />}
                                 {text === 'My bannars' && <ViewDaySharpIcon />}
-                                {text === 'Add banner' && <AddCardIcon />}
                             </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>
@@ -99,10 +83,7 @@ const SidBar = () => {
         <Box sx={{ zIndex: '9100' }}>
             <ListItemButton onClick={toggleDrawer('left', true)}>
                 <MenuOpenOutlinedIcon
-                    sx={{
-                        transform: 'rotateY(180deg)', color: '#fff'
-                    }}
-                />
+                    sx={{ transform: 'rotateY(180deg)', color: '#fff' }} />
             </ListItemButton>
             <Drawer anchor="left" open={state.left} onClose={toggleDrawer('left', false)}>
                 {list('left')}

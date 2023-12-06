@@ -1,17 +1,15 @@
-import { Box, Stack } from "@mui/system";
+import { Box, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { bannerByUserID } from "../../api/banners/bannerByUserID";
 import CardBanner from "../../components/cards/CardBanner";
-import { ResponseBanner } from "../../types/BannerInterface";
 import BannerNotFind from "./BannerNotFind";
 import Circular from "../../components/Circular";
+import { ResponseBanner } from "../../types/BannerInterface";
 
 const BannerByUserID = () => {
     const navigate = useNavigate();
-    const handleClickLogin = () => {
-        navigate('/banner/login');
-    };
+    const handleClickLogin = () => navigate('/banner/login');
 
     useEffect(() => {
         if (localStorage.getItem('token') === null) {
@@ -19,10 +17,8 @@ const BannerByUserID = () => {
         }
     }, []);
 
-    const [, setMessage] = useState('');
     const [banners, setBanners] = useState<ResponseBanner[] | string>([]);
     const userID = localStorage.getItem('userID');
-
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -32,7 +28,7 @@ const BannerByUserID = () => {
                     const result = await bannerByUserID(userID);
 
                     if (result.success === false) {
-                        setMessage(result.message);
+                        setBanners(result.message);
                     } else if (result.success === true) {
                         const data: ResponseBanner[] = result.data;
                         setBanners(data.length === 0 ? '' : data);
@@ -40,13 +36,11 @@ const BannerByUserID = () => {
                 }
             } catch (error) {
                 console.error('Error fetching banners:', error);
-                setMessage('Error fetching banners');
-                setBanners('')
+                setBanners('Error fetching banners');
             } finally {
                 setLoading(false);
             }
         };
-
         fetchData();
     }, [userID]);
 
@@ -59,15 +53,20 @@ const BannerByUserID = () => {
             ) : (
                 <Stack spacing={2}>
                     {typeof banners === 'string' ? (
-                        <Box>
-                            {/* <Typography variant="h3" textAlign="center">{banners}</Typography> */}
-                            <BannerNotFind />
-
-                        </Box>
+                        <BannerNotFind />
                     ) : (
-                        banners.map((banner, index) => (
-                            <CardBanner key={index} banner={banner} />
-                        ))
+                        <Box sx={{
+                            width: '100%',
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            justifyContent: 'space-around'
+                        }}>
+                            {banners.map((banner, index) => (
+                                <Stack key={index} sx={{ width: '250px' }}>
+                                    <CardBanner banner={banner}  />
+                                </Stack>
+                            ))}
+                        </Box>
                     )}
                 </Stack>
             )}

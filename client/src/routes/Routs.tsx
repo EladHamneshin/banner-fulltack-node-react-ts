@@ -88,19 +88,7 @@ export default function Routs() {
                     element: <EditUserForm />,
                     errorElement: <ErrorPage />,
                 },
-                // {
-                //     path: "banners/products",
-                //     element: <AllProducts />,
-                //     errorElement: <ErrorPage />,
-                // },
-                // {
-                //     path: "banners/create/:productID",
-                //     element: <BannerCreateOrEdit />,
-                //     errorElement: <ErrorPage />,
-                // },
             ],
-
         }]);
-
     return <RouterProvider router={router} />;
 }

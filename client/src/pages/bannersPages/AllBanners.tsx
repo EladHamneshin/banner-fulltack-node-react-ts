@@ -12,29 +12,27 @@ const AllBanners = () => {
     const [banners, setBanners] = useState<ResponseBanner[] | string | null>(null);
     const [loading, setLoading] = useState(true);
     const [triger, setTriger] = useState(true);
-    const navigate = useNavigate();
 
+    const navigate = useNavigate();
     const handleLoginRedirect = () => navigate('/banner/login');
 
     useEffect(() => {
-        if (localStorage.getItem('token') === null) {
-            handleLoginRedirect();
-        }
+        if (localStorage.getItem('token') === null) handleLoginRedirect();
     }, []);
 
     const themeOptions = {
         palette: {
             primary: {
-                main: '#03045e', // Adjust this color
+                main: '#03045e',
             },
             secondary: {
-                main: '#4CAF50', // Adjust this color
+                main: '#4CAF50',
             },
             error: {
-                main: '#FF5722', // Adjust this color
+                main: '#FF5722',
             },
             text: {
-                primary: '#212121', // Adjust this color
+                primary: '#212121',
             },
         },
         typography: {
@@ -49,7 +47,6 @@ const AllBanners = () => {
             },
         },
     };
-
     const theme: Theme = createTheme(themeOptions);
 
     useEffect(() => {

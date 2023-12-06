@@ -22,3 +22,10 @@ export interface Response {
     };
     message: string;
 }
+
+export interface UserFormInput {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+}

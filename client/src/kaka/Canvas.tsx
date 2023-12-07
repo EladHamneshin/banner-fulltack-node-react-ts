@@ -1,12 +1,8 @@
-import { Box, Button, Dialog, Slide, Typography } from "@mui/material";
+import { Box, Button, Dialog,  Typography } from "@mui/material";
 
 import React, { useEffect, useRef, useState } from "react";
 import { Product } from "../types/ProductInterface";
-import { VpnKeyOff } from "@mui/icons-material";
 
-
-
-const API_URL = import.meta.env.VITE_API_URI;
 
 interface BannerCanvasProps {
     width: number;
@@ -63,7 +59,7 @@ const Canvas = (props: BannerCanvasProps) => {
         if (history.length > 0) {
             console.log("Before undo:", { bgImage, element, combinedText }); // הדפסה לפני השינוי
             const canvas = canvasRef.current;
-            const context = canvas!.getContext('2d');
+            // const context = canvas!.getContext('2d');
     
             // עדכון הקנבס לפי ההיסטוריה
             history.slice(0, -1).forEach((canvasState) => {
@@ -83,13 +79,7 @@ const Canvas = (props: BannerCanvasProps) => {
 
 
 
-    // const setDimensions = () => {
-    //     const canvas = canvasRef.current;
-    //     if (canvas) {
-    //         canvas.width = width;
-    //         canvas.height = height;
-    //     }
-    // };
+
 
     const handleBackgroundClicked = (bg: { src: string }) => {
         setBgImage(bg.src);

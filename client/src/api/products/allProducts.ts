@@ -9,11 +9,14 @@ export const getAllProducts = async () => {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
+
         url: `${API_URL}/ext/bannersProduct/`,
+
         headers: { 
             'Authorization': token, 
             'Content-Type': 'application/json'
           },
+
     };
     try {
         const res = await axios.request(config)

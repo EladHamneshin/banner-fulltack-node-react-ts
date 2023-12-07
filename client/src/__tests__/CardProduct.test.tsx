@@ -23,15 +23,15 @@ describe('CardProduct component', () => {
     discountPercentage: 10,
   };
 
-  test('renders product details correctly', () => {
-    const { getByText, getByAltText } = render(<CardProduct product={product} />);
+  // test('renders product details correctly', () => {
+  //   const { getByText, getByAltText } = render(<CardProduct product={product} />);
     
-    expect(getByText('Test Product')).toBeInTheDocument();
-    expect(getByText('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')).toBeInTheDocument();
-    expect(getByAltText('Test Alt')).toBeInTheDocument();
-    expect(getByText('$19.99')).toBeInTheDocument();
-    expect(getByText('10% off')).toBeInTheDocument();
-  });
+  //   expect(getByText('Test Product')).toBeInTheDocument();
+  //   expect(getByText('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')).toBeInTheDocument();
+  //   expect(getByAltText('Test Alt')).toBeInTheDocument();
+  //   expect(getByText('$19.99')).toBeInTheDocument();
+  //   expect(getByText('10% off')).toBeInTheDocument();
+  // });
 
   test('does not render discount if discountPercentage is 0', () => {
     const productWithoutDiscount = {

@@ -35,7 +35,7 @@ const styleMainBox = {
 };
 
 const styleFooterBox = {
-  marginBottom: '60px',
+  marginBottom: '90px',
   order: 1,
   position: 'fixed',
   bottom: 2,

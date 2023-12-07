@@ -7,6 +7,7 @@ import { createBanner } from '../../api/banners/createNewBanner';
 import AddBannerForm from './AddBannerForm';
 // import resizeImage from '../../utils/resizeImage';
 import { uploadImageToServer } from '../../api/banners/uploadImage';
+
 const API_URI = import.meta.env.VITE_API_URI
 
 type Props = {
@@ -22,9 +23,11 @@ const NewBannerForm = (props: Props) => {
 
     // const [message] = useState('');
     // const [loading, setLoading] = useState(false);
+
     const [imageUrl, setImage] = useState("");
 
-    const uploadImage = async (image: File, name: string, size: string) => {
+
+    const uploadImage = async (image: File, name : string , size : string) => {
         // let width = 750
         // let height = 550
         // if (size === 'side'){
@@ -73,12 +76,12 @@ const NewBannerForm = (props: Props) => {
                 onSubmitForm={onSubmitForm}
                 uploadImage={uploadImage}
                 product={product} />
-            <Box>
+            {/* <Box>
                 {imageUrl ? <img src={imageUrl} width="100%" alt='fff'></img>
                     :
-                    <p>image not selected</p>}
-            </Box>
-            <Box>
+                <AppKaka />}
+            </Box> */}
+            <Box >
                 <CardProduct product={product} />
             </Box>
         </Box>

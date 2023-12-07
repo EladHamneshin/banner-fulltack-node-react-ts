@@ -6,6 +6,10 @@ import * as yup from "yup";
 import { Product } from '../../types/ProductInterface';
 import { v4 as uuid } from 'uuid'
 import Circular from '../Circular';
+// import AppKaka from '../../kaka/CropKaka/AppKaka';
+import Canvas from '../../kaka/Canvas';
+import CanvasPlus from '../../kaka/canvasPlus2/CanvasPlus2';
+
 
 // type SchemaData : yup.ObjectSchema<{
 //     name: string;
@@ -29,10 +33,14 @@ type Props = {
     onSubmitForm: (data: any) => Promise<void>
 }
 
+
+
 const AddBannerForm = (props: Props) => {
+
     const product = props.product
     const [message] = useState('');
     const [loading, setLoading] = useState(false);
+
 
     const textFieldStyle = { padding: '2px', margin: '4px auto ' };
 
@@ -107,34 +115,6 @@ const AddBannerForm = (props: Props) => {
                             </Box>
                             <TextField
                                 style={textFieldStyle}
-// <<<<<<< HEAD
-//                                 label="size"
-//                                 defaultValue="side"
-//                                 {...register("size", { required: true })}
-//                             >
-//                                 <MenuItem value="all">ALL</MenuItem>
-//                                 <MenuItem value="side">SIDE</MenuItem>
-//                                 <MenuItem value="top">TOP</MenuItem>
-//                             </Select>
-//                             <Typography color='red' variant='caption'>{errors.size?.message}</Typography>
-//                         </Box>
-
-//                         <Box>
-
-//                             <InputLabel htmlFor="kind">Select kind</InputLabel>
-//                             <Select
-//                                 style={textFieldStyle}
-//                                 label="kind"
-//                                 defaultValue="price"
-//                                 {...register("kind", { required: true })}
-//                             >
-//                                 <MenuItem value="price">price</MenuItem>
-//                                 <MenuItem value="sale">sale</MenuItem>
-//                             </Select>
-//                             <Typography color='red' variant='caption'>{errors.kind?.message}</Typography>
-//                         </Box>
-
-// =======
                                 type="file"
                                 label="Image"
                                 {...register("image")}
@@ -146,7 +126,13 @@ const AddBannerForm = (props: Props) => {
                             <Typography color="red" variant="caption">
                                 {errors.image?.message}
                             </Typography>
+
+                             <Canvas width={1000} height={200}  product={product}/> 
+                             <CanvasPlus width={1000} height={200}  product={product}/> 
+                             {/* <BannerCanvas width={600} height={120} product={product}/> */}
+
                         </Grid>
+
 
                     </Box>
                 </Grid>

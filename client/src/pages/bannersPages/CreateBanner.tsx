@@ -3,8 +3,10 @@ import NewBannerForm from '../../components/creatBanner/NewBannerHeder';
 import { Grid, Avatar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
+
 import { useNavigate, useParams } from 'react-router-dom';
 import { getProductById } from '../../api/products/productById';
+
 
 const CreateBanner = () => {
     const { productID } = useParams()
@@ -12,7 +14,8 @@ const CreateBanner = () => {
     useEffect(() => {
         const api = async () => {
             const data = await getProductById(productID!)
-            setProduct(data.data)
+            console.log(data);     
+            setProduct (data.data)
         }
         api()
     }, [])
@@ -43,6 +46,7 @@ const CreateBanner = () => {
                 },
             }}
         >
+
             <Grid
                 container
                 direction="column"
@@ -60,9 +64,11 @@ const CreateBanner = () => {
                     </Typography>
                 </Grid>
             </Grid>
+            
             <Box sx={{ display: 'flex', padding: '33px', alignSelf: 'end' }}>
                 {product && <NewBannerForm product={product} />}
             </Box>
+
         </Grid>
     );
 };

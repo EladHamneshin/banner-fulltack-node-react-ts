@@ -15,7 +15,6 @@ export interface Product {
         latitude1: number
         latitude2: number
         latitude3: number
-       
     }
     image:
     {

@@ -12,9 +12,7 @@ const ProfileUser = () => {
     const goToEditUser = () => navigate('/banner/banners/user/edit');
 
     useEffect(() => {
-        if (localStorage.getItem('token') === null) {
-            handleLoginRedirect();
-        }
+        if (localStorage.getItem('token') === null) handleLoginRedirect();
     }, []);
 
     return (
@@ -29,16 +27,11 @@ const ProfileUser = () => {
                 padding: '20px',
             }}
         >
-            <Card sx={{ maxWidth: 600, width: '80%', textAlign: 'center' }}>
+            <Card sx={{ maxWidth: 600, width: '100%', textAlign: 'center' }}>
                 <Box sx={{ p: 8, display: 'flex', alignItems: 'center' }}>
                     <Avatar
                         src="avatar.jpg"
-                        sx={{
-                            bgcolor: green[500],
-                            margin: '20px',
-                            width: 80,
-                            height: 80,
-                        }}
+                        sx={{ bgcolor: green[500], margin: '20px', width: 80, height: 80, fontSize: '40px' }}
                     >
                         {localStorage.getItem('name')?.slice(0, 1).toUpperCase()}
                     </Avatar>

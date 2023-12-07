@@ -6,16 +6,13 @@ import Circular from '../../components/Circular';
 import { Box, Typography } from '@mui/material';
 import CardProduct from '../../components/cards/CardProduct';
 
-
 const AllProducts = () => {
   const [message, setMessage] = useState('');
   const [products, setProduct] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const handleLoginRedirect = () => {
-    navigate('/banner/login');
-  };
+  const handleLoginRedirect = () => navigate('/banner/login');
 
   useEffect(() => {
     if (localStorage.getItem('token') === null) {
@@ -28,8 +25,6 @@ const AllProducts = () => {
       try {
         const result = await getAllProducts();
         const data: Product[] = result.data
-        console.log('fetch resulte:', result);
-
         setProduct(data)
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -55,7 +50,6 @@ const AllProducts = () => {
               style={{ textDecoration: 'none' }}>
               <CardProduct key={index} product={product} />
             </Link>
-
           ))}
         </Box>
       </Box>

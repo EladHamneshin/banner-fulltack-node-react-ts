@@ -1,35 +1,27 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import  { useState } from 'react';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { Box } from '@mui/material';
-// import { toastSuccess } from '../../api/banners/toast';
 
-export default function BannerNotFind() {
-    const [open, setOpen] = React.useState(true);
-
+const BannerNotFind = () => {
+    const [open, setOpen] = useState(true);
     const navigate = useNavigate();
 
-    const handelClickcreateBanner = () => {
+    const handleCreateBannerClick = () => {
         setOpen(false);
-        navigate(`/banner/banners/products`)
-    }
-    const handelClickAllBanners = () => {
+        navigate(`/banner/banners/products`);
+    };
+
+    const handleAllBannersClick = () => {
         setOpen(false);
         navigate(`/banner/banners`);
     };
+
     const handleClose = () => {
         setOpen(false);
     };
 
     return (
-    <Box>
-
-        <React.Fragment>
+        <Box>
             <Dialog
                 open={open}
                 onClose={handleClose}
@@ -38,26 +30,28 @@ export default function BannerNotFind() {
                 sx={{
                     backgroundColor: '#3bffd066',
                     '& .MuiDialogTitle-root': {
-                        backgroundColor: 'blue',
+                        backgroundColor: '#2196F3',
+                        color: '#fff',
                     },
                 }}
-                >
-                <DialogTitle id="alert-dialog-title">
-                    {"There are no banners on your name"}
-                </DialogTitle>
+            >
+                <DialogTitle id="alert-dialog-title">{"There are no banners on your name"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         Do you want to add a banner?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handelClickAllBanners}>Back to all banners</Button>
-                    <Button onClick={handelClickcreateBanner} autoFocus>
-                        to add banner
+                    <Button onClick={handleAllBannersClick} color="primary">
+                        Back to all banners
+                    </Button>
+                    <Button onClick={handleCreateBannerClick} color="primary" autoFocus>
+                        Add a banner
                     </Button>
                 </DialogActions>
             </Dialog>
-        </React.Fragment>
-                </Box>
+        </Box>
     );
-}
+};
+
+export default BannerNotFind;

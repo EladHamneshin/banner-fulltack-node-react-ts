@@ -1,13 +1,10 @@
 import axios from 'axios';
-
 const API_URL = import.meta.env.VITE_API_URI
-
 
 export const getAllProducts = async () => {
 
     let token = localStorage.getItem('banner_token');
     if (!token) { token = ''}
-    
     
     let config = {
         method: 'get',
@@ -19,7 +16,6 @@ export const getAllProducts = async () => {
             'Authorization': token, 
             'Content-Type': 'application/json'
           },
-
 
     };
     try {

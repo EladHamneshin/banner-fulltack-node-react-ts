@@ -66,7 +66,7 @@ const EditUserForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Grid sx={{ display: 'flex', flexDirection: 'column' }}>
+      <Grid sx={{ display: 'flex', flexDirection: 'column',width:'60vw' }}>
         <TextField
           style={textFieldStyle}
           label="Name"

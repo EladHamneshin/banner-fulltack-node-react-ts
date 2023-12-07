@@ -83,19 +83,15 @@ const ProductPage = () => {
         typography: {
             h3: {
                 fontSize: '1.2rem',
-                '@media (min-width:600px)': {
-                    fontSize: '1.5rem',
-                },
-                '@media (min-width:960px)': {
-                    fontSize: '2rem',
-                },
+                '@media (min-width:600px)': { fontSize: '1.5rem' },
+                '@media (min-width:960px)': { fontSize: '2rem' },
             },
         },
     });
 
     return (
         <ThemeProvider theme={theme}>
-            <Box sx={{ backgroundColor: '#f8f8f8',padding:'20px' }}>
+            <Box sx={{ backgroundColor: '#f8f8f8', padding: '20px' }}>
                 {product && (
                     <Typography variant="h3" sx={{ display: 'flex', justifyContent: 'center', color: '#2196F3', marginTop: '16px' }}>
                         {product.name}
@@ -121,7 +117,6 @@ const ProductPage = () => {
                                     flexWrap: 'wrap',
                                     cursor: 'pointer',
                                     justifyContent: 'center',
-                                    // height: '270px',
                                     margin: '5px',
                                     marginBottom: '10px',
                                 }}>
@@ -135,9 +130,9 @@ const ProductPage = () => {
                         <Divider sx={{ margin: '10px', border: '1px solid #2196F3' }} />
                         {product && (
                             <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', width: '80%', margin: 2 }}>
-                                <Card sx={{ display:'flex',alignItems:'center',borderRadius:'0.5rem', height: '80vh', width: '25vw', flexDirection: 'column', justifyContent: 'space-around', backgroundColor: '#fff', boxShadow: '0px 0px 10px 2px rgba(0,0,0,0.1)' }}>
-                                    <CardMedia 
-                                    sx={{width:'90%'}}
+                                <Card sx={{ display: 'flex', alignItems: 'center', borderRadius: '0.5rem', height: '80vh', width: '25vw', flexDirection: 'column', justifyContent: 'space-around', backgroundColor: '#fff', boxShadow: '0px 0px 10px 2px rgba(0,0,0,0.1)' }}>
+                                    <CardMedia
+                                        sx={{ width: '90%' }}
                                         component="img"
                                         height="200vh"
                                         image={product.image.url}
@@ -165,14 +160,14 @@ const ProductPage = () => {
                                             Rating: {product.rating}/5
                                         </Typography>
                                     </CardContent>
-                                        <Button
-                                            variant="contained"
-                                            color="primary"
-                                            onClick={handleAddBanner}
-                                            sx={{ margin: '4px' }}
-                                        >
-                                            Add Banner
-                                        </Button>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={handleAddBanner}
+                                        sx={{ margin: '4px' }}
+                                    >
+                                        Add Banner
+                                    </Button>
                                 </Card>
                             </Box>
                         )}

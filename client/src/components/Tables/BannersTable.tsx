@@ -4,11 +4,11 @@ import { Box, ThemeProvider } from '@mui/system';
 import { Typography, createTheme } from '@mui/material';
 
 const columns: GridColDef[] = [
-  { field: 'Name', headerName: 'Name', width: 80, type: 'string' },
-  { field: 'productID', headerName: 'Product', type: 'string', width: 80 },
-  { field: 'categoryID', headerName: 'Category', type: 'string', width: 80 },
-  { field: 'author', headerName: 'Author', type: 'string', width: 80 },
-  { field: 'creationDate', headerName: 'Creation Date', type: 'string', width: 80 },
+  { field: 'Name', headerName: 'Name', width: 150, type: 'string' },
+  { field: 'productID', headerName: 'Product', type: 'string', width: 100 },
+  { field: 'categoryID', headerName: 'Category', type: 'string', width: 100 },
+  { field: 'author', headerName: 'Author', type: 'string', width: 100 },
+  { field: 'creationDate', headerName: 'Creation Date', type: 'string', width: 100 },
 ];
 
 type Props = {
@@ -19,10 +19,10 @@ export default function BannersTable(props: Props) {
   const rows: any = [];
   props.pro.forEach((element, index) => {
     rows.push({
-      id: index + 1, // Use index as a simple unique identifier
+      id: index + 1,
       Name: element.name,
       productID: element.productID,
-      categoryID: element.catogryID, // Corrected field name from 'catogryID' to 'categoryID'
+      categoryID: element.catogryID,
       author: element.author,
       creationDate: element.createdAt,
     });
@@ -31,10 +31,10 @@ export default function BannersTable(props: Props) {
   const theme = createTheme({
     palette: {
       primary: {
-        main: '#2196F3', // Blue
+        main: '#2196F3',
       },
       secondary: {
-        main: '#FF9800', // Orange
+        main: '#FF9800',
       },
     },
     typography: {
@@ -46,7 +46,7 @@ export default function BannersTable(props: Props) {
         '@media (min-width:960px)': {
           fontSize: '2rem',
         },
-        color: '#2196F3', // Blue
+        color: '#2196F3',
       },
     },
   });
@@ -62,9 +62,9 @@ export default function BannersTable(props: Props) {
         rows={rows}
         columns={columns}
         autoPageSize
+        pagination
         pageSizeOptions={[2, 5, 10, 25]}
-        checkboxSelection
-        getRowId={(row) => row.id} // Specify the custom id using getRowId
+        getRowId={(row) => row.id}
         components={{
           NoRowsOverlay: () => (
             <Box
@@ -74,13 +74,12 @@ export default function BannersTable(props: Props) {
                 alignItems: 'center',
                 height: '100%',
                 color: theme.palette.secondary.main,
-              }}
-            >
+              }}>
               No banners available.
             </Box>
           ),
-        }}
-      />
+        }} 
+        />
     </Box>
   );
 }

@@ -1,4 +1,3 @@
-
 import { Box, Stack, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { bannerByProducdID } from '../../api/banners/bannerByProducdID'
@@ -9,15 +8,14 @@ import CardBanner from '../../components/cards/CardBanner'
 const BannersByProductID = () => {
 
     const navigate = useNavigate();
-    const handelClickLogin = () => { navigate(`/banner/login`) }
+    const handelClickLogin = () => navigate(`/banner/login`) 
     useEffect(() => {
         if (localStorage.getItem('token') === null) { handelClickLogin() }
     }, [])
 
+    const { productID } = useParams()
     const [message, setMessage] = useState('')
     const [banners, setBanners] = useState<ResponseBanner[] | string>([]);
-    const { productID } = useParams()
-
 
     useEffect(() => {
         const fetchData = async () => {

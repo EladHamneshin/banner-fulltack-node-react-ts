@@ -11,18 +11,12 @@ const CardHomePage: React.FC<Props> = ({ banner }) => {
     const navigate = useNavigate();
     const theme = useTheme();
 
-    const handleClickLogin = () => {
-        navigate('login');
-    };
+    const handleClickLogin = () => navigate('login');
 
-    const handleClickCardProduct = () => {
-        navigate(`/banner/banners/ProductPage/${banner.productID}`);
-    };
+    const handleClickCardProduct = () => navigate(`/banner/banners/ProductPage/${banner.productID}`);
 
     useEffect(() => {
-        if (localStorage.getItem('token') === null) {
-            handleClickLogin();
-        }
+        if (localStorage.getItem('token') === null) handleClickLogin();
     }, []);
 
     return (

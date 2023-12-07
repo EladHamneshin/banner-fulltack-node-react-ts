@@ -27,7 +27,6 @@ const schema = yup.object({
     // author: yup.string().required(),
 }).required();
 
-
 type Props = {
     product: Product
     uploadImage: (image: File, name: string, size: string) => Promise<void>
@@ -38,13 +37,9 @@ type Props = {
 
 const AddBannerForm = (props: Props) => {
 
-
     const product = props.product
-
     const [message] = useState('');
     const [loading, setLoading] = useState(false);
-
-
 
 
     const textFieldStyle = { padding: '2px', margin: '4px auto ' };
@@ -62,13 +57,8 @@ const AddBannerForm = (props: Props) => {
         // props.setdataForm(newBanner)
         await props.onSubmitForm(data)
         setLoading(false);
-
-
         // setImage(data.image[0])
     };
-
-
-
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -84,10 +74,7 @@ const AddBannerForm = (props: Props) => {
                         display: 'flex',
                         justifyContent: 'space-between',
                     }}>
-
-
                         <Grid key={uuid()} sx={{ display: 'flex', flexDirection: 'column', }}>
-
 
                             <TextField style={textFieldStyle} label="Name" value={`${product.name}`}
                                 {...register("name", { required: true, maxLength: 20 })} />
@@ -99,7 +86,6 @@ const AddBannerForm = (props: Props) => {
 
                             <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
                                 <Box>
-
                                     <InputLabel htmlFor="size">Select size</InputLabel>
                                     <Select
                                         style={textFieldStyle}
@@ -113,9 +99,7 @@ const AddBannerForm = (props: Props) => {
                                     </Select>
                                     <Typography color='red' variant='caption'>{errors.size?.message}</Typography>
                                 </Box>
-
                                 <Box>
-
                                     <InputLabel htmlFor="kind">Select kind</InputLabel>
                                     <Select
                                         style={textFieldStyle}
@@ -128,7 +112,6 @@ const AddBannerForm = (props: Props) => {
                                     </Select>
                                     <Typography color='red' variant='caption'>{errors.kind?.message}</Typography>
                                 </Box>
-
                             </Box>
                             <TextField
                                 style={textFieldStyle}

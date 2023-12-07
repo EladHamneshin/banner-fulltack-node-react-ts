@@ -6,12 +6,10 @@ import { bannerByCategoryByName } from '../../api/banners/bannerByCategoryByName
 import { ResponseBanner } from '../../types/BannerInterface'
 import CardBanner from '../../components/cards/CardBanner'
 
-
-
 const BannerByCategoryByName = () => {
 
     const navigate = useNavigate();
-    const handelClickLogin = () => { navigate(`/banner/login`) }
+    const handelClickLogin = () =>navigate(`/banner/login`)
     useEffect(() => {
         if (localStorage.getItem('token') === null) { handelClickLogin() }
     }, [])
@@ -20,27 +18,21 @@ const BannerByCategoryByName = () => {
     const [banners, setBanners] = useState<ResponseBanner[] | string>([]);
     const { name } = useParams()
 
-
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const result = await bannerByCategoryByName(name!);
-
-
                 if (result.success === false) { return setMessage(result.message) }
                 if (result.success === true) {
                     const data: ResponseBanner[] = result.data
                     data.length === 0 ? setBanners('There is no such category name') : setBanners(data)
-
                 }
             } catch (error) {
                 console.log(error);
             }
         };
         fetchData();
-
     }, []);
-
 
     return (
         <Box>
@@ -48,7 +40,6 @@ const BannerByCategoryByName = () => {
                 <Stack>{message}</Stack>
             ) : (
                 <>
-
                     {typeof banners === 'string' ? (
                         <Typography variant='h2'>{banners}</Typography>
                     ) : (
@@ -56,8 +47,6 @@ const BannerByCategoryByName = () => {
                             <Stack key={index}><CardBanner banner={banner} /></Stack>
                         ))
                     )}
-
-
                 </>
             )}
         </Box>

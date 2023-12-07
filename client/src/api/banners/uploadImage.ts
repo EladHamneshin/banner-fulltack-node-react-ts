@@ -1,7 +1,5 @@
 import axios from 'axios';
-
 const API_URI = import.meta.env.VITE_API_URI
-
 
 export  const uploadImageToServer = async (image: File) => {
 
@@ -10,14 +8,11 @@ export  const uploadImageToServer = async (image: File) => {
     let token = localStorage.getItem('banner_token');
     if (!token) { token = ''}
     
-    
     let configUpImage = {
         method: "post",
         url: `${API_URI}/upload/image`,
-
         data: formData
     }
-
     try {
         const resURL = await axios.request(configUpImage)
         console.log(resURL.data);

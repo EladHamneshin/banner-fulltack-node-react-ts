@@ -1,14 +1,12 @@
 import { useState } from 'react';
 import { Box } from '@mui/material';
 import { Product } from '../../types/ProductInterface';
-
 import { useNavigate } from 'react-router-dom';
 import CardProduct from '../cards/CardProduct';
 import { createBanner } from '../../api/banners/createNewBanner';
 import AddBannerForm from './AddBannerForm';
 // import resizeImage from '../../utils/resizeImage';
 import { uploadImageToServer } from '../../api/banners/uploadImage';
-
 
 const API_URI = import.meta.env.VITE_API_URI
 
@@ -17,38 +15,42 @@ type Props = {
 }
 
 const NewBannerForm = (props: Props) => {
-
     const navigate = useNavigate();
-    const handelClickLogin = () => { navigate(`/banner/login`) }
+    const handelClickLogin = () => navigate(`/banner/login`)
     if (localStorage.getItem('token') === null) { handelClickLogin() }
 
     const product = props.product
 
-
+    // const [message] = useState('');
+    // const [loading, setLoading] = useState(false);
 
     const [imageUrl, setImage] = useState("");
 
 
     const uploadImage = async (image: File, name : string , size : string) => {
-
+        // let width = 750
+        // let height = 550
+        // if (size === 'side'){
+        //     width = 120
+        //     height = 650
+        // } else if (size === 'top'){
+        //     width = 770
+        //     height = 150
+        // }   
+        // const getresizeImage = await resizeImage(image, width, height);
 
         const FileName = name + size
         const cleanFileName = FileName.replace(/[^a-zA-Z0-9]/g, '')
         const blob = new Blob([image], { type: 'image/jpeg' });
-
         const file = new File([blob], `${cleanFileName}.jpg`);
         const resUrl = await uploadImageToServer(file)
         console.log(resUrl);
 
-       
-
         setImage(`${API_URI}/images/${cleanFileName}.jpg`)
         console.log(imageUrl);
-
     }
 
-
-    const onSubmitForm = async (data : any) => {
+    const onSubmitForm = async (data: any) => {
 
         const FileName = product.name + data.size
         const cleanFileName = FileName.replace(/[^a-zA-Z0-9]/g, '')
@@ -67,7 +69,6 @@ const NewBannerForm = (props: Props) => {
             author: 'admin',
         }
         await createBanner(newBanner, product.id);
-
     };
     return (
         <Box sx={{ display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-around', width: '95vw' }}>
@@ -83,7 +84,6 @@ const NewBannerForm = (props: Props) => {
             <Box >
                 <CardProduct product={product} />
             </Box>
-
         </Box>
     );
 };

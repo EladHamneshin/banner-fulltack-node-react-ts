@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const API_URL = import.meta.env.VITE_API_URI
 
 export const loginFetch = async (user: string) => {
@@ -18,7 +17,6 @@ export const loginFetch = async (user: string) => {
 
     try {
         const res = await axios.request(config)
-
         
         const token  = res.headers.authorization
         console.log(token)

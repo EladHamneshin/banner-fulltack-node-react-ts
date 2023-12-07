@@ -15,6 +15,7 @@ import ProfileUser from "../pages/users/ProfileUser";
 import AllProducts from "../pages/products/AllProducts";
 import ProductPage from "../pages/products/ProductPage";
 import EditUserForm from "../pages/users/EditUserForm";
+import AllUsers from "../pages/users/AllUsers";
 
 export default function Routs() {
     const router = createBrowserRouter([
@@ -88,19 +89,12 @@ export default function Routs() {
                     element: <EditUserForm />,
                     errorElement: <ErrorPage />,
                 },
-                // {
-                //     path: "banners/products",
-                //     element: <AllProducts />,
-                //     errorElement: <ErrorPage />,
-                // },
-                // {
-                //     path: "banners/create/:productID",
-                //     element: <BannerCreateOrEdit />,
-                //     errorElement: <ErrorPage />,
-                // },
+                {
+                    path: `banners/user/users`,
+                    element: <AllUsers />,
+                    errorElement: <ErrorPage />,
+                },
             ],
-
         }]);
-
     return <RouterProvider router={router} />;
 }

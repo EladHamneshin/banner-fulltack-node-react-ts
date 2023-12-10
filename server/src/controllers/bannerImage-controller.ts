@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import { asyncHandler } from "../middleware/async-middleware";
-import { BannerInterface } from "../types/interfaces/bannerInterface";
-import { ApiError } from "../utils/ApiError";
-import STATUS_CODES from "../utils/StatusCodes";
+import { asyncHandler } from "../middleware/async-middleware.js";
+import { BannerInterface } from "../types/interfaces/bannerInterface.js";
+import { ApiError } from "../utils/ApiError.js";
+import STATUS_CODES from "../utils/StatusCodes.js";
 
 // Import service functions
 import {
@@ -15,7 +15,7 @@ import {
   deleteBannerImage as serviceDeleteBannerImage,
   getBannerImagesByQuery as serviceGetBannerImageByQuery,
   getTop5BannersImages as serviceGetTop5BannersImages,
-} from "../services/bannersImage-service";
+} from "../services/bannersImage-service.js";
 
 // @desc   Get all bannersImage
 // @route  GET /bannersImage

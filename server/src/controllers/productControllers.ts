@@ -1,10 +1,10 @@
-import { asyncHandler } from "../middleware/async-middleware";
-import productService from "../services/productService";
+import { asyncHandler } from "../middleware/async-middleware.js";
+import productService from "../services/productService.js";
 import { Request, Response, NextFunction } from "express";
-import { Category, Product } from "../types/interfaces/productInterfaces";
-import { ApiError } from "../utils/ApiError";
-import { ApiSuccess } from "../utils/ApiSucess";
-import STATUS_CODES from "../utils/StatusCodes";
+import { Category, Product } from "../types/interfaces/productInterfaces.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiSuccess } from "../utils/ApiSucess.js";
+import STATUS_CODES from "../utils/StatusCodes.js";
 
 const getAllProducts = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const products = await productService.getAllProducts();

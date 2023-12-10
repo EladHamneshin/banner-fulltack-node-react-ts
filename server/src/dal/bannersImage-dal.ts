@@ -1,8 +1,8 @@
-import { bannerModel } from "../models/bannersModel";
-import { BannerInterface } from "../types/interfaces/bannerInterface";
-import { queryInterface } from "../types/interfaces/imageQueryInterface";
-import { ApiError } from "../utils/ApiError";
-import STATUS_CODES from "../utils/StatusCodes";
+import { bannerModel } from "../models/bannersModel.js";
+import { BannerInterface } from "../types/interfaces/bannerInterface.js";
+import { queryInterface } from "../types/interfaces/imageQueryInterface.js";
+import { ApiError } from "../utils/ApiError.js";
+import STATUS_CODES from "../utils/StatusCodes.js";
 
 // Function to get all bannersImage
 export const getAllBannersImages = async (): Promise<BannerInterface[]> => {

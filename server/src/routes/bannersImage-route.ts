@@ -9,8 +9,8 @@ import {
     deleteBannerImage,
     getBannerImagesByQuery,
     getTop5BannersImages,
-} from "../controllers/bannerImage-controller";
-import { authHandler } from "../middleware/auth-middleware";
+} from "../controllers/bannerImage-controller.js";
+import { authHandler } from "../middleware/auth-middleware.js";
 // import { authHandler } from "../middleware/auth-middleware";
 
 

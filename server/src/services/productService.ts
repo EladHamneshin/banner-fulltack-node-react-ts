@@ -1,7 +1,7 @@
-import productsDal from "../dal/productsDal"
-import { Category, Product } from "../types/interfaces/productInterfaces";
-import { ApiError } from "../utils/ApiError";
-import STATUS_CODES from "../utils/StatusCodes";
+import productsDal from "../dal/productsDal.js"
+import { Category, Product } from "../types/interfaces/productInterfaces.js";
+import { ApiError } from "../utils/ApiError.js";
+import STATUS_CODES from "../utils/StatusCodes.js";
 
 const getAllProducts = async () => {
     return await productsDal.fetchAllProducts();

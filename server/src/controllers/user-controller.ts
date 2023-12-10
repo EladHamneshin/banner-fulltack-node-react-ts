@@ -1,12 +1,12 @@
 import { Request, Response, NextFunction } from "express";
-import { ApiSuccess } from "../utils/ApiSucess";
-import { asyncHandler } from "../middleware/async-middleware";
-import { UserInterface as User } from "../types/interfaces/UserInterface";
-import { ApiError } from "../utils/ApiError";
-import userService from "../services/user-service";
-import STATUS_CODES from "../utils/StatusCodes";
-import { registerUserValidation, loginUserValidation } from "../utils/validations/userValidation";
-import generateToken from "../utils/jwtUtils";
+import { ApiSuccess } from "../utils/ApiSucess.js";
+import { asyncHandler } from "../middleware/async-middleware.js";
+import { UserInterface as User } from "../types/interfaces/UserInterface.js";
+import { ApiError } from "../utils/ApiError.js";
+import userService from "../services/user-service.js";
+import STATUS_CODES from "../utils/StatusCodes.js";
+import { registerUserValidation, loginUserValidation } from "../utils/validations/userValidation.js";
+import generateToken from "../utils/jwtUtils.js";
 import jwt from 'jsonwebtoken';
 
 // @desc Auth user & login

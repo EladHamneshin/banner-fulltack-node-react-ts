@@ -1,8 +1,8 @@
-import { ApiError } from "../utils/ApiError";
-import { UserInterface as User } from "../types/interfaces/UserInterface";
-import STATUS_CODES from "../utils/StatusCodes";
-import userDal from "../dal/userDal";
-import { comparePassword, hashPassword } from "../utils/encryptionUtils";
+import { ApiError } from "../utils/ApiError.js";
+import { UserInterface as User } from "../types/interfaces/UserInterface.js";
+import STATUS_CODES from "../utils/StatusCodes.js";
+import userDal from "../dal/userDal.js";
+import { comparePassword, hashPassword } from "../utils/encryptionUtils.js";
 import { v4 as uuid } from 'uuid';
 
 

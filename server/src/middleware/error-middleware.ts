@@ -1,4 +1,4 @@
-import { ApiError } from "../types/interfaces/ApiErrorInterface";
+import { ApiError } from "../types/interfaces/ApiErrorInterface.js";
 import { Request, Response, NextFunction } from "express";
 
 

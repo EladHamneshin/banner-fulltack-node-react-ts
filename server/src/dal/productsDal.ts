@@ -1,5 +1,5 @@
-import { ApiError } from "../utils/ApiError";
-import STATUS_CODES from "../utils/StatusCodes";
+import { ApiError } from "../utils/ApiError.js";
+import STATUS_CODES from "../utils/StatusCodes.js";
 
 const fetchAllProducts = async () => {
     try {

@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { UserInterface } from "../../types/interfaces/UserInterface";
+import { UserInterface } from "../../types/interfaces/UserInterface.js";
 
 
 const registerUserValidation = (user: UserInterface) => {

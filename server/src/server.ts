@@ -1,100 +1,55 @@
-import cookieParser from 'cookie-parser';
-import express from "express";
-import dotenv from "dotenv";
-import cors from "cors";
-import helmet from "helmet";
-// import hpp from "hpp";
-import morgan from "morgan";
-import rateLimit from "express-rate-limit";
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import express from 'express';
+import http from 'http';
+import cors from 'cors';
+import { typeDefs, } from './schema.js';
+import { resolvers, } from './resolvers.js';
+import morgan from 'morgan';
+import { connectToPostgres } from './configs/pgConnect.js';
+import dotenv from 'dotenv';
 
-
-// import { unless } from "./middleware/unless";
-
-// Setup .env variables for app usage
 dotenv.config();
 
-// Import routes from the ./routes
-import user from "./routes/user-route";
+interface MyContext {
+  token?: string;
+};
 
-import connectToDB from "./configs/mongoDBConnect";
-import productRouter from "./routes/productRoutes";
+// Required logic for integrating with Express
+const app = express();
+// Our httpServer handles incoming requests to our Express app.
+// Below, we tell Apollo Server to "drain" this httpServer,
+// enabling our servers to shut down gracefully.
+const httpServer = http.createServer(app);
 
-import { catchErrors, notFound } from "./middleware/errorNOTfound";
-import routerBannersImage from "./routes/bannersImage-route";
-import uploadRouter from "./routes/upLoad";
-import { insertBanners } from './models/bannersModel';
-import { connectToPostgres } from './configs/pgConnect';
-
-// Setup constant variables
-const PORT = process.env.PORT || 5000;
-const RATE_TIME_LIMIT = Number(process.env.RATE_TIME_LIMIT) || 15;
-const RATE_REQUEST_LIMIT = Number(process.env.RATE_REQUEST_LIMIT) || 100;
-
-// Init express app
-export const app = express();
-
-app.use(express.static('public'))
-// Body parser
-app.use(express.json());
-app.use(cookieParser());
-
-app.use(express.urlencoded({ extended: true }));
-
-
-// Detailed server logging
-app.use(morgan("dev"));
-
-// Limit rate of requests
-// Alternatively, you can pass through specific routes for different limits based on route
-// app.use(
-//   rateLimit({
-//     windowMs: RATE_TIME_LIMIT * 60 * 1000,
-//     max: RATE_REQUEST_LIMIT,
-//   }),
-// );
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Expose-Headers', 'Authorization');
-  next();
+// Same ApolloServer initialization as before, plus the drain plugin
+// for our httpServer.
+const server = new ApolloServer<MyContext>({
+  typeDefs,
+  resolvers,
+  plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 });
-// Enable CORS
-app.use(cors());
+// Ensure we wait for our server to start
+await server.start();
 
-// Security Headers
-app.use(helmet());
+// Set up our Express middleware to handle CORS, body parsing,
+// and our expressMiddleware function.
+// server.addPlugin(ApolloMiddleware)
+app.use(
+  '/',
+  cors<cors.CorsRequest>(),
+  express.json(),
+  morgan('dev'),
+  // expressMiddleware accepts the same arguments:
+  // an Apollo Server instance and optional configuration options
+  expressMiddleware(server, {
+    context: async ({ req }) => ({ token: req.headers.token }),
+  }),
+);
 
-// Secure against param pollutions
-// app.use(hpp());
+// Modified server startup
 
-// app.use(unless(["/users/login"], verify));
-
-
-app.use("/users", user);
-app.use("/bannersImage", routerBannersImage);
-app.use("/upload", uploadRouter);
-
-
-app.use("/ext/bannersProduct", productRouter)
-
-
-
-app.use(notFound);
-
-app.use(catchErrors);
-
-
-// Listen to specified port in .env or default 5000
-
-if (process.env.NODE_ENV !== "test") {
-  connectToPostgres().then(() => {
-    connectToDB()
-  }).then((res) => {
-
-    console.log('Connecting to mongodb');
-    // איתוחל דאטה ראשוני
-
-    // insertBanners()
-    app.listen(PORT, () => {
-      console.log(`Server is listening on: ${PORT}`);
-    });
-  }).catch((err) => console.error(err))
-}
+await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
+await connectToPostgres();
+console.log(`🚀 Server ready at http://localhost:4000/`);

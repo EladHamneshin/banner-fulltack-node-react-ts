@@ -1,7 +1,7 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { asyncHandler } from "../middleware/async-middleware";
-import STATUS_CODES from '../utils/StatusCodes';
-import { ApiError } from '../utils/ApiError';
+import { asyncHandler } from "../middleware/async-middleware.js";
+import STATUS_CODES from '../utils/StatusCodes.js';
+import { ApiError } from '../utils/ApiError.js';
 import { NextFunction, Request, Response } from 'express';
 
 
@@ -16,7 +16,7 @@ const authHandler = asyncHandler(async (req: Request, res: Response, next: NextF
   };
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET, { complete: true })
+    const decoded = jwt.verify(token, process.env.JWT_SECRET, { complete: true });
 
     const user = decoded.payload as JwtPayload;
 

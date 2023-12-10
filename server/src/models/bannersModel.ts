@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { BannerInterface } from "../types/interfaces/bannerInterface";
+import { BannerInterface } from "../types/interfaces/bannerInterface.js";
 
 
 const bannerSchema = new mongoose.Schema<BannerInterface>({

@@ -1,7 +1,8 @@
-import postgresPool from '../configs/pgConnect';
-import { UserInterface as User } from '../types/interfaces/UserInterface';
-import { ApiError } from '../utils/ApiError';
-import STATUS_CODES from '../utils/StatusCodes';
+import { GraphQLError } from 'graphql';
+import postgresPool from '../configs/pgConnect.js';
+import { UserInterface as User } from '../types/interfaces/UserInterface.js';
+import { ApiError } from '../utils/ApiError.js';
+import STATUS_CODES from '../utils/StatusCodes.js';
 
 const getUserByEmail = async (email: string) => {
     let client;
@@ -14,11 +15,11 @@ const getUserByEmail = async (email: string) => {
             throw new ApiError( queryError , STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong, stack: 1');
         } finally {
             client.release();
-        }
+        };
     } catch (connectionError) {        
         if (connectionError instanceof ApiError) throw connectionError;
         throw new ApiError(connectionError , STATUS_CODES.BAD_GATEWAY, 'Could not connect to the database, stack: 1');
-    }
+    };
 };
 
 const registerUser = async (user: User) => {
@@ -32,11 +33,11 @@ const registerUser = async (user: User) => {
             throw new ApiError( queryError , STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong, stack: 1');
         } finally {
             client.release();
-        }
+        };
     } catch (connectionError) {
         if (connectionError instanceof ApiError) throw connectionError;
-        throw new ApiError( connectionError , STATUS_CODES.BAD_GATEWAY, 'Could not connect to the database, stack: 1');
-    }
+        throw new GraphQLError('Error connecting to the database, stack: 1',{extensions:{code: 'INTERNAL_SERVER_ERROR',http:{status: 500}}});
+    };
 };
 
 const getAllUsers = async () => {
@@ -50,11 +51,11 @@ const getAllUsers = async () => {
             throw new ApiError(queryError, STATUS_CODES.INTERNAL_SERVER_ERROR, 'Something went wrong, stack: 1');
         } finally {
             client.release();
-        }
+        };
     } catch (connectionError) {
         if (connectionError instanceof ApiError) throw connectionError;
-        throw new ApiError( connectionError , STATUS_CODES.BAD_GATEWAY, 'Could not connect to the database, stack: 1');
-    }
+        throw new GraphQLError('Error connecting to the database, stack: 1',{extensions:{code: connectionError,http:{status: 500}}});
+    };
 };
 
 const deleteUser = async (userID: string) => {

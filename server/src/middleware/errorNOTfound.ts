@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { asyncHandler } from "./async-middleware";
-import STATUS_CODES from "../utils/StatusCodes";
-import { ApiError } from "../utils/ApiError";
+import { asyncHandler } from "./async-middleware.js";
+import STATUS_CODES from "../utils/StatusCodes.js";
+import { ApiError } from "../utils/ApiError.js";
 
 
 export const notFound = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {

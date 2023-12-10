@@ -6,7 +6,7 @@ const API_URL = import.meta.env.VITE_API_URI
 export const getAllProducts = async () => {
 
     let token = localStorage.getItem('banner_token');
-    if (!token) { token = ''}
+    if (!token) { token = ''};
     
     
     let config = {

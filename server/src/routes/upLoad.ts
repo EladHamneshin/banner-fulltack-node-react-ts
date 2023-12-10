@@ -1,5 +1,5 @@
 import express from 'express';
-// import productControllers from '../controllers/productControllers';
+// import productControllers from '../controllers/productControllers.js';
 import multer from 'multer'
 import path from 'path'
 

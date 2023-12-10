@@ -86,12 +86,9 @@ app.use(catchErrors);
 // Listen to specified port in .env or default 5000
 
 
-connectToPostgres().then(() => {
-  connectToDB()
-}).then((res) => {
-
-  console.log('Connecting to mongodb');
+connectToPostgres().then((res) => {
   if (process.env.NODE_ENV !== "test") {
+    connectToDB()
     app.listen(PORT, () => {
       console.log(`Server is listening on: ${PORT}`);
     });

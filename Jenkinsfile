@@ -16,22 +16,24 @@ pipeline {
                 script {
                     dir('client') {
                         sh 'echo "Building..."'
-                        sh 'docker build -t banner-client .'
+                        sh 'npm i'
+                        sh 'npm run lint'
+                        // sh 'docker build -t banner-client .'
                     }
                 }
             }
         }
 
-        stage('server build') {
-            steps {
-                script {
-                    dir('server') {
-                        sh 'echo "Building..."'
-                        sh 'docker build -t banner-server .'
-                    }
-                }
-            }
-        }
+        // stage('server build') {
+        //     steps {
+        //         script {
+        //             dir('server') {
+        //                 sh 'echo "Building..."'
+        //                 sh 'docker build -t banner-server .'
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     post {

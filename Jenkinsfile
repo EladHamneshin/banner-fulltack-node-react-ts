@@ -17,7 +17,7 @@ pipeline {
                     dir('client') {
                         sh 'echo "Building..."'
                         sh 'npm cache clean --force'
-                        sh 'npm i eslint --verbose'
+                        sh 'npm i eslint eslint-plugin-react-hooks eslint-plugin-react-refresh'
                         sh 'npm run lint'
                         // sh 'docker build -t banner-client .'
                     }

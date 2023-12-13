@@ -16,7 +16,7 @@ pipeline {
                 script {
                     dir('client') {
                         sh 'echo "Building..."'
-                        sh 'npm i'
+                        sh 'npm i eslint'
                         sh 'npm run lint'
                         // sh 'docker build -t banner-client .'
                     }

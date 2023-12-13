@@ -14,7 +14,7 @@ pipeline {
         stage('client build') {
             steps {
                 script {
-                    dir('client') {
+                    dir('client test') {
                         sh 'echo "Building..."'
                         sh 'npm i'
                         sh 'npm run lint'

@@ -58,5 +58,10 @@ pipeline {
                 )
             }
         }
+        always{
+            script{
+                cleanWs()
+            }
+        }
     }
 }

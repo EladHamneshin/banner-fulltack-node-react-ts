@@ -11,7 +11,7 @@ pipeline {
             }
         }
 
-        stage('client build test') {
+        stage('client build') {
             steps {
                 script {
                     dir('client') {

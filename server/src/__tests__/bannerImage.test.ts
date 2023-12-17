@@ -5,30 +5,29 @@ import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import { insertBanners } from "../models/bannersModel";
 
-beforeAll(async () => {
-  console.log("Connecting to MongoDB Memory Server");
-  let mongoMemoryServer: MongoMemoryServer;
-  mongoMemoryServer = await MongoMemoryServer.create();
-  const dbUri = mongoMemoryServer.getUri();
-  const port = parseInt(dbUri.split(':')[2].split('/')[0]);
-  await mongoose.connect(dbUri)
-  console.log('Connected to mongoMemoryServer on port', port);
-  await insertBanners()
-  console.log('Insert Banners Done');
-})
-
-afterAll(() => {
-  mongoose.connection.close();
-  console.log('Disconnected from mongodb');
-})
-
-// beforeAll(async() => {
-//      await insertBanners();
+// beforeAll(async () => {
+//   // console.log("Connecting to MongoDB Memory Server");
+//   // let mongoMemoryServer: MongoMemoryServer;
+//   // mongoMemoryServer = await MongoMemoryServer.create();
+//   // const dbUri = mongoMemoryServer.getUri();
+//   // const port = parseInt(dbUri.split(':')[2].split('/')[0]);
+//   // await mongoose.connect(dbUri)
+//   // console.log('Connected to mongoMemoryServer on port', port);
+//   await insertBanners()
+//   console.log('Insert Banners Done');
 // })
+
+// afterAll(() => {
+//   mongoose.connection.close();
+//   console.log('Disconnected from mongodb');
+// })
+
+beforeAll(async() => {
+     await insertBanners();
+})
 
 describe("GET /bannersImage/", () => {
   test("should return all bannersImage", async () => {
-    const response = await request(app).get("/bannersImage/");
     const response = await request(app).get("/bannersImage/");
     expect(response.status).toBe(200);
     expect(response.body.success).toBe(true);    
@@ -40,7 +39,6 @@ describe("GET /bannersImage/:productID", () => {
   test("should return bannersImage by productID", async () => {
     const productID = "456";
     const response = (await request(app).get(`/bannersImage/product/${productID}`));
-    const response = (await request(app).get(`/bannersImage/product/${productID}`));
     expect(response.status).toBe(200);
     expect(response.body.success).toBe(true);
     expect(response.body.data).toBeInstanceOf(Array);
@@ -51,7 +49,6 @@ describe("GET /bannersImage/category/:categoryName", () => {
   test("should return bannersImage by category", async () => {
     const categoryName = "456";
     const response = await request(app).get(`/bannersImage/category/${categoryName}`);
-    const response = await request(app).get(`/bannersImage/category/${categoryName}`);
     expect(response.status).toBe(200);
     expect(response.body.success).toBe(true);
     expect(response.body.data).toBeInstanceOf(Array);
@@ -61,7 +58,6 @@ describe("GET /bannersImage/category/:categoryName", () => {
 describe("GET /bannersImage/user/:userID", () => {
   test("should return bannersImage by user", async () => {
     const userID = "Admin";
-    const response = await request(app).get(`/bannersImage/user/${userID}`);
     const response = await request(app).get(`/bannersImage/user/${userID}`);
     expect(response.status).toBe(200);
     expect(response.body.success).toBe(true);
@@ -78,7 +74,6 @@ describe("PUT /bannersImage/:bannerID", () => {
       description: "New Description",
       imageUrl: "newImageUrl",
     };
-    const response = await request(app).put(`/bannersImage/${bannerID}`).send(updatedBanner);
     const response = await request(app).put(`/bannersImage/${bannerID}`).send(updatedBanner);
     expect(response.status).toBe(200);
     expect(response.body.success).toBe(true);

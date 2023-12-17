@@ -87,11 +87,10 @@ app.use(catchErrors);
 
 
 connectToPostgres().then((res) => {
-  if (process.env.NODE_ENV !== "test") {
     connectToDB()
     app.listen(PORT, () => {
       console.log(`Server is listening on: ${PORT}`);
     });
   }
-}).catch((err) => console.error(err))
+).catch((err) => console.error(err))
 

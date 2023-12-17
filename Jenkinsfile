@@ -2,65 +2,119 @@ pipeline {
     agent any
 
     stages {
+
         stage('Checkout') {
             steps {
                 script {
-                    def pullRequestBranch = env.GITHUB_PR_SOURCE_BRANCH
-                    checkout([$class: 'GitSCM', branches: [[name: "*/${pullRequestBranch}"]], userRemoteConfigs: [[url: 'https://github.com/EladHamneshin/banner-fulltack-node-react-ts']]])
+                    echo 'Checking out code...'
+                    checkout scm
                 }
-            }
+            }   
         }
 
-        stage('client build test') {
+        stage('Lint') {
             steps {
                 script {
                     dir('client') {
-                        sh 'echo "Building..."'
-                        sh 'npm cache clean --force'
-                        sh 'npm i eslint eslint-plugin-react-hooks eslint-plugin-react-refresh'
-                        sh 'npm run lint'
-                        // sh 'docker build -t banner-client .'
+                        echo 'Linting...'
+                        //sh 'npm run lint'
                     }
                 }
             }
         }
 
-        // stage('server build') {
+        stage('Unit Test') {
+            steps {
+                script {
+                    dir('client') {
+                        echo 'Installing dependencies...'
+                        sh 'npm install'
+                        echo 'Running unit tests...'
+                        sh 'npm run test'
+                    }
+                }
+            }
+        }
+
+        // stage('Client Build') {
         //     steps {
         //         script {
-        //             dir('server') {
-        //                 sh 'echo "Building..."'
-        //                 sh 'docker build -t banner-server .'
+        //             dir('client') {
+        //                 echo 'Building...'
+        //                 sh 'npm run build'
         //             }
         //         }
         //     }
         // }
-    }
 
+        // stage('Integration Test') {
+        //     steps {
+        //         script {
+        //             dir('client') {
+        //                 echo 'Installing dependencies...'
+        //                 sh 'npm install'
+        //                 echo 'Running integration tests...'
+        //                 sh 'npm run test'
+        //             }
+        //         }
+        //     }
+        // }
+
+
+        // stage('Build and Test') {
+        //     steps {
+        //         script {
+        //             def initSqlContent = '''CREATE DATABASE db;            
+        //                     CREATE TABLE IF NOT EXISTS users (
+        //                     id SERIAL PRIMARY KEY,
+        //                     email VARCHAR(255) NOT NULL,
+        //                     password VARCHAR(255) NOT NULL,
+        //                     isadmin BOOLEAN DEFAULT false,
+        //                     resetcode VARCHAR(255),
+        //                     registration_time TIMESTAMP
+        //                 );'''
+
+        //             sh 'echo $initSqlContent'
+        //             writeFile file: 'scripts/init.sql', text: initSqlContent
+                   
+        //             sh 'ls -alF'
+
+        //             def dockerfileContent = '''
+        //                 FROM node:18-alpine AS builder
+        //                 WORKDIR /app
+        //                 COPY package*.json ./
+        //                 RUN npm install
+        //                 RUN npm install -D typescript
+        //                 COPY . .
+        //                 CMD ["npm", "test"]
+        //             '''
+        //             // Write Dockerfile content to a file
+        //             writeFile file: 'Dockerfile.test', text: dockerfileContent
+
+        //             // Create the network if it doesn't exist
+        //             sh 'docker network ls | grep -q app-network || docker network create app-network'
+
+        //             // Build the Docker image for Express.js server
+        //             sh 'docker build -t oms-end-test3 -f Dockerfile.test .'
+        //             sh 'docker build -t oms-end3 .'
+
+        //             sh 'docker-compose up -d'               
+        //         }
+        //     }
+        // }
+    }
     post {
-        success {
-            script {
-                echo 'Linting passed. You may now merge.'
-                setGitHubPullRequestStatus(
-                    state: 'SUCCESS',
-                    context: 'class4_banner_lint',
-                    message: 'Build passed',
-                )
-            }
-        }
-        
-        failure {
-            script {
-                echo 'Pipeline failed. Blocking pull request merge.'
-                setGitHubPullRequestStatus(
-                    state: 'FAILURE',
-                    context: 'class4_banner_lint',
-                    message: 'Build failed  run npm run build to see errors',
-                )
-            }
-        }
-        always{
+        always {
             cleanWs()
+            // script {
+            //     sh 'docker stop mongo-db'
+            //     sh 'docker rm mongo-db'
+
+            //     sh 'docker stop my-postgres'
+            //     sh 'docker rm my-postgres'
+
+            //     sh 'docker-compose down -v'
+            // }
         }
     }
 }

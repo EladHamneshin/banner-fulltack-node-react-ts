@@ -1,16 +1,20 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKER_CREDENTIALS = credentials('docker-hub-elad')
+    }
+
     stages {
 
-        stage('Checkout') {
-            steps {
-                script {
-                    echo 'Checking out code...'
-                    checkout scm
-                }
-            }   
-        }
+        // stage('Checkout') {
+        //     steps {
+        //         script {
+        //             echo 'Checking out code...'
+        //             checkout scm
+        //         }
+        //     }   
+        // }
 
         stage('Lint') {
             steps {
@@ -31,6 +35,28 @@ pipeline {
                         sh 'npm install'
                         echo 'Running unit tests...'
                         sh 'npm run test'
+                    }
+                }
+            }
+        }
+
+        stage('Server Build') {
+            steps {
+                script {
+                    dir('server') {
+                        echo 'Building Server...'
+                        sh 'docker build -t $ DOCKER_CREDENTIALS_USR/banners-server .'
+                    }
+                }
+            }
+        }
+
+        stage('Client Build') {
+            steps {
+                script {
+                    dir('client') {
+                        echo 'Building Client...'
+                        sh 'docker build -t $ DOCKER_CREDENTIALS_USR/banners-client .'
                     }
                 }
             }

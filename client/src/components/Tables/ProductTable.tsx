@@ -45,7 +45,7 @@ const ProductTable: React.FC<ProductTableProps> = ({ prod }) => {
     category: element.category,
     rating: element.rating,
     salePrice: element.salePrice,
-    realPrice: element.salePrice - (element.salePrice * element.discountPercentage) / 100,
+    realPrice: element.salePrice - (element.salePrice * 0.2) / 100,
   }));
 
   return (

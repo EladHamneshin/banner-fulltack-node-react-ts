@@ -58,7 +58,7 @@ const Canvas = (props: BannerCanvasProps) => {
     const handleUndo = () => {
         if (history.length > 0) {
             console.log("Before undo:", { bgImage, element, combinedText }); // הדפסה לפני השינוי
-            const canvas = canvasRef.current;
+            // const canvas = canvasRef.current;
             // const context = canvas!.getContext('2d');
     
             // עדכון הקנבס לפי ההיסטוריה

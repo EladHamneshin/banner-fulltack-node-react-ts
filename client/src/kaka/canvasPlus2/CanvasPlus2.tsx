@@ -1,5 +1,5 @@
 import { Box, Button, Dialog, Typography } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Product } from "../../types/ProductInterface";
 import BackgroundImage from "./BgCanvas";
 
@@ -100,6 +100,8 @@ const CanvasPlus = (props: BannerCanvasProps) => {
         // שמירת ההיסטוריה
         const { bgImage, productImage, text } = canvasState;
 
+        console.log(productImage);
+        
         // Draw background
         if (bgImage) {
           await fabric.Image.fromURL(bgImage, img => {
@@ -188,14 +190,14 @@ const CanvasPlus = (props: BannerCanvasProps) => {
 
 
   const saveCanvas = () => {
-    const canvas = canvasRef.current;
-    const ctx = canvas!.getContext('2d');
+    // const canvas = canvasRef.current;
+    // const ctx = canvas!.getContext('2d');
 
     // ניצור אובייקט ImageData כדי לקבל את כל הפיקסלים בקנבס
-    const imageData = ctx!.getImageData(0, 0, width, height);
+    // const imageData = ctx!.getImageData(0, 0, width, height);
 
     // יצירת קובץ Blob מהתמונה
-    const blob = new Blob([imageData.data], { type: 'image/png' });
+    // const blob = new Blob([imageData.data], { type: 'image/png' });
     // const file = new File([blob], `${product.name}.jpg`);
     // שמור בסטייט
     // setCanvasImage(blob);

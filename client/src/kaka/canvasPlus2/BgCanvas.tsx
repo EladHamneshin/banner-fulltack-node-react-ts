@@ -20,7 +20,7 @@ type Props = {
 const BackgroundImage = (props: Props) => {
     const { image, onChange } = props
 
-    const [bgImage, setBgImage] = useState(image);
+    const [_bgImage, setBgImage] = useState(image);
 
     function handleImageClick(selectedImage: string) {
         setBgImage(selectedImage);

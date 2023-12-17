@@ -1,15 +1,9 @@
 import axios from 'axios';
-
-
 const API_URI = import.meta.env.VITE_API_URI
-
 
 export const createBanner = async (newBanner: any, productID: string) => {
 
-
     try {
-
-        // let data = await JSON.stringify(newBanner);
         let token = localStorage.getItem('banner_token');
         if (!token) { token = ''}
 console.log(token);

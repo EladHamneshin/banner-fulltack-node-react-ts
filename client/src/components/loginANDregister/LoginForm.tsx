@@ -6,7 +6,7 @@ import { loginFetch } from '../../api/users/loginFetch';
 import { Response } from '../../types/UserInterface';
 import { useNavigate } from 'react-router-dom';
 import { toastError, toastSuccess } from '../../utils/toast';
-
+import { UserFormInput } from '../../types/UserInterface';
 
 const schema = yup.object({
     firstName: yup.string().max(12).required(),
@@ -16,18 +16,8 @@ const schema = yup.object({
 })
     .required();
 
-interface UserFormInput {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-}
-
-const textFieldStyle = { padding: '2px', margin: '4px auto ' }
-
 const LoginForm = () => {
     const navigate = useNavigate();
-
 
     const { register, formState: { errors }, handleSubmit } = useForm<UserFormInput>({
         resolver: yupResolver(schema),
@@ -43,33 +33,28 @@ const LoginForm = () => {
             password: password
         });
 
-        // setLoading(true)
         const handelClickHomePage = () => {
             navigate(`/banner/`)
-            // window.location.reload();
+            window.location.reload();
         }
-        const handelClickLogIn = () => {
-            navigate(`/banner/login`)
-        }
+
+        const handelClickLogIn = () => navigate(`/banner/login`)
+
         try {
             const data: Response = await loginFetch(user)
 
             if (data.success === true) {
                 toastSuccess(data.message)
 
-                localStorage.setItem('token', data.data.name)
-                localStorage.setItem('name', data.data.name)
-                localStorage.setItem('userID', data.data.id)
-                localStorage.setItem('email', data.data.email)
+                localStorage.setItem('token', data.data!.name)
+                localStorage.setItem('name', data.data!.name)
+                localStorage.setItem('userID', data.data!.id)
+                localStorage.setItem('email', data.data!.email)
                 setTimeout(() => {
                     handelClickHomePage()
                 }, 2000);
             }
-
-
-
         } catch (err) {
-            // setMessage('');
             toastError('login error - try again')
             setTimeout(() => {
                 handelClickLogIn()
@@ -80,7 +65,6 @@ const LoginForm = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-
             <Grid>
                 <Box
                     sx={{
@@ -102,41 +86,30 @@ const LoginForm = () => {
                             aria-invalid={
                                 errors.firstName ? "true" : "false"
                             } />
-                        <Typography
-                            color='red'
-                            variant='caption'
-                        >
+                        <Typography color='red' variant='caption'>
                             {errors.firstName?.message}
                         </Typography>
                     </Grid>
-
                     <Grid
                         sx={{
                             display: 'flex',
                             flexDirection: 'column'
                         }}>
-                        <TextField
-                            style={textFieldStyle}
+                        <TextField sx={textFieldStyle}
                             label="Last Name"
                             placeholder="Enter last name"
                             {...register("lastName", {
                                 required: true, maxLength: 20
                             })}
                             aria-invalid={errors.lastName ? "true" : "false"} />
-                        <Typography
-                            color='red'
-                            variant='caption'
-                        >
+                        <Typography color='red' variant='caption' >
                             {errors.lastName?.message}
                         </Typography>
                     </Grid>
                 </Box>
 
                 <Grid
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column'
-                    }}>
+                    sx={{ display: 'flex', flexDirection: 'column' }}>
                     <TextField
                         style={textFieldStyle}
                         label="Email"
@@ -144,18 +117,14 @@ const LoginForm = () => {
                         fullWidth
                         {...register("email", { required: true, pattern: /^\S+@\S+\.\S+$/ })}
                         aria-invalid={errors.email ? "true" : "false"} />
-                    <Typography
-                        color='red'
-                        variant='caption'
-                    >
+                    <Typography color='red' variant='caption'>
                         {errors.email?.message}
                     </Typography>
                 </Grid>
 
                 <Grid
                     sx={{
-                        display: 'flex',
-                        flexDirection: 'column'
+                        display: 'flex', flexDirection: 'column'
                     }}>
                     <TextField
                         style={textFieldStyle}
@@ -164,25 +133,18 @@ const LoginForm = () => {
                         fullWidth
                         {...register("password", { required: true, min: 4, max: 12 })}
                         aria-invalid={errors.password ? "true" : "false"} />
-                    <Typography
-                        color='red'
-                        variant='caption'
-                    >
+                    <Typography color='red' variant='caption'>
                         {errors.password?.message}
                     </Typography>
                 </Grid>
             </Grid>
-            <Button
-                type='submit'
-                variant="contained"
-                color="primary"
-                fullWidth
-            >
+            <Button type='submit' variant="contained" color="primary" fullWidth>
                 sign in
             </Button>
         </form >
-
     )
 }
 
 export default LoginForm
+
+const textFieldStyle = { padding: '2px', margin: '4px auto ' }

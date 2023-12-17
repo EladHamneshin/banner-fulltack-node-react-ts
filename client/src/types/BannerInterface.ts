@@ -1,5 +1,3 @@
-
-
 export interface BannerInterface {
     _id?: string;
     name: string;
@@ -20,12 +18,12 @@ export interface ResponseBanner {
     author: string;
     catogryID: string;
     clickCount: number;
-    createdAt: string; // Assuming it's a date string
+    createdAt: string;
     image: {
         alt: string;
         url: string;
     };
-    kind: string[]; // Assuming it's an array of strings
+    kind: string[]; 
     name: string;
     productID: string;
     size: string;

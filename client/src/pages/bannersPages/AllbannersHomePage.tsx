@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, ThemeProvider, Typography, createTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { ResponseBanner } from '../../types/BannerInterface';
 import BannerNotFind from './BannerNotFind';
@@ -7,16 +7,13 @@ import CardHomePage from '../../components/cards/CardHomePage';
 import { getAllBannersImage } from '../../api/banners/bannersImageFunc';
 import Circular from '../../components/Circular';
 
-
 const AllbannersHomePage = () => {
     const [message, setMessage] = useState('');
-    const [banners, setBanners] = useState<ResponseBanner[] | string | null>(null);
+    const [banners, setBanners] = useState<ResponseBanner[] | null>(null);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-    const handleLoginRedirect = () => {
-        navigate('/banner/login');
-    };
+    const handleLoginRedirect = () => navigate('/banner/login')
 
     useEffect(() => {
         if (localStorage.getItem('token') === null) {
@@ -32,7 +29,7 @@ const AllbannersHomePage = () => {
                     setMessage(result.message);
                 } else if (result.success === true) {
                     const data: ResponseBanner[] = result.data;
-                    setBanners(data.length === 0 ? 'There are no banners' : data.slice(0, 5));
+                    setBanners(data.length === 0 ? [] : data.slice(0, 5));
                 }
             } catch (error) {
                 console.error('Error fetching banners:', error);
@@ -41,14 +38,34 @@ const AllbannersHomePage = () => {
                 setLoading(false);
             }
         };
-
         fetchData();
     }, []);
+    const theme = createTheme();
+
+    theme.typography.h2 = {
+        fontSize: '2rem',
+        '@media (min-width:600px)': {
+            fontSize: '2.2rem',
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '2.5rem',
+        },
+    };
 
     return (
         <Box>
-            <Typography variant="h2" sx={{ display: 'flex',justifyContent: 'center',margin:'10px'}}>Top 5 Banners</Typography>
-            <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-around' }}>
+            <ThemeProvider theme={theme}>
+                <Typography
+                    variant="h2"
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        margin: '10px'
+                    }}>
+                    Top 5 Banners
+                </Typography>
+            </ThemeProvider>
+            <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
                 {loading ? (
                     <Circular />
                 ) : message ? (
@@ -61,9 +78,8 @@ const AllbannersHomePage = () => {
                     <BannerNotFind />
                 ) : (
                     banners.map((banner, index) => (
-                        <Stack key={index} sx={{ cursor: 'pointer', width: '200px',margin:'30px' }}>
-                            <CardHomePage
-                                banner={banner} />
+                        <Stack key={index} sx={{ cursor: 'pointer', width: '200px', margin: '30px' }}>
+                            <CardHomePage banner={banner} />
                         </Stack>
                     ))
                 )}

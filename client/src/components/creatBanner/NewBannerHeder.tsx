@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Box } from '@mui/material';
 import { Product } from '../../types/ProductInterface';
-
 import { useNavigate } from 'react-router-dom';
 import CardProduct from '../cards/CardProduct';
 import { createBanner } from '../../api/banners/createNewBanner';
@@ -16,9 +15,8 @@ type Props = {
 }
 
 const NewBannerForm = (props: Props) => {
-
     const navigate = useNavigate();
-    const handelClickLogin = () => { navigate(`/banner/login`) }
+    const handelClickLogin = () => navigate(`/banner/login`)
     if (localStorage.getItem('token') === null) { handelClickLogin() }
 
     const product = props.product
@@ -44,20 +42,15 @@ const NewBannerForm = (props: Props) => {
         const FileName = name + size
         const cleanFileName = FileName.replace(/[^a-zA-Z0-9]/g, '')
         const blob = new Blob([image], { type: 'image/jpeg' });
-
         const file = new File([blob], `${cleanFileName}.jpg`);
         const resUrl = await uploadImageToServer(file)
         console.log(resUrl);
 
-       
-
         setImage(`${API_URI}/images/${cleanFileName}.jpg`)
         console.log(imageUrl);
-
     }
 
-
-    const onSubmitForm = async (data : any) => {
+    const onSubmitForm = async (data: any) => {
 
         const FileName = product.name + data.size
         const cleanFileName = FileName.replace(/[^a-zA-Z0-9]/g, '')
@@ -76,7 +69,6 @@ const NewBannerForm = (props: Props) => {
             author: 'admin',
         }
         await createBanner(newBanner, product.id);
-
     };
     return (
         <Box sx={{ display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-around', width: '95vw' }}>
@@ -84,15 +76,14 @@ const NewBannerForm = (props: Props) => {
                 onSubmitForm={onSubmitForm}
                 uploadImage={uploadImage}
                 product={product} />
-            <Box>
+            {/* <Box>
                 {imageUrl ? <img src={imageUrl} width="100%" alt='fff'></img>
                     :
-                    <p>image not selected</p>}
-            </Box>
-            <Box>
+                <AppKaka />}
+            </Box> */}
+            <Box >
                 <CardProduct product={product} />
             </Box>
-
         </Box>
     );
 };

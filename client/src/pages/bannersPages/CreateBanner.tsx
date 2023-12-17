@@ -8,35 +8,27 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getProductById } from '../../api/products/productById';
 
 
-
-
-
 const CreateBanner = () => {
-    const {productID} = useParams()
-    const [product , setProduct] = useState(null)
+    const { productID } = useParams()
+    const [product, setProduct] = useState(null)
     useEffect(() => {
-        const api =  async () => {
-            
+        const api = async () => {
             const data = await getProductById(productID!)
-            console.log(data);
-            
+            console.log(data);     
             setProduct (data.data)
         }
         api()
-        
-        
     }, [])
     const navigate = useNavigate();
-    const handelClickLogin = () => { navigate(`/banner/login`) }
+    const handelClickLogin = () => navigate(`/banner/login`)
     useEffect(() => {
         if (localStorage.getItem('token') === null) { handelClickLogin() }
     }, [])
-    
+
     const paperStyle = {
         margin: '0 auto',
         boxShadow: '0',
         display: 'flex',
-
     };
 
     const avatarStyle = { backgroundColor: 'green', marginBottom: '1rem' }; // Added margin-bottom
@@ -48,16 +40,13 @@ const CreateBanner = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                flexDirection: 'column', // Adjusted to column direction
-
+                flexDirection: 'column',
                 '& .MuiPaper-root': {
-                    // Adjust styles for the Paper component
                     ...paperStyle,
                 },
             }}
         >
 
-            {/* <Paper elevation={10}> */}
             <Grid
                 container
                 direction="column"
@@ -75,10 +64,11 @@ const CreateBanner = () => {
                     </Typography>
                 </Grid>
             </Grid>
+            
             <Box sx={{ display: 'flex', padding: '33px', alignSelf: 'end' }}>
                 {product && <NewBannerForm product={product} />}
             </Box>
-            {/* </Paper> */}
+
         </Grid>
     );
 };

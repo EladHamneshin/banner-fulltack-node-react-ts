@@ -9,13 +9,14 @@ export const editUserFetch = async (user: UserInterface) => {
     let config = {
         method: 'put',
         maxBodyLength: Infinity,
+
         url: `${API_URL}/users/`,
+
         headers: {
             'Content-Type': 'application/json'
         },
         data: data
     };
-
     try {
         const res = await axios.request(config)
         return res.data

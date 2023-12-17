@@ -1,11 +1,9 @@
 import { Box, IconButton, ThemeProvider, createTheme } from '@mui/material'
 import { useState } from 'react'
-// import HomeIcon from '@mui/icons-material/Home';
 import { blue } from '@mui/material/colors';
 import ManageIcon from '../ManageIcon';
 import { useNavigate } from 'react-router-dom';
 import SidBar from '../SidBar';
-
 
 const Header = () => {
 
@@ -16,10 +14,8 @@ const Header = () => {
   }
   const storedUserName = localStorage.getItem('name');
 
-  // Define a union type for UserName
   type UserNameType = 'User' | string | null;
 
-  // Set the initial state based on the stored value or use 'User' as a fallback
   const initialUserName: UserNameType = storedUserName ? storedUserName : 'User';
 
   const [UserName] = useState<UserNameType>(initialUserName);
@@ -36,8 +32,6 @@ const Header = () => {
 
   return (
     <Box sx={containerStyle}>
-
-
       <Box style={textBoxStyle}>
         Hello {UserName}
         <br />
@@ -49,22 +43,15 @@ const Header = () => {
             <SidBar />
           </IconButton>
           <IconButton onClick={handelClickHomePage}>
-            <img src='\public\bannars-high-resolution-logo-transparent.png' alt='logo'
+            <img src='\public\logo.svg' alt='logo'
               height={'40px'}></img>
-            {/* <HomeIcon
-
-              sx={{
-                bgcolor: `primary.light`,
-                borderRadius: '50% '
-              }} 
-              fontSize="large"
-              color="primary" /> */}
           </IconButton>
         </Box>
       </ThemeProvider>
     </Box>
   );
 };
+
 const containerStyle = {
   display: "flex",
   alignItems: "stretch",
@@ -78,11 +65,12 @@ const containerStyle = {
 const textBoxStyle = {
   display: 'flex',
   padding: ' 0px 25px',
-  flexDirection: 'column' as 'column', // Ensure flexDirection is of type 'column'
+  flexDirection: 'column' as 'column',
   alignItems: 'center',
   justifyContent: 'center',
   fontFamily: "Arial, sans-serif",
   fontSize: "16px",
   color: "white"
 };
+
 export default Header

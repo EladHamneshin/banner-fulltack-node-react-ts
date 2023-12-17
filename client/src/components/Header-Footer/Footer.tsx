@@ -7,24 +7,31 @@ const Footer = () => {
       sx={{
         py: 3,
         px: 2,
-        mt: 'auto',
-        backgroundColor: (theme) =>
-          theme.palette.mode === 'light'
-            ? theme.palette.grey[200]
-            : theme.palette.grey[800],
-      }}
+         mt: 'auto',
+         backgroundColor: '#496178',
+         color: '#FFFFFF',display:'flex'
+        }}
     >
-      <Container maxWidth="sm">
+      <Container
+       maxWidth="sm"
+       sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            alignItems: 'center',
+      }}>
         <Typography variant="body1">
           Banners Website Footer.
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="#FFFFFF">
           {'Copyright © '}
-          <Link color="inherit" href="/">
+        </Typography>
+        <Typography variant="body2" color="#FFFFFF">
+          <Link color="inherit" href="/" underline="none">
             Banners Website
-          </Link>{' '}
+          {' '}
           {new Date().getFullYear()}
-          {'.'}
+          </Link>
         </Typography>
       </Container>
     </Box>

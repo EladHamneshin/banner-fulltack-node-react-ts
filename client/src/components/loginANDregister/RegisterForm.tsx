@@ -15,26 +15,19 @@ const schema = yup.object({
 })
   .required();
 
-
-
-
 const RegisterForm = () => {
   const navigate = useNavigate();
 
   const textFieldStyle = { padding: '2px', margin: '4px auto ' }
-
 
   const { register, formState: { errors }, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
   const onSubmit: SubmitHandler<any> = async (data) => {
 
-    const moveToLogin = () => {
-      navigate(`/banner/login`)
-    }
-    const handelClickSignUp = () => {
-      navigate(`/banner/register`)
-    }
+    const moveToLogin = () => navigate(`/banner/login`)
+
+    const handelClickSignUp = () => navigate(`/banner/register`)
 
     const name = data.firstName + ' ' + data.lastName;
     const email = data.email
@@ -48,9 +41,6 @@ const RegisterForm = () => {
     };
     try {
       const data = await regiterFetch(user)
-
-      console.log(data);
-      console.log('data.success', data.success);
       if (data.success === true) {
         toastSuccess(data.message)
 
@@ -59,7 +49,6 @@ const RegisterForm = () => {
           moveToLogin()
         }, 2000);
       };
-
 
     } catch (err) {
       toastError('sign up faild - try again');
@@ -71,9 +60,7 @@ const RegisterForm = () => {
 
   return (
     <>
-
       <form onSubmit={handleSubmit(onSubmit)}>
-
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Grid sx={{ display: 'flex', flexDirection: 'column' }}>
             <TextField style={textFieldStyle} label="First Name" placeholder="Enter first name"

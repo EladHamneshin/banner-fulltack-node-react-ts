@@ -11,27 +11,30 @@ pipeline {
             }
         }
 
-        stage('client build') {
+        stage('client build test') {
             steps {
                 script {
                     dir('client') {
                         sh 'echo "Building..."'
-                        sh 'docker build -t banner-client .'
+                        sh 'npm cache clean --force'
+                        sh 'npm i eslint eslint-plugin-react-hooks eslint-plugin-react-refresh'
+                        sh 'npm run lint'
+                        // sh 'docker build -t banner-client .'
                     }
                 }
             }
         }
 
-        stage('server build') {
-            steps {
-                script {
-                    dir('server') {
-                        sh 'echo "Building..."'
-                        sh 'docker build -t banner-server .'
-                    }
-                }
-            }
-        }
+        // stage('server build') {
+        //     steps {
+        //         script {
+        //             dir('server') {
+        //                 sh 'echo "Building..."'
+        //                 sh 'docker build -t banner-server .'
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     post {
@@ -40,7 +43,7 @@ pipeline {
                 echo 'Linting passed. You may now merge.'
                 setGitHubPullRequestStatus(
                     state: 'SUCCESS',
-                    context: 'ESLINT-banners',
+                    context: 'class4_banner_lint',
                     message: 'Build passed',
                 )
             }
@@ -51,10 +54,13 @@ pipeline {
                 echo 'Pipeline failed. Blocking pull request merge.'
                 setGitHubPullRequestStatus(
                     state: 'FAILURE',
-                    context: 'ESLINT-banners',
+                    context: 'class4_banner_lint',
                     message: 'Build failed  run npm run build to see errors',
                 )
             }
+        }
+        always{
+            cleanWs()
         }
     }
 }

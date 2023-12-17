@@ -5,7 +5,7 @@ export interface Product {
     quantity: number,
     description: string,
     category: string,
-    discountPercentage: number,
+    discount: number,
     rating: number,
     click: number
     coordinate: {
@@ -15,7 +15,6 @@ export interface Product {
         latitude1: number
         latitude2: number
         latitude3: number
-       
     }
     image:
     {

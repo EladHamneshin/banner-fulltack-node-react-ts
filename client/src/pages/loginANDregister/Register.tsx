@@ -1,16 +1,11 @@
 import { Avatar, Box, Button, Grid, Paper, Typography, } from '@mui/material';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
-
 import RegisterForm from '../../components/loginANDregister/RegisterForm';
 import { useNavigate } from 'react-router-dom';
 
-
-
 const Register = () => {
     const navigate = useNavigate();
-    const handelClickLogin = () => {
-        navigate(`/banner/login`)
-    }
+    const handelClickLogin = () => navigate(`/banner/login`)
 
     const paperStyle = {
         padding: 20,
@@ -21,16 +16,12 @@ const Register = () => {
     };
     const avatarStyle = { backgroundColor: 'green' };
 
-
     return (
         <Grid
             container
             justifyContent="center"
             alignItems="center"
-            style={{
-                minHeight: '70vh',
-                display: 'flex'
-            }}
+            sx={{ minHeight: '70vh', display: 'flex' }}
         >
             <Paper
                 style={paperStyle}>

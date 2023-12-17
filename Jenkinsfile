@@ -32,6 +32,7 @@ pipeline {
                 script {
                     dir('client') {
                         echo 'Installing dependencies...'
+                        sh 'npm cache clean --force'
                         sh 'npm install'
                         echo 'Running unit tests...'
                         sh 'npm run test'

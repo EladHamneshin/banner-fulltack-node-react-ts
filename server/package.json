@@ -8,7 +8,7 @@
     "build": "tsc",
     "start": "node .",
     "bs": "tsc && node .",
-    "test": "jest --runInBand --detectOpenHandles --forceExit"
+    "test": "jest --forceExit"
   },
   "keywords": [],
   "author": "",

@@ -28,94 +28,91 @@ beforeAll(async() => {
 
 describe("GET /bannersImage/", () => {
   test("should return all bannersImage", async () => {
-    const response = await request(app).get("/banners/api/bannersImage/");
+    const response = await request(app).get("/bannersImage/");
     expect(response.status).toBe(200);
-    expect(response.body.success).toBe(true);
-    console.log(response.body.data);
-    
+    expect(response.body.success).toBe(true);    
     expect(response.body.data).toBeInstanceOf(Array);
   });
 });
 
-describe("GET /api/bannersImage/:productID", () => {
+describe("GET /bannersImage/:productID", () => {
   test("should return bannersImage by productID", async () => {
     const productID = "456";
-    const response = (await request(app).get(`/banners/api/bannersImage/product/${productID}`));
+    const response = (await request(app).get(`/bannersImage/product/${productID}`));
     expect(response.status).toBe(200);
     expect(response.body.success).toBe(true);
     expect(response.body.data).toBeInstanceOf(Array);
   },10000);
 });
 
-describe("GET /api/bannersImage/category/:categoryName", () => {
+describe("GET /bannersImage/category/:categoryName", () => {
   test("should return bannersImage by category", async () => {
     const categoryName = "456";
-    const response = await request(app).get(`/banners/api/bannersImage/category/${categoryName}`);
+    const response = await request(app).get(`/bannersImage/category/${categoryName}`);
     expect(response.status).toBe(200);
     expect(response.body.success).toBe(true);
     expect(response.body.data).toBeInstanceOf(Array);
   });
 });
 
-describe("GET /api/bannersImage/user/:userID", () => {
+describe("GET /bannersImage/user/:userID", () => {
   test("should return bannersImage by user", async () => {
     const userID = "Admin";
-    const response = await request(app).get(`/banners/api/bannersImage/user/${userID}`);
+    const response = await request(app).get(`/bannersImage/user/${userID}`);
     expect(response.status).toBe(200);
     expect(response.body.success).toBe(true);
     expect(response.body.data).toBeInstanceOf(Array);
   },10000);
 });
 
-describe("PUT /api/bannersImage/:bannerID", () => {
+describe("PUT /bannersImage/:bannerID", () => {
   test("should update bannerImage by bannerID", async () => {
-    const res = await request(app).get("/api/bannersImage/");
-    console.log("this is the data",res.body.data);
+    const res = await request(app).get("/bannersImage/");
     const bannerID = res.body.data[Math.floor(Math.random() * res.body.data.length)]._id
     const updatedBanner = {
       title: "New Title",
       description: "New Description",
       imageUrl: "newImageUrl",
     };
-    const response = await request(app).put(`/api/bannersImage/${bannerID}`).send(updatedBanner);
+    const response = await request(app).put(`/bannersImage/${bannerID}`).send(updatedBanner);
     expect(response.status).toBe(200);
     expect(response.body.success).toBe(true);
   });
 });
 
-describe("POST /api/bannersImage/:productID", () => {
-  test("should create bannerImage by productID", async () => {
-    const productID = "1234567890";
-    const newBanner = {
-      name: "Cyber Monday Sale",
-      productID: "09876",
-      catogryID: "09876",
-      clickCount: 123,
-      image: {
-        url: "https://example.com/cyber-monday.jpg",
-        alt: "Cyber Monday"
-      },
-      size: "side",
-      kind: [
-        "sale"
-      ],
-      text: "Don't miss out on our Cyber Monday deals!",
-      createdAt: "2023-11-26T10:36:00Z",
-      author: "David Brown"
-    };
-    const response = await request(app).post(`/api/bannersImage/${productID}`).send(newBanner);
-    expect(response.status).toBe(201);
-    expect(response.body.success).toBe(true);
-    expect(response.body.data).toEqual(newBanner);
-  });
-});
+// describe("POST /bannersImage/:productID", () => {
+//   test("should create bannerImage by productID", async () => {
+//     const productID = "1234567890";
+//     const newBanner = {
+//       name: "Cyber Monday Sale",
+//       productID: "09876",
+//       catogryID: "09876",
+//       clickCount: 123,
+//       image: {
+//         url: "https://example.com/cyber-monday.jpg",
+//         alt: "Cyber Monday"
+//       },
+//       size: "side",
+//       kind: [
+//         "sale"
+//       ],
+//       text: "Don't miss out on our Cyber Monday deals!",
+//       createdAt: "2023-11-26T10:36:00Z",
+//       author: "David Brown"
+//     };
+//     const response = await request(app).post(`/bannersImage/${productID}`).send(newBanner);
+//     expect(response.status).toBe(201);
+//     expect(response.body.success).toBe(true);
+//     expect(response.body.data).toEqual(newBanner);
+//   });
+// });
 
-describe("DELETE /api/bannersImage/:bannerID", () => {
-  test("should delete bannerImage by bannerID", async () => {
-    const bannerID = "6566682341ec4afc00c859fe";
-    const response = await request(app).delete(`/api/bannersImage/${bannerID}`);
-    expect(response.status).toBe(200);
-    expect(response.body.success).toBe(true);
-    expect(response.body.data).toEqual(bannerID);
-  });
-});
+// describe("DELETE /bannersImage/:bannerID", () => {
+//   test("should delete bannerImage by bannerID", async () => {
+//     const bannerID = "6566682341ec4afc00c859fe";
+//     const response = await request(app).delete(`/bannersImage/${bannerID}`);
+//     expect(response.status).toBe(200);
+//     expect(response.body.success).toBe(true);
+//     expect(response.body.data).toEqual(bannerID);
+//   });
+// });

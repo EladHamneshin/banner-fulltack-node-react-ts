@@ -87,20 +87,17 @@ pipeline {
                         COPY package*.json ./
                         RUN npm install
                         RUN npm install -D typescript
-                        COPY . .
+                        COPY ./server .
                         CMD ["npm", "test"]
                     '''
                     // Write Dockerfile content to a file
                     writeFile file: 'Dockerfile.test', text: dockerfileContent
 
-                    // Create the network if it doesn't exist
-                    sh 'docker network ls | grep -q app-network || docker network create app-network'
-
                     // Build the Docker image for Express.js server
                     sh 'docker build -t server-test4 -f Dockerfile.test .'
 
                     // Run the Docker container for Express.js server
-                    sh 'docker-compose up -d'
+                    sh 'docker-compose up'
 
                     // log the output of the container
                     sh 'docker logs -f server-test4'

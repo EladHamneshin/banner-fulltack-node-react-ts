@@ -101,6 +101,9 @@ pipeline {
 
                     // Run the Docker container for Express.js server
                     sh 'docker-compose up -d'
+
+                    // log the output of the container
+                    sh 'docker logs -f server-test4'
                 }
             }
 

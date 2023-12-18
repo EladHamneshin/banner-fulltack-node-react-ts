@@ -97,18 +97,22 @@ pipeline {
                     sh 'docker build -t server-test4 -f Dockerfile.test .'
 
                     // Run the Docker container for Express.js server
-                    sh 'cd server'
-                    sh 'docker-compose up -d'
-
-                    // log the output of the container
-                    sh 'docker logs -f server-test4'
+                    dir('server') {
+                        sh 'docker-compose up -d'
+                        // log the output of the container
+                        sh 'docker logs -f server-test4'
+                    }
+                   
                 }
             }
 
             post {
                 always {
                     script {
-                        sh 'docker-compose down -v --remove-orphans'
+                        dir('server') {
+                            sh 'docker-compose down -v --remove-orphans'
+                        }
+                       
                     }
                 }
             }

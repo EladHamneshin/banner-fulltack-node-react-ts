@@ -107,7 +107,7 @@ pipeline {
             post {
                 always {
                     script {
-                        sh 'docker-compose down -v --remove-orphans'
+                        sh 'docker-compose down -f ./server/docker-compose.yaml -v --remove-orphans'
                     }
                 }
             }

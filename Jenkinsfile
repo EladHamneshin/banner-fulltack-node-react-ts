@@ -6,16 +6,6 @@ pipeline {
     }
 
     stages {
-
-        // stage('Checkout') {
-        //     steps {
-        //         script {
-        //             echo 'Checking out code...'
-        //             checkout scm
-        //         }
-        //     }   
-        // }
-
         stage('Lint') {
             steps {
                 script {
@@ -27,13 +17,22 @@ pipeline {
             }
         }
 
-        stage('Unit Test') {
+        stage('Install Dependencies') {
             steps {
                 script {
                     dir('client') {
                         echo 'Installing dependencies...'
                         sh 'npm cache clean --force'
                         sh 'npm install'
+                    }
+                }
+            }
+        }
+
+        stage('Unit Test') {
+            steps {
+                script {
+                    dir('client') {
                         echo 'Running unit tests...'
                         sh 'npm run test'
                     }
@@ -63,72 +62,56 @@ pipeline {
             }
         }
 
-        // stage('Client Build') {
-        //     steps {
-        //         script {
-        //             dir('client') {
-        //                 echo 'Building...'
-        //                 sh 'npm run build'
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Integration Test') {
+            steps {
+                script {
+                    echo 'Running integration tests...'
 
-        // stage('Integration Test') {
-        //     steps {
-        //         script {
-        //             dir('client') {
-        //                 echo 'Installing dependencies...'
-        //                 sh 'npm install'
-        //                 echo 'Running integration tests...'
-        //                 sh 'npm run test'
-        //             }
-        //         }
-        //     }
-        // }
+                      def initSqlContent = '''CREATE DATABASE db;            
+                            CREATE TABLE IF NOT EXISTS users (
+                            id SERIAL PRIMARY KEY,
+                            email VARCHAR(255) NOT NULL,
+                            password VARCHAR(255) NOT NULL,
+                            isadmin BOOLEAN DEFAULT false,
+                            resetcode VARCHAR(255),
+                            registration_time TIMESTAMP
+                        );'''
 
-
-        // stage('Build and Test') {
-        //     steps {
-        //         script {
-        //             def initSqlContent = '''CREATE DATABASE db;            
-        //                     CREATE TABLE IF NOT EXISTS users (
-        //                     id SERIAL PRIMARY KEY,
-        //                     email VARCHAR(255) NOT NULL,
-        //                     password VARCHAR(255) NOT NULL,
-        //                     isadmin BOOLEAN DEFAULT false,
-        //                     resetcode VARCHAR(255),
-        //                     registration_time TIMESTAMP
-        //                 );'''
-
-        //             sh 'echo $initSqlContent'
-        //             writeFile file: 'scripts/init.sql', text: initSqlContent
+                    writeFile file: 'scripts/init.sql', text: initSqlContent
                    
-        //             sh 'ls -alF'
+                    sh 'ls -alF'
 
-        //             def dockerfileContent = '''
-        //                 FROM node:18-alpine AS builder
-        //                 WORKDIR /app
-        //                 COPY package*.json ./
-        //                 RUN npm install
-        //                 RUN npm install -D typescript
-        //                 COPY . .
-        //                 CMD ["npm", "test"]
-        //             '''
-        //             // Write Dockerfile content to a file
-        //             writeFile file: 'Dockerfile.test', text: dockerfileContent
+                    def dockerfileContent = '''
+                        FROM node:18-alpine AS builder
+                        WORKDIR /app
+                        COPY package*.json ./
+                        RUN npm install
+                        RUN npm install -D typescript
+                        COPY . .
+                        CMD ["npm", "test"]
+                    '''
+                    // Write Dockerfile content to a file
+                    writeFile file: 'Dockerfile.test', text: dockerfileContent
 
-        //             // Create the network if it doesn't exist
-        //             sh 'docker network ls | grep -q app-network || docker network create app-network'
+                    // Create the network if it doesn't exist
+                    sh 'docker network ls | grep -q app-network || docker network create app-network'
 
-        //             // Build the Docker image for Express.js server
-        //             sh 'docker build -t oms-end-test3 -f Dockerfile.test .'
-        //             sh 'docker build -t oms-end3 .'
+                    // Build the Docker image for Express.js server
+                    sh 'docker build -t server-test4 -f Dockerfile.test .'
 
-        //             sh 'docker-compose up -d'               
-        //         }
-        //     }
-        // }
+                    // Run the Docker container for Express.js server
+                    sh 'docker-compose up -d'
+                }
+            }
+
+            post {
+                always {
+                    script {
+                        sh 'docker-compose down -v --remove-orphans'
+                    }
+                }
+            }
+        }
     }
     // post {
     //     always {

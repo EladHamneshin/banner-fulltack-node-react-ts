@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  mongo-db:
+    image: mongo
+    container_name: mongo-db
+    networks:
+      - app-network
+
+  my-postgres:
+    image: postgres
+    container_name: my-postgres
+    environment:
+      POSTGRES_PASSWORD: mypassword
+    networks:
+      - app-network
+    volumes:
+      - ./scripts:/docker-entrypoint-initdb.d
+      - pgdata4:/var/lib/postgresql/data 
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 25s
+      retries: 3
+
+  banners-server4:
+    image: elaha123/banners-server
+    container_name:  banners-server4
+    networks:
+      - app-network
+    environment:
+      - MONGO_URI=mongodb://mongo-db:27017/test
+      - PG_URI=postgresql://postgres:mypassword@my-postgres:5432
+      - JWT_SECRET=mysecret
+      - PORT=5000
+    depends_on:
+      my-postgres:
+        condition: service_healthy
+
+  server-test4:
+    image: server-test4
+    container_name: server-test4
+    networks:
+      - app-network
+    depends_on:
+      oms-class3:
+        condition: service_started
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  pgdata4:  

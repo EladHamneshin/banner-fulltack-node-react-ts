@@ -45,7 +45,8 @@ pipeline {
                 script {
                     dir('server') {
                         echo 'Building Server...'
-                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-server .'
+                        // sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-server .'
+                         sh 'docker build -t banners-server .'
                     }
                 }
             }

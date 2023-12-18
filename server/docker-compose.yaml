@@ -47,7 +47,7 @@ services:
       - PG_URI=postgresql://postgres:mypassword@my-postgres:5432
       - TEST_SERVER_URI=http://banners-server4:5000
     depends_on:
-      oms-class3:
+      banners-server4:
         condition: service_started
 
 networks:

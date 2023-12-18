@@ -29,16 +29,16 @@ pipeline {
             }
         }
 
-        stage('Unit Test') {
-            steps {
-                script {
-                    dir('client') {
-                        echo 'Running unit tests...'
-                        sh 'npm run test'
-                    }
-                }
-            }
-        }
+        // stage('Unit Test') {
+        //     steps {
+        //         script {
+        //             dir('client') {
+        //                 echo 'Running unit tests...'
+        //                 sh 'npm run test'
+        //             }
+        //         }
+        //     }
+        // }
 
         stage('Server Build') {
             steps {

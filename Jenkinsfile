@@ -136,17 +136,27 @@ pipeline {
             }
         }
 
-        stage('Update values.yml') {
+        stage('Update values.yaml') {
             steps {
                 script {
                     dir('helm-chart/devOps/demo-store/') {
-                        // Define the new values
-                        def new_tag = "latest"
-                        def new_repo = "\$DOCKER_CREDENTIALS_USR/banners-server"
+                        // // Define the new values
+                        // def new_tag = "latest"
+                        // def new_repo = "\$DOCKER_CREDENTIALS_USR/banners-server"
 
-                        // Use sed to replace the values in the file
-                        sh "sed -i 's|^[ \\t]*tag: .*|tag: $new_tag|' values.yaml"
-                        sh "sed -i 's|^[ \\t]*repository: .*|repository: $new_repo|' values.yaml"
+                        // // Use sed to replace the values in the file
+                        // sh "sed -i 's|^[ \\t]*tag: .*|tag: $new_tag|' values.yaml"
+                        // sh "sed -i 's|^[ \\t]*repository: .*|repository: $new_repo|' values.yaml"
+
+                        // Read the YAML file
+                        def values = readYaml file: 'values.yml'
+
+                        // Update the values
+                        values.deployment.image.tag = 'latest'
+                        values.deployment.image.repository = "\$DOCKER_CREDENTIALS_USR/repo"
+
+                        // Write the updated values back to the file
+                        writeYaml file: 'values.yml', data: values
                     }
                 }
             }

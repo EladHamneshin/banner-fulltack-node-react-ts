@@ -183,7 +183,7 @@ pipeline {
             // cleanWs()
             script {
                 echo 'Cleaning workspace...'
-                sh 'rm -rf helm-chart'
+                // sh 'rm -rf helm-chart'
                 sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-server:latest'
                 sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-client:latest'
             }

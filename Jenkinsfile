@@ -139,7 +139,7 @@ pipeline {
         stage('Update values.yaml') {
             steps {
                 script {
-                    dir('helm-chart/devOps/charts/') {
+                    dir('helm-chart/devOps/charts/demo-store/') {
                         // // Define the new values
                         // def new_tag = "latest"
                         // def new_repo = "\$DOCKER_CREDENTIALS_USR/banners-server"
@@ -159,15 +159,22 @@ pipeline {
 
                         // Write the updated values back to the file
                         writeYaml file: 'values.yaml', data: values
-
-                        // Print the updated values
-                        sh 'cat values.yaml'
                     }
                 }
             }
         }
 
-
+        stage('helm chart update') {
+            steps {
+                script {
+                    dir('helm-chart/devOps/charts/demo-store/') {
+                        sh 'git add .'
+                        sh 'git commit -m "helm chart update"'
+                        sh 'git push'
+                    }
+                }
+            }
+        }
 
         // //helm chart push to git artifact repo with git credentials
         // stage('helm chart push') {

@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   mongo-db:
@@ -14,9 +14,9 @@ services:
       POSTGRES_PASSWORD: mypassword
     networks:
       - app-network4
-    volumes:
-      - ./scripts:/docker-entrypoint-initdb.d
-      - pgdata4:/var/lib/postgresql/data 
+    # volumes:
+    #   - ./scripts:/docker-entrypoint-initdb.d
+    #   - pgdata4:/var/lib/postgresql/data 
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -54,5 +54,5 @@ networks:
   app-network4:
     driver: bridge
 
-volumes:
-  pgdata4:  
+# volumes:
+#   pgdata4:  

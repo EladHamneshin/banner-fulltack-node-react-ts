@@ -45,8 +45,8 @@ pipeline {
                 script {
                     dir('server') {
                         echo 'Building Server...'
-                        // sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-server .'
-                         sh 'docker build -t banners-server .'
+                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-server:latest .'
+                        //sh 'docker build -t banners-server .'
                     }
                 }
             }
@@ -57,7 +57,7 @@ pipeline {
                 script {
                     dir('client') {
                         echo 'Building Client...'
-                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-client .'
+                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-client:latest .'
                     }
                 }
             }
@@ -112,25 +112,42 @@ pipeline {
                     script {
                         dir('server') {
                             sh 'docker-compose down -v --remove-orphans'
+                            sh 'docker rmi server-test4'
                         }
-                       
                     }
                 }
             }
         }
+
+        stage('dockerhub login') {
+            steps {
+                script{
+                    sh 'echo "Logging in to Dockerhub..."'
+                    sh 'echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR --password-stdin'                		
+                    sh 'echo "Login Completed"'   
+                }      
+            }
+        }
+
+        stage('dockerhub push') {
+            steps {
+                script {
+                    sh 'echo "Pushing..."'
+                    sh 'docker push eladha123/oms-server:latest'
+                    sh 'docker push eladha123/oms-client:latest'
+                }
+            }
+        }
     }
-    // post {
-    //     always {
-    //         cleanWs()
-    //         // script {
-    //         //     sh 'docker stop mongo-db'
-    //         //     sh 'docker rm mongo-db'
 
-    //         //     sh 'docker stop my-postgres'
-    //         //     sh 'docker rm my-postgres'
-
-    //         //     sh 'docker-compose down -v'
-    //         // }
-    //     }
-    // }
+    post {
+        always {
+            // cleanWs()
+            script {
+                echo 'Cleaning workspace...'
+                sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-server:latest'
+                sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-client:latest'
+            }
+        }
+    }
 }

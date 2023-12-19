@@ -164,6 +164,37 @@ pipeline {
             }
         }
 
+        stage('Increment version') {
+            steps {
+                script {
+                    // Read YAML from file
+                    def values = readYaml file: 'Chart.yaml'
+
+                    // Get the current version number
+                    def currentVersion = values.version
+
+                    // Split the version number into parts
+                    def parts = currentVersion.split('\\.')
+
+                    // Increment the last part of the version number
+                    parts[-1] = parts[-1].toInteger() + 1
+
+                    // Join the parts back together to get the new version number
+                    def newVersion = parts.join('.')
+
+                    // Update the version number in the values
+                    values.version = newVersion
+
+                    sh 'rm -rf Chart.yaml'
+
+                    // Write the updated values back to the file
+                    writeYaml file: 'Chart.yaml', data: values
+
+                    sh 'cat Chart.yaml'
+                }
+            }
+        }
+
         stage('helm chart update') {
             steps {
                 script {

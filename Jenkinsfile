@@ -149,14 +149,14 @@ pipeline {
                         // sh "sed -i 's|^[ \\t]*repository: .*|repository: $new_repo|' values.yaml"
 
                         // Read the YAML file
-                        def values = readYaml file: 'values.yml'
+                        def values = readYaml file: 'values.yaml'
 
                         // Update the values
                         values.deployment.image.tag = 'latest'
                         values.deployment.image.repository = "\$DOCKER_CREDENTIALS_USR/repo"
 
                         // Write the updated values back to the file
-                        writeYaml file: 'values.yml', data: values
+                        writeYaml file: 'values.yaml', data: values
 
                         // Print the updated values
                         echo values

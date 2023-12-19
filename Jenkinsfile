@@ -155,7 +155,7 @@ pipeline {
                         values.deployment.image.tag = 'latest'
                         values.deployment.image.repository = "\$DOCKER_CREDENTIALS_USR/repo"
 
-                        sh 'rm -f values.yml'
+                        sh 'rm -f values.yaml'
 
                         // Write the updated values back to the file
                         writeYaml file: 'values.yaml', data: values

@@ -145,8 +145,8 @@ pipeline {
                         def new_repo = "\$DOCKER_CREDENTIALS_USR/banners-server"
 
                         // Use sed to replace the values in the file
-                        sh "sed -i 's|^[ \\t]*tag: .*|tag: $new_tag|' values.yml"
-                        sh "sed -i 's|^[ \\t]*repository: .*|repository: $new_repo|' values.yml"
+                        sh "sed -i 's|^[ \\t]*tag: .*|tag: $new_tag|' values.yaml"
+                        sh "sed -i 's|^[ \\t]*repository: .*|repository: $new_repo|' values.yaml"
                     }
                 }
             }

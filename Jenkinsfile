@@ -180,7 +180,7 @@ pipeline {
 
     post {
         always {
-            // cleanWs()
+            cleanWs()
             script {
                 echo 'Cleaning workspace...'
                 sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-server:latest'

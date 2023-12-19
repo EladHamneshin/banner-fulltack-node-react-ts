@@ -161,7 +161,7 @@ pipeline {
                         writeYaml file: 'values.yaml', data: values
 
                         // Print the updated values
-                        echo "Updated values: ${values}"
+                        sh 'cat values.yaml'
                     }
                 }
             }

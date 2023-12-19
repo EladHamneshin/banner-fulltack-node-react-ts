@@ -168,12 +168,12 @@ pipeline {
             steps {
                 script {
                     dir('helm-chart/devOps/charts/demo-store/') {
-                        withCredentials([gitUsernamePassword(credentialsId: 'test', gitToolName: 'git')]) {
+                        withCredentials([sshUserPrivateKey(credentialsId: 'test', keyFileVariable: 'SSH_KEY')]) {
                             sh 'git config --global user.email "hamneshin123@gmail.com"'
                             sh 'git config --global user.name "jenkins"'
-                            sh 'git add .'
-                            sh 'git commit -m "helm chart update"'
-                            sh 'git push'
+                            sh 'GIT_SSH_COMMAND="ssh -i $SSH_KEY" git add .'
+                            sh 'GIT_SSH_COMMAND="ssh -i $SSH_KEY" git commit -m "helm chart update"'
+                            sh 'GIT_SSH_COMMAND="ssh -i $SSH_KEY" git push'
                         }
                     }
                 }

@@ -152,8 +152,8 @@ pipeline {
                         def values = readYaml file: 'values.yaml'
 
                         // Update the values
-                        values.deployment.image.tag = 'latest'
-                        values.deployment.image.repository = "$DOCKER_CREDENTIALS_USR/repo"
+                        values.deployment.client.image.tag = 'latest'
+                        values.deployment.client.image.tag = 'latest'
 
                         // Write the updated values back to the file
                         writeYaml file: 'values.yaml', data: values

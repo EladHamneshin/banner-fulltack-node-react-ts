@@ -168,11 +168,13 @@ pipeline {
             steps {
                 script {
                     dir('helm-chart/devOps/charts/demo-store/') {
-                        sh 'git config --global user.email "hamneshin123@gmail.com"'
-                        sh 'git config --global user.name "EladHamneshin"'
-                        sh 'git add .'
-                        sh 'git commit -m "helm chart update"'
-                        sh 'git push'
+                        withCredentials([gitUsernamePassword(credentialsId: 'elad', gitToolName: 'git')]) {
+                            sh 'git config --global user.email "hamneshin123@gmail.com"'
+                            sh 'git config --global user.name "jenkins"'
+                            sh 'git add .'
+                            sh 'git commit -m "helm chart update"'
+                            sh 'git push'
+                        }
                     }
                 }
             }

@@ -155,6 +155,8 @@ pipeline {
                         values.deployment.client.image.tag = 'latest'
                         values.deployment.client.image.tag = 'latest'
 
+                        sh 'rm -rf values.yaml'
+
                         // Write the updated values back to the file
                         writeYaml file: 'values.yaml', data: values
 

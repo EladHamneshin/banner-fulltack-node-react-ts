@@ -133,8 +133,8 @@ pipeline {
             steps {
                 script {
                     sh 'echo "Pushing..."'
-                    sh 'docker push eladha123/oms-server:latest'
-                    sh 'docker push eladha123/oms-client:latest'
+                    sh 'docker push $DOCKER_CREDENTIALS_USR/oms-server:latest'
+                    sh 'docker push $DOCKER_CREDENTIALS_USR/oms-client:latest'
                 }
             }
         }

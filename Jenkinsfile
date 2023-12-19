@@ -136,17 +136,23 @@ pipeline {
             }
         }
 
-        // //edit artifact repo images version in the helm chart yaml files with git credentials
-        // stage('helm chart edit') {
-        //     steps {
-        //         script {
-        //             dir('helm-chart') {
-        //                 sh 'sed -i "s/oms-server:latest/oms-server:$BUILD_NUMBER/g" values.yaml'
-        //                 sh 'sed -i "s/oms-client:latest/oms-client:$BUILD_NUMBER/g" values.yaml'
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Update values.yml') {
+            steps {
+                script {
+                    dir('helm-chart/devOps/demo-store/') {
+                        // Define the new values
+                        def new_tag = "latest"
+                        def new_repo = "\$DOCKER_CREDENTIALS_USR/banners-server"
+
+                        // Use sed to replace the values in the file
+                        sh "sed -i 's|^[ \\t]*tag: .*|tag: $new_tag|' values.yml"
+                        sh "sed -i 's|^[ \\t]*repository: .*|repository: $new_repo|' values.yml"
+                    }
+                }
+            }
+        }
+
+
 
         // //helm chart push to git artifact repo with git credentials
         // stage('helm chart push') {

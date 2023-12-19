@@ -195,21 +195,21 @@ pipeline {
             }
         }
 
-        stage('helm chart update') {
-            steps {
-                script {
-                    dir('helm-chart/devOps/charts/demo-store/') {
-                        withCredentials([gitUsernamePassword(credentialsId: 'dc9f43f7-8a44-4a8f-90f4-9116603bbbc7', gitToolName: 'git')]) {
-                            sh 'git config --global user.email "hamneshin123@gmail.com"'
-                            sh 'git config --global user.name "jenkins"'
-                            sh 'git add .'
-                            sh 'git commit -m "helm chart update"'
-                            sh 'git push'
-                        }
-                    }
-                }
-            }
-        }
+        // stage('helm chart update') {
+        //     steps {
+        //         script {
+        //             dir('helm-chart/devOps/charts/demo-store/') {
+        //                 withCredentials([gitUsernamePassword(credentialsId: 'dc9f43f7-8a44-4a8f-90f4-9116603bbbc7', gitToolName: 'git')]) {
+        //                     sh 'git config --global user.email "hamneshin123@gmail.com"'
+        //                     sh 'git config --global user.name "jenkins"'
+        //                     sh 'git add .'
+        //                     sh 'git commit -m "helm chart update"'
+        //                     sh 'git push'
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
         // //helm chart push to git artifact repo with git credentials
         // stage('helm chart push') {

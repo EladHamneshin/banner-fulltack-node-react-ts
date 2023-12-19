@@ -40,28 +40,28 @@ pipeline {
         //     }
         // }
 
-        // stage('Server Build') {
-        //     steps {
-        //         script {
-        //             dir('server') {
-        //                 echo 'Building Server...'
-        //                 sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-server:latest .'
-        //                 //sh 'docker build -t banners-server .'
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Server Build') {
+            steps {
+                script {
+                    dir('server') {
+                        echo 'Building Server...'
+                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-server:latest .'
+                        //sh 'docker build -t banners-server .'
+                    }
+                }
+            }
+        }
 
-        // stage('Client Build') {
-        //     steps {
-        //         script {
-        //             dir('client') {
-        //                 echo 'Building Client...'
-        //                 sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-client:latest .'
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Client Build') {
+            steps {
+                script {
+                    dir('client') {
+                        echo 'Building Client...'
+                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-client:latest .'
+                    }
+                }
+            }
+        }
 
         // stage('Integration Test') {
         //     steps {
@@ -197,8 +197,8 @@ pipeline {
             script {
                 echo 'Cleaning workspace...'
                 sh 'rm -rf helm-chart'
-                sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-server:latest'
-                sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-client:latest'
+                // sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-server:latest'
+                // sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-client:latest'
             }
         }
     }

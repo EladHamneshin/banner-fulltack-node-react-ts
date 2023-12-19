@@ -140,14 +140,6 @@ pipeline {
             steps {
                 script {
                     dir('helm-chart/devOps/charts/demo-store/') {
-                        // // Define the new values
-                        // def new_tag = "latest"
-                        // def new_repo = "\$DOCKER_CREDENTIALS_USR/banners-server"
-
-                        // // Use sed to replace the values in the file
-                        // sh "sed -i 's|^[ \\t]*tag: .*|tag: $new_tag|' values.yaml"
-                        // sh "sed -i 's|^[ \\t]*repository: .*|repository: $new_repo|' values.yaml"
-
                         // Read YAML from file
                         def values = readYaml file: 'values.yaml'
 
@@ -167,30 +159,32 @@ pipeline {
         stage('Increment version') {
             steps {
                 script {
-                    // Read YAML from file
-                    def values = readYaml file: 'Chart.yaml'
+                    dir('helm-chart/devOps/charts/demo-store/') {
+                        // Read YAML from file
+                        def values = readYaml file: 'Chart.yaml'
 
-                    // Get the current version number
-                    def currentVersion = values.version
+                        // Get the current version number
+                        def currentVersion = values.version
 
-                    // Split the version number into parts
-                    def parts = currentVersion.split('\\.')
+                        // Split the version number into parts
+                        def parts = currentVersion.split('\\.')
 
-                    // Increment the last part of the version number
-                    parts[-1] = parts[-1].toInteger() + 1
+                        // Increment the last part of the version number
+                        parts[-1] = parts[-1].toInteger() + 1
 
-                    // Join the parts back together to get the new version number
-                    def newVersion = parts.join('.')
+                        // Join the parts back together to get the new version number
+                        def newVersion = parts.join('.')
 
-                    // Update the version number in the values
-                    values.version = newVersion
+                        // Update the version number in the values
+                        values.version = newVersion
 
-                    sh 'rm -rf Chart.yaml'
+                        sh 'rm -rf Chart.yaml'
 
-                    // Write the updated values back to the file
-                    writeYaml file: 'Chart.yaml', data: values
+                        // Write the updated values back to the file
+                        writeYaml file: 'Chart.yaml', data: values
 
-                    sh 'cat Chart.yaml'
+                        sh 'cat Chart.yaml'
+                    }
                 }
             }
         }

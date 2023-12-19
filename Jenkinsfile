@@ -72,10 +72,10 @@ pipeline {
                         def dockerfileContent = '''
                             FROM node:18-alpine AS builder
                             WORKDIR /app
-                            COPY ./server/package*.json ./
+                            COPY /package*.json ./
                             RUN npm install
                             RUN npm install -D typescript
-                            COPY ./server .
+                            COPY . .
                             CMD ["npm", "test"]
                         '''
                         // Write Dockerfile content to a file

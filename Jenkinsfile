@@ -168,7 +168,7 @@ pipeline {
             steps {
                 script {
                     dir('helm-chart/devOps/charts/demo-store/') {
-                        withCredentials([gitUsernamePassword(credentialsId: 'Elad', gitToolName: 'git')]) {
+                        withCredentials([gitUsernamePassword(credentialsId: 'test', gitToolName: 'git')]) {
                             sh 'git config --global user.email "hamneshin123@gmail.com"'
                             sh 'git config --global user.name "jenkins"'
                             sh 'git add .'

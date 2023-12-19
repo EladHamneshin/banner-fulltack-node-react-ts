@@ -153,7 +153,7 @@ pipeline {
 
                         // Update the values
                         values.deployment.client.image.tag = 'latest'
-                        values.deployment.client.image.tag = 'latest'
+                        values.deployment.server.image.tag = 'latest'
 
                         sh 'rm -rf values.yaml'
 

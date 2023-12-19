@@ -157,6 +157,9 @@ pipeline {
 
                         // Write the updated values back to the file
                         writeYaml file: 'values.yml', data: values
+
+                        // Print the updated values
+                        echo values
                     }
                 }
             }
@@ -193,7 +196,7 @@ pipeline {
             // cleanWs()
             script {
                 echo 'Cleaning workspace...'
-                // sh 'rm -rf helm-chart'
+                sh 'rm -rf helm-chart'
                 sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-server:latest'
                 sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-client:latest'
             }

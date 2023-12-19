@@ -66,44 +66,30 @@ pipeline {
         stage('Integration Test') {
             steps {
                 script {
-                    echo 'Running integration tests...'
-
-                      def initSqlContent = '''CREATE DATABASE db;            
-                            CREATE TABLE IF NOT EXISTS users (
-                            id SERIAL PRIMARY KEY,
-                            email VARCHAR(255) NOT NULL,
-                            password VARCHAR(255) NOT NULL,
-                            isadmin BOOLEAN DEFAULT false,
-                            resetcode VARCHAR(255),
-                            registration_time TIMESTAMP
-                        );'''
-
-                    writeFile file: 'scripts/init.sql', text: initSqlContent
-                   
-                    sh 'ls -alF'
-
-                    def dockerfileContent = '''
-                        FROM node:18-alpine AS builder
-                        WORKDIR /app
-                        COPY ./server/package*.json ./
-                        RUN npm install
-                        RUN npm install -D typescript
-                        COPY ./server .
-                        CMD ["npm", "test"]
-                    '''
-                    // Write Dockerfile content to a file
-                    writeFile file: 'Dockerfile.test', text: dockerfileContent
-
-                    // Build the Docker image for Express.js server
-                    sh 'docker build -t server-test4 -f Dockerfile.test .'
-
-                    // Run the Docker container for Express.js server
                     dir('server') {
+                        echo 'Running integration tests...'
+
+                        def dockerfileContent = '''
+                            FROM node:18-alpine AS builder
+                            WORKDIR /app
+                            COPY ./server/package*.json ./
+                            RUN npm install
+                            RUN npm install -D typescript
+                            COPY ./server .
+                            CMD ["npm", "test"]
+                        '''
+                        // Write Dockerfile content to a file
+                        writeFile file: 'Dockerfile.test', text: dockerfileContent
+
+                        // Build the Docker image for Express.js server
+                        sh 'docker build -t server-test4 -f Dockerfile.test .'
+                    
+                        // Run the Docker container for Express.js server
                         sh 'docker-compose up -d'
-                        // log the output of the container
+
+                        // Log the output of the test
                         sh 'docker logs -f server-test4'
-                    }
-                   
+                    } 
                 }
             }
 

@@ -139,7 +139,7 @@ pipeline {
         stage('Update values.yaml') {
             steps {
                 script {
-                    dir('helm-chart/devOps/demo-store/') {
+                    dir('helm-chart/devOps/charts/') {
                         // // Define the new values
                         // def new_tag = "latest"
                         // def new_repo = "\$DOCKER_CREDENTIALS_USR/banners-server"

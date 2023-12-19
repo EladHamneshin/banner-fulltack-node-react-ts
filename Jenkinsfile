@@ -40,28 +40,28 @@ pipeline {
         //     }
         // }
 
-        stage('Server Build') {
-            steps {
-                script {
-                    dir('server') {
-                        echo 'Building Server...'
-                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-server:latest .'
-                        //sh 'docker build -t banners-server .'
-                    }
-                }
-            }
-        }
+        // stage('Server Build') {
+        //     steps {
+        //         script {
+        //             dir('server') {
+        //                 echo 'Building Server...'
+        //                 sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-server:latest .'
+        //                 //sh 'docker build -t banners-server .'
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('Client Build') {
-            steps {
-                script {
-                    dir('client') {
-                        echo 'Building Client...'
-                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-client:latest .'
-                    }
-                }
-            }
-        }
+        // stage('Client Build') {
+        //     steps {
+        //         script {
+        //             dir('client') {
+        //                 echo 'Building Client...'
+        //                 sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-client:latest .'
+        //             }
+        //         }
+        //     }
+        // }
 
         // stage('Integration Test') {
         //     steps {
@@ -105,25 +105,25 @@ pipeline {
         //     }
         // }
 
-        stage('dockerhub login') {
-            steps {
-                script{
-                    sh 'echo "Logging in to Dockerhub..."'
-                    sh 'echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR --password-stdin'                		
-                    sh 'echo "Login Completed"'   
-                }      
-            }
-        }
+        // stage('dockerhub login') {
+        //     steps {
+        //         script{
+        //             sh 'echo "Logging in to Dockerhub..."'
+        //             sh 'echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR --password-stdin'                		
+        //             sh 'echo "Login Completed"'   
+        //         }      
+        //     }
+        // }
 
-        stage('dockerhub push') {
-            steps {
-                script {
-                    sh 'echo "Pushing..."'
-                    sh 'docker push $DOCKER_CREDENTIALS_USR/banners-server:latest'
-                    sh 'docker push $DOCKER_CREDENTIALS_USR/banners-client:latest'
-                }
-            }
-        }
+        // stage('dockerhub push') {
+        //     steps {
+        //         script {
+        //             sh 'echo "Pushing..."'
+        //             sh 'docker push $DOCKER_CREDENTIALS_USR/banners-server:latest'
+        //             sh 'docker push $DOCKER_CREDENTIALS_USR/banners-client:latest'
+        //         }
+        //     }
+        // }
 
         //clone helm chart repo
         stage('helm chart clone') {
@@ -148,20 +148,18 @@ pipeline {
                         // sh "sed -i 's|^[ \\t]*tag: .*|tag: $new_tag|' values.yaml"
                         // sh "sed -i 's|^[ \\t]*repository: .*|repository: $new_repo|' values.yaml"
 
-                        // Read the YAML file
+                        // Read YAML from file
                         def values = readYaml file: 'values.yaml'
 
                         // Update the values
                         values.deployment.image.tag = 'latest'
-                        values.deployment.image.repository = "\$DOCKER_CREDENTIALS_USR/repo"
-
-                        sh 'rm -f values.yaml'
+                        values.deployment.image.repository = "$DOCKER_CREDENTIALS_USR/repo"
 
                         // Write the updated values back to the file
                         writeYaml file: 'values.yaml', data: values
 
                         // Print the updated values
-                        echo values
+                        echo "Updated values: ${values}"
                     }
                 }
             }

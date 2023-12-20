@@ -150,7 +150,7 @@ pipeline {
                     dir('client') {
                         // TODO: add arg for base url
                         echo 'Building Client...'
-                        "docker build -t $DOCKER_CREDENTIALS_USR/banners-client:${TAG_NAME} ." 
+                        sh "docker build -t $DOCKER_CREDENTIALS_USR/banners-client:${TAG_NAME} ." 
                     }
                 }
             }

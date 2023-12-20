@@ -51,14 +51,6 @@ pipeline {
         //     }
         // }
 
-        stage('echo branch') {
-            steps {
-                script {
-                    sh 'echo "Current branch: ${env.GIT_BRANCH}"'
-                }
-            }
-        }
-
         stage('test main') {
             when {
                 branch 'origin/main'

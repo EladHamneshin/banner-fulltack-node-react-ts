@@ -45,7 +45,7 @@ pipeline {
                 script {
                     dir('server') {
                         echo 'Building Server...'
-                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-server:1.0.0 .'
+                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-server:1.0.1 .'
                         //sh 'docker build -t banners-server .'
                     }
                 }
@@ -58,7 +58,7 @@ pipeline {
                     dir('client') {
                         // TODO: add arg for base url
                         echo 'Building Client...'
-                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-client:1.0.0 .'
+                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-client:1.0.1 .'
                     }
                 }
             }
@@ -121,8 +121,8 @@ pipeline {
             steps {
                 script {
                     sh 'echo "Pushing..."'
-                    sh 'docker push $DOCKER_CREDENTIALS_USR/banners-server:1.0.0'
-                    sh 'docker push $DOCKER_CREDENTIALS_USR/banners-client:1.0.0'
+                    sh 'docker push $DOCKER_CREDENTIALS_USR/banners-server:1.0.1'
+                    sh 'docker push $DOCKER_CREDENTIALS_USR/banners-client:1.0.1'
                 }
             }
         }
@@ -145,8 +145,8 @@ pipeline {
                     dir('helm-chart/devOps/charts/demo-store/') {
                         def values = readYaml file: 'values.yaml'
 
-                        values.deployment.client.image.tag = '1.0.0'
-                        values.deployment.server.image.tag = '1.0.0'
+                        values.deployment.client.image.tag = '1.0.1'
+                        values.deployment.server.image.tag = '1.0.1'
 
                         sh 'rm -rf values.yaml'
                         writeYaml file: 'values.yaml', data: values
@@ -198,8 +198,8 @@ pipeline {
             script {
                 echo 'Cleaning workspace...'
                 sh 'rm -rf helm-chart'
-                sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-server:1.0.0'
-                sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-client:1.0.0'
+                sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-server:1.0.1'
+                sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-client:1.0.1'
             }
         }
     }

@@ -53,7 +53,9 @@ pipeline {
 
         stage('test main') {
             when {
-                branch 'origin/main'
+                expression {
+                    env.GIT_BRANCH != 'origin/main'
+                }
             }
             steps {
                 script {
@@ -64,8 +66,8 @@ pipeline {
 
         stage('test not main') {
             when {
-                not {
-                    branch 'origin/main'
+                expression {
+                    env.GIT_BRANCH == 'origin/main'
                 }
             }
             steps {

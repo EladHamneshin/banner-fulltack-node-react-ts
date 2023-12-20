@@ -54,7 +54,8 @@ pipeline {
         stage('echo branch') {
             steps {
                 script {
-                    sh 'echo $BRANCH_NAME'
+                    printenv()
+                    sh 'echo "Current branch: ${env.BRANCH_NAME}"'
                 }
             }
         }

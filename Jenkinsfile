@@ -5,6 +5,9 @@ pipeline {
         githubPush()
     }
 
+    //todo add tag 
+    //todo send env to compose
+    //todo change version in npm
     environment {
         DOCKER_CREDENTIALS = credentials('docker-hub-elad')
         TAG_NAME = ''
@@ -12,162 +15,183 @@ pipeline {
     }
 
     stages {
-        // stage('Checkout') {
-        //     steps {
-        //         script {
-        //             sh 'printenv'
-        //             echo "Checking out code........"
-        //             def pullRequestBranch = env.GITHUB_PR_SOURCE_BRANCH ?: 'main'
-        //             checkout([$class: 'GitSCM', branches: [[name: "*/${pullRequestBranch}"]], userRemoteConfigs: [[url:'https://github.com/yakovperets/zalmans-server.git']]])
 
-        //             // Check if TAG_NAME exists
-        //             TAG_NAME = sh(script: "git tag --contains ${env.GIT_COMMIT}", returnStdout: true).trim()
+    // stage('Checkout') {
+        // when {
+    //     expression {
+    //         env.GIT_BRANCH == 'origin/main'
+    //     }
+    // }
+    //     steps {
+    //         script {
+    //             echo 'Checking out...'
+    //             def pullRequestBranch = env.GITHUB_PR_SOURCE_BRANCH ?: 'main'
+    //             checkout([$class: 'GitSCM', branches: [[name: "*/${pullRequestBranch}"]], userRemoteConfigs: [[url:'https://github.com/EladHamneshin/banner-fulltack-node-react-ts.git']]])
+    //         }
+    //     }
+    // }
 
-        //             // Remove the leading "v" from the tag name
-        //             TAG_NAME = TAG_NAME.replaceAll(/[a-zA-Z]/, '')
+    stage('Set Tag Name') {
+    // when {
+    //     expression {
+    //         env.GIT_BRANCH == 'origin/main'
+    //     }
+    // }
+        steps {
+            script {
 
-        //             // Create a boolean variable based on the existence of TAG_NAME
-        //             TAG_EXISTS = TAG_NAME != null && !TAG_NAME.isEmpty()
+                // Check if TAG_NAME exists
+                TAG_NAME = sh(script: "git tag --contains ${env.GIT_PREVIOUS_COMMIT}", returnStdout: true).trim()
 
-        //             if (TAG_EXISTS.toBoolean()) {
-        //                 echo "GitHub Release Tag Name: ${TAG_NAME}"
-        //                 // Add any other steps you need for when TAG_NAME exists
-        //             } else {
-        //                 echo "No GitHub Release Tag found."
-        //                 // Add any other steps you need for when TAG_NAME does not exist
-        //             }
-        //         }
-        //     }
-        // }
+                // Remove the leading "v" from the tag name
+                TAG_NAME = TAG_NAME.replaceAll(/[a-zA-Z]/, '')
 
-        // stage('Lint') {
-        //     steps {
-        //         script {
-        //             dir('client') {
-        //                 echo 'Linting...'
-        //                 //sh 'npm run lint'
-        //             }
-        //         }
-        //     }
-        // }
+                // Create a boolean variable based on the existence of TAG_NAME
+                TAG_EXISTS = TAG_NAME != null && !TAG_NAME.isEmpty()
 
-        stage('test main') {
-            when {
-                expression {
-                    env.GIT_BRANCH == 'origin/main'
-                }
-            }
-            steps {
-                script {
-                    sh 'echo "test main"'
+                if (TAG_EXISTS.toBoolean()) {
+                    echo "GitHub Release Tag Name: ${TAG_NAME}"
+                    // Add any other steps you need for when TAG_NAME exists
+                } else {
+                    echo "No GitHub Release Tag found."
+                    // Add any other steps you need for when TAG_NAME does not exist
                 }
             }
         }
+    }
 
-        stage('test not main') {
-            when {
-                expression {
-                    env.GIT_BRANCH != 'origin/main'
-                }
-            }
-            steps {
-                script {
-                    sh 'echo "test not main"'
-                }
-            }
-        }
+    // stage('Lint') {
+    // when {
+    //     expression {
+    //         env.GIT_BRANCH == 'origin/main' || env.GIT_BRANCH == 'origin/release'
+    //     }
+    // }
+    //     steps {
+    //         script {
+    //             dir('client') {
+    //                 echo 'Linting...'
+    //                 //sh 'npm run lint'
+    //             }
+    //         }
+    //     }
+    // }
 
-        // stage('Install') {
-        //     steps {
-        //         script {
-        //             dir('client') {
-        //                 echo 'Installing dependencies...'
-        //                 sh 'npm cache clean --force'
-        //                 sh 'npm install'
-        //             }
-        //         }
-        //     }
-        // }
+    // stage('Install') {
+    // when {
+    //     expression {
+    //         env.GIT_BRANCH == 'origin/main' || env.GIT_BRANCH == 'origin/release'
+    //     }
+    // }
+    //     steps {
+    //         script {
+    //             dir('client') {
+    //                 echo 'Installing dependencies...'
+    //                 sh 'npm cache clean --force'
+    //                 sh 'npm install'
+    //             }
+    //         }
+    //     }
+    // }
 
-        // stage('Unit Test') {
-        //     steps {
-        //         script {
-        //             dir('client') {
-        //                 echo 'Running unit tests...'
-        //                 sh 'npm run test'
-        //             }
-        //         }
-        //     }
-        // }
+    // stage('Unit Test') {
+    //     steps {
+    //         script {
+    //             dir('client') {
+    //                 echo 'Running unit tests...'
+    //                 sh 'npm run test'
+    //             }
+    //         }
+    //     }
+    // }
 
-        // stage('Server Build') {
-        //     steps {
-        //         script {
-        //             dir('server') {
-        //                 echo 'Building Server...'
-        //                 sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-server:1.0.2 .'
-        //                 //sh 'docker build -t banners-server .'
-        //             }
-        //         }
-        //     }
-        // }
+    // stage('Integration Test') {
+    // when {
+    //     expression {
+    //         env.GIT_BRANCH == 'origin/main' || env.GIT_BRANCH == 'origin/release'
+    //     }
+    // }
+    //     steps {
+    //         script {
+    //             dir('server') {
+    //                 echo 'Running integration tests...'
 
-        // stage('Client Build') {
-        //     steps {
-        //         script {
-        //             dir('client') {
-        //                 // TODO: add arg for base url
-        //                 echo 'Building Client...'
-        //                 sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-client:1.0.2 .'
-        //             }
-        //         }
-        //     }
-        // }
+    //                 def dockerfileContent = '''
+    //                     FROM node:18-alpine AS builder
+    //                     WORKDIR /app
+    //                     COPY /package*.json ./
+    //                     RUN npm install
+    //                     RUN npm install -D typescript
+    //                     COPY . .
+    //                     CMD ["npm", "test"]
+    //                 '''
+    //                 // Write Dockerfile content to a file
+    //                 writeFile file: 'Dockerfile.test', text: dockerfileContent
 
-        // stage('Integration Test') {
-        //     steps {
-        //         script {
-        //             dir('server') {
-        //                 echo 'Running integration tests...'
+    //                 // Build the Docker image for TEST server
+    //                 sh 'docker build -t server-test-class4 -f Dockerfile.test .'
+        
+    //                 // Run the Docker container for Express.js server
+    //                 sh 'docker-compose up -d'
 
-        //                 def dockerfileContent = '''
-        //                     FROM node:18-alpine AS builder
-        //                     WORKDIR /app
-        //                     COPY /package*.json ./
-        //                     RUN npm install
-        //                     RUN npm install -D typescript
-        //                     COPY . .
-        //                     CMD ["npm", "test"]
-        //                 '''
-        //                 // Write Dockerfile content to a file
-        //                 writeFile file: 'Dockerfile.test', text: dockerfileContent
+    //                 // Log the output of the test
+    //                 // TODO: rename container
+    //                 sh 'docker logs -f server-test-class4'
+    //             } 
+    //         }
+    //     }
 
-        //                 // Build the Docker image for TEST server
-        //                 sh 'docker build -t server-test-class4 -f Dockerfile.test .'
-                    
-        //                 // Run the Docker container for Express.js server
-        //                 sh 'docker-compose up -d'
+    //     post {
+    //         always {
+    //             script {
+    //                 dir('server') {
+    //                     sh 'docker-compose down -v --remove-orphans'
+    //                     sh 'docker rmi server-test-class4'
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
-        //                 // Log the output of the test
-        //                 // TODO: rename container
-        //                 sh 'docker logs -f server-test-class4'
-        //             } 
-        //         }
-        //     }
+    // stage('Server Build') {
+    // when {
+    //     expression {
+    //         env.GIT_BRANCH == 'origin/main' || env.GIT_BRANCH == 'origin/release'
+    //     }
+    // }
+    //     steps {
+    //         script {
+    //             dir('server') {
+    //                 echo 'Building Server...'
+    //                 sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-server:1.0.2 .'
+    //                 //sh 'docker build -t banners-server .'
+    //             }
+    //         }
+    //     }
+    // }
 
-        //     post {
-        //         always {
-        //             script {
-        //                 dir('server') {
-        //                     sh 'docker-compose down -v --remove-orphans'
-        //                     sh 'docker rmi server-test-class4'
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
+    // stage('Client Build') {
+    // when {
+    //     expression {
+    //         env.GIT_BRANCH == 'origin/main' || env.GIT_BRANCH == 'origin/release'
+    //     }
+    // }
+    //     steps {
+    //         script {
+    //             dir('client') {
+    //                 // TODO: add arg for base url
+    //                 echo 'Building Client...'
+    //                 sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-client:1.0.2 .'
+    //             }
+    //         }
+    //     }
+    // }
 
     //     stage('Dockerhub Login') {
+    // when {
+    //     expression {
+    //         env.GIT_BRANCH == 'origin/release'
+    //     }
+    // }
     //         steps {
     //             script{
     //                 sh 'echo "Logging in to Dockerhub..."'
@@ -178,6 +202,11 @@ pipeline {
     //     }
 
     //     stage('Dockerhub Push') {
+    // when {
+    //     expression {
+    //         env.GIT_BRANCH == 'origin/release'
+    //     }
+    // }
     //         steps {
     //             script {
     //                 sh 'echo "Pushing..."'
@@ -188,6 +217,11 @@ pipeline {
     //     }
 
     //     stage('Clone Helm Repo') {
+    // when {
+    //     expression {
+    //         env.GIT_BRANCH == 'origin/release'
+    //     }
+    // }
     //         steps {
     //             script {
     //                 dir('helm-chart') {
@@ -199,6 +233,11 @@ pipeline {
     //     }
 
     //     stage('Update values.yaml') {
+    // when {
+    //     expression {
+    //         env.GIT_BRANCH == 'origin/release'
+    //     }
+    // }
     //         steps {
     //             script {
     //                 dir('helm-chart/devOps/charts/demo-store/') {
@@ -214,7 +253,12 @@ pipeline {
     //         }
     //     }
 
-    //     stage('Update Chart.yaml') {
+    // stage('Update Chart.yaml') {
+    // when {
+    //     expression {
+    //         env.GIT_BRANCH == 'origin/release'
+    //     }
+    // }
     //         steps {
     //             script {
     //                 dir('helm-chart/devOps/charts/demo-store/') {
@@ -229,13 +273,18 @@ pipeline {
 
     //                     sh 'rm -rf Chart.yaml'
     //                     writeYaml file: 'Chart.yaml', data: values
-                        // sh 'cat Chart.yaml'
+            // sh 'cat Chart.yaml'
     //                 }
     //             }
     //         }
     //     }
 
     //     stage('Push helm') {
+    // when {
+    //     expression {
+    //         env.GIT_BRANCH == 'origin/release'
+    //     }
+    // }
     //         steps {
     //             script {
     //                 dir('helm-chart/devOps/charts/demo-store/') {
@@ -263,7 +312,7 @@ pipeline {
     //         }
     //     }
     // }
- 
+
     //     stage('NextStage') {
     //         when {
     //             expression { TAG_EXISTS.toBoolean() }

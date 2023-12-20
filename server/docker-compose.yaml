@@ -21,7 +21,7 @@ services:
       retries: 3
 
   server-class4:
-    image: eladha123/banners-server
+    image: server-class4
     container_name:  server-class4
     networks:
       - app-network4

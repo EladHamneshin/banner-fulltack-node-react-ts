@@ -37,9 +37,9 @@ services:
       my-postgres4:
         condition: service_healthy
 
-  server-test4:
-    image: server-test4
-    container_name: server-test4
+  server-test-class4:
+    image: server-test-class4
+    container_name: server-test-class4
     networks:
       - app-network4
     environment:

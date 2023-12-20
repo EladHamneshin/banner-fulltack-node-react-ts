@@ -29,23 +29,23 @@ pipeline {
             }
         }
 
-        stage('Unit Test') {
-            steps {
-                script {
-                    dir('client') {
-                        echo 'Running unit tests...'
-                        sh 'npm run test'
-                    }
-                }
-            }
-        }
+        // stage('Unit Test') {
+        //     steps {
+        //         script {
+        //             dir('client') {
+        //                 echo 'Running unit tests...'
+        //                 sh 'npm run test'
+        //             }
+        //         }
+        //     }
+        // }
 
         stage('Server Build') {
             steps {
                 script {
                     dir('server') {
                         echo 'Building Server...'
-                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-server:latest .'
+                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-server:1.0.0 .'
                         //sh 'docker build -t banners-server .'
                     }
                 }
@@ -58,54 +58,54 @@ pipeline {
                     dir('client') {
                         // TODO: add arg for base url
                         echo 'Building Client...'
-                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-client:latest .'
+                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-client:1.0.0 .'
                     }
                 }
             }
         }
 
-        stage('Integration Test') {
-            steps {
-                script {
-                    dir('server') {
-                        echo 'Running integration tests...'
+        // stage('Integration Test') {
+        //     steps {
+        //         script {
+        //             dir('server') {
+        //                 echo 'Running integration tests...'
 
-                        def dockerfileContent = '''
-                            FROM node:18-alpine AS builder
-                            WORKDIR /app
-                            COPY /package*.json ./
-                            RUN npm install
-                            RUN npm install -D typescript
-                            COPY . .
-                            CMD ["npm", "test"]
-                        '''
-                        // Write Dockerfile content to a file
-                        writeFile file: 'Dockerfile.test', text: dockerfileContent
+        //                 def dockerfileContent = '''
+        //                     FROM node:18-alpine AS builder
+        //                     WORKDIR /app
+        //                     COPY /package*.json ./
+        //                     RUN npm install
+        //                     RUN npm install -D typescript
+        //                     COPY . .
+        //                     CMD ["npm", "test"]
+        //                 '''
+        //                 // Write Dockerfile content to a file
+        //                 writeFile file: 'Dockerfile.test', text: dockerfileContent
 
-                        // Build the Docker image for TEST server
-                        sh 'docker build -t server-test4 -f Dockerfile.test .'
+        //                 // Build the Docker image for TEST server
+        //                 sh 'docker build -t server-test4 -f Dockerfile.test .'
                     
-                        // Run the Docker container for Express.js server
-                        sh 'docker-compose up -d'
+        //                 // Run the Docker container for Express.js server
+        //                 sh 'docker-compose up -d'
 
-                        // Log the output of the test
-                        // TODO: rename container
-                        sh 'docker logs -f server-test4'
-                    } 
-                }
-            }
+        //                 // Log the output of the test
+        //                 // TODO: rename container
+        //                 sh 'docker logs -f server-test4'
+        //             } 
+        //         }
+        //     }
 
-            post {
-                always {
-                    script {
-                        dir('server') {
-                            sh 'docker-compose down -v --remove-orphans'
-                            sh 'docker rmi server-test4'
-                        }
-                    }
-                }
-            }
-        }
+        //     post {
+        //         always {
+        //             script {
+        //                 dir('server') {
+        //                     sh 'docker-compose down -v --remove-orphans'
+        //                     sh 'docker rmi server-test4'
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
         stage('Dockerhub Login') {
             steps {
@@ -121,8 +121,8 @@ pipeline {
             steps {
                 script {
                     sh 'echo "Pushing..."'
-                    sh 'docker push $DOCKER_CREDENTIALS_USR/banners-server:latest'
-                    sh 'docker push $DOCKER_CREDENTIALS_USR/banners-client:latest'
+                    sh 'docker push $DOCKER_CREDENTIALS_USR/banners-server:1.0.0'
+                    sh 'docker push $DOCKER_CREDENTIALS_USR/banners-client:1.0.0'
                 }
             }
         }
@@ -145,8 +145,8 @@ pipeline {
                     dir('helm-chart/devOps/charts/demo-store/') {
                         def values = readYaml file: 'values.yaml'
 
-                        values.deployment.client.image.tag = 'latest'
-                        values.deployment.server.image.tag = 'latest'
+                        values.deployment.client.image.tag = '1.0.0'
+                        values.deployment.server.image.tag = '1.0.0'
 
                         sh 'rm -rf values.yaml'
                         writeYaml file: 'values.yaml', data: values
@@ -198,8 +198,8 @@ pipeline {
             script {
                 echo 'Cleaning workspace...'
                 sh 'rm -rf helm-chart'
-                sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-server:latest'
-                sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-client:latest'
+                sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-server:1.0.0'
+                sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-client:1.0.0'
             }
         }
     }

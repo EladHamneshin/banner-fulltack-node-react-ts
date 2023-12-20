@@ -123,165 +123,164 @@ pipeline {
             }
         }
 
-        // stage('Server Build') {
-        // when {
-        //     expression {
-        //        env.GIT_BRANCH == 'origin/release'
-        //     }
-        // }
-        //     steps {
-        //         script {
-        //             dir('server') {
-        //                 echo 'Building Server...'
-                        // sh "docker build -t $DOCKER_CREDENTIALS_USR/banners-server:${TAG_NAME} ."    
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Server Build') {
+            when {
+                expression {
+                env.GIT_BRANCH == 'origin/release'
+                }
+            }
+            steps {
+                script {
+                    dir('server') {
+                        echo 'Building Server...'
+                        sh "docker build -t $DOCKER_CREDENTIALS_USR/banners-server:${TAG_NAME} ."    
+                    }
+                }
+            }
+        }
 
-        // stage('Client Build') {
-        // when {
-        //     expression {
-        //         env.GIT_BRANCH == 'origin/release'
-        //     }
-        // }
-        //     steps {
-        //         script {
-        //             dir('client') {
-        //                 // TODO: add arg for base url
-        //                 echo 'Building Client...'
-        //                 "docker build -t $DOCKER_CREDENTIALS_USR/banners-client:${TAG_NAME} ." 
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Client Build') {
+            when {
+                expression {
+                    env.GIT_BRANCH == 'origin/release'
+                }
+            }
+            steps {
+                script {
+                    dir('client') {
+                        // TODO: add arg for base url
+                        echo 'Building Client...'
+                        "docker build -t $DOCKER_CREDENTIALS_USR/banners-client:${TAG_NAME} ." 
+                    }
+                }
+            }
+        }
 
-        //     stage('Dockerhub Login') {
-        // when {
-        //     expression {
-        //         env.GIT_BRANCH == 'origin/release'
-        //     }
-        // }
-        //         steps {
-        //             script{
-        //                 sh 'echo "Logging in to Dockerhub..."'
-        //                 sh 'echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR --password-stdin'                		
-        //                 sh 'echo "Login Completed"'   
-        //             }      
-        //         }
-        //     }
+            stage('Dockerhub Login') {
+                when {
+                    expression {
+                        env.GIT_BRANCH == 'origin/release'
+                    }
+                }
+                steps {
+                    script{
+                        sh 'echo "Logging in to Dockerhub..."'
+                        sh 'echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR --password-stdin'                		
+                        sh 'echo "Login Completed"'   
+                    }      
+                }
+            }
 
-        //     stage('Dockerhub Push') {
-        // when {
-        //     expression {
-        //         env.GIT_BRANCH == 'origin/release'
-        //     }
-        // }
-        //         steps {
-        //             script {
-        //                 sh 'echo "Pushing..."'
-        //                 sh "docker push $DOCKER_CREDENTIALS_USR/banners-server:${TAG_NAME}"
-        //                 sh "docker push $DOCKER_CREDENTIALS_USR/banners-client:${TAG_NAME}"
-        //             }
-        //         }
-        //     }
+            stage('Dockerhub Push') {
+                when {
+                    expression {
+                        env.GIT_BRANCH == 'origin/release'
+                    }
+                }
+                steps {
+                    script {
+                        sh 'echo "Pushing..."'
+                        sh "docker push $DOCKER_CREDENTIALS_USR/banners-server:${TAG_NAME}"
+                        sh "docker push $DOCKER_CREDENTIALS_USR/banners-client:${TAG_NAME}"
+                    }
+                }
+            }
 
-        //     stage('Clone Helm Repo') {
-        // when {
-        //     expression {
-        //         env.GIT_BRANCH == 'origin/release'
-        //     }
-        // }
-        //         steps {
-        //             script {
-        //                 dir('helm-chart') {
-        //                     // TODO: git tool
-        //                     sh 'git clone https://github.com/Yakov-Damen/devOps.git'
-        //                 }
-        //             }
-        //         }
-        //     }
+            stage('Clone Helm Repo') {
+                when {
+                    expression {
+                        env.GIT_BRANCH == 'origin/release'
+                    }
+                }
+                steps {
+                    script {
+                        dir('helm-chart') {
+                            // TODO: git tool
+                            sh 'git clone https://github.com/Yakov-Damen/devOps.git'
+                        }
+                    }
+                }
+            }
 
-        //     stage('Update values.yaml') {
-        // when {
-        //     expression {
-        //         env.GIT_BRANCH == 'origin/release'
-        //     }
-        // }
-        //         steps {
-        //             script {
-        //                 dir('helm-chart/devOps/charts/demo-store/') {
-        //                     def values = readYaml file: 'values.yaml'
+            stage('Update values.yaml') {
+                when {
+                    expression {
+                        env.GIT_BRANCH == 'origin/release'
+                    }
+                }
+                steps {
+                    script {
+                        dir('helm-chart/devOps/charts/demo-store/') {
+                            def values = readYaml file: 'values.yaml'
 
-        //                     values.deployment.client.image.tag = "${TAG_NAME}"
-        //                     values.deployment.server.image.tag = "${TAG_NAME}"
+                            values.deployment.client.image.tag = "${TAG_NAME}"
+                            values.deployment.server.image.tag = "${TAG_NAME}"
 
-        //                     sh 'rm -rf values.yaml'
-        //                     writeYaml file: 'values.yaml', data: values
-        //                 }
-        //             }
-        //         }
-        //     }
+                            sh 'rm -rf values.yaml'
+                            writeYaml file: 'values.yaml', data: values
+                        }
+                    }
+                }
+            }
 
-        // stage('Update Chart.yaml') {
-        // when {
-        //     expression {
-        //         env.GIT_BRANCH == 'origin/release'
-        //     }
-        // }
-        //         steps {
-        //             script {
-        //                 dir('helm-chart/devOps/charts/demo-store/') {
-        //                     def values = readYaml file: 'Chart.yaml'
-        //                     def currentVersion = values.version
+        stage('Update Chart.yaml') {
+                when {
+                    expression {
+                        env.GIT_BRANCH == 'origin/release'
+                    }
+                }
+                steps {
+                    script {
+                        dir('helm-chart/devOps/charts/demo-store/') {
+                            def values = readYaml file: 'Chart.yaml'
+                            def currentVersion = values.version
 
-        //                     def parts = currentVersion.split('\\.')
-        //                     parts[-1] = parts[-1].toInteger() + 1
+                            def parts = currentVersion.split('\\.')
+                            parts[-1] = parts[-1].toInteger() + 1
 
-        //                     def newVersion = parts.join('.')
-        //                     values.version = newVersion
+                            def newVersion = parts.join('.')
+                            values.version = newVersion
 
-        //                     sh 'rm -rf Chart.yaml'
-        //                     writeYaml file: 'Chart.yaml', data: values
-                // sh 'cat Chart.yaml'
-        //                 }
-        //             }
-        //         }
-        //     }
+                            sh 'rm -rf Chart.yaml'
+                            writeYaml file: 'Chart.yaml', data: values
+                sh 'cat Chart.yaml'
+                        }
+                    }
+                }
+            }
 
-        //     stage('Push helm') {
-        // when {
-        //     expression {
-        //         env.GIT_BRANCH == 'origin/release'
-        //     }
-        // }
-        //         steps {
-        //             script {
-        //                 dir('helm-chart/devOps/charts/demo-store/') {
-        //                     withCredentials([gitUsernamePassword(credentialsId: 'dc9f43f7-8a44-4a8f-90f4-9116603bbbc7', gitToolName: 'git')]) {
-        //                         sh 'git config --global user.email "hamneshin123@gmail.com"'
-        //                         sh 'git config --global user.name "jenkins"'
-        //                         sh 'git add .'
-        //                         sh 'git commit -m "helm chart update"'
-        //                         sh 'git push'
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
+            stage('Push helm') {
+                when {
+                    expression {
+                        env.GIT_BRANCH == 'origin/release'
+                    }
+                }
+                steps {
+                    script {
+                        dir('helm-chart/devOps/charts/demo-store/') {
+                            withCredentials([gitUsernamePassword(credentialsId: 'dc9f43f7-8a44-4a8f-90f4-9116603bbbc7', gitToolName: 'git')]) {
+                                sh 'git config --global user.email "hamneshin123@gmail.com"'
+                                sh 'git config --global user.name "jenkins"'
+                                sh 'git add .'
+                                sh 'git commit -m "helm chart update"'
+                                sh 'git push'
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-        // post {
-        //     always {
-        //        cleanWs()
-        //         script {
-        //             echo 'Cleaning workspace...'
-        //             sh 'rm -rf helm-chart'
-        //             sh "docker rmi $DOCKER_CREDENTIALS_USR/banners-server:${TAG_NAME}"
-                    // sh "docker rmi $DOCKER_CREDENTIALS_USR/banners-client:${TAG_NAME}"
-        //         }
-        //     }
-        // }
-
+        post {
+            always {
+               cleanWs()
+                script {
+                    echo 'Cleaning workspace...'
+                    sh 'rm -rf helm-chart'
+                    sh "docker rmi $DOCKER_CREDENTIALS_USR/banners-server:${TAG_NAME}"
+                    sh "docker rmi $DOCKER_CREDENTIALS_USR/banners-client:${TAG_NAME}"
+                }
+            }
+        }
     }
 }

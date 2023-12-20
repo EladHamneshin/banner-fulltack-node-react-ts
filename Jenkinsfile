@@ -53,7 +53,7 @@ pipeline {
 
         stage('test release') {
             when {
-                branch 'release'
+                branch 't'
             }
             steps {
                 script {
@@ -65,7 +65,7 @@ pipeline {
           stage('test not release') {
             when {
                 not {
-                    branch 'release'
+                    branch 't'
                 }
             }
             steps {

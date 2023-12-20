@@ -54,15 +54,14 @@ pipeline {
         stage('echo branch') {
             steps {
                 script {
-                    sh 'printenv'
-                    sh 'echo "Current branch: ${env.BRANCH_NAME}"'
+                    sh 'echo "Current branch: ${env.GIT_BRANCH}"'
                 }
             }
         }
 
         stage('test main') {
             when {
-                branch 'main'
+                branch 'origin/main'
             }
             steps {
                 script {
@@ -74,7 +73,7 @@ pipeline {
         stage('test not main') {
             when {
                 not {
-                    branch 'main'
+                    branch 'origin/main'
                 }
             }
             steps {

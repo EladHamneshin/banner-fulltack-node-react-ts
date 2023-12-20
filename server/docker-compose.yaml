@@ -14,18 +14,17 @@ services:
       POSTGRES_PASSWORD: mypassword
     networks:
       - app-network4
-    # volumes:
-    #   - ./scripts:/docker-entrypoint-initdb.d
-    #   - pgdata4:/var/lib/postgresql/data 
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 25s
       retries: 3
 
-  banners-server4:
-    image: eladha123/banners-server
-    container_name:  banners-server4
+  server-class4:
+    build:
+        context: .
+        dockerfile: Dockerfile    
+    container_name:  server-class4
     networks:
       - app-network4
     environment:
@@ -38,22 +37,20 @@ services:
         condition: service_healthy
 
   server-test-class4:
-    image: server-test-class4
+    build:
+      context: .
+      dockerfile: Dockerfile.test
     container_name: server-test-class4
     networks:
       - app-network4
     environment:
       - MONGO_URI=mongodb://mongo-db4:27017/test
       - PG_URI=postgresql://postgres:mypassword@my-postgres4:5432
-      - TEST_SERVER_URI=http://banners-server4:5000
+      - TEST_SERVER_URI=http://server-class4:5000
     depends_on:
-      banners-server4:
+      server-class4:
         condition: service_started
 
 networks:
   app-network4:
     driver: bridge
-
-# volumes:
-#   pgdata4: 
-# 

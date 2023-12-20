@@ -54,7 +54,7 @@ pipeline {
         stage('test main') {
             when {
                 expression {
-                    env.GIT_BRANCH != 'origin/main'
+                    env.GIT_BRANCH == 'origin/main'
                 }
             }
             steps {
@@ -67,7 +67,7 @@ pipeline {
         stage('test not main') {
             when {
                 expression {
-                    env.GIT_BRANCH == 'origin/main'
+                    env.GIT_BRANCH != 'origin/main'
                 }
             }
             steps {

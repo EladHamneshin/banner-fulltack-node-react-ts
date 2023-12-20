@@ -105,7 +105,7 @@ pipeline {
                         '''
                         writeFile file: 'Dockerfile.test', text: dockerfileContent
 
-                        sh 'docker-compose up --build'
+                        sh 'docker-compose up -d --build'
 
                         sh 'docker logs -f server-test-class4'
                     } 

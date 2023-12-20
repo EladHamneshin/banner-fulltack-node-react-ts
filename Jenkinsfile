@@ -54,39 +54,39 @@ pipeline {
             }
         }
 
-        // stage('Lint') {
-        //     steps {
-        //         script {
-        //             dir('client') {
-        //                 echo 'Linting...'
-        //                 //sh 'npm run lint'
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Lint') {
+            steps {
+                script {
+                    dir('client') {
+                        echo 'Linting...'
+                        //sh 'npm run lint'
+                    }
+                }
+            }
+        }
 
-        // stage('Install') {
-        //     steps {
-        //         script {
-        //             dir('client') {
-        //                 echo 'Installing dependencies...'
-        //                 sh 'npm cache clean --force'
-        //                 sh 'npm install'
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Install') {
+            steps {
+                script {
+                    dir('client') {
+                        echo 'Installing dependencies...'
+                        sh 'npm cache clean --force'
+                        sh 'npm install'
+                    }
+                }
+            }
+        }
 
-        // stage('Unit Test') {
-        //     steps {
-        //         script {
-        //             dir('client') {
-        //                 echo 'Running unit tests...'
-        //                 sh 'npm run test'
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Unit Test') {
+            steps {
+                script {
+                    dir('client') {
+                        echo 'Running unit tests...'
+                        sh 'npm run test'
+                    }
+                }
+            }
+        }
 
         stage('Integration Test') {
             steps {
@@ -195,7 +195,6 @@ pipeline {
                 steps {
                     script {
                         dir('helm-chart') {
-                            // TODO: git tool
                             sh 'git clone https://github.com/Yakov-Damen/devOps.git'
                         }
                     }
@@ -224,62 +223,61 @@ pipeline {
             }
 
         stage('Update Chart.yaml') {
-                when {
-                    expression {
-                        env.GIT_BRANCH == 'origin/release'
-                    }
-                }
-                steps {
-                    script {
-                        dir('helm-chart/devOps/charts/demo-store/') {
-                            def values = readYaml file: 'Chart.yaml'
-                            def currentVersion = values.version
-
-                            def parts = currentVersion.split('\\.')
-                            parts[-1] = parts[-1].toInteger() + 1
-
-                            def newVersion = parts.join('.')
-                            values.version = newVersion
-
-                            sh 'rm -rf Chart.yaml'
-                            writeYaml file: 'Chart.yaml', data: values
-                sh 'cat Chart.yaml'
-                        }
-                    }
+            when {
+                expression {
+                    env.GIT_BRANCH == 'origin/release'
                 }
             }
+            steps {
+                script {
+                    dir('helm-chart/devOps/charts/demo-store/') {
+                        def values = readYaml file: 'Chart.yaml'
+                        def currentVersion = values.version
 
-            stage('Push helm') {
-                when {
-                    expression {
-                        env.GIT_BRANCH == 'origin/release'
-                    }
-                }
-                steps {
-                    script {
-                        dir('helm-chart/devOps/charts/demo-store/') {
-                            withCredentials([gitUsernamePassword(credentialsId: 'dc9f43f7-8a44-4a8f-90f4-9116603bbbc7', gitToolName: 'git')]) {
-                                sh 'git config --global user.email "hamneshin123@gmail.com"'
-                                sh 'git config --global user.name "jenkins"'
-                                sh 'git add .'
-                                sh 'git commit -m "helm chart update"'
-                                sh 'git push'
-                            }
-                        }
+                        def parts = currentVersion.split('\\.')
+                        parts[-1] = parts[-1].toInteger() + 1
+
+                        def newVersion = parts.join('.')
+                        values.version = newVersion
+
+                        sh 'rm -rf Chart.yaml'
+                        writeYaml file: 'Chart.yaml', data: values
+            sh 'cat Chart.yaml'
                     }
                 }
             }
         }
 
-        post {
-            always {
-               cleanWs()
-                script {
-                    echo 'Cleaning workspace...'
-                    sh 'rm -rf helm-chart'
-                    sh "docker rmi $DOCKER_CREDENTIALS_USR/banners-server:${TAG_NAME}"
-                    sh "docker rmi $DOCKER_CREDENTIALS_USR/banners-client:${TAG_NAME}"
+        stage('Push helm') {
+            when {
+                expression {
+                    env.GIT_BRANCH == 'origin/release'
                 }
+            }
+            steps {
+                script {
+                    dir('helm-chart/devOps/charts/demo-store/') {
+                        withCredentials([gitUsernamePassword(credentialsId: 'dc9f43f7-8a44-4a8f-90f4-9116603bbbc7', gitToolName: 'git')]) {
+                            sh 'git config --global user.email "hamneshin123@gmail.com"'
+                            sh 'git config --global user.name "jenkins"'
+                            sh 'git add .'
+                            sh 'git commit -m "helm chart update"'
+                            sh 'git push'
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+            script {
+                echo 'Cleaning workspace...'
+                sh 'rm -rf helm-chart'
+                sh "docker rmi $DOCKER_CREDENTIALS_USR/banners-server:${TAG_NAME}"
+                sh "docker rmi $DOCKER_CREDENTIALS_USR/banners-client:${TAG_NAME}"
             }
         }
     }

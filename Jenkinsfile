@@ -54,13 +54,6 @@ pipeline {
         }
     }
 
-    stage('echo tag') {
-        steps {
-            echo "TAG_NAME: ${TAG_NAME}"
-            echo "TAG_EXISTS: ${TAG_EXISTS}"
-        }
-    }
-
     // stage('Lint') {
     // when {
     //     expression {

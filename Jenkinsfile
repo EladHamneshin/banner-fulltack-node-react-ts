@@ -4,7 +4,7 @@ pipeline {
     triggers {
         githubPush()
     }
-
+    //
     //todo add tag 
     //todo send env to compose
     //todo change version in npm

@@ -51,6 +51,14 @@ pipeline {
         //     }
         // }
 
+        stage('echo branch') {
+            steps {
+                script {
+                    sh 'echo $BRANCH_NAME'
+                }
+            }
+        }
+
         stage('test main') {
             when {
                 branch 'main'

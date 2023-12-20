@@ -51,26 +51,26 @@ pipeline {
         //     }
         // }
 
-        stage('test t') {
+        stage('test main') {
             when {
-                branch 't'
+                branch 'main'
             }
             steps {
                 script {
-                    sh 'echo "test t"'
+                    sh 'echo "test main"'
                 }
             }
         }
 
-        stage('test not t') {
+        stage('test not main') {
             when {
                 not {
-                    branch 't'
+                    branch 'main'
                 }
             }
             steps {
                 script {
-                    sh 'echo "test not t"'
+                    sh 'echo "test not main"'
                 }
             }
         }

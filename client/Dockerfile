@@ -5,7 +5,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-ENV VITE_API_URI=http://a78ce6e9dbace422e9ddf578d52be2de-1214614456.eu-central-1.elb.amazonaws.com/banner/api
+ENV VITE_API_URI=http://ade0a9e8c300f48708e5fcdcf95a35a4-507123613.eu-central-1.elb.amazonaws.com/banner/api
+                 
 COPY . .
 RUN npm run build
 

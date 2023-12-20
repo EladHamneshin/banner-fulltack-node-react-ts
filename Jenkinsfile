@@ -51,18 +51,18 @@ pipeline {
         //     }
         // }
 
-        stage('test release') {
+        stage('test t') {
             when {
                 branch 't'
             }
             steps {
                 script {
-                    sh 'echo "test release"'
+                    sh 'echo "test t"'
                 }
             }
         }
 
-          stage('test not release') {
+          stage('test not t') {
             when {
                 not {
                     branch 't'
@@ -70,7 +70,7 @@ pipeline {
             }
             steps {
                 script {
-                    sh 'echo "test not release"'
+                    sh 'echo "test not t"'
                 }
             }
         }

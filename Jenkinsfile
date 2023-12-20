@@ -134,18 +134,18 @@ pipeline {
             }
         }
 
-    //     post {
-    //         always {
-    //             script {
-    //                 dir('server') {
-    //                     sh 'docker-compose down -v --remove-orphans'
-    //                     sh 'docker rmi server-test-class4'
-    //                     sh 'docker rmi server-class4'
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+        post {
+            always {
+                script {
+                    dir('server') {
+                        sh 'docker-compose down -v --remove-orphans'
+                        sh 'docker rmi server-test-class4'
+                        sh 'docker rmi server-class4'
+                    }
+                }
+            }
+        }
+    }
 
     // stage('Server Build') {
     // when {

@@ -45,7 +45,7 @@ pipeline {
                 script {
                     dir('server') {
                         echo 'Building Server...'
-                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-server:1.0.1 .'
+                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-server:1.0.2 .'
                         //sh 'docker build -t banners-server .'
                     }
                 }
@@ -58,7 +58,7 @@ pipeline {
                     dir('client') {
                         // TODO: add arg for base url
                         echo 'Building Client...'
-                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-client:1.0.1 .'
+                        sh 'docker build -t $DOCKER_CREDENTIALS_USR/banners-client:1.0.2 .'
                     }
                 }
             }
@@ -121,8 +121,8 @@ pipeline {
             steps {
                 script {
                     sh 'echo "Pushing..."'
-                    sh 'docker push $DOCKER_CREDENTIALS_USR/banners-server:1.0.1'
-                    sh 'docker push $DOCKER_CREDENTIALS_USR/banners-client:1.0.1'
+                    sh 'docker push $DOCKER_CREDENTIALS_USR/banners-server:1.0.2'
+                    sh 'docker push $DOCKER_CREDENTIALS_USR/banners-client:1.0.2'
                 }
             }
         }
@@ -145,8 +145,8 @@ pipeline {
                     dir('helm-chart/devOps/charts/demo-store/') {
                         def values = readYaml file: 'values.yaml'
 
-                        values.deployment.client.image.tag = '1.0.1'
-                        values.deployment.server.image.tag = '1.0.1'
+                        values.deployment.client.image.tag = '1.0.2'
+                        values.deployment.server.image.tag = '1.0.2'
 
                         sh 'rm -rf values.yaml'
                         writeYaml file: 'values.yaml', data: values
@@ -198,9 +198,61 @@ pipeline {
             script {
                 echo 'Cleaning workspace...'
                 sh 'rm -rf helm-chart'
-                sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-server:1.0.1'
-                sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-client:1.0.1'
+                sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-server:1.0.2'
+                sh 'docker rmi $DOCKER_CREDENTIALS_USR/banners-client:1.0.2'
             }
         }
     }
+
+    // triggers {
+    //     githubPush()
+    // }
+
+    // environment {
+    //     // Define environment variables at the top level
+    //     TAG_NAME = ''
+    //     TAG_EXISTS = 'false'
+    // }
+
+    // stages {
+    //     stage('Checkout') {
+    //         steps {
+    //             script {
+    //                 sh 'printenv'
+    //                 echo "Checking out code........"
+    //                 def pullRequestBranch = env.GITHUB_PR_SOURCE_BRANCH ?: 'main'
+    //                 checkout([$class: 'GitSCM', branches: [[name: "*/${pullRequestBranch}"]], userRemoteConfigs: [[url:'https://github.com/yakovperets/zalmans-server.git']]])
+
+    //                 // Check if TAG_NAME exists
+    //                 TAG_NAME = sh(script: "git tag --contains ${env.GIT_COMMIT}", returnStdout: true).trim()
+
+    //                 // Remove the leading "v" from the tag name
+    //                 TAG_NAME = TAG_NAME.replaceAll(/[a-zA-Z]/, '')
+
+    //                 // Create a boolean variable based on the existence of TAG_NAME
+    //                 TAG_EXISTS = TAG_NAME != null && !TAG_NAME.isEmpty()
+
+    //                 if (TAG_EXISTS.toBoolean()) {
+    //                     echo "GitHub Release Tag Name: ${TAG_NAME}"
+    //                     // Add any other steps you need for when TAG_NAME exists
+    //                 } else {
+    //                     echo "No GitHub Release Tag found."
+    //                     // Add any other steps you need for when TAG_NAME does not exist
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     stage('NextStage') {
+    //         when {
+    //             expression { TAG_EXISTS.toBoolean() }
+    //         }
+    //         steps {
+    //             // This stage will only execute if TAG_EXISTS is true
+    //             echo "Executing NextStage because TAG_EXISTS is true"
+    //             echo "Using GitHub Release Tag Name in NextStage: ${TAG_NAME}"
+    //             // Add any other steps for the NextStage
+    //         }
+        // }
+    // }
 }

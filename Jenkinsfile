@@ -32,11 +32,11 @@ pipeline {
     // }
 
     stage('Set Tag Name') {
-    // when {
-    //     expression {
-    //         env.GIT_BRANCH == 'origin/main'
-    //     }
-    // }
+        // when {
+        //     expression {
+        //         env.GIT_BRANCH == 'origin/release'
+        //     }
+        // }
         steps {
             script {
 
@@ -57,6 +57,13 @@ pipeline {
                     // Add any other steps you need for when TAG_NAME does not exist
                 }
             }
+        }
+    }
+
+    stage('echo tag') {
+        steps {
+            echo "TAG_NAME: ${TAG_NAME}"
+            echo "TAG_EXISTS: ${TAG_EXISTS}"
         }
     }
 

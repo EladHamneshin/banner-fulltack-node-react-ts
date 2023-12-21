@@ -110,7 +110,7 @@ pipeline {
                         '''
                         writeFile file: 'Dockerfile.test', text: dockerfileContent
 
-                        sh 'docker-compose up -d --build'
+                        sh 'docker compose up -d --build'
 
                         sh 'docker logs -f server-test-class4'
                     } 
@@ -121,7 +121,7 @@ pipeline {
                 always {
                     script {
                         dir('server') {
-                            sh 'docker-compose down --rmi all -v --remove-orphans'
+                            sh 'docker compose down --rmi all -v --remove-orphans'
                         }
                     }
                 }

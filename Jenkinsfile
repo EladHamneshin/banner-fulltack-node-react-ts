@@ -48,9 +48,6 @@ pipeline {
                     parts[-1] = parts[-1].toInteger() + 1
 
                     TAG_NAME = parts.join('.')
-                    // TAG_NAME = sh(script: "git tag --contains ${env.GIT_PREVIOUS_COMMIT}", returnStdout: true).trim()
-                    // TAG_NAME = TAG_NAME.replaceAll(/[a-zA-Z]/, '')
-
                     TAG_EXISTS = TAG_NAME != null && !TAG_NAME.isEmpty()
 
                     if (TAG_EXISTS.toBoolean()) {

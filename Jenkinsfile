@@ -10,7 +10,7 @@ pipeline {
     //todo send env to compose
     //todo change version in npm
     environment {
-        DOCKER_CREDENTIALS = credentials('docker-hub-elad')
+        DOCKER_CREDENTIALS = credentials('Elad-Dockerhub-UsernamePassword')
         TAG_NAME = ''
         TAG_EXISTS = 'false'
     }
@@ -265,7 +265,7 @@ pipeline {
             steps {
                 script {
                     dir('helm-chart/devOps/charts/demo-store/') {
-                        withCredentials([gitUsernamePassword(credentialsId: 'dc9f43f7-8a44-4a8f-90f4-9116603bbbc7', gitToolName: 'git')]) {
+                        withCredentials([gitUsernamePassword(credentialsId: 'Elad-Github-UsernamePassword', gitToolName: 'git')]) {
                             sh 'git config --global user.email "hamneshin123@gmail.com"'
                             sh 'git config --global user.name "jenkins"'
                             sh 'git add .'

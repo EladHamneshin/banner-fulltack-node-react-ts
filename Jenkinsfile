@@ -40,8 +40,15 @@ pipeline {
             }
             steps {
                 script {
-                    TAG_NAME = sh(script: "git tag --contains ${env.GIT_PREVIOUS_COMMIT}", returnStdout: true).trim()
-                    TAG_NAME = TAG_NAME.replaceAll(/[a-zA-Z]/, '')
+                    def prevVersion = sh(script: "git tag --contains ${env.GIT_PREVIOUS_COMMIT}", returnStdout: true).trim()
+                    prevVersion = prevVersion.replaceAll(/[a-zA-Z]/, '')
+
+                    def parts = prevVersion.split('\\.')
+                    parts[-1] = parts[-1].toInteger() + 1
+
+                    TAG_NAME = parts.join('.')
+                    // TAG_NAME = sh(script: "git tag --contains ${env.GIT_PREVIOUS_COMMIT}", returnStdout: true).trim()
+                    // TAG_NAME = TAG_NAME.replaceAll(/[a-zA-Z]/, '')
 
                     TAG_EXISTS = TAG_NAME != null && !TAG_NAME.isEmpty()
 
@@ -156,71 +163,71 @@ pipeline {
             }
         }
 
-            stage('Dockerhub Login') {
-                when {
-                    expression {
-                        env.GIT_BRANCH == 'origin/release'
-                    }
-                }
-                steps {
-                    script{
-                        sh 'echo "Logging in to Dockerhub..."'
-                        sh 'echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR --password-stdin'                		
-                        sh 'echo "Login Completed"'   
-                    }      
+        stage('Dockerhub Login') {
+            when {
+                expression {
+                    env.GIT_BRANCH == 'origin/release'
                 }
             }
+            steps {
+                script{
+                    sh 'echo "Logging in to Dockerhub..."'
+                    sh 'echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR --password-stdin'                		
+                    sh 'echo "Login Completed"'   
+                }      
+            }
+        }
 
-            stage('Dockerhub Push') {
-                when {
-                    expression {
-                        env.GIT_BRANCH == 'origin/release'
-                    }
-                }
-                steps {
-                    script {
-                        sh 'echo "Pushing..."'
-                        sh "docker push $DOCKER_CREDENTIALS_USR/banners-server:${TAG_NAME}"
-                        sh "docker push $DOCKER_CREDENTIALS_USR/banners-client:${TAG_NAME}"
-                    }
+        stage('Dockerhub Push') {
+            when {
+                expression {
+                    env.GIT_BRANCH == 'origin/release'
                 }
             }
-
-            stage('Clone Helm Repo') {
-                when {
-                    expression {
-                        env.GIT_BRANCH == 'origin/release'
-                    }
-                }
-                steps {
-                    script {
-                        dir('helm-chart') {
-                            sh 'git clone https://github.com/Yakov-Damen/devOps.git'
-                        }
-                    }
+            steps {
+                script {
+                    sh 'echo "Pushing..."'
+                    sh "docker push $DOCKER_CREDENTIALS_USR/banners-server:${TAG_NAME}"
+                    sh "docker push $DOCKER_CREDENTIALS_USR/banners-client:${TAG_NAME}"
                 }
             }
+        }
 
-            stage('Update values.yaml') {
-                when {
-                    expression {
-                        env.GIT_BRANCH == 'origin/release'
-                    }
+        stage('Clone Helm Repo') {
+            when {
+                expression {
+                    env.GIT_BRANCH == 'origin/release'
                 }
-                steps {
-                    script {
-                        dir('helm-chart/devOps/charts/demo-store/') {
-                            def values = readYaml file: 'values.yaml'
-
-                            values.deployment.client.image.tag = "${TAG_NAME}"
-                            values.deployment.server.image.tag = "${TAG_NAME}"
-
-                            sh 'rm -rf values.yaml'
-                            writeYaml file: 'values.yaml', data: values
-                        }
+            }
+            steps {
+                script {
+                    dir('helm-chart') {
+                        sh 'git clone https://github.com/Yakov-Damen/devOps.git'
                     }
                 }
             }
+        }
+
+        stage('Update values.yaml') {
+            when {
+                expression {
+                    env.GIT_BRANCH == 'origin/release'
+                }
+            }
+            steps {
+                script {
+                    dir('helm-chart/devOps/charts/demo-store/') {
+                        def values = readYaml file: 'values.yaml'
+
+                        values.deployment.client.image.tag = "${TAG_NAME}"
+                        values.deployment.server.image.tag = "${TAG_NAME}"
+
+                        sh 'rm -rf values.yaml'
+                        writeYaml file: 'values.yaml', data: values
+                    }
+                }
+            }
+        }
 
         stage('Update Chart.yaml') {
             when {
@@ -242,7 +249,7 @@ pipeline {
 
                         sh 'rm -rf Chart.yaml'
                         writeYaml file: 'Chart.yaml', data: values
-            sh 'cat Chart.yaml'
+                        sh 'cat Chart.yaml'
                     }
                 }
             }
